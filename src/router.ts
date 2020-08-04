@@ -51,6 +51,10 @@ router.get('/about', async ctx => {
 	await ctx.render('about');
 });
 
+router.get('/teapot', async ctx => {
+	await die(ctx, 'I\'m teapot', 418);
+});
+
 router.get('/miauth', async ctx => {
 	const session = ctx.query.session as string | undefined;
 	if (!session) {
