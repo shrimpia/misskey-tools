@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid';
 import { config } from './config';
 import axios from 'axios';
 import { upsertUser, getUser, getUserCount, updateUser } from './users';
+import { api } from './misskey';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -98,6 +99,5 @@ router.get('/legacy-auth', async ctx => {
 
 // Return 404 for other pages
 router.all('(.*)', async ctx => {
-	ctx.status = 404;
-	await die(ctx, 'ページが見つかりませんでした');
+	await die(ctx, 'ページが見つかりませんでした', 404);
 });
