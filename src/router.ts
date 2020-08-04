@@ -17,11 +17,22 @@ router.get('/', async ctx => {
 });
 
 router.get('/login', async ctx => {
-	const host = ctx.query.host as string | undefined;
+	let host = ctx.query.host as string | undefined;
 	if (!host) { 
 		await die(ctx, 'ホストを空欄にしてはいけない');
 		return;
 	}
+	const meta = await api<{ name: string, uri: string, features: Record<string, boolean | undefined> }>(host, 'meta', {});
+
+	// MiAuth 以外はサポートしていない
+	if (!meta.features.miauth) {
+		await die(ctx, 'ごめんなさい。お使いのインスタンス "' + (meta.name || host) + '" はまだサポートされていません。現在、MiAuth 認証方式をサポートするバージョンの Misskey のみご利用頂けます。対象の Misskey バージョンは Misskey v12, Groundpolis v3 の最新版です。インスタンス管理者にご問い合わせください。');
+		return;
+	}
+
+	// ホスト名の正規化
+	host = meta.uri.replace(/^https?:\/\//, '');
+	
 	const session = uuid();
 	const name = encodeURI('みす廃あらーと');
 	const permission = encodeURI('write:notes');
