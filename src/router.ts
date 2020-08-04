@@ -53,7 +53,7 @@ router.get('/about', async ctx => {
 });
 
 router.get('/teapot', async ctx => {
-	await die(ctx, 'I\'m teapot', 418);
+	await die(ctx, 'I\'m a teapot', 418);
 });
 
 router.get('/miauth', async ctx => {
