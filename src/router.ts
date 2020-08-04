@@ -9,16 +9,51 @@ import { api } from './misskey';
 
 export const router = new Router<DefaultState, Context>();
 
-export const sessionHostCache: Record<string, string> = { };
+const sessionHostCache: Record<string, string> = { };
+const ipAccessCount: Record<string, { time: number, count: number }> = {};
+
+const freshIpAccessCount = (time: number) => {
+	for (const ips of Object.keys(ipAccessCount)) {
+		if (time - ipAccessCount[ips].time > 2000) {
+			delete ipAccessCount[ips];
+		}
+	}
+};
+
+const welcomeMessage = [
+	'ついついノートしすぎていませんか？',
+	'Misskey, しすぎていませんか？',
+	'今日、何ノート書いた？',
+	'10000 ノートは初心者、そう思っていませんか？',
+	'息するように Misskey、そんなあなたへ。',
+	'あなたは真の Misskey 廃人ですか？'
+];
+
+const scoldingMessage = [
+	'さてはリロードを繰り返しているな？',
+	'何パターンあるか調べようとしてることはバレてんだぞ',
+	'何度もリロードして楽しいかい？',
+	'はいはいわかったから早うログインしな！',
+	'君には他にやるべきことがあるんじゃないか？',
+];
 
 router.get('/', async ctx => {
+	const time = new Date().getTime();
+	freshIpAccessCount(time);
+	if (!ipAccessCount[ctx.ip]) {
+		ipAccessCount[ctx.ip] = { count: 0, time };
+	} else {
+		ipAccessCount[ctx.ip] = { count: ipAccessCount[ctx.ip].count + 1, time };
+	}
 	await ctx.render('welcome', {
 		usersCount: await getUserCount(),
+		welcomeMessage: ipAccessCount[ctx.ip].count > 5 ? scoldingMessage[Math.floor(Math.random() * scoldingMessage.length)] : welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
 	});
 });
 
 router.get('/login', async ctx => {
 	let host = ctx.query.host as string | undefined;
+	ctx.mac;
 	if (!host) { 
 		await die(ctx, 'ホストを空欄にしてはいけない');
 		return;

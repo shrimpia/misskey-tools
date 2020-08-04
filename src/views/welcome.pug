@@ -2,11 +2,14 @@ extends _base
 
 block content
     section
-        h2 ついついノートしすぎていませんか？
+        h2= welcomeMessage
         p Misskey は楽しいものです。気がついたら1日中入り浸っていることも多いでしょう。
-        p 
             strong みす廃あらーと
             | をあなたの Misskey アカウントにインストールして、今日のあなたの Misskey 活動を把握しましょう。
+        p 始める前に、
+            a(href="/terms") 利用規約
+            | を読んでください。
+            strong ログインボタンを押した時点で、規約に従ったものとみなします。
         form(action="/login", method="get")
             .xd-inputs
                 input.xd-input(type="text" placeholder="ホスト名(例: misskey.io)" name="host" required)
