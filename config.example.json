@@ -1,4 +1,12 @@
 {
 	"port": 4000,
-	"url": "https://misshaialert.com"
+	"url": "https://misshaialert.com",
+	"db": {
+		"host": "localhost",
+		"port": 5432,
+		"user": "user",
+		"pass": "pass",
+		"db": "misshaialert",
+		"extra": {}
+	}
 }
