@@ -6,19 +6,26 @@ html
         link(href='https://unpkg.com/sanitize.css' rel='stylesheet')
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         block meta
+        - const title = 'みす廃アラート'
+        - const desc = '✨Misskey での1日のノート数、フォロー数、フォロワー数をカウントし、深夜0時にお知らせする便利サービスです。';
         title= title
+        meta(name='description' content=desc)
+        meta(property='og:title' content=title)
+        meta(property='og:description' content=desc)
+        meta(property='og:type' content='website')
+        meta(name='twitter:card' content='summary')
+        meta(name='twitter:site' content='@Xeltica')
+        meta(name='twitter:creator' content='@Xeltica')
         link(rel='stylesheet' href='/assets/style.css')
         block style
     body
         .xd-main
-            h1 みす廃あらーと
+            h1: a(href="/") みす廃あらーと
             block content
             footer.xd-footer.xd-container
-                a(href="/privacy-policy") プライバシーポリシー
-                | ・
                 a(href="/terms") 利用規約
                 | ・
-                a(href="https://github.com/Xeltica/misshaialert") リポジトリ
+                +exta(href="https://github.com/Xeltica/misshaialert") リポジトリ
                 p (C)2020 Xeltica - 
                     a(href="/about") version #{version}
                 block footer

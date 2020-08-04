@@ -12,7 +12,7 @@ block content
                 input.xd-input(type="text" placeholder="ホスト名(例: misskey.io)" name="host" required)
                 input.xd-button.primary(type="submit", value="ログイン")
         p Misskey 以外のソフトウェアには対応していません。マストドンユーザーは
-            a(href="https://donhaialert.herokuapp.com/" target="_blank" rel="noopener noreferrer") ドン廃あらーと
+            +exta(href="https://donhaialert.herokuapp.com/") ドン廃あらーと
             | をお使いください。
 
     section
@@ -28,10 +28,6 @@ block content
                             i.fas.fa-users
                             |  登録者数
                         dd !{usersCount} 人
-                        dt
-                            i.fas.fa-comment
-                            |  累計ノート数
-                        dd 0 ノート
             .xd-card
                 .header
                     h1.title
@@ -40,14 +36,14 @@ block content
                 .body
                     p 何か困ったことがあったら、以下のアカウントにメッセージを送ってください。
                     ul
-                        li: a(href="https://misskey.io/@ebi") @ebi@misskey.io
-                        li: a(href="https://groundpolis.app/@X") @X@groundpolis.app
-                        li: a(href="https://twitter.com/Xeltica") @Xeltica@twitter.com
-                        li: a(href="mailto:xeltica@gmail.com") xeltica@gmail.com
+                        li: +exta(href="https://misskey.io/@ebi") @ebi@misskey.io
+                        li: +exta(href="https://groundpolis.app/@X") @X@groundpolis.app
+                        li: +exta(href="https://twitter.com/Xeltica") @Xeltica@twitter.com
+                        li: +exta(href="mailto:xeltica@gmail.com") xeltica@gmail.com
             .xd-card
                 .header
                     h1.title
                         i.fas.fa-hashtag
                         |  タイムライン
                 .body
-                    p 準備中。
+                    p 近いうちに、ここで #misshaialert タグのタイムラインを表示します。まだ工事中です

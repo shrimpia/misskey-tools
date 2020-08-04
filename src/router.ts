@@ -4,7 +4,7 @@ import { die } from './die';
 import { v4 as uuid } from 'uuid';
 import { config } from './config';
 import axios from 'axios';
-import { upsertUser, getUser, getUserCount } from './users';
+import { upsertUser, getUser, getUserCount, updateUser } from './users';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -32,6 +32,14 @@ router.get('/login', async ctx => {
 	ctx.redirect(url);
 });
 
+router.get('/terms', async ctx => {
+	await ctx.render('term');
+});
+
+router.get('/about', async ctx => {
+	await ctx.render('about');
+});
+
 router.get('/miauth', async ctx => {
 	const session = ctx.query.session as string | undefined;
 	if (!session) {
@@ -41,12 +49,14 @@ router.get('/miauth', async ctx => {
 	const host = sessionHostCache[session];
 	if (!host) {
 		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		return;
 	}
 	const url = `https://${host}/api/miauth/${session}/check`;
 	const { token, user } = (await axios.post(url)).data;
 
 	if (!token || !user) {
 		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		return;
 	}
 
 	await upsertUser(user.username, host, token);
@@ -54,7 +64,15 @@ router.get('/miauth', async ctx => {
 
 	if (!u) {
 		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		return;
 	}
+
+	await updateUser(u.username, u.host, {
+		prevNotesCount: user.notesCount,
+		prevFollowingCount: user.followingCount,
+		prevFollowersCount: user.followersCount,
+	});
+
 	await ctx.render('logined', { user: u });
 });
 

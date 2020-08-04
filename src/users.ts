@@ -1,5 +1,6 @@
 import { User } from './models/entities/user';
 import { Users } from './models';
+import { DeepPartial } from 'typeorm';
 
 export const getUser = (username: string, host: string): Promise<User | undefined> => {
 	return Users.findOne({ username, host });
@@ -12,6 +13,10 @@ export const upsertUser = async (username: string, host: string, token: string):
 	} else {
 		await Users.insert({ username, host, token });
 	}
+};
+
+export const updateUser = async (username: string, host: string, record: DeepPartial<User>): Promise<void> => {
+	await Users.update({ username, host }, record);
 };
 
 export const deleteUser = async (username: string, host: string): Promise<void> => {
