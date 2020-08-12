@@ -1,4 +1,6 @@
 import cron from 'node-cron';
+import delay from 'delay';
+
 import { Users } from './models';
 import { api } from './misskey';
 import { format } from './format';
@@ -13,13 +15,14 @@ export default (): void => {
 			try {
 				const text = await format(user);
                                 
-				const res = await api<any>(user.host, 'notes/create', {
+				const res = await api<Record<string, unknown>>(user.host, 'notes/create', {
 					text,
 					visibility: 'home'
 				}, user.token);
 				if (res.error) {
 					throw res.error;
 				}
+
 			} catch (e) {
 				if (e.code === 'NO_SUCH_USER' || e.code === 'AUTHENTICATION_FAILED') {
 					// ユーザーが削除されている場合、レコードからも消してとりやめ
@@ -28,6 +31,8 @@ export default (): void => {
 				} else {
 					console.error(e);
 				}
+			} finally {
+				await delay(3000);
 			}
 		}
 	});
