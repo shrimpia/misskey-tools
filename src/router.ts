@@ -1,15 +1,18 @@
 import { Context, DefaultState } from 'koa';
 import Router from 'koa-router';
+import axios from 'axios';
+import crypto from 'crypto';
+
 import { die } from './die';
 import { v4 as uuid } from 'uuid';
 import { config } from './config';
-import axios from 'axios';
 import { upsertUser, getUser, getUserCount, updateUser } from './users';
 import { api } from './misskey';
 
 export const router = new Router<DefaultState, Context>();
 
 const sessionHostCache: Record<string, string> = { };
+const tokenSecretCache: Record<string, string> = { };
 const ipAccessCount: Record<string, { time: number, count: number }> = {};
 
 const freshIpAccessCount = (time: number) => {
@@ -37,6 +40,24 @@ const scoldingMessage = [
 	'君には他にやるべきことがあるんじゃないか？',
 ];
 
+const login = async (ctx: Context, user: Record<string, unknown>, host: string, token: string) => {
+	await upsertUser(user.username as string, host, token);
+	const u = await getUser(user.username as string, host);
+
+	if (!u) {
+		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		return;
+	}
+
+	await updateUser(u.username, u.host, {
+		prevNotesCount: user.notesCount as number,
+		prevFollowingCount: user.followingCount as number,
+		prevFollowersCount: user.followersCount as number,
+	});
+
+	await ctx.render('logined', { user: u });
+};
+
 router.get('/', async ctx => {
 	const time = new Date().getTime();
 	freshIpAccessCount(time);
@@ -53,30 +74,45 @@ router.get('/', async ctx => {
 
 router.get('/login', async ctx => {
 	let host = ctx.query.host as string | undefined;
-	ctx.mac;
+
 	if (!host) { 
 		await die(ctx, 'ホストを空欄にしてはいけない');
 		return;
 	}
 	const meta = await api<{ name: string, uri: string, features: Record<string, boolean | undefined> }>(host, 'meta', {});
 
-	// MiAuth 以外はサポートしていない
-	if (!meta.features.miauth) {
-		await die(ctx, 'ごめんなさい。お使いのインスタンス "' + (meta.name || host) + '" はまだサポートされていません。現在、MiAuth 認証方式をサポートするバージョンの Misskey のみご利用頂けます。対象の Misskey バージョンは Misskey v12, Groundpolis v3 の最新版です。インスタンス管理者にご問い合わせください。');
-		return;
-	}
-
 	// ホスト名の正規化
 	host = meta.uri.replace(/^https?:\/\//, '');
-	
-	const session = uuid();
-	const name = encodeURI('みす廃あらーと');
-	const permission = encodeURI('write:notes');
-	const callback = encodeURI(`${config.url}/miauth`);
-	const url = `https://${host}/miauth/${session}?name=${name}&callback=${callback}&permission=${permission}`;
-	sessionHostCache[session] = host;
+	const name = 'みす廃あらーと';
+	const description = 'ついついノートしすぎていませんか？';
+	const permission = [ 'write:notes' ];
 
-	ctx.redirect(url);
+	if (meta.features.miauth) {
+		// Use MiAuth
+		const callback = encodeURI(`${config.url}/miauth`);
+
+		const session = uuid();
+		const url = `https://${host}/miauth/${session}?name=${encodeURI(name)}&callback=${encodeURI(callback)}&permission=${encodeURI(permission.join(','))}`;
+		sessionHostCache[session] = host;
+	
+		ctx.redirect(url);
+	} else {
+		// Use legacy authentication
+		const callbackUrl = encodeURI(`${config.url}/legacy-auth`);
+
+		const { secret } = await api<{ secret: string }>(host, 'app/create', {
+			name, description, permission, callbackUrl,
+		});
+
+		const { token, url } = await api<{ token: string, url: string }>(host, 'auth/session/generate', {
+			appSecret: secret
+		});
+
+		sessionHostCache[token] = host;
+		tokenSecretCache[token] = secret;
+
+		ctx.redirect(url);
+	}
 });
 
 router.get('/terms', async ctx => {
@@ -94,14 +130,16 @@ router.get('/teapot', async ctx => {
 router.get('/miauth', async ctx => {
 	const session = ctx.query.session as string | undefined;
 	if (!session) {
-		await die(ctx, 'セッションが見つからなかった');
+		await die(ctx, 'session required');
 		return;
 	}
 	const host = sessionHostCache[session];
+	delete sessionHostCache[session];
 	if (!host) {
 		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
 		return;
 	}
+
 	const url = `https://${host}/api/miauth/${session}/check`;
 	const { token, user } = (await axios.post(url)).data;
 
@@ -110,25 +148,37 @@ router.get('/miauth', async ctx => {
 		return;
 	}
 
-	await upsertUser(user.username, host, token);
-	const u = await getUser(user.username, host);
+	await login(ctx, user, host, token);
+	
+});
 
-	if (!u) {
+router.get('/legacy-auth', async ctx => {
+	const token = ctx.query.token as string | undefined;
+	if (!token) {
+		await die(ctx, 'token required');
+		return;
+	}
+	const host = sessionHostCache[token];
+	delete sessionHostCache[token];
+	if (!host) {
+		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		return;
+	}
+	const appSecret = tokenSecretCache[token];
+	delete tokenSecretCache[token];
+	if (!appSecret) {
 		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
 		return;
 	}
 
-	await updateUser(u.username, u.host, {
-		prevNotesCount: user.notesCount,
-		prevFollowingCount: user.followingCount,
-		prevFollowersCount: user.followersCount,
+	console.log(host);
+	
+	const { accessToken, user } = await api<{ accessToken: string, user: Record<string, unknown> }>(host, 'auth/session/userkey', {
+		appSecret, token,
 	});
+	const i = crypto.createHash('sha256').update(accessToken + appSecret, 'utf8').digest('hex');
 
-	await ctx.render('logined', { user: u });
-});
-
-router.get('/legacy-auth', async ctx => {
-	await die(ctx, 'coming soon');
+	await login(ctx, user, host, i);
 });
 
 
