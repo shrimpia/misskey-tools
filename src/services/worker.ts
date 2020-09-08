@@ -9,7 +9,7 @@ import { updateScore } from '../functions/update-score';
 import { getScores } from '../functions/get-scores';
 
 export default (): void => {
-	cron.schedule('50 45 0 * * *', async () => {
+	cron.schedule('0 0 0 * * *', async () => {
 		const users = await Users.createQueryBuilder()
 			.select()
 			.getMany();
