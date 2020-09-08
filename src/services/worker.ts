@@ -15,8 +15,8 @@ export default (): void => {
 			.getMany();
 		for (const user of users) {
 			try {
-				await updateScore(user);
 				const text = format(await getScores(user));
+				await updateScore(user);
 
 				if (user.alertMode === 'note') {
 					const res = await api<Record<string, unknown>>(user.host, 'notes/create', {
