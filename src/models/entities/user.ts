@@ -49,7 +49,7 @@ export class User {
 	@Column({
 		type: 'enum',
 		enum: alertModes,
-		default: 'note'
+		default: 'notification'
 	})
 	public alertMode: AlertMode;
 }
