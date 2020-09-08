@@ -1,7 +1,7 @@
-import { initDb } from './db';
+import { initDb } from './services/db';
 
 (async () => {
 	await initDb();
-	(await import('./worker')).default();
-	(await import('./server')).default();
+	(await import('./services/worker')).default();
+	(await import('./server/server')).default();
 })();

@@ -5,9 +5,9 @@ import crypto from 'crypto';
 
 import { die } from './die';
 import { v4 as uuid } from 'uuid';
-import { config } from './config';
-import { upsertUser, getUser, getUserCount, updateUser } from './users';
-import { api } from './misskey';
+import { config } from '../config';
+import { upsertUser, getUser, getUserCount, updateUser } from '../functions/users';
+import { api } from '../services/misskey';
 
 export const router = new Router<DefaultState, Context>();
 

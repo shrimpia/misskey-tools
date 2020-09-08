@@ -5,10 +5,10 @@ import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
 import mount from 'koa-mount';
 
-import constant from './const';
+import constant from '../const';
 import { router } from './router';
 import { render } from './render';
-import { config } from './config';
+import { config } from '../config';
 
 export default (): void => {
 	const app = new Koa();

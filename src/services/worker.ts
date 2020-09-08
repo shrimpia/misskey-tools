@@ -1,10 +1,10 @@
 import cron from 'node-cron';
 import delay from 'delay';
 
-import { Users } from './models';
+import { Users } from '../models';
 import { api } from './misskey';
-import { format } from './format';
-import { deleteUser } from './users';
+import { format } from '../functions/format';
+import { deleteUser } from '../functions/users';
 
 export default (): void => {
 	cron.schedule('0 0 0 * * *', async () => {

@@ -1,5 +1,5 @@
-import { User } from './models/entities/user';
-import { Users } from './models';
+import { User } from '../models/entities/user';
+import { Users } from '../models';
 import { DeepPartial } from 'typeorm';
 
 export const getUser = (username: string, host: string): Promise<User | undefined> => {

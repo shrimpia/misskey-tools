@@ -1,6 +1,6 @@
 import { getConnection, createConnection, Connection } from 'typeorm';
-import { config } from './config';
-import { User } from './models/entities/user';
+import { config } from '../config';
+import { User } from '../models/entities/user';
 
 export const entities = [
 	User

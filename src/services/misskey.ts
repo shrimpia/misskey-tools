@@ -1,5 +1,5 @@
 import axios from 'axios';
-import _const from './const';
+import _const from '../const';
 
 export const ua = `Mozilla/5.0 misshaialertBot/${_const.version} +https://github.com/Xeltica/misshaialert Node/${process.version}`;
 

@@ -1,10 +1,10 @@
-import { api } from './misskey';
-import { config } from './config';
-import { User } from './models/entities/user';
+import { api } from '../services/misskey';
+import { config } from '../config';
+import { User } from '../models/entities/user';
 import { updateUser } from './users';
 
 export const format = async (user: User): Promise<string> => {
-	const miUser = await api<Record<string, any>>(user.host, 'users/show', { username: user.username }, user.token);
+	const miUser = await api<Record<string, number>>(user.host, 'users/show', { username: user.username }, user.token);
 	if (miUser.error) {
 		throw miUser.error;
 	}
