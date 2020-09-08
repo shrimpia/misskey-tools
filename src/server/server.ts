@@ -20,8 +20,10 @@ export default (): void => {
 
 	app.use(bodyParser());
 	app.use(render);
-	app.use(mount('/assets', serve(__dirname + '/assets')));
+	app.use(mount('/assets', serve(__dirname + '/../assets')));
 	app.use(router.routes());
+
+	app.keys = [ '人類', 'ミス廃化', '計画', 'ここに極まれり', 'ﾌｯﾌｯﾌ...' ];
 
 	console.log(`listening port ${config.port}...`);
 	console.log('App launched!');

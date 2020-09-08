@@ -6,22 +6,13 @@ import crypto from 'crypto';
 import { die } from './die';
 import { v4 as uuid } from 'uuid';
 import { config } from '../config';
-import { upsertUser, getUser, getUserCount, updateUser } from '../functions/users';
+import { upsertUser, getUser, getUserCount, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken } from '../functions/users';
 import { api } from '../services/misskey';
 
 export const router = new Router<DefaultState, Context>();
 
 const sessionHostCache: Record<string, string> = { };
 const tokenSecretCache: Record<string, string> = { };
-const ipAccessCount: Record<string, { time: number, count: number }> = {};
-
-const freshIpAccessCount = (time: number) => {
-	for (const ips of Object.keys(ipAccessCount)) {
-		if (time - ipAccessCount[ips].time > 2000) {
-			delete ipAccessCount[ips];
-		}
-	}
-};
 
 const welcomeMessage = [
 	'ついついノートしすぎていませんか？',
@@ -32,16 +23,9 @@ const welcomeMessage = [
 	'あなたは真の Misskey 廃人ですか？'
 ];
 
-const scoldingMessage = [
-	'さてはリロードを繰り返しているな？',
-	'何パターンあるか調べようとしてることはバレてんだぞ',
-	'何度もリロードして楽しいかい？',
-	'はいはいわかったから早うログインしな！',
-	'君には他にやるべきことがあるんじゃないか？',
-];
-
 const login = async (ctx: Context, user: Record<string, unknown>, host: string, token: string) => {
 	await upsertUser(user.username as string, host, token);
+
 	const u = await getUser(user.username as string, host);
 
 	if (!u) {
@@ -55,21 +39,28 @@ const login = async (ctx: Context, user: Record<string, unknown>, host: string, 
 		prevFollowersCount: user.followersCount as number,
 	});
 
-	await ctx.render('logined', { user: u });
+	const misshaiToken = await updateUsersMisshaiToken(u);
+
+	ctx.cookies.set('token', misshaiToken, { signed: true });
+
+	// await ctx.render('logined', { user: u });
+	ctx.redirect('/');
 };
 
 router.get('/', async ctx => {
-	const time = new Date().getTime();
-	freshIpAccessCount(time);
-	if (!ipAccessCount[ctx.ip]) {
-		ipAccessCount[ctx.ip] = { count: 0, time };
+	const token = ctx.cookies.get('token', { signed: true });
+	const user = token ? await getUserByMisshaiToken(token) : undefined;
+	if (!user) {
+		// 非ログイン
+		await ctx.render('welcome', {
+			usersCount: await getUserCount(),
+			welcomeMessage:  welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
+		});
 	} else {
-		ipAccessCount[ctx.ip] = { count: ipAccessCount[ctx.ip].count + 1, time };
+		await ctx.render('mypage', {
+			user
+		});
 	}
-	await ctx.render('welcome', {
-		usersCount: await getUserCount(),
-		welcomeMessage: ipAccessCount[ctx.ip].count > 5 ? scoldingMessage[Math.floor(Math.random() * scoldingMessage.length)] : welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
-	});
 });
 
 router.get('/login', async ctx => {

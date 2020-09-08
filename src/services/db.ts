@@ -1,9 +1,11 @@
 import { getConnection, createConnection, Connection } from 'typeorm';
 import { config } from '../config';
 import { User } from '../models/entities/user';
+import { UsedToken } from '../models/entities/usedToken';
 
 export const entities = [
-	User
+	User,
+	UsedToken,
 ];
 
 export const initDb = async (force = false): Promise<Connection> => {

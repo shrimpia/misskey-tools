@@ -1,4 +1,5 @@
 import { initDb } from './services/db';
+import 'reflect-metadata';
 
 (async () => {
 	await initDb();

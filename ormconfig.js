@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const entities = require('./built/db').entities;
+const entities = require('./built/services/db').entities;
 
 const config = Object.freeze(JSON.parse(fs.readFileSync(__dirname + '/config.json', 'utf-8')));
 

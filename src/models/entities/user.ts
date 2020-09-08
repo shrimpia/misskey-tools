@@ -22,6 +22,12 @@ export class User {
 	public token: string;
 
 	@Column({
+		type: 'varchar',
+		default: ''
+	})
+	public misshaiToken: string;
+
+	@Column({
 		type: 'integer',
 		default: 0,
 	})
