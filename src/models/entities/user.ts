@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
+import { AlertMode, alertModes } from '../../types/AlertMode';
 
 @Entity()
 @Index([ 'username', 'host' ], { unique: true })
@@ -44,4 +45,11 @@ export class User {
 		default: 0,
 	})
 	public prevFollowersCount: number;
+
+	@Column({
+		type: 'enum',
+		enum: alertModes,
+		default: 'note'
+	})
+	public alertMode: AlertMode;
 }

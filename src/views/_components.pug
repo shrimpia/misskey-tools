@@ -1,3 +1,25 @@
 mixin exta()
     a(href=attributes.href target="_blank" rel="noopener noreferrer")
         block
+
+mixin serverInfo()
+    .xd-card
+        .header
+            h1.title
+                i.fas.fa-info-circle
+                |  サービスの情報
+        .body
+            dl
+                dt
+                    i.fas.fa-users
+                    |  登録者数
+                dd !{usersCount} 人
+                dt
+                    |  総ノート数
+                dd (coming soon)
+                dt
+                    |  総フォロー数
+                dd (coming soon)
+                dt
+                    |  総フォロワー数
+                dd (coming soon)

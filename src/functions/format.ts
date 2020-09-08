@@ -2,32 +2,15 @@ import { api } from '../services/misskey';
 import { config } from '../config';
 import { User } from '../models/entities/user';
 import { updateUser } from './users';
+import { Score } from '../types/Score';
 
-export const format = async (user: User): Promise<string> => {
-	const miUser = await api<Record<string, number>>(user.host, 'users/show', { username: user.username }, user.token);
-	if (miUser.error) {
-		throw miUser.error;
-	}
-	const notesDelta = toSignedString(miUser.notesCount - user.prevNotesCount);
-	const followingDelta = toSignedString(miUser.followingCount - user.prevFollowingCount);
-	const followersDelta = toSignedString(miUser.followersCount - user.prevFollowersCount);
-                
-	await updateUser(user.username, user.host, {
-		prevNotesCount: miUser.notesCount,
-		prevFollowingCount: miUser.followingCount,
-		prevFollowersCount: miUser.followersCount,
-	});
+export const format = (score: Score): string => `昨日のMisskeyの活動は
 
-	return `昨日のMisskeyの活動は
-
-ノート: ${miUser.notesCount}(${notesDelta})
-フォロー : ${miUser.followingCount}(${followingDelta})
-フォロワー :${miUser.followersCount}(${followersDelta})
+ノート: ${score.notesCount}(${score.notesDelta})
+フォロー : ${score.followingCount}(${score.followingDelta})
+フォロワー :${score.followersCount}(${score.followersDelta})
 
 でした。
 ${config.url}
 
 #misshaialert`;
-};
-
-export const toSignedString = (num: number): string => num < 0 ? num.toString() : '+' + num;

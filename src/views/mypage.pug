@@ -1,6 +1,63 @@
 extends _base
 
 block content
-    section
-        h2 マイページ
-        p おかえりなさい、@!{ user.username }@!{ user.host } さん。
+    h2 マイページ
+    p おかえりなさい、@!{ user.username }@!{ user.host } さん。
+    
+    section#scores
+        .xd-cards.center
+            +serverInfo()
+            .xd-card
+                .header
+                    h1.title
+                        i.fas.fa-chart-area
+                        |  あなたの廃人度は…
+                .body
+                    table
+                        thead
+                            tr
+                                th 内容
+                                th スコア
+                                th 前日比
+                        tbody
+                            tr
+                                td ノート
+                                td !{score.notesCount}
+                                td !{score.notesDelta}
+                            tr
+                                td フォロー
+                                td !{score.followingCount}
+                                td !{score.followingDelta}
+                            tr
+                                td フォロワー
+                                td !{score.followersCount}
+                                td !{score.followersDelta}
+    
+        section.xd-card#settings
+                .header
+                    h1.title
+                        i.fas.fa-cog
+                        |  設定
+                .body
+                    form(method="post", action="/update-settings")
+                        p: label スコア通知方法：
+                            select(name="alertMode")
+                                option(value="note", selected=user.alertMode === 'note') 自動的にノートを投稿 (標準)
+                                option(value="notification", selected=user.alertMode === 'notification') Misskey に通知
+                                option(value="nothing", selected=user.alertMode === 'nothing') 通知しない
+                        p: label タイムゾーン：(coming soon)
+                        button.primary(type="submit") 保存
+                .body
+                    div.mb-2: a.xd-button.danger#logout(href="/logout") ログアウト
+                    div: a.xd-button.danger#optout(href="/optout") アカウント連携を解除する
+
+block script
+    script.
+        document.getElementById("optout").addEventListener("click", (e) => {
+            if (!confirm('連携を解除すると、統計情報などのデータが削除されてしまい、以後アラート機能をご利用いただけなくなります。この操作は変更できません。\n\nそれでもなお、連携を解除しますか？'))
+                e.preventDefault();
+        });
+        document.getElementById("logout").addEventListener("click", (e) => {
+            if (!confirm('ログアウトしますか？'))
+                e.preventDefault();
+        });

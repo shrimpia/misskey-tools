@@ -18,6 +18,9 @@ $card-header: $bg-pale-1;
 $card-footer: $bg-pale-1;
 $card-fg: $fg;
 $divider: rgba($fg, 0.25);
+$table-bg-header: $md-grey-300;
+$table-bg-odd: $md-grey-100;
+$table-bg-even: white;
 $barSize: 64px;
 
 * {
@@ -144,6 +147,18 @@ button, .xd-button {
       background: $primary-dark;
     }
   }
+
+  &.danger {
+    background: $md-red-700;
+    color: $md-white;
+    border-color: $md-red-900;
+    &:hover {
+      background: $md-red-500;
+    }
+    &:active {
+      background: $md-red-800;
+    }
+  }
 }
 
 // ul, ol {
@@ -158,6 +173,27 @@ a, .link {
   border-bottom: 1px solid $primary;
   &:hover {
     opacity: 0.7;
+  }
+}
+
+table {
+  border: 1px solid $divider;
+  border-radius: 2px;
+  width: 100%;
+
+  > thead {
+    background: $table-bg-header;
+    margin-bottom: 2px;
+    text-align: left;
+  }
+  > tbody > tr {
+    background: $table-bg-even;
+    &:nth-child(odd) {
+      background: $table-bg-odd;
+    }
+  }
+  th, td {
+    padding: 4px 8px;
   }
 }
 
@@ -233,6 +269,9 @@ code {
   }
   @media screen and (max-width: 640px) {
     flex-wrap: wrap;
+    > .xd-card {
+      margin: 8px 0;
+    }
   }
 
   &.wrap {

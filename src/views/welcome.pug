@@ -20,17 +20,7 @@ block content
 
     section
         .xd-cards.center
-            .xd-card
-                .header
-                    h1.title
-                        i.fas.fa-info-circle
-                        |  情報
-                .body
-                    dl
-                        dt
-                            i.fas.fa-users
-                            |  登録者数
-                        dd !{usersCount} 人
+            +serverInfo()
             .xd-card
                 .header
                     h1.title

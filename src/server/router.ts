@@ -6,8 +6,11 @@ import crypto from 'crypto';
 import { die } from './die';
 import { v4 as uuid } from 'uuid';
 import { config } from '../config';
-import { upsertUser, getUser, getUserCount, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken } from '../functions/users';
+import { upsertUser, getUser, getUserCount, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken, deleteUser } from '../functions/users';
 import { api } from '../services/misskey';
+import { getScores } from '../functions/get-scores';
+import { AlertMode, alertModes } from '../types/AlertMode';
+import { Users } from '../models';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -29,7 +32,7 @@ const login = async (ctx: Context, user: Record<string, unknown>, host: string, 
 	const u = await getUser(user.username as string, host);
 
 	if (!u) {
-		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		await die(ctx);
 		return;
 	}
 
@@ -58,7 +61,9 @@ router.get('/', async ctx => {
 		});
 	} else {
 		await ctx.render('mypage', {
-			user
+			user,
+			usersCount: await getUserCount(),
+			score: await getScores(user),
 		});
 	}
 });
@@ -76,7 +81,7 @@ router.get('/login', async ctx => {
 	host = meta.uri.replace(/^https?:\/\//, '');
 	const name = 'みす廃あらーと';
 	const description = 'ついついノートしすぎていませんか？';
-	const permission = [ 'write:notes' ];
+	const permission = [ 'write:notes', 'write:notifications' ];
 
 	if (meta.features.miauth) {
 		// Use MiAuth
@@ -106,6 +111,42 @@ router.get('/login', async ctx => {
 	}
 });
 
+router.get('/logout', async ctx => {
+	const token = ctx.cookies.get('token');
+	if (!token) {
+		await die(ctx, 'ログインしていません');
+		return;	
+	}
+	ctx.cookies.set('token', '');
+	await ctx.render('welcome', {
+		usersCount: await getUserCount(),
+		welcomeMessage:  'ログアウトしました。',
+	});
+});
+
+router.get('/optout', async ctx => {
+	const token = ctx.cookies.get('token');
+	if (!token) {
+		await die(ctx, 'ログインしていません');
+		return;	
+	}
+	ctx.cookies.set('token', '');
+
+	const u = await getUserByMisshaiToken(token);
+
+	if (!u) {
+		await die(ctx);
+		return;
+	}
+
+	await deleteUser(u.username, u.host);
+	
+	await ctx.render('welcome', {
+		usersCount: await getUserCount(),
+		welcomeMessage:  '連携を解除しました。',
+	});
+});
+
 router.get('/terms', async ctx => {
 	await ctx.render('term');
 });
@@ -127,7 +168,7 @@ router.get('/miauth', async ctx => {
 	const host = sessionHostCache[session];
 	delete sessionHostCache[session];
 	if (!host) {
-		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		await die(ctx);
 		return;
 	}
 
@@ -135,7 +176,7 @@ router.get('/miauth', async ctx => {
 	const { token, user } = (await axios.post(url)).data;
 
 	if (!token || !user) {
-		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		await die(ctx);
 		return;
 	}
 
@@ -152,13 +193,13 @@ router.get('/legacy-auth', async ctx => {
 	const host = sessionHostCache[token];
 	delete sessionHostCache[token];
 	if (!host) {
-		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		await die(ctx);
 		return;
 	}
 	const appSecret = tokenSecretCache[token];
 	delete tokenSecretCache[token];
 	if (!appSecret) {
-		await die(ctx, '問題が発生しました。お手数ですが、最初からやり直してください。');
+		await die(ctx);
 		return;
 	}
 
@@ -170,6 +211,32 @@ router.get('/legacy-auth', async ctx => {
 	const i = crypto.createHash('sha256').update(accessToken + appSecret, 'utf8').digest('hex');
 
 	await login(ctx, user, host, i);
+});
+
+router.post('/update-settings', async ctx => {
+	const mode = ctx.request.body.alertMode as AlertMode;
+	// 一応型チェック
+	if (!alertModes.includes(mode)) {
+		await die(ctx, `${mode} is an invalid value`);
+		return;
+	}
+
+	const token = ctx.cookies.get('token');
+	if (!token) {
+		await die(ctx, 'ログインしていません');
+		return;	
+	}
+	
+	const u = await getUserByMisshaiToken(token);
+
+	if (!u) {
+		await die(ctx);
+		return;
+	}
+
+	await Users.update(u.id, { alertMode: mode });
+
+	ctx.redirect('/');
 });
 
 
