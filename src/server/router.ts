@@ -7,7 +7,7 @@ import { die } from './die';
 import { v4 as uuid } from 'uuid';
 import { config } from '../config';
 import { upsertUser, getUser, getUserCount, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken, deleteUser } from '../functions/users';
-import { api } from '../services/misskey';
+import { api, apiAvailable } from '../services/misskey';
 import { getScores } from '../functions/get-scores';
 import { AlertMode, alertModes } from '../types/AlertMode';
 import { Users } from '../models';
@@ -53,17 +53,20 @@ const login = async (ctx: Context, user: Record<string, unknown>, host: string, 
 router.get('/', async ctx => {
 	const token = ctx.cookies.get('token', { signed: true });
 	const user = token ? await getUserByMisshaiToken(token) : undefined;
-	if (!user) {
-		// 非ログイン
-		await ctx.render('welcome', {
-			usersCount: await getUserCount(),
-			welcomeMessage:  welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
-		});
-	} else {
+	
+	const isAvailable = user && await apiAvailable(user.host, user.token);
+	console.log(isAvailable);
+	if (user && isAvailable) {
 		await ctx.render('mypage', {
 			user,
 			usersCount: await getUserCount(),
 			score: await getScores(user),
+		});
+	} else {
+		// 非ログイン
+		await ctx.render('welcome', {
+			usersCount: await getUserCount(),
+			welcomeMessage:  welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
 		});
 	}
 });

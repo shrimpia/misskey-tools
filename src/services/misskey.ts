@@ -14,3 +14,12 @@ export const api = <T = Record<string, unknown>>(host: string, endpoint: string,
 	}
 	return axios.post<T>(`https://${host}/api/${endpoint}`, a).then(res => res.data);
 };
+
+export const apiAvailable = async (host: string, i: string) : Promise<boolean> => {
+	try {
+		const res = await api(host, 'i', {}, i);
+		return !res.error;
+	} catch {
+		return false;
+	}
+};
