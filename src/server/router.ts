@@ -11,6 +11,7 @@ import { api, apiAvailable } from '../services/misskey';
 import { getScores } from '../functions/get-scores';
 import { AlertMode, alertModes } from '../types/AlertMode';
 import { Users } from '../models';
+import { send } from '../services/send';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -64,12 +65,14 @@ router.get('/', async ctx => {
 			user,
 			usersCount: await getUserCount(),
 			score: await getScores(user),
+			from: ctx.query.from,
 		});
 	} else {
 		// 非ログイン
 		await ctx.render('welcome', {
 			usersCount: await getUserCount(),
 			welcomeMessage:  welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
+			from: ctx.query.from,
 		});
 	}
 });
@@ -115,42 +118,6 @@ router.get('/login', async ctx => {
 
 		ctx.redirect(url);
 	}
-});
-
-router.get('/logout', async ctx => {
-	const token = ctx.cookies.get('token');
-	if (!token) {
-		await die(ctx, 'ログインしていません');
-		return;	
-	}
-	ctx.cookies.set('token', '');
-	await ctx.render('welcome', {
-		usersCount: await getUserCount(),
-		welcomeMessage:  'ログアウトしました。',
-	});
-});
-
-router.get('/optout', async ctx => {
-	const token = ctx.cookies.get('token');
-	if (!token) {
-		await die(ctx, 'ログインしていません');
-		return;	
-	}
-	ctx.cookies.set('token', '');
-
-	const u = await getUserByMisshaiToken(token);
-
-	if (!u) {
-		await die(ctx);
-		return;
-	}
-
-	await deleteUser(u.username, u.host);
-	
-	await ctx.render('welcome', {
-		usersCount: await getUserCount(),
-		welcomeMessage:  '連携を解除しました。',
-	});
 });
 
 router.get('/terms', async ctx => {
@@ -242,7 +209,56 @@ router.post('/update-settings', async ctx => {
 
 	await Users.update(u.id, { alertMode: mode });
 
-	ctx.redirect('/');
+	ctx.redirect('/?from=updateSettings');
+});
+
+
+
+router.post('/logout', async ctx => {
+	const token = ctx.cookies.get('token');
+	if (!token) {
+		await die(ctx, 'ログインしていません');
+		return;	
+	}
+	ctx.cookies.set('token', '');
+	ctx.redirect('/?from=logout');
+});
+
+router.post('/optout', async ctx => {
+	const token = ctx.cookies.get('token');
+	if (!token) {
+		await die(ctx, 'ログインしていません');
+		return;	
+	}
+	ctx.cookies.set('token', '');
+
+	const u = await getUserByMisshaiToken(token);
+
+	if (!u) {
+		await die(ctx);
+		return;
+	}
+
+	await deleteUser(u.username, u.host);
+	
+	ctx.redirect('/?from=optout');
+});
+
+router.post('/send', async ctx => {
+	const token = ctx.cookies.get('token');
+	if (!token) {
+		await die(ctx, 'ログインしていません');
+		return;	
+	}
+	
+	const u = await getUserByMisshaiToken(token);
+
+	if (!u) {
+		await die(ctx);
+		return;
+	}
+	await send(u).catch(() => die(ctx));
+	ctx.redirect('/?from=send');
 });
 
 
