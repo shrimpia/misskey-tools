@@ -19,15 +19,16 @@ export default (): void => {
 				await updateScore(user);
 
 				if (user.alertMode === 'note') {
+					console.info(`send ${user.username}@${user.host}'s misshaialert as a note`);
 					const res = await api<Record<string, unknown>>(user.host, 'notes/create', {
 						text,
-						visibility: 'specified'
 					}, user.token);
 					if (res.error) {
 						throw res.error;
 					}
 					break;
 				} else if (user.alertMode === 'notification') {
+					console.log(`send ${user.username}@${user.host}'s misshaialert as a notification`);
 					const res = await api(user.host, 'notifications/create', {
 						header: 'みす廃あらーと',
 						icon: 'https://i.imgur.com/B991yTl.png',
@@ -36,6 +37,8 @@ export default (): void => {
 					if (res.error) {
 						throw res.error;
 					}
+				} else {
+					console.info(`will not send ${user.username}@${user.host}'s misshaialert`);
 				}
 			} catch (e) {
 				if (e.code === 'NO_SUCH_USER' || e.code === 'AUTHENTICATION_FAILED') {
