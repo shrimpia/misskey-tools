@@ -18,9 +18,16 @@ $card-header: $bg-pale-1;
 $card-footer: $bg-pale-1;
 $card-fg: $fg;
 $divider: rgba($fg, 0.25);
-$table-bg-header: $md-grey-300;
-$table-bg-odd: $md-grey-100;
-$table-bg-even: white;
+$table-bg-header: $bg-pale-2;
+$table-bg-odd: $bg-pale-1;
+$table-bg-even: $bg;
+$alert-bg: $bg-pale-1;
+$alert-border: $divider;
+$alert-fg: $fg;
+$alert-bg-danger: $md-red-300;
+$alert-border-danger: $md-red-900;
+$alert-fg-danger: $md-red-50;
+
 $barSize: 64px;
 
 * {
@@ -411,6 +418,23 @@ img, .xd-responsive {
     &.gap-2 { margin: 16px; }
     &.gap-3 { margin: 24px; }
   }
+}
+
+.xd-alert {
+  padding: 8px 16px;
+  border-radius: 2px;
+  width: 100%;
+  background: $alert-bg;
+  border: 1px solid $alert-border;
+  color: $alert-fg;
+  font-size: 75%;
+
+  &.danger {
+    background: $alert-bg-danger;
+    border: 1px solid $alert-border-danger;
+    color: $alert-fg-danger;
+  }
+
 }
 
 .xd-center {

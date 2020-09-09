@@ -39,6 +39,7 @@ block content
                         i.fas.fa-cog
                         |  設定
                 .body
+                    .xd-alert.danger.mb-2 スコア通知方法に「Misskey に通知」を選んでいる場合、Groundpolis v3 および Misskey v12 の最新版以外では動作しません。めいすきーや古いバージョンをお使いの方は、「自動的にノートを投稿」をお使いください。
                     form(method="post", action="/update-settings")
                         p: label スコア通知方法：
                             select(name="alertMode")
@@ -48,8 +49,8 @@ block content
                         p: label タイムゾーン：(coming soon)
                         button.primary(type="submit") 保存
                 .body
-                    div.mb-2: a.xd-button.danger#logout(href="/logout") ログアウト
-                    div: a.xd-button.danger#optout(href="/optout") アカウント連携を解除する
+                    div.mb-2: a.xd-button.danger#logout(style="display: inline-block", href="/logout") ログアウト
+                    div: a.xd-button.danger#optout(style="display: inline-block", href="/optout") アカウント連携を解除する
 
 block script
     script.
