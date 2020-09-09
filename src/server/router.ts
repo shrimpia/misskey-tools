@@ -27,6 +27,7 @@ const welcomeMessage = [
 ];
 
 const login = async (ctx: Context, user: Record<string, unknown>, host: string, token: string) => {
+	const isNewcomer = !(await getUser(user.username as string, host));
 	await upsertUser(user.username as string, host, token);
 
 	const u = await getUser(user.username as string, host);
@@ -36,11 +37,13 @@ const login = async (ctx: Context, user: Record<string, unknown>, host: string, 
 		return;
 	}
 
-	await updateUser(u.username, u.host, {
-		prevNotesCount: user.notesCount as number,
-		prevFollowingCount: user.followingCount as number,
-		prevFollowersCount: user.followersCount as number,
-	});
+	if (isNewcomer) {
+		await updateUser(u.username, u.host, {
+			prevNotesCount: user.notesCount as number,
+			prevFollowingCount: user.followingCount as number,
+			prevFollowersCount: user.followersCount as number,
+		});
+	}
 
 	const misshaiToken = await updateUsersMisshaiToken(u);
 
