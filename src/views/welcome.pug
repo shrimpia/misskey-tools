@@ -2,6 +2,11 @@ extends _base
 
 block content
     section
+        case from
+            when 'logout'
+                p: strong ログアウトしました。
+            when 'optout'
+                p: strong 連携を解除しました。
         h2= welcomeMessage
         p Misskey は楽しいものです。気がついたら1日中入り浸っていることも多いでしょう。
             strong みす廃あらーと
@@ -40,3 +45,8 @@ block content
                         |  タイムライン
                 .body
                     p 近いうちに、ここで #misshaialert タグのタイムラインを表示します。まだ工事中です
+
+
+block script
+    script.
+        history.replaceState(null, null, '/');

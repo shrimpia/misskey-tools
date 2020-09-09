@@ -2,7 +2,13 @@ extends _base
 
 block content
     h2 マイページ
-    p おかえりなさい、@!{ user.username }@!{ user.host } さん。
+    case from
+        when "updateSettings"
+            p: strong 設定を変更しました。
+        when "updateSettings"
+            p: strong テスト送信しました。
+        default
+            p おかえりなさい、@!{ user.username }@!{ user.host } さん。
     
     section#scores
         .xd-cards.center
@@ -48,12 +54,21 @@ block content
                                 option(value="nothing", selected=user.alertMode === 'nothing') 通知しない
                         p: label タイムゾーン：(coming soon)
                         button.primary(type="submit") 保存
+
+
+        section.xd-card#settings
+                .header
+                    h1.title
+                        i.fas.fa-sliders-h
+                        |  操作
                 .body
-                    div.mb-2: a.xd-button.danger#logout(style="display: inline-block", href="/logout") ログアウト
-                    div: a.xd-button.danger#optout(style="display: inline-block", href="/optout") アカウント連携を解除する
+                    form.mb-2(action="/send", method="post"): button#send(style="display: inline-block") アラートをテスト送信
+                    form.mb-2(action="/logout", method="post"): button.danger#logout(style="display: inline-block") ログアウト
+                    form.mb-2(action="/optout", method="post"): button.danger#optout(style="display: inline-block") アカウント連携を解除する
 
 block script
     script.
+        history.replaceState(null, null, '/');
         document.getElementById("optout").addEventListener("click", (e) => {
             if (!confirm('連携を解除すると、統計情報などのデータが削除されてしまい、以後アラート機能をご利用いただけなくなります。この操作は変更できません。\n\nそれでもなお、連携を解除しますか？'))
                 e.preventDefault();
