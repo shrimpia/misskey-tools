@@ -40,9 +40,9 @@ const login = async (ctx: Context, user: Record<string, unknown>, host: string, 
 
 	if (isNewcomer) {
 		await updateUser(u.username, u.host, {
-			prevNotesCount: user.notesCount as number,
-			prevFollowingCount: user.followingCount as number,
-			prevFollowersCount: user.followersCount as number,
+			prevNotesCount: user.notesCount as number ?? 0,
+			prevFollowingCount: user.followingCount as number ?? 0,
+			prevFollowersCount: user.followersCount as number ?? 0,
 		});
 	}
 
@@ -80,10 +80,15 @@ router.get('/login', async ctx => {
 	let host = ctx.query.host as string | undefined;
 
 	if (!host) { 
-		await die(ctx, 'ホストを空欄にしてはいけない');
+		await die(ctx, 'host is empty');
 		return;
 	}
-	const meta = await api<{ name: string, uri: string, features: Record<string, boolean | undefined> }>(host, 'meta', {});
+	const meta = await api<{ name: string, uri: string, version: string, features: Record<string, boolean | undefined> }>(host, 'meta', {});
+
+	if (meta.version.includes('hitori')) {
+		await die(ctx, 'ひとりすきーは連携できません。');
+		return;
+	}
 
 	// ホスト名の正規化
 	host = meta.uri.replace(/^https?:\/\//, '');
