@@ -9,8 +9,8 @@ export const updateScore = async (user: User): Promise<void>  => {
 	}
                 
 	await updateUser(user.username, user.host, {
-		prevNotesCount: miUser.notesCount,
-		prevFollowingCount: miUser.followingCount,
-		prevFollowersCount: miUser.followersCount,
+		prevNotesCount: miUser.notesCount ?? 0,
+		prevFollowingCount: miUser.followingCount ?? 0,
+		prevFollowersCount: miUser.followersCount ?? 0,
 	});
 };
