@@ -2,11 +2,8 @@ import cron from 'node-cron';
 import delay from 'delay';
 
 import { Users } from '../models';
-import { api } from './misskey';
-import { format } from '../functions/format';
 import { deleteUser } from '../functions/users';
 import { updateScore } from '../functions/update-score';
-import { getScores } from '../functions/get-scores';
 import { send } from './send';
 
 export default (): void => {

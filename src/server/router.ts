@@ -59,7 +59,6 @@ router.get('/', async ctx => {
 	const user = token ? await getUserByMisshaiToken(token) : undefined;
 	
 	const isAvailable = user && await apiAvailable(user.host, user.token);
-	console.log(isAvailable);
 	if (user && isAvailable) {
 		await ctx.render('mypage', {
 			user,
@@ -176,8 +175,6 @@ router.get('/legacy-auth', async ctx => {
 		return;
 	}
 
-	console.log(host);
-	
 	const { accessToken, user } = await api<{ accessToken: string, user: Record<string, unknown> }>(host, 'auth/session/userkey', {
 		appSecret, token,
 	});
