@@ -5,12 +5,14 @@ import { Users } from '../models';
 import { deleteUser } from '../functions/users';
 import { updateScore } from '../functions/update-score';
 import { send } from './send';
+import { Not } from 'typeorm';
+import { AlertMode } from '../types/AlertMode';
 
 export default (): void => {
 	cron.schedule('0 0 0 * * *', async () => {
-		const users = await Users.createQueryBuilder()
-			.select()
-			.getMany();
+		const users = await Users.find({
+			alertMode: Not<AlertMode>('nothing'),
+		});
 		for (const user of users) {
 			try {
 				await send(user);
