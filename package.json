@@ -16,7 +16,7 @@
       "build:styles": "sass styles/:built/assets",
       "build": "run-p build:*",
       "migrate": "ts-node --project ./tsconfig.migration.json ./node_modules/typeorm/cli.js migration:run",
-      "watch": "nodemon"
+      "dev": "nodemon"
    },
    "dependencies": {
       "@types/koa-bodyparser": "^4.3.0",
