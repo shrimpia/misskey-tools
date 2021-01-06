@@ -24,7 +24,7 @@ const welcomeMessage = [
 	'今日、何ノート書いた？',
 	'10000 ノートは初心者、そう思っていませんか？',
 	'息するように Misskey、そんなあなたへ。',
-	'あなたは真の Misskey 廃人ですか？'
+	'あなたは真の Misskey 廃人ですか？',
 ];
 
 const login = async (ctx: Context, user: Record<string, unknown>, host: string, token: string) => {

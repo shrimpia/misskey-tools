@@ -130,7 +130,7 @@ button, .xd-button {
   text-decoration: none;
   cursor: pointer;
 
-  &:hover {
+  &:hover, &:focus {
     background: var(--bg-pale-1);
   }
   &:active {
@@ -141,7 +141,7 @@ button, .xd-button {
     background: var(--primary);
     color: var(--primary-fg);
     border-color: var(--primary-dark);
-    &:hover {
+    &:hover, &:focus {
       background: var(--primary-light);
     }
     &:active {
@@ -153,12 +153,28 @@ button, .xd-button {
     background: var(--bg-danger);
     color: white;
     border-color: var(--divider-danger);
-    &:hover {
+    &:hover, &:focus {
       background: var(--bg-danger-lighten);
     }
     &:active {
       background: var(--bg-danger-lighten);
     }
+  }
+}
+
+textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--overlay);
+  border: none;
+  outline: none;
+  height: 8rem;
+  line-height: 1;
+  &:focus {
+    border: 1px solid var(--primary);
+    color: var(--fg);
   }
 }
 
