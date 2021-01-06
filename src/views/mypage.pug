@@ -70,65 +70,67 @@ block content
                         | スコア通知方法に「Misskey に通知」を選んでいる場合、Groundpolis v3 および Misskey v12 の最新版以外では動作しません。めいすきーや古いバージョンをお使いの方は、「自動的にノートを投稿」をお使いください。
                     form(method="post", action="/update-settings")
                         p: label スコア通知方法：
-                            select(name="alertMode", tabindex=1)
+                            select#alertModeSelector(name="alertMode", tabindex=1)
                                 each set in alertModes
                                     option(value=set[0], selected=(user.alertMode === set[0]))= set[1]
-                        p: label 公開範囲：
-                            select(name="visibility", tabindex=2)
-                                each set in visibilities
-                                    option(value=set[0], selected=(user.visibility === set[0]))= set[1]
-                        p 
-                            | フラグ <br />
-                            label
-                                input(type="radio", name="flag", value="none", checked=!user.localOnly && !user.remoteFollowersOnly, tabindex=3)
-                                | なし(標準)<br />
-                            label
-                                input(type="radio", name="flag", value="localOnly", checked=user.localOnly, tabindex=4)
-                                | ローカルのみ<br />
-                            if isGroundpolis
+                        #hideWhenAlertModeNotNote
+                            p: label 公開範囲：
+                                select(name="visibility", tabindex=2)
+                                    each set in visibilities
+                                        option(value=set[0], selected=(user.visibility === set[0]))= set[1]
+                            p 
+                                | フラグ <br />
                                 label
-                                    input(type="radio", name="flag", value="remoteFollowersOnly", checked=user.remoteFollowersOnly, tabindex=5)
-                                    | リモートフォロワーとローカル<br />
-                        div
-                            label 投稿テンプレート
-                            div: textarea(name="template", disabled, tabindex=6)
-                            details(tabindex=7)
-                                summary ヘルプ
-                                p
-                                    code {notesCount}
-                                    | などのテキストを挿入することで、投稿時に自動的に値が埋め込まれます。これを変数といいます。変数の表を次に示します。
-                                table
-                                    thead: tr
-                                        th 変数
-                                        th 説明
-                                    tbody
-                                        tr
-                                            td {notesCount}
-                                            td ノート数
-                                        tr
-                                            td {followingCount}
-                                            td フォロー数
-                                        tr
-                                            td {followersCount}
-                                            td フォロワー数
-                                        tr
-                                            td {notesDelta}
-                                            td 昨日とのノート数の差
-                                        tr
-                                            td {followingDelta}
-                                            td 昨日とのフォロー数の差
-                                        tr
-                                            td {followersDelta}
-                                            td 昨日とのフォロワー数の差
-                                        tr
-                                            td {url}
-                                            td みす廃アラートのURL
-                                        tr
-                                            td {ranking}
-                                            td みす廃ランキングの順位
-                                        tr
-                                            td {rating}
-                                            td みす廃レート
+                                    input(type="radio", name="flag", value="none", checked=!user.localOnly && !user.remoteFollowersOnly, tabindex=3)
+                                    | なし(標準)<br />
+                                label
+                                    input(type="radio", name="flag", value="localOnly", checked=user.localOnly, tabindex=4)
+                                    | ローカルのみ<br />
+                                if isGroundpolis
+                                    label
+                                        input(type="radio", name="flag", value="remoteFollowersOnly", checked=user.remoteFollowersOnly, tabindex=5)
+                                        | リモートフォロワーとローカル<br />
+                        #hideWhenAlertModeNothing
+                            div
+                                label 投稿テンプレート
+                                div: textarea(name="template", disabled, tabindex=6)
+                                details(tabindex=7)
+                                    summary ヘルプ
+                                    p
+                                        code {notesCount}
+                                        | などのテキストを挿入することで、投稿時に自動的に値が埋め込まれます。これを変数といいます。変数の表を次に示します。
+                                    table
+                                        thead: tr
+                                            th 変数
+                                            th 説明
+                                        tbody
+                                            tr
+                                                td {notesCount}
+                                                td ノート数
+                                            tr
+                                                td {followingCount}
+                                                td フォロー数
+                                            tr
+                                                td {followersCount}
+                                                td フォロワー数
+                                            tr
+                                                td {notesDelta}
+                                                td 昨日とのノート数の差
+                                            tr
+                                                td {followingDelta}
+                                                td 昨日とのフォロー数の差
+                                            tr
+                                                td {followersDelta}
+                                                td 昨日とのフォロワー数の差
+                                            tr
+                                                td {url}
+                                                td みす廃アラートのURL
+                                            tr
+                                                td {ranking}
+                                                td みす廃ランキングの順位
+                                            tr
+                                                td {rating}
+                                                td みす廃レート
                         button.primary(type="submit", tabindex=8) 保存
 
 
@@ -143,15 +145,25 @@ block content
 block script
     script.
         history.replaceState(null, null, '/');
-        document.getElementById("send").addEventListener("click", (e) => {
+        document.getElementById('send').addEventListener('click', (e) => {
             if (!confirm('現在の設定「!{currentAlertModeLabel}」に基づいてアラートを送信しますか？'))
                 e.preventDefault();
         });
-        document.getElementById("optout").addEventListener("click", (e) => {
+        document.getElementById('optout').addEventListener('click', (e) => {
             if (!confirm('連携を解除すると、統計情報などのデータが削除されてしまい、以後アラート機能をご利用いただけなくなります。この操作は変更できません。\n\nそれでもなお、連携を解除しますか？'))
                 e.preventDefault();
         });
-        document.getElementById("logout").addEventListener("click", (e) => {
+        document.getElementById('logout').addEventListener('click', (e) => {
             if (!confirm('ログアウトしますか？'))
                 e.preventDefault();
         });
+        const hideWhenAlertModeNotNote = document.getElementById('hideWhenAlertModeNotNote');
+        const hideWhenAlertModeNothing = document.getElementById('hideWhenAlertModeNothing');
+        const alertModeSelector = document.getElementById('alertModeSelector');
+        const updateView = () => {
+            const value = alertModeSelector.value;
+            hideWhenAlertModeNotNote.style.display = value !== 'note' ? 'none' : 'block';
+            hideWhenAlertModeNothing.style.display = value === 'nothing' ? 'none' : 'block';
+        };
+        alertModeSelector.addEventListener('change', updateView);
+        updateView();
