@@ -8,9 +8,13 @@ export const send = async (user: User): Promise<void> => {
 
 	if (user.alertMode === 'note') {
 		console.info(`send ${user.username}@${user.host}'s misshaialert as a note`);
-		const res = await api<Record<string, unknown>>(user.host, 'notes/create', {
+		const opts = {
 			text,
-		}, user.token);
+			visibility: user.visibility,
+		} as Record<string, unknown>;
+		if (user.localOnly) opts.localOnly = user.localOnly;
+		if (user.remoteFollowersOnly) opts.remoteFollowersOnly = user.remoteFollowersOnly;
+		const res = await api<Record<string, unknown>>(user.host, 'notes/create', opts, user.token);
 		if (res.error) {
 			throw res.error || res;
 		}

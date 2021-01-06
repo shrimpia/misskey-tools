@@ -12,6 +12,7 @@ import { getScores } from '../functions/get-scores';
 import { AlertMode, alertModes } from '../types/AlertMode';
 import { Users } from '../models';
 import { send } from '../services/send';
+import { visibilities, Visibility } from '../types/Visibility';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -59,9 +60,13 @@ router.get('/', async ctx => {
 	const user = token ? await getUserByMisshaiToken(token) : undefined;
 	
 	const isAvailable = user && await apiAvailable(user.host, user.token);
+
 	if (user && isAvailable) {
+		const meta = await api<{ version: string }>(user?.host, 'meta', {});
 		await ctx.render('mypage', {
 			user,
+			// To Activate Groundpolis Mode
+			isGroundpolis: meta.version.includes('gp'),
 			usersCount: await getUserCount(),
 			score: await getScores(user),
 			from: ctx.query.from,
@@ -195,13 +200,21 @@ router.post('/update-settings', async ctx => {
 		await die(ctx, `${mode} is an invalid value`);
 		return;
 	}
+	const visibility = ctx.request.body.visibility as Visibility;
+	// 一応型チェック
+	if (!visibilities.includes(visibility)) {
+		await die(ctx, `${mode} is an invalid value`);
+		return;
+	}
+
+	const flag = ctx.request.body.flag;
 
 	const token = ctx.cookies.get('token');
 	if (!token) {
 		await die(ctx, 'ログインしていません');
 		return;	
 	}
-	
+
 	const u = await getUserByMisshaiToken(token);
 
 	if (!u) {
@@ -209,7 +222,12 @@ router.post('/update-settings', async ctx => {
 		return;
 	}
 
-	await Users.update(u.id, { alertMode: mode });
+	await Users.update(u.id, {
+		alertMode: mode,
+		localOnly: flag === 'localOnly',
+		remoteFollowersOnly: flag === 'remoteFollowersOnly',
+		visibility,
+	});
 
 	ctx.redirect('/?from=updateSettings');
 });

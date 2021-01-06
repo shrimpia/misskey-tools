@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
 import { AlertMode, alertModes } from '../../types/AlertMode';
+import { visibilities, Visibility } from '../../types/Visibility';
 
 @Entity()
 @Index([ 'username', 'host' ], { unique: true })
@@ -52,4 +53,23 @@ export class User {
 		default: 'notification'
 	})
 	public alertMode: AlertMode;
+
+	@Column({
+		type: 'enum',
+		enum: visibilities,
+		default: 'home',
+	})
+	public visibility: Visibility;
+
+	@Column({
+		type: 'boolean',
+		default: false,
+	})
+	public localOnly: boolean;
+
+	@Column({
+		type: 'boolean',
+		default: false,
+	})
+	public remoteFollowersOnly: boolean;
 }
