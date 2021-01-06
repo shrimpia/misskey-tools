@@ -1,23 +1,23 @@
 extends _base
 
 block content
-    h2 マイページ
-    case from
-        when "updateSettings"
-            p: strong 設定を変更しました。
-        when "updateSettings"
-            p: strong テスト送信しました。
-        default
-            p おかえりなさい、@!{ user.username }@!{ user.host } さん。
+    .xd-card
+        h1: a(href="/") みす廃あらーと
+        h2 マイページ
+        case from
+            when "updateSettings"
+                p: strong 設定を変更しました。
+            when "updateSettings"
+                p: strong テスト送信しました。
+            default
+                p おかえりなさい、@!{ user.username }@!{ user.host } さん。
     
-    section#scores
-        .xd-cards.center
+    section#scores.xd-vstack
+        .xd-hstack
             +serverInfo()
             .xd-card
                 .header
-                    h1.title
-                        i.fas.fa-chart-area
-                        |  あなたの廃人度は…
+                    h1.title みす廃データ
                 .body
                     table
                         thead
@@ -41,9 +41,7 @@ block content
     
         section.xd-card#settings
                 .header
-                    h1.title
-                        i.fas.fa-cog
-                        |  設定
+                    h1.title 設定
                 .body
                     .xd-alert.danger.mb-2 スコア通知方法に「Misskey に通知」を選んでいる場合、Groundpolis v3 および Misskey v12 の最新版以外では動作しません。めいすきーや古いバージョンをお使いの方は、「自動的にノートを投稿」をお使いください。
                     form(method="post", action="/update-settings")
@@ -58,9 +56,7 @@ block content
 
         section.xd-card#settings
                 .header
-                    h1.title
-                        i.fas.fa-sliders-h
-                        |  操作
+                    h1.title 操作
                 .body
                     form.mb-2(action="/send", method="post"): button#send(style="display: inline-block") アラートをテスト送信
                     form.mb-2(action="/logout", method="post"): button.danger#logout(style="display: inline-block") ログアウト

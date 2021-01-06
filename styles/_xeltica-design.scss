@@ -1,34 +1,7 @@
-@import '_colors';
-
 /*
   Xeltica Design CSS Framework
   (C)2020 Xeltica
 */
-
-$primary: rgb(134, 179, 0);
-$primary-light: lighten($primary, 5%);
-$primary-dark: darken($primary, 5%);
-$primary-fg: $md-white;
-$bg: $md-white;
-$bg-pale-1: darken($bg, 5%);
-$bg-pale-2: darken($bg-pale-1, 5%);
-$fg: $md-black;
-$card-bg: $bg;
-$card-header: $bg-pale-1;
-$card-footer: $bg-pale-1;
-$card-fg: $fg;
-$divider: rgba($fg, 0.25);
-$table-bg-header: $bg-pale-2;
-$table-bg-odd: $bg-pale-1;
-$table-bg-even: $bg;
-$alert-bg: $bg-pale-1;
-$alert-border: $divider;
-$alert-fg: $fg;
-$alert-bg-danger: $md-red-300;
-$alert-border-danger: $md-red-900;
-$alert-fg-danger: $md-red-50;
-
-$barSize: 64px;
 
 * {
   box-sizing: border-box;
@@ -36,20 +9,38 @@ $barSize: 64px;
 }
 
 html {
+  $primary: rgb(134, 179, 0);
+  $fg: rgba(255, 255, 255, 0.8);
+  $bg: rgba(24, 24, 24, 0.8);
+  $overlay: transparentize($bg, 0.5);
+  $danger: #c72c2c;
   font-size: 18px;
   @media screen and (max-width: 640px) {
     font-size: 15px;
   }
+  --primary: #{$primary};
+  --primary-light: #{lighten($primary, 5%)};
+  --primary-dark: #{darken($primary, 5%)};
+  --primary-fg: white;
+  --bg: #{$bg};
+  --bg-pale-1: #{darken($bg, 5%)};
+  --bg-pale-2: #{darken($bg, 10%)};
+  --overlay: #{$overlay};
+  --fg: #{$fg};
+  // --divider: rgba(70, 70, 70, 0.25);
+  --radius: 0px;
+  --margin: 16px;
+
+  --bg-danger: #{$danger};
+  --fg-danger: white;
+  --divider-danger: #400e0e;
+  --bg-danger-lighten: #{lighten($danger, 5%)};
+  --bg-danger-darken: #{darken($danger, 5%)};
 }
 
 body {
-  background: $bg;
-  font-family: 'Noto Sans JP', sans-serif;
-  color: $fg;
-}
-
-section:not(:last-child) {
-  margin-bottom: 16px;
+  background: var(--bg);
+  color: var(--fg);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -80,15 +71,15 @@ h6 { font-size: 1.05rem; }
 
 input.xd-input {
   outline: none;
-  border-radius: 2px;
-  color: $fg;
+  border-radius: var(--radius);
+  color: var(--fg);
   background: transparent;
-  border: 1px solid $fg;
+  border: 1px solid var(--fg);
   padding: 2px 8px;
   font-size: 1rem;
 
   &:focus {
-    border-color: $primary;    
+    border-color: var(--primary);    
   }
 }
 
@@ -114,22 +105,25 @@ p {
 }
 
 .xd-main {
-  background: $bg;
+  background: var(--bg);
   padding: 32px;
-  border-radius: 2px;
-  border: 1px solid $divider;
+  border-radius: var(--radius);
+  border: 1px solid var(--divider);
   max-width: 960px;
   margin: 24px auto;
+  backdrop-filter: blur(32px) saturate(4);
+  -webkit-backdrop-filter: blur(32px) saturate(4);
+  box-shadow: 0 0 16px black;
 }
 
 button, .xd-button {
   display: flex;
-  color: $fg;
-  background: $bg;
-  border: 1px solid $bg-pale-1;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--bg-pale-1);
   align-items: center;
   justify-content: center;
-  border-radius: 2px;
+  border-radius: var(--radius);
   font-size: 1rem;
   outline: none;
   padding: 2px 8px;
@@ -137,33 +131,33 @@ button, .xd-button {
   cursor: pointer;
 
   &:hover {
-    background: $bg-pale-1;
+    background: var(--bg-pale-1);
   }
   &:active {
-    background: $bg-pale-2;
+    background: var(--bg-pale-2);
   }
 
   &.primary {
-    background: $primary;
-    color: $primary-fg;
-    border-color: $primary-dark;
+    background: var(--primary);
+    color: var(--primary-fg);
+    border-color: var(--primary-dark);
     &:hover {
-      background: $primary-light;
+      background: var(--primary-light);
     }
     &:active {
-      background: $primary-dark;
+      background: var(--primary-dark);
     }
   }
 
   &.danger {
-    background: $md-red-700;
-    color: $md-white;
-    border-color: $md-red-900;
+    background: var(--bg-danger);
+    color: white;
+    border-color: var(--divider-danger);
     &:hover {
-      background: $md-red-500;
+      background: var(--bg-danger-lighten);
     }
     &:active {
-      background: $md-red-800;
+      background: var(--bg-danger-lighten);
     }
   }
 }
@@ -176,28 +170,25 @@ button, .xd-button {
 
 a, .link {
   text-decoration: none;
-  color: $primary;
-  border-bottom: 1px solid $primary;
+  color: var(--primary);
   &:hover {
     opacity: 0.7;
   }
 }
 
 table {
-  border: 1px solid $divider;
-  border-radius: 2px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius);
+  background: var(--overlay);
   width: 100%;
 
   > thead {
-    background: $table-bg-header;
+    background: var(--overlay);
     margin-bottom: 2px;
     text-align: left;
   }
   > tbody > tr {
-    background: $table-bg-even;
-    &:nth-child(odd) {
-      background: $table-bg-odd;
-    }
+    border-bottom: 1px solid var(--overlay);
   }
   th, td {
     padding: 4px 8px;
@@ -205,22 +196,53 @@ table {
 }
 
 code {
-  border-radius: 2px;
+  border-radius: var(--radius);
   color: #0f0;
   background: #000;
   padding: 8px;
 }
 
 .xd-container {
-  padding: 32px;
+  max-width: 960px;
+  margin: 64px auto;
+}
+
+.xd-hstack {
+  display: flex;
+  > *:not(:last-child) {
+    margin-right: var(--margin);
+  }
+
+  > * {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 640px) {
+    flex-direction: column;
+    > * {
+      margin-bottom: var(--margin);
+    }
+  }
+}
+
+.xd-vstack {
+  display: flex;
+  flex-direction: column;
+  > *:not(:last-child) {
+    margin-bottom: var(--margin);
+  }
 }
 
 .xd-card {
-  background: $card-bg;
-  color: $card-fg;
-  border: 1px solid $divider;
-  border-radius: 2px;
+  background: var(--bg);
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--divider);
+  // backdrop-filter: blur(32px) saturate(4);
+  // -webkit-backdrop-filter: blur(32px) saturate(4);
+  box-shadow: 0 0 16px black;
   overflow: hidden;
+  
 
   h1 { font-size: 2rem; }
   h2 { font-size: 1.5rem; }
@@ -244,18 +266,19 @@ code {
   }
 
   > .header {
-    background: $card-header;
-    border-bottom: 1px solid $divider;
     > h1.title {
-      font-size: 1rem;
+      font-size: 1.5rem;
       margin: 0;
       font-weight: bold;
     }
   }
 
   > .footer {
-    background: $card-footer;
-    border-top: 1px solid $divider;
+    background: var(--bg-pale-1);
+    border-top: 1px solid var(--divider);
+  }
+  @media screen and (max-width: 640px) {
+    border-radius: 0;
   }
 }
 
@@ -422,17 +445,17 @@ img, .xd-responsive {
 
 .xd-alert {
   padding: 8px 16px;
-  border-radius: 2px;
+  border-radius: var(--radius);
   width: 100%;
-  background: $alert-bg;
-  border: 1px solid $alert-border;
-  color: $alert-fg;
+  background: var(--bg);
+  border: 1px solid var(--bg-pale-2);
+  color: var(--fg);
   font-size: 75%;
 
   &.danger {
-    background: $alert-bg-danger;
-    border: 1px solid $alert-border-danger;
-    color: $alert-fg-danger;
+    background: var(--bg-danger);
+    border: 1px solid var(--divider-danger);
+    color: var(--fg-danger);
   }
 
 }

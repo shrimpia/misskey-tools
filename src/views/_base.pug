@@ -19,15 +19,15 @@ html
         link(rel='stylesheet' href='/assets/style.css')
         block style
     body
-        .xd-main
-            h1: a(href="/") みす廃あらーと
+        .background
+        .xd-container.xd-vstack
             block content
-            footer.xd-footer.xd-container
-                a(href="/terms") 利用規約
-                | ・
-                +exta(href="https://github.com/Xeltica/misshaialert") リポジトリ
-                p (C)2020 Xeltica - 
-                    a(href="/about") version #{version}
-                block footer
+            footer
+                .xd-card
+                    a(href="/terms") 利用規約
+                    | ・
+                    +exta(href="https://github.com/Xeltica/misshaialert") リポジトリ
+                    p (C)2020-2021 Xeltica - 
+                        a(href="/about") version #{version}
+                    block footer
         block script
-        script(defer src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js')
