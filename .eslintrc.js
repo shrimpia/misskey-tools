@@ -31,6 +31,7 @@ module.exports = {
 		'semi': [
 			'error',
 			'always'
-		]
+		],
+		'@typescript-eslint/explicit-module-boundary-types': 'off'
 	}
 };
