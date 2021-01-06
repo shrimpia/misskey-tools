@@ -4,13 +4,22 @@ block content
     .xd-card
         h1: a(href="/") みす廃あらーと
         h2 マイページ
+        p おかえりなさい、@!{ user.username }@!{ user.host } さん。
+
         case from
             when "updateSettings"
-                p: strong 設定を変更しました。
-            when "updateSettings"
-                p: strong テスト送信しました。
-            default
-                p おかえりなさい、@!{ user.username }@!{ user.host } さん。
+                .xd-alert.my-2
+                    i.icon.fas.fa-thumbs-up
+                    strong 設定を変更しました。
+            when "send"
+                .xd-alert.my-2
+                    i.icon.fas.fa-thumbs-up
+                    strong テスト送信しました。
+    
+        if isGroundpolis
+            .xd-alert.my-2
+                i.icon.fas.fa-meteor
+                strong Groundpolis アカウントでログインしています。専用機能が有効化されました。
     
     section#scores.xd-vstack
         .xd-hstack
@@ -43,7 +52,9 @@ block content
                 .header
                     h1.title 設定
                 .body
-                    .xd-alert.danger.mb-2 スコア通知方法に「Misskey に通知」を選んでいる場合、Groundpolis v3 および Misskey v12 の最新版以外では動作しません。めいすきーや古いバージョンをお使いの方は、「自動的にノートを投稿」をお使いください。
+                    .xd-alert.danger.mb-2
+                        i.icon.fas.fa-exclamation-circle
+                        | スコア通知方法に「Misskey に通知」を選んでいる場合、Groundpolis v3 および Misskey v12 の最新版以外では動作しません。めいすきーや古いバージョンをお使いの方は、「自動的にノートを投稿」をお使いください。
                     form(method="post", action="/update-settings")
                         p: label スコア通知方法：
                             select(name="alertMode")
@@ -59,12 +70,16 @@ block content
                     h1.title 操作
                 .body
                     form.mb-2(action="/send", method="post"): button#send(style="display: inline-block") アラートをテスト送信
-                    form.mb-2(action="/logout", method="post"): button.danger#logout(style="display: inline-block") ログアウト
+                    form.mb-2(action="/logout", method="post"): button#logout(style="display: inline-block") ログアウト
                     form.mb-2(action="/optout", method="post"): button.danger#optout(style="display: inline-block") アカウント連携を解除する
 
 block script
     script.
         history.replaceState(null, null, '/');
+        document.getElementById("send").addEventListener("click", (e) => {
+            if (!confirm('現在の設定「!{currentAlertModeLabel}」に基づいてアラートを送信しますか？'))
+                e.preventDefault();
+        });
         document.getElementById("optout").addEventListener("click", (e) => {
             if (!confirm('連携を解除すると、統計情報などのデータが削除されてしまい、以後アラート機能をご利用いただけなくなります。この操作は変更できません。\n\nそれでもなお、連携を解除しますか？'))
                 e.preventDefault();

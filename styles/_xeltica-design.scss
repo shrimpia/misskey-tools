@@ -445,6 +445,8 @@ img, .xd-responsive {
 
 .xd-alert {
   padding: 8px 16px;
+  display: flex;
+  align-items: center;
   border-radius: var(--radius);
   width: 100%;
   background: var(--bg);
@@ -452,7 +454,16 @@ img, .xd-responsive {
   color: var(--fg);
   font-size: 75%;
 
+  > .icon {
+    opacity: 0.5;
+    font-size: 1.2rem;
+    margin-right: 16px;
+  }
+
   &.danger {
+    > .icon {
+      opacity: 1;
+    }
     background: var(--bg-danger);
     border: 1px solid var(--divider-danger);
     color: var(--fg-danger);

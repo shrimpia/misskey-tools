@@ -3,9 +3,9 @@ extends _base
 block content
     case from
         when 'logout'
-            .xd-card: p: strong ログアウトしました。
+            .xd-alert.danger: strong ログアウトしました。
         when 'optout'
-            .xd-card: p: strong 連携を解除しました。
+            .xd-alert.danger: strong 連携を解除しました。
     .xd-card
         h1: a(href="/") みす廃あらーと
         h2= welcomeMessage
