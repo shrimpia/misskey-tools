@@ -28,7 +28,7 @@ mixin rankingTable()
                 - const rating = rec.rating.toFixed(2);
                 tr
                     td=rank
-                    td !{rec.username}@!{rec.host}
+                    td: +exta(href="https://" + rec.host + "/@" + rec.username) @!{rec.username}@!{rec.host}
                     td=rating
                 -
                     if (lastRating !== rating) {
