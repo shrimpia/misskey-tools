@@ -79,4 +79,22 @@ export class User {
 		nullable: true,
 	})
 	public template: string | null;
+
+	@Column({
+		type: 'real',
+		default: 0,
+	})
+	public prevRating: number;
+
+	@Column({
+		type: 'real',
+		default: 0,
+	})
+	public rating: number;
+
+	@Column({
+		type: 'boolean',
+		default: false,
+	})
+	public bannedFromRanking: boolean;
 }

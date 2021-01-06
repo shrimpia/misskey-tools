@@ -53,6 +53,10 @@ export const variables: Record<string, Variable> = {
 		description: '所属するインスタンスのホスト名',
 		replace: (_, user) => String(user.host),
 	},
+	rating: {
+		description: 'みす廃レート',
+		replace: (_, user) => String(user.rating),
+	},
 };
 
 const variableRegex = /\{([a-zA-Z0-9_]+?)\}/g;

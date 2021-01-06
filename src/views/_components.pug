@@ -2,22 +2,36 @@ mixin exta()
     a(href=attributes.href target="_blank" rel="noopener noreferrer")
         block
 
-mixin serverInfo()
+mixin ranking()
     .xd-card
         .header
-            h1.title サービスの情報
+            h1.title みす廃ランキング
         .body
-            dl
-                dt
-                    i.fas.fa-users
-                    |  登録者数
-                dd !{usersCount} 人
-                dt
-                    |  総ノート数
-                dd (coming soon)
-                dt
-                    |  総フォロー数
-                dd (coming soon)
-                dt
-                    |  総フォロワー数
-                dd (coming soon)
+            p
+                i.fas.fa-users
+                strong 登録者数: !{usersCount}人
+            +rankingTable()
+            p: a(href="/ranking") 全員分見る
+
+mixin rankingTable()
+    table
+        thead: tr
+            th 順位
+            th ユーザー
+            th レート
+        tbody
+            -
+                let rank = 1;
+                let lastRating = '';
+                console.log(ranking);
+            each rec in ranking
+                - const rating = rec.rating.toFixed(2);
+                tr
+                    td=rank
+                    td !{rec.username}@!{rec.host}
+                    td=rating
+                -
+                    if (lastRating !== rating) {
+                        rank++;
+                    }
+                    lastRating = rating

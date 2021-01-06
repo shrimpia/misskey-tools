@@ -23,7 +23,7 @@ block content
     
     section#scores.xd-vstack
         .xd-hstack
-            +serverInfo()
+            +ranking()
             .xd-card
                 .header
                     h1.title みす廃データ
@@ -47,6 +47,11 @@ block content
                                 td フォロワー
                                 td !{score.followersCount}
                                 td !{score.followersDelta}
+                            tr
+                                td フォロワー
+                                td !{score.followersCount}
+                                td !{score.followersDelta}
+                    p みす廃レート: !{user.rating}
     
         section.xd-card#settings
                 -

@@ -14,6 +14,7 @@ import { Users } from '../models';
 import { send } from '../services/send';
 import { visibilities, Visibility } from '../types/Visibility';
 import { defaultTemplate, variables } from '../functions/format';
+import { getRanking } from '../functions/ranking';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -61,23 +62,25 @@ router.get('/', async ctx => {
 	const user = token ? await getUserByMisshaiToken(token) : undefined;
 	
 	const isAvailable = user && await apiAvailable(user.host, user.token);
+	const usersCount = await getUserCount();
+	const ranking = await getRanking(10);
+	console.log(ranking);
 
 	if (user && isAvailable) {
 		const meta = await api<{ version: string }>(user?.host, 'meta', {});
 		await ctx.render('mypage', {
-			user,
+			user, usersCount, ranking,
 			// To Activate Groundpolis Mode
 			isGroundpolis: meta.version.includes('gp'),
 			defaultTemplate,
 			templateVariables: variables,
-			usersCount: await getUserCount(),
 			score: await getScores(user),
 			from: ctx.query.from,
 		});
 	} else {
 		// 非ログイン
 		await ctx.render('welcome', {
-			usersCount: await getUserCount(),
+			usersCount, ranking,
 			welcomeMessage:  welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
 			from: ctx.query.from,
 		});
@@ -142,6 +145,12 @@ router.get('/about', async ctx => {
 
 router.get('/teapot', async ctx => {
 	await die(ctx, 'I\'m a teapot', 418);
+});
+
+router.get('/ranking', async ctx => {
+	await ctx.render('ranking', {
+		ranking: await getRanking(null),
+	});
 });
 
 router.get('/miauth', async ctx => {

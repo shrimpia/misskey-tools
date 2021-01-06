@@ -16,6 +16,7 @@
       "build:styles": "sass styles/:built/assets",
       "build": "run-p build:*",
       "migrate": "ts-node --project ./tsconfig.migration.json ./node_modules/typeorm/cli.js migration:run",
+      "migrate:revert": "ts-node --project ./tsconfig.migration.json ./node_modules/typeorm/cli.js migration:revert",
       "dev": "nodemon"
    },
    "dependencies": {
@@ -26,6 +27,7 @@
       "@types/node-cron": "^2.0.3",
       "@types/uuid": "^8.0.0",
       "axios": "^0.19.2",
+      "dayjs": "^1.10.2",
       "delay": "^4.4.0",
       "koa": "^2.13.0",
       "koa-bodyparser": "^4.3.0",

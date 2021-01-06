@@ -1,12 +1,14 @@
 import cron from 'node-cron';
 import delay from 'delay';
-
-import { Users } from '../models';
-import { deleteUser } from '../functions/users';
-import { updateScore } from '../functions/update-score';
-import { send } from './send';
 import { Not } from 'typeorm';
+
+import { deleteUser } from '../functions/users';
+import { MiUser, updateScore } from '../functions/update-score';
+import { updateRating } from '../functions/update-rating';
 import { AlertMode } from '../types/AlertMode';
+import { Users } from '../models';
+import { send } from './send';
+import { api } from './misskey';
 
 export default (): void => {
 	cron.schedule('0 0 0 * * *', async () => {
@@ -14,7 +16,11 @@ export default (): void => {
 			alertMode: Not<AlertMode>('nothing'),
 		});
 		for (const user of users) {
+			const miUser = await api<MiUser & { error: unknown }>(user.host, 'users/show', { username: user.username }, user.token);
+
 			try {
+				if (miUser.error) throw miUser.error;
+				await updateRating(user, miUser);
 				await send(user);
 			} catch (e) {
 				if (e.code === 'NO_SUCH_USER' || e.code === 'AUTHENTICATION_FAILED') {
@@ -27,7 +33,7 @@ export default (): void => {
 			} finally {
 				if (user.alertMode === 'note')
 					await delay(3000);
-				await updateScore(user);
+				await updateScore(user, miUser);
 			}
 		}
 	});
