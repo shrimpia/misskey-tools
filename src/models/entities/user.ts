@@ -72,4 +72,11 @@ export class User {
 		default: false,
 	})
 	public remoteFollowersOnly: boolean;
+
+	@Column({
+		type: 'varchar',
+		length: 280,
+		nullable: true,
+	})
+	public template: string | null;
 }

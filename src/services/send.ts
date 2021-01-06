@@ -4,7 +4,7 @@ import { getScores } from '../functions/get-scores';
 import { api } from './misskey';
 
 export const send = async (user: User): Promise<void> => {
-	const text = format(await getScores(user));
+	const text = format(await getScores(user), user);
 
 	if (user.alertMode === 'note') {
 		console.info(`send ${user.username}@${user.host}'s misshaialert as a note`);

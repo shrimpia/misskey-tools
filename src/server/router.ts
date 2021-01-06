@@ -13,6 +13,7 @@ import { AlertMode, alertModes } from '../types/AlertMode';
 import { Users } from '../models';
 import { send } from '../services/send';
 import { visibilities, Visibility } from '../types/Visibility';
+import { defaultTemplate, variables } from '../functions/format';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -67,6 +68,8 @@ router.get('/', async ctx => {
 			user,
 			// To Activate Groundpolis Mode
 			isGroundpolis: meta.version.includes('gp'),
+			defaultTemplate,
+			templateVariables: variables,
 			usersCount: await getUserCount(),
 			score: await getScores(user),
 			from: ctx.query.from,
@@ -209,6 +212,8 @@ router.post('/update-settings', async ctx => {
 
 	const flag = ctx.request.body.flag;
 
+	const template = ctx.request.body.template?.trim();
+
 	const token = ctx.cookies.get('token');
 	if (!token) {
 		await die(ctx, 'ログインしていません');
@@ -226,6 +231,7 @@ router.post('/update-settings', async ctx => {
 		alertMode: mode,
 		localOnly: flag === 'localOnly',
 		remoteFollowersOnly: flag === 'remoteFollowersOnly',
+		template: template === defaultTemplate || !template ? null : template,
 		visibility,
 	});
 
