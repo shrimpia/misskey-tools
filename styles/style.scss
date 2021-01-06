@@ -51,3 +51,8 @@ details > summary {
     margin-bottom: 8px;
     cursor: pointer;
 }
+
+h1 > small {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+}
