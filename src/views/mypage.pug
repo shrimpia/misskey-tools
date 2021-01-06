@@ -93,15 +93,18 @@ block content
                         #hideWhenAlertModeNothing
                             div
                                 label 投稿テンプレート<br/>
-                                textarea(name="template")=user.template || defaultTemplate
+                                textarea#template(name="template", maxlength=280, placeholder=defaultTemplate)=user.template || defaultTemplate
                                 details()
                                     summary ヘルプ
                                     ul
+                                        li テンプレートに使える文字数は280文字です。
                                         li 空欄にすると、デフォルト値にリセットされます。
                                         li ハッシュタグ #misshaialert は、テンプレートに関わらず自動付与されます。
                                         li
                                             code {notesCount}
                                             | といった形式のテキストは変数として扱われ、これを含めると投稿時に自動的に値が埋め込まれます。
+                                    
+                                    p 変数の表を以下に示します。変数をクリックすると自動挿入されます。
                                     table
                                         thead: tr
                                             th 変数
@@ -109,7 +112,7 @@ block content
                                         tbody
                                             each val, key in templateVariables
                                                 tr
-                                                    td=key
+                                                    td(onclick=`insert('{${key}}')`, style="cursor: pointer")=key
                                                     td=val.description
                         button.primary(type="submit") 保存
 
@@ -147,3 +150,8 @@ block script
         };
         alertModeSelector.addEventListener('change', updateView);
         updateView();
+        
+        const template = document.getElementById('template');
+        function insert(text) {
+            template.value += text;
+        }
