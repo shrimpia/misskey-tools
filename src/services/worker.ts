@@ -28,7 +28,7 @@ export default (): void => {
 					console.info(`${user.username}@${user.host} is deleted, so delete this user from the system`);
 					await deleteUser(user.username, user.host);
 				} else {
-					console.error(e);
+					console.error(`${e.name}: ${e.message}`);
 				}
 			} finally {
 				if (user.alertMode === 'note')

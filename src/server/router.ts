@@ -64,7 +64,6 @@ router.get('/', async ctx => {
 	const isAvailable = user && await apiAvailable(user.host, user.token);
 	const usersCount = await getUserCount();
 	const ranking = await getRanking(10);
-	console.log(ranking);
 
 	if (user && isAvailable) {
 		const meta = await api<{ version: string }>(user?.host, 'meta', {});
