@@ -15,6 +15,7 @@ import { send } from '../services/send';
 import { visibilities, Visibility } from '../types/Visibility';
 import { defaultTemplate, variables } from '../functions/format';
 import { getRanking } from '../functions/ranking';
+import { getState } from '../store';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -65,23 +66,28 @@ router.get('/', async ctx => {
 	const usersCount = await getUserCount();
 	const ranking = await getRanking(10);
 
+	const commonLocals = {
+		usersCount, ranking,
+		state: getState(),
+		from: ctx.query.from,
+	};
+
 	if (user && isAvailable) {
 		const meta = await api<{ version: string }>(user?.host, 'meta', {});
 		await ctx.render('mypage', {
-			user, usersCount, ranking,
+			...commonLocals,
+			user, 
 			// To Activate Groundpolis Mode
 			isGroundpolis: meta.version.includes('gp'),
 			defaultTemplate,
 			templateVariables: variables,
 			score: await getScores(user),
-			from: ctx.query.from,
 		});
 	} else {
 		// 非ログイン
 		await ctx.render('welcome', {
-			usersCount, ranking,
+			...commonLocals,
 			welcomeMessage:  welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
-			from: ctx.query.from,
 		});
 	}
 });
@@ -148,6 +154,7 @@ router.get('/teapot', async ctx => {
 
 router.get('/ranking', async ctx => {
 	await ctx.render('ranking', {
+		state: getState(),
 		ranking: await getRanking(null),
 	});
 });
