@@ -1,5 +1,5 @@
 import { User } from './entities/user';
-import { UsedToken } from './entities/usedToken';
+import { UsedToken } from './entities/used-token';
 import { getRepository } from 'typeorm';
 
 export const Users = getRepository(User);

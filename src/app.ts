@@ -4,5 +4,5 @@ import 'reflect-metadata';
 (async () => {
 	await initDb();
 	(await import('./services/worker')).default();
-	(await import('./server/server')).default();
+	(await import('./server')).default();
 })();

@@ -1,5 +1,5 @@
 import { User } from '../models/entities/user';
-import { Score } from '../types/Score';
+import { Score } from '../types/score';
 import { api } from '../services/misskey';
 import { toSignedString } from './to-signed-string';
 

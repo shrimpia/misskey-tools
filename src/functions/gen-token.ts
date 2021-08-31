@@ -1,5 +1,5 @@
 import rndstr from 'rndstr';
-import { UsedToken } from '../models/entities/usedToken';
+import { UsedToken } from '../models/entities/used-token';
 import { UsedTokens } from '../models';
 
 export const genToken = async (): Promise<string> => {

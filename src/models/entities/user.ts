@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
-import { AlertMode, alertModes } from '../../types/AlertMode';
-import { visibilities, Visibility } from '../../types/Visibility';
+import { AlertMode, alertModes } from '../../types/alert-mode';
+import { visibilities, Visibility } from '../../types/visibility';
 
 @Entity()
 @Index([ 'username', 'host' ], { unique: true })

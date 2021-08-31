@@ -3,7 +3,6 @@ import Router from 'koa-router';
 import axios from 'axios';
 import crypto from 'crypto';
 
-import { die } from './die';
 import { v4 as uuid } from 'uuid';
 import { config } from '../config';
 import { upsertUser, getUser, getUserCount, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken, deleteUser } from '../functions/users';
@@ -16,20 +15,12 @@ import { visibilities, Visibility } from '../types/Visibility';
 import { defaultTemplate, variables } from '../functions/format';
 import { getRanking } from '../functions/ranking';
 import { getState } from '../store';
+import { welcomeMessage } from '../misc/welcome-message';
 
 export const router = new Router<DefaultState, Context>();
 
 const sessionHostCache: Record<string, string> = { };
 const tokenSecretCache: Record<string, string> = { };
-
-const welcomeMessage = [
-	'ついついノートしすぎていませんか？',
-	'Misskey, しすぎていませんか？',
-	'今日、何ノート書いた？',
-	'10000 ノートは初心者、そう思っていませんか？',
-	'息するように Misskey、そんなあなたへ。',
-	'あなたは真の Misskey 廃人ですか？',
-];
 
 const login = async (ctx: Context, user: Record<string, unknown>, host: string, token: string) => {
 	const isNewcomer = !(await getUser(user.username as string, host));
@@ -138,14 +129,6 @@ router.get('/login', async ctx => {
 
 		ctx.redirect(url);
 	}
-});
-
-router.get('/terms', async ctx => {
-	await ctx.render('term');
-});
-
-router.get('/about', async ctx => {
-	await ctx.render('about');
 });
 
 router.get('/teapot', async ctx => {

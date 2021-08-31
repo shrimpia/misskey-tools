@@ -1,5 +1,5 @@
 {
-    "watch": ["src", ["styles"]],
-    "ext": "ts,pug,scss",
+    "watch": ["src"],
+    "ext": "ts",
     "exec": "run-s build start"
 }
