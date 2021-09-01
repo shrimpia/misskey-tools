@@ -2,6 +2,7 @@ import { User } from '../models/entities/user';
 import { Users } from '../models';
 import { DeepPartial } from 'typeorm';
 import { genToken } from './gen-token';
+import pick from 'object.pick';
 
 export const getUser = (username: string, host: string): Promise<User | undefined> => {
 	return Users.findOne({ username, host });

@@ -30,7 +30,7 @@ export default (): void => {
 
 				if (user.alertMode === 'note')
 					await delay(3000);
-			} catch (e) {
+			} catch (e: any) {
 				if (e.code) {
 					if (e.code === 'NO_SUCH_USER' || e.code === 'AUTHENTICATION_FAILED') {
 						// ユーザーが削除されている場合、レコードからも消してとりやめ

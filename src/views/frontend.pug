@@ -1,9 +1,7 @@
-include _components
 doctype html
 html
 	head
 		meta(charset="UTF-8")
-		link(href='https://unpkg.com/sanitize.css' rel='stylesheet')
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		block meta
 		- const title = 'みす廃アラート'
@@ -16,19 +14,18 @@ html
 		meta(name='twitter:card' content='summary')
 		meta(name='twitter:site' content='@Xeltica')
 		meta(name='twitter:creator' content='@Xeltica')
-		link(rel='stylesheet' href='/assets/style.css')
-		block style
+		style.
+			.loading {
+				display: flex;
+				position: fixed;
+				inset: 0;
+				background: #222;
+				color: #fff;
+				font-size: 16px;
+				align-items: center;
+				justify-content: center;
+			}
 	body
-		.background
-		.xd-container.xd-vstack
-			block content
-			footer
-				.xd-card
-					a(href="/terms") 利用規約
-					| ・
-					+exta(href="https://github.com/Xeltica/misshaialert") リポジトリ
-					p (C)2020-2021 Xeltica -
-						a(href="/about") version #{version}
-					block footer
-		block script
-		script(defer src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js')
+		#app: .loading Loading...
+
+		script(src=`/assets/fe.${version}.js`)

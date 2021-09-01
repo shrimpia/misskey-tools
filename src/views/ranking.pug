@@ -1,15 +1,15 @@
 extends _base
 
 block content
-    .xd-card
-        h1: a(href="/") みす廃あらーと
-        section
-            h2 みす廃ランキング
-            details
-                summary これは何？
-                p みす廃ランキングは、独自に算出された「<strong>みす廃レート</strong>」の高い順ランキングです。毎日みす廃あらーとが発行される度に更新されます。
-                p みす廃レートは、登録日からの経過日数およびノート数から算出されます。
-            if state.nowCalculating
-                p 現在計算中です。後ほどご確認ください
-            else
-                +rankingTable
+	.xd-card
+		h1: a(href="/") みす廃あらーと
+		section
+			h2 みす廃ランキング
+			details
+				summary これは何？
+				p みす廃ランキングは、独自に算出された「<strong>みす廃レート</strong>」の高い順ランキングです。毎日みす廃あらーとが発行される度に更新されます。
+				p みす廃レートは、登録日からの経過日数およびノート数から算出されます。
+			if state.nowCalculating
+				p 現在計算中です。後ほどご確認ください
+			else
+				+rankingTable

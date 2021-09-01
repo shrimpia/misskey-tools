@@ -1,11 +1,15 @@
-import { Get, JsonController } from "routing-controllers";
+/**
+ * バージョン情報など、サーバーのメタデータを返すAPI
+ * @author Xeltica
+ */
 
-@JsonController()
+import { Get, JsonController } from 'routing-controllers';
+
+@JsonController('/meta')
 export class MetaController {
-    @Get('/meta')
-    get() {
-        return {
-            honi: 'ほに',
-        };
-    }
+	@Get() get() {
+		return {
+			honi: 'ほに',
+		};
+	}
 }

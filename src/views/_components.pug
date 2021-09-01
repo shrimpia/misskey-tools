@@ -1,40 +1,40 @@
 mixin exta()
-    a(href=attributes.href target="_blank" rel="noopener noreferrer")
-        block
+	a(href=attributes.href target="_blank" rel="noopener noreferrer")
+		block
 
 mixin ranking()
-    .xd-card
-        .header
-            h1.title みす廃ランキング
-        .body
-            p
-                i.fas.fa-users
-                strong 登録者数: !{usersCount}人
-            if state && state.nowCalculating
-                p 現在計算中です。後ほどご確認ください
-            else
-                +rankingTable()
-                p: a(href="/ranking") 全員分見る
+	.xd-card
+		.header
+			h1.title みす廃ランキング
+		.body
+			p
+				i.fas.fa-users
+				strong 登録者数: !{usersCount}人
+			if state && state.nowCalculating
+				p 現在計算中です。後ほどご確認ください
+			else
+				+rankingTable()
+				p: a(href="/ranking") 全員分見る
 
 mixin rankingTable()
-        table
-            thead: tr
-                th 順位
-                th ユーザー
-                th レート
-            tbody
-                -
-                    let rank = 1;
-                    let lastRating = '';
-                each rec in ranking
-                    - const rating = rec.rating.toFixed(2);
-                    tr
-                        td=rank
-                        td: +exta(href="https://" + rec.host + "/@" + rec.username) @!{rec.username}<wbr/>@!{rec.host}
-                        td=rating
-                    -
-                        if (lastRating !== rating) {
-                            rank++;
-                        }
-                        lastRating = rating
-        
+		table
+			thead: tr
+				th 順位
+				th ユーザー
+				th レート
+			tbody
+				-
+					let rank = 1;
+					let lastRating = '';
+				each rec in ranking
+					- const rating = rec.rating.toFixed(2);
+					tr
+						td=rank
+						td: +exta(href="https://" + rec.host + "/@" + rec.username) @!{rec.username}<wbr/>@!{rec.host}
+						td=rating
+					-
+						if (lastRating !== rating) {
+							rank++;
+						}
+						lastRating = rating
+

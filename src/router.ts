@@ -2,91 +2,29 @@ import { Context, DefaultState } from 'koa';
 import Router from 'koa-router';
 import axios from 'axios';
 import crypto from 'crypto';
-
+import koaSend from 'koa-send';
 import { v4 as uuid } from 'uuid';
-import { config } from '../config';
-import { upsertUser, getUser, getUserCount, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken, deleteUser } from '../functions/users';
-import { api, apiAvailable } from '../services/misskey';
-import { getScores } from '../functions/get-scores';
-import { AlertMode, alertModes } from '../types/AlertMode';
-import { Users } from '../models';
-import { send } from '../services/send';
-import { visibilities, Visibility } from '../types/Visibility';
-import { defaultTemplate, variables } from '../functions/format';
-import { getRanking } from '../functions/ranking';
-import { getState } from '../store';
-import { welcomeMessage } from '../misc/welcome-message';
+import ms from 'ms';
+
+import { config } from './config';
+import { upsertUser, getUser, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken, deleteUser } from './functions/users';
+import { api } from './services/misskey';
+import { AlertMode, alertModes } from './types/alert-mode';
+import { Users } from './models';
+import { send } from './services/send';
+import { visibilities, Visibility } from './types/visibility';
+import { defaultTemplate } from './functions/format';
+import { die } from './die';
 
 export const router = new Router<DefaultState, Context>();
 
 const sessionHostCache: Record<string, string> = { };
 const tokenSecretCache: Record<string, string> = { };
 
-const login = async (ctx: Context, user: Record<string, unknown>, host: string, token: string) => {
-	const isNewcomer = !(await getUser(user.username as string, host));
-	await upsertUser(user.username as string, host, token);
-
-	const u = await getUser(user.username as string, host);
-
-	if (!u) {
-		await die(ctx);
-		return;
-	}
-
-	if (isNewcomer) {
-		await updateUser(u.username, u.host, {
-			prevNotesCount: user.notesCount as number ?? 0,
-			prevFollowingCount: user.followingCount as number ?? 0,
-			prevFollowersCount: user.followersCount as number ?? 0,
-		});
-	}
-
-	const misshaiToken = await updateUsersMisshaiToken(u);
-
-	ctx.cookies.set('token', misshaiToken, { signed: true });
-
-	// await ctx.render('logined', { user: u });
-	ctx.redirect('/');
-};
-
-router.get('/', async ctx => {
-	const token = ctx.cookies.get('token', { signed: true });
-	const user = token ? await getUserByMisshaiToken(token) : undefined;
-	
-	const isAvailable = user && await apiAvailable(user.host, user.token);
-	const usersCount = await getUserCount();
-	const ranking = await getRanking(10);
-
-	const commonLocals = {
-		usersCount, ranking,
-		state: getState(),
-		from: ctx.query.from,
-	};
-
-	if (user && isAvailable) {
-		const meta = await api<{ version: string }>(user?.host, 'meta', {});
-		await ctx.render('mypage', {
-			...commonLocals,
-			user, 
-			// To Activate Groundpolis Mode
-			isGroundpolis: meta.version.includes('gp'),
-			defaultTemplate,
-			templateVariables: variables,
-			score: await getScores(user),
-		});
-	} else {
-		// 非ログイン
-		await ctx.render('welcome', {
-			...commonLocals,
-			welcomeMessage:  welcomeMessage[Math.floor(Math.random() * welcomeMessage.length)],
-		});
-	}
-});
-
 router.get('/login', async ctx => {
 	let host = ctx.query.host as string | undefined;
 
-	if (!host) { 
+	if (!host) {
 		await die(ctx, 'host is empty');
 		return;
 	}
@@ -110,7 +48,7 @@ router.get('/login', async ctx => {
 		const session = uuid();
 		const url = `https://${host}/miauth/${session}?name=${encodeURI(name)}&callback=${encodeURI(callback)}&permission=${encodeURI(permission.join(','))}`;
 		sessionHostCache[session] = host;
-	
+
 		ctx.redirect(url);
 	} else {
 		// Use legacy authentication
@@ -135,13 +73,6 @@ router.get('/teapot', async ctx => {
 	await die(ctx, 'I\'m a teapot', 418);
 });
 
-router.get('/ranking', async ctx => {
-	await ctx.render('ranking', {
-		state: getState(),
-		ranking: await getRanking(null),
-	});
-});
-
 router.get('/miauth', async ctx => {
 	const session = ctx.query.session as string | undefined;
 	if (!session) {
@@ -164,7 +95,7 @@ router.get('/miauth', async ctx => {
 	}
 
 	await login(ctx, user, host, token);
-	
+
 });
 
 router.get('/legacy-auth', async ctx => {
@@ -215,7 +146,7 @@ router.post('/update-settings', async ctx => {
 	const token = ctx.cookies.get('token');
 	if (!token) {
 		await die(ctx, 'ログインしていません');
-		return;	
+		return;
 	}
 
 	const u = await getUserByMisshaiToken(token);
@@ -242,7 +173,7 @@ router.post('/logout', async ctx => {
 	const token = ctx.cookies.get('token');
 	if (!token) {
 		await die(ctx, 'ログインしていません');
-		return;	
+		return;
 	}
 	ctx.cookies.set('token', '');
 	ctx.redirect('/?from=logout');
@@ -252,7 +183,7 @@ router.post('/optout', async ctx => {
 	const token = ctx.cookies.get('token');
 	if (!token) {
 		await die(ctx, 'ログインしていません');
-		return;	
+		return;
 	}
 	ctx.cookies.set('token', '');
 
@@ -264,7 +195,7 @@ router.post('/optout', async ctx => {
 	}
 
 	await deleteUser(u.username, u.host);
-	
+
 	ctx.redirect('/?from=optout');
 });
 
@@ -272,9 +203,9 @@ router.post('/send', async ctx => {
 	const token = ctx.cookies.get('token');
 	if (!token) {
 		await die(ctx, 'ログインしていません');
-		return;	
+		return;
 	}
-	
+
 	const u = await getUserByMisshaiToken(token);
 
 	if (!u) {
@@ -285,8 +216,44 @@ router.post('/send', async ctx => {
 	ctx.redirect('/?from=send');
 });
 
-
-// Return 404 for other pages
-router.all('(.*)', async ctx => {
-	await die(ctx, 'ページが見つかりませんでした', 404);
+router.get('/assets/(.*)', async ctx => {
+	await koaSend(ctx as any, ctx.path.replace('/assets/', ''), {
+		root: `${__dirname}/assets/`,
+		maxage: process.env.NODE_ENV !== 'production' ? 0 : ms('7 days'),
+	});
 });
+
+router.get('/api(.*)', async (ctx, next) => {
+	next();
+});
+
+router.get('(.*)', async (ctx) => {
+	await ctx.render('frontend');
+});
+
+async function login(ctx: Context, user: Record<string, unknown>, host: string, token: string) {
+	const isNewcomer = !(await getUser(user.username as string, host));
+	await upsertUser(user.username as string, host, token);
+
+	const u = await getUser(user.username as string, host);
+
+	if (!u) {
+		await die(ctx);
+		return;
+	}
+
+	if (isNewcomer) {
+		await updateUser(u.username, u.host, {
+			prevNotesCount: user.notesCount as number ?? 0,
+			prevFollowingCount: user.followingCount as number ?? 0,
+			prevFollowersCount: user.followersCount as number ?? 0,
+		});
+	}
+
+	const misshaiToken = await updateUsersMisshaiToken(u);
+
+	ctx.cookies.set('token', misshaiToken, { signed: true });
+
+	// await ctx.render('logined', { user: u });
+	ctx.redirect('/');
+}

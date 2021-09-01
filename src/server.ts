@@ -1,26 +1,39 @@
+import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import serve from 'koa-static';
-import mount from 'koa-mount';
-import { createKoaServer } from 'routing-controllers';
+import { Action, useKoaServer } from 'routing-controllers';
 
 import constant from './const';
 import { config } from './config';
-import controllers from './controllers';
+import { render } from './render';
+import { router } from './router';
+import { getUserByMisshaiToken } from './functions/users';
 
 import 'reflect-metadata';
 
 export default (): void => {
-	const app = createKoaServer({
-		controllers,
-		routePrefix: '/api/v1',
-	});
+	const app = new Koa();
 
 	console.log('Misshaialert v' + constant.version);
 
 	console.log('Initializing DB connection...');
 
+	app.use(render);
 	app.use(bodyParser());
-	app.use(mount('/assets', serve(__dirname + '/../assets')));
+
+	useKoaServer(app, {
+		controllers: [ __dirname + '/controllers/**/*{.ts,.js}' ],
+		routePrefix: '/api/v1',
+		defaultErrorHandler: false,
+		currentUserChecker: async ({ request }: Action) => {
+			const authorization: string | null = request.headers['Authorization'];
+			if (!authorization || !authorization.startsWith('Bearer ')) return null;
+
+			const token = authorization.split(' ')[1];
+			return getUserByMisshaiToken(token);
+		},
+	});
+
+	app.use(router.routes());
 
 	app.keys = [ '人類', 'ミス廃化', '計画', 'ここに極まれり', 'ﾌｯﾌｯﾌ...' ];
 
