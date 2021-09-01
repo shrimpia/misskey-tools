@@ -21,21 +21,22 @@ export default (): void => {
 	app.use(bodyParser());
 
 	useKoaServer(app, {
-		controllers: [ __dirname + '/controllers/**/*{.ts,.js}' ],
+		controllers: [__dirname + '/controllers/**/*{.ts,.js}'],
 		routePrefix: '/api/v1',
 		defaultErrorHandler: false,
 		currentUserChecker: async ({ request }: Action) => {
-			const authorization: string | null = request.headers['Authorization'];
+			const { authorization } = request.header;
 			if (!authorization || !authorization.startsWith('Bearer ')) return null;
 
-			const token = authorization.split(' ')[1];
-			return getUserByMisshaiToken(token);
+			const token = authorization.split(' ')[1].trim();
+			const user = await getUserByMisshaiToken(token);
+			return user;
 		},
 	});
 
 	app.use(router.routes());
 
-	app.keys = [ '人類', 'ミス廃化', '計画', 'ここに極まれり', 'ﾌｯﾌｯﾌ...' ];
+	app.keys = ['人類', 'ミス廃化', '計画', 'ここに極まれり', 'ﾌｯﾌｯﾌ...'];
 
 	console.log(`listening port ${config.port}...`);
 	console.log('App launched!');

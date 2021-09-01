@@ -18,8 +18,8 @@ import { die } from './die';
 
 export const router = new Router<DefaultState, Context>();
 
-const sessionHostCache: Record<string, string> = { };
-const tokenSecretCache: Record<string, string> = { };
+const sessionHostCache: Record<string, string> = {};
+const tokenSecretCache: Record<string, string> = {};
 
 router.get('/login', async ctx => {
 	let host = ctx.query.host as string | undefined;
@@ -39,7 +39,7 @@ router.get('/login', async ctx => {
 	host = meta.uri.replace(/^https?:\/\//, '');
 	const name = 'みす廃あらーと';
 	const description = 'ついついノートしすぎていませんか？';
-	const permission = [ 'write:notes', 'write:notifications' ];
+	const permission = ['write:notes', 'write:notifications'];
 
 	if (meta.features.miauth) {
 		// Use MiAuth
@@ -252,7 +252,7 @@ async function login(ctx: Context, user: Record<string, unknown>, host: string, 
 
 	const misshaiToken = await updateUsersMisshaiToken(u);
 
-	ctx.cookies.set('token', misshaiToken, { signed: true });
+	ctx.cookies.set('token', misshaiToken, { signed: false, httpOnly: false });
 
 	// await ctx.render('logined', { user: u });
 	ctx.redirect('/');
