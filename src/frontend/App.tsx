@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Switch, useLocation } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch, useLocation } from 'react-router-dom';
 
 import { IndexPage } from './pages';
 import { RankingPage } from './pages/ranking';
@@ -7,6 +7,7 @@ import { Header } from './components/Header';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
+import { TermPage } from './pages/term';
 
 const AppInner : React.VFC = () => {
 	const $location = useLocation();
@@ -17,9 +18,11 @@ const AppInner : React.VFC = () => {
 				<Switch>
 					<Route exact path="/" component={IndexPage} />
 					<Route exact path="/ranking" component={RankingPage} />
+					<Route exact path="/term" component={TermPage} />
 				</Switch>
 				<footer className="text-center pa-5">
-					(C)2020-2021 Xeltica
+					<p>(C)2020-2021 Xeltica</p>
+					<p><Link to="/term">利用規約</Link></p>
 				</footer>
 			</div>
 		</>

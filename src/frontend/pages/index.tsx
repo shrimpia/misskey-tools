@@ -8,7 +8,6 @@ import { HashtagTimeline } from '../components/HashtagTimeline';
 import { Header } from '../components/Header';
 
 export const IndexPage: React.VFC = () => {
-
 	return (
 		<>
 			<Header>
@@ -37,9 +36,6 @@ export const IndexPage: React.VFC = () => {
 					<div className="body"><HashtagTimeline hashtag="misshaialert"/></div>
 				</div>
 			</article>
-			<footer className="text-center pa-5">
-				(C)2020-2021 Xeltica
-			</footer>
 		</>
 	);
 };
