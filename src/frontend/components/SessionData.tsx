@@ -1,44 +1,66 @@
 import React from 'react';
-import { useGetScoreQuery } from '../services/session';
+import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
 
 export const SessionData: React.VFC = () => {
-	const { data: score, error, isLoading } = useGetScoreQuery(undefined);
+	const session = useGetSessionQuery(undefined);
+	const score = useGetScoreQuery(undefined);
 
-	return isLoading ? (
+	return session.isLoading || score.isLoading ? (
 		<div>Loading...</div>
-	) : score === undefined ? (
-		<div>No score</div>
 	) : (
 		<>
-			<section>
-				<h2>みす廃データ</h2>
-				<table className="table">
-					<thead>
-						<tr>
-							<th>内容</th>
-							<th>スコア</th>
-							<th>前日比</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>ノート</td>
-							<td>{score.notesCount}</td>
-							<td>{score.notesDelta}</td>
-						</tr>
-						<tr>
-							<td>フォロー</td>
-							<td>{score.followingCount}</td>
-							<td>{score.followingDelta}</td>
-						</tr>
-						<tr>
-							<td>フォロワー</td>
-							<td>{score.followersCount}</td>
-							<td>{score.followersDelta}</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
+			{session.data && (
+				<section>
+					<p>
+						おかえりなさい、
+						<a
+							href={`https://${session.data.host}/@${session.data.username}`}
+							target="_blank"
+							rel="noreferrer noopener"
+						>
+							@{session.data.username}@{session.data.host}
+						</a>
+						さん。
+					</p>
+					<p>
+						<strong>
+							みす廃レート:
+						</strong>
+						{session.data.rating}
+					</p>
+				</section>
+			)}
+			{score.data && (
+				<section>
+					<h2>みす廃データ</h2>
+					<table className="table fluid">
+						<thead>
+							<tr>
+								<th>内容</th>
+								<th>スコア</th>
+								<th>前日比</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>ノート</td>
+								<td>{score.data.notesCount}</td>
+								<td>{score.data.notesDelta}</td>
+							</tr>
+							<tr>
+								<td>フォロー</td>
+								<td>{score.data.followingCount}</td>
+								<td>{score.data.followingDelta}</td>
+							</tr>
+							<tr>
+								<td>フォロワー</td>
+								<td>{score.data.followersCount}</td>
+								<td>{score.data.followersDelta}</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			)}
 		</>
 	);
 };
