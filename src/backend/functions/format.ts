@@ -2,6 +2,9 @@ import { config } from '../../config';
 import { User } from '../models/entities/user';
 import { Score } from '../../common/types/score';
 
+/**
+ * デフォルトの投稿用テンプレート
+ */
 export const defaultTemplate = `昨日のMisskeyの活動は
 
 ノート: {notesCount}({notesDelta})
@@ -11,11 +14,17 @@ export const defaultTemplate = `昨日のMisskeyの活動は
 でした。
 {url}`;
 
+/**
+ * 埋め込み変数の型
+ */
 export type Variable = {
 	description?: string;
 	replace?: string | ((score: Score, user: User) => string);
 };
 
+/**
+ * 埋め込み可能な変数のリスト
+ */
 export const variables: Record<string, Variable> = {
 	notesCount: {
 		description: 'ノート数',
@@ -61,6 +70,12 @@ export const variables: Record<string, Variable> = {
 
 const variableRegex = /\{([a-zA-Z0-9_]+?)\}/g;
 
+/**
+ * スコア情報とユーザー情報からテキストを生成する
+ * @param score スコア情報
+ * @param user ユーザー情報
+ * @returns 生成したテキスト
+ */
 export const format = (score: Score, user: User): string => {
 	const template = user.template || defaultTemplate;
 	return template.replace(variableRegex, (m, name) => {

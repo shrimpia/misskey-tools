@@ -15,6 +15,12 @@ export class RankingController {
 		return this.getResponse(getState().nowCalculating, limit ? Number(limit) : undefined);
 	}
 
+	/**
+	 * DBに問い合わせてランキングを取得する
+	 * @param isCalculating 現在算出中かどうか
+	 * @param limit 何件取得するか
+	 * @returns ランキング
+	 */
 	private async getResponse(isCalculating: boolean, limit?: number) {
 		const ranking = isCalculating ? [] : (await getRanking(limit)).map((u) => ({
 			id: u.id,

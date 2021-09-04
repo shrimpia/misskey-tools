@@ -11,7 +11,7 @@ import { upsertUser, getUser, updateUser, updateUsersMisshaiToken, getUserByMiss
 import { api } from './services/misskey';
 import { AlertMode, alertModes } from '../common/types/alert-mode';
 import { Users } from './models';
-import { send } from './services/send';
+import { sendAlert } from './services/send-alert';
 import { visibilities, Visibility } from '../common/types/visibility';
 import { defaultTemplate } from './functions/format';
 import { die } from './die';
@@ -212,7 +212,7 @@ router.post('/send', async ctx => {
 		await die(ctx);
 		return;
 	}
-	await send(u).catch(() => die(ctx));
+	await sendAlert(u).catch(() => die(ctx));
 	ctx.redirect('/?from=send');
 });
 

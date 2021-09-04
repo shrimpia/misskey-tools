@@ -4,10 +4,10 @@ import { BrowserRouter, Link, Route, Switch, useLocation } from 'react-router-do
 import { IndexPage } from './pages';
 import { RankingPage } from './pages/ranking';
 import { Header } from './components/Header';
+import { TermPage } from './pages/term';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
-import { TermPage } from './pages/term';
 
 const AppInner : React.VFC = () => {
 	const $location = useLocation();

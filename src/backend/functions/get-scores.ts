@@ -3,6 +3,11 @@ import { Score } from '../../common/types/score';
 import { api } from '../services/misskey';
 import { toSignedString } from './to-signed-string';
 
+/**
+ * ユーザーのスコアを取得します。
+ * @param user ユーザー
+ * @returns ユーザーのスコア
+ */
 export const getScores = async (user: User): Promise<Score> => {
 	const miUser = await api<Record<string, number>>(user.host, 'users/show', { username: user.username }, user.token);
 	if (miUser.error) {

@@ -7,3 +7,27 @@ body {
     margin: auto;
     max-width: 720px;
 }
+
+.tab {
+    .item {
+        position: relative;
+        padding: var(--margin);
+        &.active {
+            color: var(--primary);
+            transition: width 0.2s ease;
+            &::after {
+                content: "";
+                width: 100%;
+            }
+        }
+        &::after {
+            content: "";
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            width: 0;
+            background-color: var(--primary);
+        }
+    }
+}
