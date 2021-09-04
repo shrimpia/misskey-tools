@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
-import { AlertMode, alertModes } from '../../types/alert-mode';
-import { visibilities, Visibility } from '../../types/visibility';
+import { AlertMode, alertModes } from '../../../common/types/alert-mode';
+import { visibilities, Visibility } from '../../../common/types/visibility';
 
 @Entity()
-@Index([ 'username', 'host' ], { unique: true })
+@Index(['username', 'host'], { unique: true })
 export class User {
 	@PrimaryGeneratedColumn()
 	public id: number;

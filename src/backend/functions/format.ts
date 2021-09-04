@@ -1,6 +1,6 @@
-import { config } from '../config';
+import { config } from '../../config';
 import { User } from '../models/entities/user';
-import { Score } from '../types/score';
+import { Score } from '../../common/types/score';
 
 export const defaultTemplate = `昨日のMisskeyの活動は
 

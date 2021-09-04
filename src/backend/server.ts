@@ -3,7 +3,7 @@ import bodyParser from 'koa-bodyparser';
 import { Action, useKoaServer } from 'routing-controllers';
 
 import constant from './const';
-import { config } from './config';
+import { config } from '../config';
 import { render } from './render';
 import { router } from './router';
 import { getUserByMisshaiToken } from './functions/users';

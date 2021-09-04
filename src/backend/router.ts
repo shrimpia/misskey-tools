@@ -6,13 +6,13 @@ import koaSend from 'koa-send';
 import { v4 as uuid } from 'uuid';
 import ms from 'ms';
 
-import { config } from './config';
+import { config } from '../config';
 import { upsertUser, getUser, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken, deleteUser } from './functions/users';
 import { api } from './services/misskey';
-import { AlertMode, alertModes } from './types/alert-mode';
+import { AlertMode, alertModes } from '../common/types/alert-mode';
 import { Users } from './models';
 import { send } from './services/send';
-import { visibilities, Visibility } from './types/visibility';
+import { visibilities, Visibility } from '../common/types/visibility';
 import { defaultTemplate } from './functions/format';
 import { die } from './die';
 
@@ -218,7 +218,7 @@ router.post('/send', async ctx => {
 
 router.get('/assets/(.*)', async ctx => {
 	await koaSend(ctx as any, ctx.path.replace('/assets/', ''), {
-		root: `${__dirname}/assets/`,
+		root: `${__dirname}/../assets/`,
 		maxage: process.env.NODE_ENV !== 'production' ? 0 : ms('7 days'),
 	});
 });

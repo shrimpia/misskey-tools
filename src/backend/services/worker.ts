@@ -5,7 +5,7 @@ import { Not } from 'typeorm';
 import { deleteUser } from '../functions/users';
 import { MiUser, updateScore } from '../functions/update-score';
 import { updateRating } from '../functions/update-rating';
-import { AlertMode } from '../types/alert-mode';
+import { AlertMode } from '../../common/types/alert-mode';
 import { Users } from '../models';
 import { send } from './send';
 import { api } from './misskey';

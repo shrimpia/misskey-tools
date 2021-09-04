@@ -1,7 +1,7 @@
-import { Users } from '../models';
-import { updateRating } from '../functions/update-rating';
-import { api } from '../services/misskey';
-import { MiUser } from '../functions/update-score';
+import { Users } from '../backend/models';
+import { updateRating } from '../backend/functions/update-rating';
+import { api } from '../backend/services/misskey';
+import { MiUser } from '../backend/functions/update-score';
 
 export default async () => {
 	const users = await Users.find();

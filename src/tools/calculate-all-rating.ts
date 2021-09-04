@@ -1,4 +1,4 @@
-import { initDb } from '../services/db';
+import { initDb } from '../backend/services/db';
 import 'reflect-metadata';
 
 (async () => {

@@ -1,5 +1,5 @@
 import { getConnection, createConnection, Connection } from 'typeorm';
-import { config } from '../config';
+import { config } from '../../config';
 import { User } from '../models/entities/user';
 import { UsedToken } from '../models/entities/used-token';
 

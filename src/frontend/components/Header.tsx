@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { welcomeMessage } from '../../misc/welcome-message';
+import { welcomeMessage } from '../misc/welcome-message';
 
 export type HeaderProps = {
 	hasTopLink?: boolean;
