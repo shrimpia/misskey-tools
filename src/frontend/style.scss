@@ -6,26 +6,38 @@ body {
 .xarticle {
     margin: auto;
     max-width: 720px;
+    overflow: hidden;
 }
 
 .tab {
+    display: flex;
+    background: var(--panel);
     .item {
         position: relative;
-        padding: var(--margin);
+        background: transparent;
+        border: none;
+        color: var(--fg);
+        padding: calc(var(--margin) / 2) var(--margin);
         &.active {
             color: var(--primary);
-            transition: width 0.2s ease;
             &::after {
                 content: "";
                 width: 100%;
             }
         }
+        &:hover {
+            background: var(--hover);
+        }
         &::after {
             content: "";
+            position: absolute;
+            transition: width 0.2s ease;
+            transform-origin: center center;
+            display: block;
             bottom: 0;
+            height: 2px;
             left: 0;
             right: 0;
-            height: 2px;
             width: 0;
             background-color: var(--primary);
         }

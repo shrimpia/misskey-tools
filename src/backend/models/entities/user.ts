@@ -1,10 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
 import { AlertMode, alertModes } from '../../../common/types/alert-mode';
 import { visibilities, Visibility } from '../../../common/types/visibility';
+import { IUser } from '../../../common/types/user';
 
 @Entity()
 @Index(['username', 'host'], { unique: true })
-export class User {
+export class User implements IUser {
 	@PrimaryGeneratedColumn()
 	public id: number;
 

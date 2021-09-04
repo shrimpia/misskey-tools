@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { BrowserRouter, Link, Route, Switch, useLocation } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import { IndexPage } from './pages';
 import { RankingPage } from './pages/ranking';
 import { Header } from './components/Header';
 import { TermPage } from './pages/term';
+import { store } from './store';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
 
 const AppInner : React.VFC = () => {
 	const $location = useLocation();
+
 	return (
 		<>
 			<div className="container">
@@ -30,7 +33,9 @@ const AppInner : React.VFC = () => {
 };
 
 export const App: React.VFC = () => (
-	<BrowserRouter>
-		<AppInner />
-	</BrowserRouter>
+	<Provider store={store}>
+		<BrowserRouter>
+			<AppInner />
+		</BrowserRouter>
+	</Provider>
 );

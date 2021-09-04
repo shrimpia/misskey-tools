@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 export type TabItem = {
 	label: string;
@@ -11,14 +11,14 @@ export type TabProps = {
 };
 
 // タブコンポーネント
-export const Tab: React.FC<TabProps> = (props) => {
+export const Tab: React.VFC<TabProps> = (props) => {
 	return (
 		<div className="tab">
 			{props.items.map((item, index) => {
 				return (
 					<button
 						key={index}
-						className={'item ' + (index === props.selected ? 'selected' : '')}
+						className={'item ' + (index === props.selected ? 'active' : '')}
 						onClick={() => props.onSelect(index)}
 					>
 						{item.label}
