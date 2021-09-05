@@ -8,9 +8,6 @@ const token = document.cookie
 	.find(row => row.startsWith('token'))
 	?.split('=')[1];
 
-console.log(document.cookie);
-console.log(token);
-
 if (token) {
 	localStorage['token'] = token;
 	// 今の所はcookieをトークン以外に使用しないため全消去する

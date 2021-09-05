@@ -1,12 +1,18 @@
 import React from 'react';
 import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
+import { Skeleton } from './Skeleton';
 
-export const SessionData: React.VFC = () => {
+export const SessionDataPage: React.VFC = () => {
 	const session = useGetSessionQuery(undefined);
 	const score = useGetScoreQuery(undefined);
 
 	return session.isLoading || score.isLoading ? (
-		<div>Loading...</div>
+		<div className="vstack">
+			<Skeleton width="100%" height="1rem" />
+			<Skeleton width="100%" height="1rem" />
+			<Skeleton width="100%" height="2rem" />
+			<Skeleton width="100%" height="160px" />
+		</div>
 	) : (
 		<>
 			{session.data && (

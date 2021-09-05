@@ -13,7 +13,7 @@ import { AlertMode, alertModes } from '../common/types/alert-mode';
 import { Users } from './models';
 import { sendAlert } from './services/send-alert';
 import { visibilities, Visibility } from '../common/types/visibility';
-import { defaultTemplate } from './functions/format';
+import { defaultTemplate } from '../common/default-template';
 import { die } from './die';
 
 export const router = new Router<DefaultState, Context>();

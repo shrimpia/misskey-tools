@@ -9,6 +9,20 @@ body {
     overflow: hidden;
 }
 
+.skeleton {
+    border-radius: var(--radius);
+    background: var(--tone-1);
+    position: relative;
+    overflow: hidden;
+    &::after {
+        content: "";
+        inset: 0;
+        position: absolute;
+        background: linear-gradient(90deg, transparent, var(--tone-2) 50%, transparent 100%);
+        animation: 1.2s ease-out 0s infinite skeleton;
+    }
+}
+
 .tab {
     display: flex;
     background: var(--panel);
@@ -18,6 +32,7 @@ body {
         border: none;
         color: var(--fg);
         padding: calc(var(--margin) / 2) var(--margin);
+        transition: background 0.2s ease;
         &.active {
             color: var(--primary);
             &::after {
@@ -41,5 +56,14 @@ body {
             width: 0;
             background-color: var(--primary);
         }
+    }
+}
+
+@keyframes skeleton {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(300%);
     }
 }

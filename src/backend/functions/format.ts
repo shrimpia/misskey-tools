@@ -1,18 +1,7 @@
 import { config } from '../../config';
 import { User } from '../models/entities/user';
 import { Score } from '../../common/types/score';
-
-/**
- * デフォルトの投稿用テンプレート
- */
-export const defaultTemplate = `昨日のMisskeyの活動は
-
-ノート: {notesCount}({notesDelta})
-フォロー : {followingCount}({followingDelta})
-フォロワー :{followersCount}({followersDelta})
-
-でした。
-{url}`;
+import { defaultTemplate } from '../../common/default-template';
 
 /**
  * 埋め込み変数の型

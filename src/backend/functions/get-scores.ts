@@ -9,6 +9,7 @@ import { toSignedString } from './to-signed-string';
  * @returns ユーザーのスコア
  */
 export const getScores = async (user: User): Promise<Score> => {
+	// TODO 毎回取ってくるのも微妙なので、ある程度キャッシュしたいかも
 	const miUser = await api<Record<string, number>>(user.host, 'users/show', { username: user.username }, user.token);
 	if (miUser.error) {
 		throw miUser.error;
