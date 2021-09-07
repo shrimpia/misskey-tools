@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { App } from './App';
 
+document.body.classList.add('dark');
+
 // cookieにトークンが入ってたらlocalStorageに移し替える
 const token = document.cookie
 	.split('; ')

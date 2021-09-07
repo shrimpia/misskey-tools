@@ -14,7 +14,7 @@ export const SessionDataPage: React.VFC = () => {
 			<Skeleton width="100%" height="160px" />
 		</div>
 	) : (
-		<>
+		<div className="fade">
 			{session.data && (
 				<section>
 					<p>
@@ -39,7 +39,7 @@ export const SessionDataPage: React.VFC = () => {
 			{score.data && (
 				<section>
 					<h2>みす廃データ</h2>
-					<table className="table fluid">
+					<table className="table fluid shadow-2" style={{border: 'none'}}>
 						<thead>
 							<tr>
 								<th>内容</th>
@@ -67,6 +67,6 @@ export const SessionDataPage: React.VFC = () => {
 					</table>
 				</section>
 			)}
-		</>
+		</div>
 	);
 };

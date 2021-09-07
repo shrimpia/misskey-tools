@@ -6,25 +6,29 @@ body {
 .xarticle {
     margin: auto;
     max-width: 720px;
-    overflow: hidden;
 }
 
 .skeleton {
     border-radius: var(--radius);
-    background: var(--tone-1);
+    background: var(--tone-2);
     position: relative;
     overflow: hidden;
     &::after {
         content: "";
         inset: 0;
         position: absolute;
-        background: linear-gradient(90deg, transparent, var(--tone-2) 50%, transparent 100%);
+        background: linear-gradient(90deg, transparent, var(--tone-3) 50%, transparent 100%);
         animation: 1.2s ease-out 0s infinite skeleton;
     }
 }
 
+.fade {
+    animation: 0.3s ease-out 0s fadeIn;
+}
+
 .tab {
     display: flex;
+    flex-wrap: wrap;
     background: var(--panel);
     .item {
         position: relative;
@@ -65,5 +69,16 @@ body {
     }
     to {
         transform: translateX(300%);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
     }
 }

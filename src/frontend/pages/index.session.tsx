@@ -29,10 +29,10 @@ export const IndexSessionPage: React.VFC = () => {
 			<Header />
 			<div className="xarticle card" style={{borderRadius: 'var(--radius)'}}>
 				<Tab items={items} selected={selectedTab} onSelect={setSelectedTab}/>
-				<article className="container">
-					{component}
-				</article>
 			</div>
+			<article className="xarticle mt-4">
+				{component}
+			</article>
 		</>
 	);
 };
