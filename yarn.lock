@@ -5586,8 +5586,8 @@ xdg-basedir@^4.0.0:
   integrity sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==
 
 xeltica-ui@xeltica/ui:
-  version "1.0.0-alpha.6"
-  resolved "https://codeload.github.com/xeltica/ui/tar.gz/07ed1214a91994f58fc4b0bc7be53a7120ba53f5"
+  version "1.0.0-alpha.7"
+  resolved "https://codeload.github.com/xeltica/ui/tar.gz/765a73de505b5e405021b8ce182f4e3627560e72"
 
 xml2js@^0.4.17:
   version "0.4.23"

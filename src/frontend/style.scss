@@ -1,6 +1,5 @@
 body {
     --primary: rgb(134, 179, 0);
-    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 .xarticle {
@@ -8,68 +7,8 @@ body {
     max-width: 720px;
 }
 
-.skeleton {
-    border-radius: var(--radius);
-    background: var(--tone-2);
-    position: relative;
-    overflow: hidden;
-    &::after {
-        content: "";
-        inset: 0;
-        position: absolute;
-        background: linear-gradient(90deg, transparent, var(--tone-3) 50%, transparent 100%);
-        animation: 1.2s ease-out 0s infinite skeleton;
-    }
-}
-
 .fade {
     animation: 0.3s ease-out 0s fadeIn;
-}
-
-.tab {
-    display: flex;
-    flex-wrap: wrap;
-    background: var(--panel);
-    .item {
-        position: relative;
-        background: transparent;
-        border: none;
-        color: var(--fg);
-        padding: calc(var(--margin) / 2) var(--margin);
-        transition: background 0.2s ease;
-        &.active {
-            color: var(--primary);
-            &::after {
-                content: "";
-                width: 100%;
-            }
-        }
-        &:hover {
-            background: var(--hover);
-        }
-        &::after {
-            content: "";
-            position: absolute;
-            transition: width 0.2s ease;
-            transform-origin: center center;
-            display: block;
-            bottom: 0;
-            height: 2px;
-            left: 0;
-            right: 0;
-            width: 0;
-            background-color: var(--primary);
-        }
-    }
-}
-
-@keyframes skeleton {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(300%);
-    }
 }
 
 @keyframes fadeIn {
