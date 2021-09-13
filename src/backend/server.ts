@@ -23,7 +23,8 @@ export default (): void => {
 	useKoaServer(app, {
 		controllers: [__dirname + '/controllers/**/*{.ts,.js}'],
 		routePrefix: '/api/v1',
-		defaultErrorHandler: false,
+		classTransformer: true,
+		validation: true,
 		currentUserChecker: async ({ request }: Action) => {
 			const { authorization } = request.header;
 			if (!authorization || !authorization.startsWith('Bearer ')) return null;
@@ -35,6 +36,7 @@ export default (): void => {
 	});
 
 	app.use(router.routes());
+	app.use(router.allowedMethods());
 
 	app.keys = ['人類', 'ミス廃化', '計画', 'ここに極まれり', 'ﾌｯﾌｯﾌ...'];
 

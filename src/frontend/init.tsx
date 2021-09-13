@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { App } from './App';
+import { LOCALSTORAGE_KEY_TOKEN } from './const';
 
 document.body.classList.add('dark');
 
@@ -11,7 +12,7 @@ const token = document.cookie
 	?.split('=')[1];
 
 if (token) {
-	localStorage['token'] = token;
+	localStorage[LOCALSTORAGE_KEY_TOKEN] = token;
 	// 今の所はcookieをトークン以外に使用しないため全消去する
 	// もしcookieの用途が増えるのであればここを良い感じに書き直す必要がある
 	document.cookie = '';

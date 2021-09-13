@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import { AlertMode } from '../../common/types/alert-mode';
 import { IUser } from '../../common/types/user';
 import { Visibility } from '../../common/types/visibility';
@@ -6,6 +6,7 @@ import { useGetSessionQuery } from '../services/session';
 import { defaultTemplate } from '../../common/default-template';
 import { Card } from './Card';
 import { Theme } from '../misc/theme';
+import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
 
 type SettingDraftType = Pick<IUser,
 	| 'alertMode'
@@ -50,6 +51,21 @@ export const SettingPage: React.VFC = () => {
 	const [currentTheme, setCurrentTheme] = useState<Theme>('light');
 	const [currentLang, setCurrentLang] = useState<string>('ja-JP');
 
+	const updateSetting = useCallback(() => {
+		fetch(`${API_ENDPOINT}session`, {
+			method: 'PUT',
+			headers: {
+				'Authorization': `Bearer ${localStorage[LOCALSTORAGE_KEY_TOKEN]}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(draft),
+		})
+			.then(() => alert('設定を保存しました。'))
+			.catch(e => {
+				alert(e.message);
+			});
+	}, [draft]);
+
 	useEffect(() => {
 		if (data) {
 			dispatchDraft({
@@ -60,13 +76,13 @@ export const SettingPage: React.VFC = () => {
 				template: data.template,
 			});
 		}
-	}, [session.data]);
+	}, [data]);
 
 	const saveButton = useMemo(() => (
-		<button className="btn primary" style={{alignSelf: 'flex-end'}}>
+		<button className="btn primary" style={{alignSelf: 'flex-end'}} onClick={updateSetting}>
 			保存
 		</button>
-	), []);
+	), [updateSetting]);
 
 	return session.isLoading || !data ? (
 		<div className="skeleton" style={{width: '100%', height: '128px'}}></div>

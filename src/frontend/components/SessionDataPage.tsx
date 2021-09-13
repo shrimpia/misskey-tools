@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
 import { Skeleton } from './Skeleton';
 
 export const SessionDataPage: React.VFC = () => {
 	const session = useGetSessionQuery(undefined);
 	const score = useGetScoreQuery(undefined);
+
+	/**
+	 * Session APIのエラーハンドリング
+	 * このAPIがエラーを返した = トークンが無効 なのでトークンを削除してログアウトする
+	 */
+	useEffect(() => {
+		if (session.error) {
+			console.error(session.error);
+			localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
+			location.reload();
+		}
+	}, [session.error]);
 
 	return session.isLoading || score.isLoading ? (
 		<div className="vstack">
