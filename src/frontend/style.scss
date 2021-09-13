@@ -1,5 +1,6 @@
 body {
     --primary: rgb(134, 179, 0);
+    font-feature-settings: "pkna";
 }
 
 .xarticle {
@@ -9,12 +10,38 @@ body {
 
 .fade {
     animation: 0.3s ease-out 0s fadeIn;
+    &.down {
+        animation-name: fadeInUp;
+    }
+    &.up {
+        animation-name: fadeInUp;
+    }
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
         transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
     }
     to {
         opacity: 1;
@@ -32,4 +59,20 @@ body {
 
 small {
     font-size: 0.8rem;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000c0;
+    z-index: 40000;
+}
+
+.dark .card.dialog {
+    background: var(--tone-2);
+    min-width: min(100vw, 320px);
+    max-width: min(100vw, 600px);
 }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Link, Route, Switch, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -6,13 +6,45 @@ import { IndexPage } from './pages';
 import { RankingPage } from './pages/ranking';
 import { Header } from './components/Header';
 import { TermPage } from './pages/term';
-import { store } from './store';
+import { store, useSelector } from './store';
+import { ModalComponent } from './Modal';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
+import { ActualTheme } from './misc/theme';
 
 const AppInner : React.VFC = () => {
 	const $location = useLocation();
+
+	const theme = useSelector(state => state.screen.theme);
+
+	const [ osTheme, setOsTheme ] = useState<ActualTheme>('dark');
+
+	const applyTheme = useCallback(() => {
+		const actualTheme = theme === 'system' ? osTheme : theme;
+		if (actualTheme === 'dark') {
+			document.body.classList.add('dark');
+		} else {
+			document.body.classList.remove('dark');
+		}
+	}, [theme, osTheme]);
+
+	// テーマ変更に追従する
+	useEffect(() => {
+		applyTheme();
+	}, [theme, osTheme]);
+
+	// システムテーマ変更に追従する
+	useEffect(() => {
+		const q = window.matchMedia('(prefers-color-scheme: dark)');
+		setOsTheme(q.matches ? 'dark' : 'light');
+
+		const listener = () => setOsTheme(q.matches ? 'dark' : 'light');
+		q.addEventListener('change', listener);
+		return () => {
+			q.removeEventListener('change', listener);
+		};
+	}, [osTheme, setOsTheme]);
 
 	return (
 		<>
@@ -27,6 +59,7 @@ const AppInner : React.VFC = () => {
 					<p>(C)2020-2021 Xeltica</p>
 					<p><Link to="/term">利用規約</Link></p>
 				</footer>
+				<ModalComponent />
 			</div>
 		</>
 	);

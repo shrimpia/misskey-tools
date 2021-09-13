@@ -1,25 +1,29 @@
-import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
-import { AlertMode } from '../../common/types/alert-mode';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
+import { alertModes } from '../../common/types/alert-mode';
 import { IUser } from '../../common/types/user';
-import { Visibility } from '../../common/types/visibility';
+import { visibilities, Visibility } from '../../common/types/visibility';
 import { useGetSessionQuery } from '../services/session';
 import { defaultTemplate } from '../../common/default-template';
 import { Card } from './Card';
 import { Theme } from '../misc/theme';
 import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
+import { useDispatch } from 'react-redux';
+import { changeTheme, showModal } from '../store/slices/screen';
+import { useSelector } from '../store';
 
-type SettingDraftType = Pick<IUser,
+type SettingDraftType = Partial<Pick<IUser,
 	| 'alertMode'
 	| 'visibility'
 	| 'localOnly'
 	| 'remoteFollowersOnly'
 	| 'template'
->;
+>>;
 
 type DraftReducer = React.Reducer<SettingDraftType, Partial<SettingDraftType>>;
 
 export const SettingPage: React.VFC = () => {
 	const session = useGetSessionQuery(undefined);
+	const dispatch = useDispatch();
 
 	const data = session.data;
 
@@ -48,23 +52,38 @@ export const SettingPage: React.VFC = () => {
 		},
 	];
 
-	const [currentTheme, setCurrentTheme] = useState<Theme>('light');
+	const currentTheme = useSelector(state => state.screen.theme);
 	const [currentLang, setCurrentLang] = useState<string>('ja-JP');
 
-	const updateSetting = useCallback(() => {
-		fetch(`${API_ENDPOINT}session`, {
+	const availableVisibilities: Visibility[] = [
+		'public',
+		'home',
+		'followers'
+	];
+
+	const updateSetting = useCallback((obj: SettingDraftType) => {
+		dispatchDraft(obj);
+		return fetch(`${API_ENDPOINT}session`, {
 			method: 'PUT',
 			headers: {
 				'Authorization': `Bearer ${localStorage[LOCALSTORAGE_KEY_TOKEN]}`,
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(draft),
-		})
-			.then(() => alert('設定を保存しました。'))
+			body: JSON.stringify(obj),
+		});
+	}, []);
+
+	const updateSettingWithDialog = useCallback((obj: SettingDraftType) => {
+		updateSetting(obj)
+			.then(() => dispatch(showModal({
+				type: 'dialog',
+				icon: 'info',
+				message: '保存しました。'
+			})))
 			.catch(e => {
 				alert(e.message);
 			});
-	}, [draft]);
+	}, [updateSetting]);
 
 	useEffect(() => {
 		if (data) {
@@ -78,26 +97,70 @@ export const SettingPage: React.VFC = () => {
 		}
 	}, [data]);
 
-	const saveButton = useMemo(() => (
-		<button className="btn primary" style={{alignSelf: 'flex-end'}} onClick={updateSetting}>
-			保存
-		</button>
-	), [updateSetting]);
+	const onClickSendAlert = useCallback(() => {
+		dispatch(showModal({
+			type: 'dialog',
+			title: 'アラートをテスト送信しますか？',
+			message: '現在の設定でアラートを送信します。設定が保存済みであるかどうか、実行前に必ずご確認ください。',
+			icon: 'question',
+			buttons: 'yesNo',
+			onSelect(i) {
+				if (i === 0) {
+					fetch(`${API_ENDPOINT}session/alert`, {
+						method: 'POST',
+						headers: {
+							'Authorization': `Bearer ${localStorage[LOCALSTORAGE_KEY_TOKEN]}`,
+						},
+					}).then(() => {
+						dispatch(showModal({
+							type: 'dialog',
+							message: '送信しました。',
+							icon: 'info',
+						}));
+					}).catch((e) => {
+						console.error(e);
+						dispatch(showModal({
+							type: 'dialog',
+							message: '送信に失敗しました。',
+							icon: 'error',
+						}));
+					});
+				}
+			},
+		}));
+	}, [dispatch]);
+
+	const onClickLogout = useCallback(() => {
+		dispatch(showModal({
+			type: 'dialog',
+			message: 'WIP',
+		}));
+	}, [dispatch]);
+
+	const onClickDeleteAccount = useCallback(() => {
+		dispatch(showModal({
+			type: 'dialog',
+			message: 'WIP',
+		}));
+	}, [dispatch]);
 
 	return session.isLoading || !data ? (
 		<div className="skeleton" style={{width: '100%', height: '128px'}}></div>
 	) : (
 		<div className="vstack fade">
 			<Card bodyClassName="vstack">
-				<h1>スコア通知方法</h1>
+				<h1>アラート送信方法</h1>
 				<div>
-					<select name="alertMode" className="input-field" value={draft.alertMode} onChange={(e) => {
-						dispatchDraft({ alertMode: e.target.value as AlertMode });
-					}}>
-						<option value="note">自動的にノートを投稿</option>
-						<option value="notification">Misskeyに通知(標準)</option>
-						<option value="nothing">通知しない</option>
-					</select>
+					{
+						alertModes.map((mode) => (
+							<label key={mode} className="input-check">
+								<input type="radio" checked={mode === draft.alertMode} onChange={() => {
+									updateSetting({ alertMode: mode });
+								}} />
+								<span>{mode}</span>
+							</label>
+						))
+					}
 					{draft.alertMode === 'notification' && (
 						<div className="alert bg-danger mt-2">
 							<i className="icon bi bi-exclamation-circle"></i>
@@ -108,21 +171,24 @@ export const SettingPage: React.VFC = () => {
 				{ draft.alertMode === 'note' && (
 					<div>
 						<label htmlFor="visibility" className="input-field">公開範囲</label>
-						<select name="visibility" className="input-field" value={draft.visibility} onChange={(e) => {
-							dispatchDraft({ visibility: e.target.value as Visibility });
-						}}>
-							<option value="public">パブリック</option>
-							<option value="home">ホーム</option>
-							<option value="followers">フォロワー</option>
-						</select>
-						<label className="input-switch mt-2">
-							<input type="checkbox" />
-							<div className="switch"></div>
+						{
+							availableVisibilities.map((visibility) => (
+								<label key={visibility} className="input-check">
+									<input type="radio" checked={visibility === draft.visibility} onChange={() => {
+										updateSetting({ visibility });
+									}} />
+									<span>{visibility}</span>
+								</label>
+							))
+						}
+						<label className="input-check mt-2">
+							<input type="checkbox" checked={draft.localOnly} onChange={(e) => {
+								updateSetting({ localOnly: e.target.checked });
+							}} />
 							<span>ローカル限定</span>
 						</label>
 					</div>
 				)}
-				{saveButton}
 			</Card>
 			<Card bodyClassName="vstack">
 				<h1>表示設定</h1>
@@ -131,7 +197,7 @@ export const SettingPage: React.VFC = () => {
 					{
 						themes.map(({ theme, name }) => (
 							<label key={theme} className="input-check">
-								<input type="radio" name={theme} value={theme} checked={theme === currentTheme} onChange={(e) => setCurrentTheme(e.target.value as Theme)} />
+								<input type="radio" value={theme} checked={theme === currentTheme} onChange={(e) => dispatch(changeTheme(e.target.value as Theme))} />
 								<span>{name}</span>
 							</label>
 						))
@@ -147,8 +213,8 @@ export const SettingPage: React.VFC = () => {
 
 			<Card bodyClassName="vstack">
 				<h1>テンプレート</h1>
-				<p>アラートの自動投稿をカスタマイズできます。テンプレートに使える文字数は280文字です。空欄にすると、デフォルト値にリセットされます。</p>
-				<textarea className="input-field" value={draft.template ?? defaultTemplate} style={{height: 228}} onChange={(e) => {
+				<p>アラートの自動投稿をカスタマイズできます。</p>
+				<textarea className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
 					dispatchDraft({ template: e.target.value });
 				}} />
 				<small className="text-dimmed">
@@ -160,24 +226,29 @@ export const SettingPage: React.VFC = () => {
 						<li><code>{'{'}notesCount{'}'}</code>といった形式のテキストは変数として扱われ、これを含めると投稿時に自動的に値が埋め込まれます。</li>
 					</ul>
 				</details>
-				{saveButton}
+				<div className="hstack" style={{justifyContent: 'flex-end'}}>
+					<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>初期値に戻す</button>
+					<button className="btn primary" onClick={() => {
+						updateSettingWithDialog({ template: draft.template === '' ? null : draft.template });
+					}}>保存</button>
+				</div>
 			</Card>
 			<Card bodyClassName="vstack">
-				<button className="btn block">アラートをテスト送信する</button>
+				<button className="btn block" onClick={onClickSendAlert}>アラートをテスト送信する</button>
 				<p className="text-dimmed">
-					このボタンを押すと、現在の設定でアラートを送信するテストを行います。
+					現在の設定を用いて、アラート送信をテストします。
 				</p>
 			</Card>
 			<Card bodyClassName="vstack">
-				<button className="btn block">ログアウトする</button>
+				<button className="btn block" onClick={onClickLogout}>ログアウトする</button>
 				<p className="text-dimmed">
 					ログアウトしても、アラートは送信されます。
 				</p>
 			</Card>
 			<Card bodyClassName="vstack">
-				<button className="btn danger block">アカウント連携を解除する</button>
+				<button className="btn danger block" onClick={onClickDeleteAccount}>アカウント連携を解除する</button>
 				<p className="text-dimmed">
-					これを実行すると、Misskeyとの連携設定を含むみす廃アラートのアカウントを削除します。
+					Misskeyとの連携設定を含むみす廃アラートのアカウントを削除します。
 				</p>
 			</Card>
 		</div>
