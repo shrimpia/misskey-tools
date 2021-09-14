@@ -5,12 +5,13 @@ import { Visibility } from '../../common/types/visibility';
 import { useGetSessionQuery } from '../services/session';
 import { defaultTemplate } from '../../common/default-template';
 import { Card } from './Card';
-import { Theme } from '../misc/theme';
-import { API_ENDPOINT, LOCALSTORAGE_KEY_LANG, LOCALSTORAGE_KEY_TOKEN } from '../const';
+import { Theme, themes } from '../misc/theme';
+import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { useDispatch } from 'react-redux';
 import { changeLang, changeTheme, showModal } from '../store/slices/screen';
 import { useSelector } from '../store';
 import { languageName } from '../langs';
+import { useTranslation } from 'react-i18next';
 
 type SettingDraftType = Partial<Pick<IUser,
 	| 'alertMode'
@@ -27,6 +28,7 @@ export const SettingPage: React.VFC = () => {
 	const dispatch = useDispatch();
 
 	const data = session.data;
+	const {t} = useTranslation();
 
 	const [draft, dispatchDraft] = useReducer<DraftReducer>((state, action) => {
 		return { ...state, ...action };
@@ -38,23 +40,8 @@ export const SettingPage: React.VFC = () => {
 		template: data?.template ?? null,
 	});
 
-	const themes: Array<{ theme: Theme, name: string }> = [
-		{
-			theme: 'light',
-			name: 'ライトテーマ'
-		},
-		{
-			theme: 'dark',
-			name: 'ダークテーマ'
-		},
-		{
-			theme: 'system',
-			name: 'システム設定に準じる'
-		},
-	];
-
 	const currentTheme = useSelector(state => state.screen.theme);
-	const currentLang = useSelector(state => state.screen.lang);
+	const currentLang = useSelector(state => state.screen.language);
 
 	const availableVisibilities: Visibility[] = [
 		'public',
@@ -150,7 +137,7 @@ export const SettingPage: React.VFC = () => {
 	) : (
 		<div className="vstack fade">
 			<Card bodyClassName="vstack">
-				<h1>アラート送信方法</h1>
+				<h1>{t('alertMode')}</h1>
 				<div>
 					{
 						alertModes.map((mode) => (
@@ -158,27 +145,27 @@ export const SettingPage: React.VFC = () => {
 								<input type="radio" checked={mode === draft.alertMode} onChange={() => {
 									updateSetting({ alertMode: mode });
 								}} />
-								<span>{mode}</span>
+								<span>{t(`_alertMode.${mode}`)}</span>
 							</label>
 						))
 					}
 					{draft.alertMode === 'notification' && (
 						<div className="alert bg-danger mt-2">
 							<i className="icon bi bi-exclamation-circle"></i>
-							「Misskey に通知」オプションは古いMisskeyでは動作しません。
+							{t('_alertMode.notificationWarning')}
 						</div>
 					)}
 				</div>
 				{ draft.alertMode === 'note' && (
 					<div>
-						<label htmlFor="visibility" className="input-field">公開範囲</label>
+						<label htmlFor="visibility" className="input-field">{t('visibility')}</label>
 						{
 							availableVisibilities.map((visibility) => (
 								<label key={visibility} className="input-check">
 									<input type="radio" checked={visibility === draft.visibility} onChange={() => {
 										updateSetting({ visibility });
 									}} />
-									<span>{visibility}</span>
+									<span>{t(`_visibility.${visibility}`)}</span>
 								</label>
 							))
 						}
@@ -186,26 +173,26 @@ export const SettingPage: React.VFC = () => {
 							<input type="checkbox" checked={draft.localOnly} onChange={(e) => {
 								updateSetting({ localOnly: e.target.checked });
 							}} />
-							<span>ローカル限定</span>
+							<span>{t('localOnly')}</span>
 						</label>
 					</div>
 				)}
 			</Card>
 			<Card bodyClassName="vstack">
-				<h1>表示設定</h1>
-				<h2>テーマ</h2>
+				<h1>{t('appearance')}</h1>
+				<h2>{t('theme')}</h2>
 				<div>
 					{
-						themes.map(({ theme, name }) => (
+						themes.map(theme => (
 							<label key={theme} className="input-check">
 								<input type="radio" value={theme} checked={theme === currentTheme} onChange={(e) => dispatch(changeTheme(e.target.value as Theme))} />
-								<span>{name}</span>
+								<span>{t(`_themes.${theme}`)}</span>
 							</label>
 						))
 					}
 				</div>
 
-				<h2>言語設定</h2>
+				<h2>{t('language')}</h2>
 				<select name="currentLang" className="input-field" value={currentLang} onChange={(e) => {
 					dispatch(changeLang(e.target.value));
 				}}>
@@ -218,16 +205,14 @@ export const SettingPage: React.VFC = () => {
 			</Card>
 
 			<Card bodyClassName="vstack">
-				<h1>テンプレート</h1>
-				<p>アラートの自動投稿をカスタマイズできます。</p>
+				<h1>{t('template')}</h1>
+				<p>{t('_template.description')}</p>
 				<textarea className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
 					dispatchDraft({ template: e.target.value });
 				}} />
-				<small className="text-dimmed">
-					ハッシュタグ #misshaialert は、テンプレートに関わらず自動付与されます。
-				</small>
+				<small className="text-dimmed">{t('_template.description2')}</small>
 				<details>
-					<summary>ヘルプ</summary>
+					<summary>{t('help')}</summary>
 					<ul className="fade">
 						<li><code>{'{'}notesCount{'}'}</code>といった形式のテキストは変数として扱われ、これを含めると投稿時に自動的に値が埋め込まれます。</li>
 					</ul>
@@ -236,26 +221,20 @@ export const SettingPage: React.VFC = () => {
 					<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>初期値に戻す</button>
 					<button className="btn primary" onClick={() => {
 						updateSettingWithDialog({ template: draft.template === '' ? null : draft.template });
-					}}>保存</button>
+					}}>{t('save')}</button>
 				</div>
 			</Card>
 			<Card bodyClassName="vstack">
-				<button className="btn block" onClick={onClickSendAlert}>アラートをテスト送信する</button>
-				<p className="text-dimmed">
-					現在の設定を用いて、アラート送信をテストします。
-				</p>
+				<button className="btn block" onClick={onClickSendAlert}>{t('sendAlert')}</button>
+				<p className="text-dimmed">{t('sendAlertDescription')}</p>
 			</Card>
 			<Card bodyClassName="vstack">
-				<button className="btn block" onClick={onClickLogout}>ログアウトする</button>
-				<p className="text-dimmed">
-					ログアウトしても、アラートは送信されます。
-				</p>
+				<button className="btn block" onClick={onClickLogout}>{t('logout')}</button>
+				<p className="text-dimmed">{t('logoutDescription')}</p>
 			</Card>
 			<Card bodyClassName="vstack">
-				<button className="btn danger block" onClick={onClickDeleteAccount}>アカウント連携を解除する</button>
-				<p className="text-dimmed">
-					Misskeyとの連携設定を含むみす廃アラートのアカウントを削除します。
-				</p>
+				<button className="btn danger block" onClick={onClickDeleteAccount}>{t('deleteAccount')}</button>
+				<p className="text-dimmed">{t('deleteAccountDescription')}</p>
 			</Card>
 		</div>
 	);

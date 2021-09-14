@@ -1,18 +1,18 @@
 import React  from 'react';
+import { useTranslation } from 'react-i18next';
 import { Ranking } from '../components/Ranking';
 
 
 export const RankingPage: React.VFC = () => {
+	const {t} = useTranslation();
+
 	return (
 		<article className="xarticle">
-			<h2>みす廃ランキング</h2>
+			<h2>{t('_missHai.ranking')}</h2>
 			<section>
-				<p>
-					ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。
-					みす廃レートは、次のような条件で算出されます。
-				</p>
-				<p><strong>(ノート数) / (アカウント登録からの経過日数)</strong></p>
-				<p>廃人を極めるか、ノート数を控えるか、全てあなた次第！</p>
+				<p>{t('_missHai.rankingDescription1')}</p>
+				<p><strong>{t('_missHai.rankingFormula')}</strong></p>
+				<p>{t('_missHai.rankingDescription2')}</p>
 			</section>
 			<section className="pt-2">
 				<Ranking />

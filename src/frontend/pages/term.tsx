@@ -1,6 +1,7 @@
 import React  from 'react';
 
 export const TermPage: React.VFC = () => {
+	// TODO: 外部サイトに誘導する
 	return (
 		<article className="xarticle">
 			<h2>利用規約</h2>

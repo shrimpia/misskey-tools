@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const LoginForm: React.VFC = () => {
 	const [host, setHost] = useState('');
+	const {t} = useTranslation();
 
 	return (
 		<nav>
 			<div>
-				<strong>インスタンスURL</strong>
+				<strong>{t('instanceUrl')}</strong>
 			</div>
 			<div className="hgroup">
 				<input
 					className="input-field"
 					type="text"
-					placeholder="例: misskey.io"
 					value={host}
 					onChange={(e) => setHost(e.target.value)}
 					required
@@ -23,7 +24,7 @@ export const LoginForm: React.VFC = () => {
 					disabled={!host}
 					onClick={() => location.href = `//${location.host}/login?host=${encodeURIComponent(host)}`}
 				>
-					ログイン
+					{t('login')}
 				</button>
 			</div>
 		</nav>

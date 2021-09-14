@@ -1,3 +1,13 @@
-export type Theme = ActualTheme | 'system';
+export const actualThemes = [
+	'light',
+	'dark',
+] as const;
 
-export type ActualTheme = 'light' | 'dark';
+export const themes = [
+	...actualThemes,
+	'system',
+] as const;
+
+export type Theme = typeof themes[number];
+
+export type ActualTheme = typeof actualThemes[number];

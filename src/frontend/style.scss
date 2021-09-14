@@ -71,8 +71,10 @@ small {
     z-index: 40000;
 }
 
-.dark .card.dialog {
-    background: var(--tone-2);
+.card.dialog {
+    .dark & {
+        background: var(--tone-2);
+    }
     min-width: min(100vw, 320px);
     max-width: min(100vw, 600px);
 }

@@ -73,7 +73,7 @@ export const ModalComponent: React.VFC = () => {
 	if (!shown || !modal) return null;
 
 	return (
-		<div className="modal" onClick={() => dispatch(hideModal())}>
+		<div className="modal fade" onClick={() => dispatch(hideModal())}>
 			<div className="fade up" onClick={(e) => e.stopPropagation()}>
 				{ ModalInner(modal) }
 			</div>

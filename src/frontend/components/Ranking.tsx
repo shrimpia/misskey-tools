@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface RankingResponse {
 	isCalculating: boolean;
@@ -21,6 +22,7 @@ export const Ranking: React.VFC<RankingProps> = ({limit}) => {
 	const [response, setResponse] = useState<RankingResponse | null>(null);
 	const [isFetching, setIsFetching] = useState(true);
 	const [isError, setIsError] = useState(false);
+	const {t} = useTranslation();
 
 	// APIコール
 	useEffect(() => {
@@ -39,27 +41,27 @@ export const Ranking: React.VFC<RankingProps> = ({limit}) => {
 
 	return (
 		isFetching ? (
-			<p className="text-dimmed">取得中…</p>
+			<p className="text-dimmed">{t('fetching')}</p>
 		) : isError ? (
-			<div className="alert bg-danger">取得エラー</div>
+			<div className="alert bg-danger">{t('failedToFetch')}</div>
 		) : response ? (
 			<>
-				<aside>登録者数：{response?.userCount}</aside>
+				<aside>{t('registeredUsersCount')}: {response?.userCount}</aside>
 				{response.isCalculating ? (
-					<p>現在算出中です。後ほどご確認ください！</p>
+					<p>{t('isCalculating')}</p>
 				) : (
-					<table className="table shadow-2 mt-1 fluid">
+					<table className="table mt-1 fluid">
 						<thead>
 							<tr>
-								<th>順位</th>
-								<th>名前</th>
-								<th>レート</th>
+								<th>{t('_missHai.order')}</th>
+								<th>{t('name')}</th>
+								<th>{t('_missHai.rating')}</th>
 							</tr>
 						</thead>
 						<tbody>
 							{response.ranking.map((r, i) => (
 								<tr key={i}>
-									<td>{i + 1}位</td>
+									<td>{i + 1}</td>
 									<td>
 										{r.username}@{r.host}
 									</td>

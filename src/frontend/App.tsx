@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Link, Route, Switch, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { IndexPage } from './pages';
 import { RankingPage } from './pages/ranking';
@@ -46,6 +47,8 @@ const AppInner : React.VFC = () => {
 		};
 	}, [osTheme, setOsTheme]);
 
+	const {t} = useTranslation();
+
 	return (
 		<>
 			<div className="container">
@@ -57,7 +60,7 @@ const AppInner : React.VFC = () => {
 				</Switch>
 				<footer className="text-center pa-5">
 					<p>(C)2020-2021 Xeltica</p>
-					<p><Link to="/term">利用規約</Link></p>
+					<p><Link to="/term">{t('termsOfService')}</Link></p>
 				</footer>
 				<ModalComponent />
 			</div>

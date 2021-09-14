@@ -1,5 +1,6 @@
 import React  from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Ranking } from '../components/Ranking';
 import { LoginForm } from '../components/LoginForm';
@@ -8,20 +9,22 @@ import { HashtagTimeline } from '../components/HashtagTimeline';
 import { Header } from '../components/Header';
 
 export const IndexWelcomePage: React.VFC = () => {
+	const {t} = useTranslation();
+
 	return (
 		<>
 			<Header>
 				<article className="mt-4">
-					<p>Misskeyは楽しいものです。気がついたら1日中入り浸っていることも多いでしょう。</p>
-					<p>さあ、今すぐみす廃アラートをインストールして、あなたの活動を把握しよう。</p>
+					<p>{t('description1')}</p>
+					<p>{t('description2')}</p>
 				</article>
 				<LoginForm />
 			</Header>
 			<article className="xarticle card ghost">
 				<div className="body">
-					<h1 className="mb-1">みす廃ランキング</h1>
+					<h1 className="mb-1">{t('_missHai.ranking')}</h1>
 					<Ranking limit={10} />
-					<Link to="/ranking">全員分見る</Link>
+					<Link to="/ranking">{t('_missHai.showAll')}</Link>
 				</div>
 			</article>
 			<article className="xarticle mt-4 row">
