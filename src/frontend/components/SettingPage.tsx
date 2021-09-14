@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import { alertModes } from '../../common/types/alert-mode';
 import { IUser } from '../../common/types/user';
-import { visibilities, Visibility } from '../../common/types/visibility';
+import { Visibility } from '../../common/types/visibility';
 import { useGetSessionQuery } from '../services/session';
 import { defaultTemplate } from '../../common/default-template';
 import { Card } from './Card';
 import { Theme } from '../misc/theme';
-import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
+import { API_ENDPOINT, LOCALSTORAGE_KEY_LANG, LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { useDispatch } from 'react-redux';
-import { changeTheme, showModal } from '../store/slices/screen';
+import { changeLang, changeTheme, showModal } from '../store/slices/screen';
 import { useSelector } from '../store';
+import { languageName } from '../langs';
 
 type SettingDraftType = Partial<Pick<IUser,
 	| 'alertMode'
@@ -53,7 +54,7 @@ export const SettingPage: React.VFC = () => {
 	];
 
 	const currentTheme = useSelector(state => state.screen.theme);
-	const [currentLang, setCurrentLang] = useState<string>('ja-JP');
+	const currentLang = useSelector(state => state.screen.lang);
 
 	const availableVisibilities: Visibility[] = [
 		'public',
@@ -205,9 +206,14 @@ export const SettingPage: React.VFC = () => {
 				</div>
 
 				<h2>言語設定</h2>
-				<select name="currentLang" className="input-field" value={currentLang} onChange={e => setCurrentLang(e.target.value)}>
-					<option value="ja-JP">日本語</option>
-					<option value="en-US">英語</option>
+				<select name="currentLang" className="input-field" value={currentLang} onChange={(e) => {
+					dispatch(changeLang(e.target.value));
+				}}>
+					{
+						(Object.keys(languageName) as Array<keyof typeof languageName>).map(n => (
+							<option value={n} key={n}>{languageName[n]}</option>
+						))
+					}
 				</select>
 			</Card>
 
