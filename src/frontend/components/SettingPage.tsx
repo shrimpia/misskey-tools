@@ -3,7 +3,6 @@ import { alertModes } from '../../common/types/alert-mode';
 import { IUser } from '../../common/types/user';
 import { Visibility } from '../../common/types/visibility';
 import { useGetSessionQuery } from '../services/session';
-import { defaultTemplate } from '../../common/default-template';
 import { Card } from './Card';
 import { Theme, themes } from '../misc/theme';
 import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
@@ -140,6 +139,8 @@ export const SettingPage: React.VFC = () => {
 			message: 'WIP',
 		}));
 	}, [dispatch]);
+
+	const defaultTemplate = t('_template.default');
 
 	return session.isLoading || !data ? (
 		<div className="skeleton" style={{width: '100%', height: '128px'}}></div>

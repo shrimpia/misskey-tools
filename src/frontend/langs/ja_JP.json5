@@ -97,6 +97,7 @@
 		_template: {
 			description: "アラートの自動投稿をカスタマイズできます。",
 			description2: "ハッシュタグ #misshaialert は、テンプレートに関わらず自動付与されます。",
+			default: "昨日のMisskeyの活動は\n\nノート: {notesCount}({notesDelta})\nフォロー : {followingCount}({followingDelta})\nフォロワー :{followersCount}({followersDelta})\n\nでした。\n{url}",
 		},
 		_error: {
 			sorry: "問題が発生しました。お手数ですが、やり直してください。",

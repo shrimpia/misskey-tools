@@ -97,6 +97,7 @@
 		_template: {
 			description: "Customize template of your alert.",
 			description2: "Hashtag '#misshaialert' will be appended regardless of the template.",
+			default: "My Misskey activity yesterday was:\n\nNotes: {notesCount}({notesDelta})\nFollowing: {followingCount}({followingDelta})\nFollowers: {followersCount}({followersDelta})\n\n{url}",
 		},
 		_error: {
 			sorry: "Something went wrong. Please retry again.",

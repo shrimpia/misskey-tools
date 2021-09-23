@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter, Link, Route, Switch, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 import { IndexPage } from './pages';
 import { RankingPage } from './pages/ranking';
@@ -10,10 +12,27 @@ import { TermPage } from './pages/term';
 import { store, useSelector } from './store';
 import { ModalComponent } from './Modal';
 import { ActualTheme } from './misc/theme';
-import { ErrorCode } from '../common/types/error-code';
+import { getBrowserLanguage, resources } from './langs';
+import { LOCALSTORAGE_KEY_LANG } from './const';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
+
+document.body.classList.add('dark');
+
+if (!localStorage[LOCALSTORAGE_KEY_LANG]) {
+	localStorage[LOCALSTORAGE_KEY_LANG] = getBrowserLanguage();
+}
+
+i18n
+	.use(initReactI18next)
+	.init({
+		resources,
+		lng: localStorage[LOCALSTORAGE_KEY_LANG],
+		interpolation: {
+			escapeValue: false // react already safes from xss
+		}
+	});
 
 const AppInner : React.VFC = () => {
 	const $location = useLocation();
