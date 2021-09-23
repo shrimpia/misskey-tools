@@ -1,5 +1,5 @@
 import { User } from '../models/entities/user';
-import { format } from '../functions/format';
+import { format } from '../../common/functions/format';
 import { getScores } from '../functions/get-scores';
 import { api } from './misskey';
 

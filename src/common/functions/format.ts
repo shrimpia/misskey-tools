@@ -1,13 +1,13 @@
 import { config } from '../../config';
-import { User } from '../models/entities/user';
-import { Score } from '../../common/types/score';
-import { defaultTemplate } from '../../common/default-template';
+import { User } from '../../backend/models/entities/user';
+import { Score } from '../types/score';
+import { defaultTemplate } from '../../backend/const';
+import { IUser } from '../types/user';
 
 /**
  * 埋め込み変数の型
  */
 export type Variable = {
-	description?: string;
 	replace?: string | ((score: Score, user: User) => string);
 };
 
@@ -16,43 +16,33 @@ export type Variable = {
  */
 export const variables: Record<string, Variable> = {
 	notesCount: {
-		description: 'ノート数',
 		replace: (score) => String(score.notesCount),
 	},
 	followingCount: {
-		description: 'フォロー数',
 		replace: (score) => String(score.followingCount),
 	},
 	followersCount: {
-		description: 'フォロワー数',
 		replace: (score) => String(score.followersCount),
 	},
 	notesDelta: {
-		description: '昨日とのノート数の差',
 		replace: (score) => String(score.notesDelta),
 	},
 	followingDelta: {
-		description: '昨日とのフォロー数の差',
 		replace: (score) => String(score.followingDelta),
 	},
 	followersDelta: {
-		description: '昨日とのフォロワー数の差',
 		replace: (score) => String(score.followersDelta),
 	},
 	url: {
-		description: 'みす廃アラートのURL',
 		replace: config.url,
 	},
 	username: {
-		description: 'ユーザー名',
 		replace: (_, user) => String(user.username),
 	},
 	host: {
-		description: '所属するインスタンスのホスト名',
 		replace: (_, user) => String(user.host),
 	},
 	rating: {
-		description: 'みす廃レート',
 		replace: (_, user) => String(user.rating),
 	},
 };
@@ -65,7 +55,7 @@ const variableRegex = /\{([a-zA-Z0-9_]+?)\}/g;
  * @param user ユーザー情報
  * @returns 生成したテキスト
  */
-export const format = (score: Score, user: User): string => {
+export const format = (score: Score, user: IUser): string => {
 	const template = user.template || defaultTemplate;
 	return template.replace(variableRegex, (m, name) => {
 		const v = variables[name];

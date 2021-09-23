@@ -1,7 +1,7 @@
 import { User } from '../models/entities/user';
 import { Score } from '../../common/types/score';
 import { api } from '../services/misskey';
-import { toSignedString } from './to-signed-string';
+import { toSignedString } from '../../common/functions/to-signed-string';
 
 /**
  * ユーザーのスコアを取得します。

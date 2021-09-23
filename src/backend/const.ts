@@ -5,3 +5,5 @@ export default {
 		'全員分の算出が終わるまで、ランキングを非表示に',
 	],
 };
+
+export const defaultTemplate = '昨日のMisskeyの活動は\n\nノート: {notesCount}({notesDelta})\nフォロー : {followingCount}({followingDelta})\nフォロワー :{followersCount}({followersDelta})\n\nでした。\n{url}';
