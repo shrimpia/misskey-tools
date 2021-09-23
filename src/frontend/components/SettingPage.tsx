@@ -50,6 +50,7 @@ export const SettingPage: React.VFC = () => {
 	];
 
 	const updateSetting = useCallback((obj: SettingDraftType) => {
+		const previousDraft = draft;
 		dispatchDraft(obj);
 		return fetch(`${API_ENDPOINT}session`, {
 			method: 'PUT',
@@ -58,8 +59,16 @@ export const SettingPage: React.VFC = () => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(obj),
-		});
-	}, []);
+		})
+			.catch(e => {
+				dispatch(showModal({
+					type: 'dialog',
+					icon: 'error',
+					message: 'エラー'
+				}));
+				dispatchDraft(previousDraft);
+			});
+	}, [draft]);
 
 	const updateSettingWithDialog = useCallback((obj: SettingDraftType) => {
 		updateSetting(obj)
@@ -67,10 +76,7 @@ export const SettingPage: React.VFC = () => {
 				type: 'dialog',
 				icon: 'info',
 				message: '保存しました。'
-			})))
-			.catch(e => {
-				alert(e.message);
-			});
+			})));
 	}, [updateSetting]);
 
 	useEffect(() => {
