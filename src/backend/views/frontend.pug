@@ -29,4 +29,13 @@ html
 	body
 		#app: .loading Loading...
 
+		if token
+			script.
+				localStorage.setItem('token', '#{token}');
+				history.replaceState(null, null, '/');
+
+		if error
+			script.
+				window.__misshaialert = { error: '#{error}' };
+
 		script(src=`/assets/fe.${version}.js` async defer)

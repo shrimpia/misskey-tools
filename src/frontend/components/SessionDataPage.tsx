@@ -35,7 +35,7 @@ export const SessionDataPage: React.VFC = () => {
 					<p>{t('welcomeBack', {acct: `@${session.data.username}@${session.data.host}`})}</p>
 					<p>
 						<strong>
-							{t('_missHai.rating')}:
+							{t('_missHai.rating')}{': '}
 						</strong>
 						{session.data.rating}
 					</p>

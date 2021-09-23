@@ -7,6 +7,7 @@ import { SettingPage } from '../components/SettingPage';
 import { useTranslation } from 'react-i18next';
 import { RankingPage } from '../components/RankingPage';
 
+
 export const IndexSessionPage: React.VFC = () => {
 	const [selectedTab, setSelectedTab] = useState<number>(0);
 	const {t, i18n} = useTranslation();

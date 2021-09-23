@@ -3,7 +3,6 @@ import { alertModes } from '../../common/types/alert-mode';
 import { IUser } from '../../common/types/user';
 import { Visibility } from '../../common/types/visibility';
 import { useGetSessionQuery } from '../services/session';
-import { defaultTemplate } from '../../common/default-template';
 import { Card } from './Card';
 import { Theme, themes } from '../misc/theme';
 import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
@@ -127,7 +126,16 @@ export const SettingPage: React.VFC = () => {
 	const onClickLogout = useCallback(() => {
 		dispatch(showModal({
 			type: 'dialog',
-			message: 'WIP',
+			title: 'ログアウトしてもよろしいですか？',
+			message: 'ログアウトしても、アラート送信や、お使いのMisskeyアカウントのデータ収集といった機能は動作し続けます。Misskey Toolsの利用を停止したい場合は、「アカウント連携を解除する」ボタンを押下して下さい。',
+			icon: 'question',
+			buttons: 'yesNo',
+			onSelect(i) {
+				if (i === 0) {
+					localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
+					location.reload();
+				}
+			},
 		}));
 	}, [dispatch]);
 
@@ -137,6 +145,8 @@ export const SettingPage: React.VFC = () => {
 			message: 'WIP',
 		}));
 	}, [dispatch]);
+
+	const defaultTemplate = t('_template.default');
 
 	return session.isLoading || !data ? (
 		<div className="skeleton" style={{width: '100%', height: '128px'}}></div>
@@ -155,33 +165,36 @@ export const SettingPage: React.VFC = () => {
 							</label>
 						))
 					}
-					{draft.alertMode === 'notification' && (
-						<div className="alert bg-danger mt-2">
-							<i className="icon bi bi-exclamation-circle"></i>
-							{t('_alertMode.notificationWarning')}
-						</div>
-					)}
 				</div>
+
+				{ draft.alertMode === 'notification' && (
+					<div className="alert bg-danger mt-2">
+						<i className="icon bi bi-exclamation-circle"></i>
+						{t('_alertMode.notificationWarning')}
+					</div>
+				)}
 				{ draft.alertMode === 'note' && (
-					<div>
-						<label htmlFor="visibility" className="input-field">{t('visibility')}</label>
-						{
-							availableVisibilities.map((visibility) => (
-								<label key={visibility} className="input-check">
-									<input type="radio" checked={visibility === draft.visibility} onChange={() => {
-										updateSetting({ visibility });
-									}} />
-									<span>{t(`_visibility.${visibility}`)}</span>
-								</label>
-							))
-						}
+					<>
+						<h2>{t('visibility')}</h2>
+						<div>
+							{
+								availableVisibilities.map((visibility) => (
+									<label key={visibility} className="input-check">
+										<input type="radio" checked={visibility === draft.visibility} onChange={() => {
+											updateSetting({ visibility });
+										}} />
+										<span>{t(`_visibility.${visibility}`)}</span>
+									</label>
+								))
+							}
+						</div>
 						<label className="input-check mt-2">
 							<input type="checkbox" checked={draft.localOnly} onChange={(e) => {
 								updateSetting({ localOnly: e.target.checked });
 							}} />
 							<span>{t('localOnly')}</span>
 						</label>
-					</div>
+					</>
 				)}
 			</Card>
 			<Card bodyClassName="vstack">
@@ -224,7 +237,7 @@ export const SettingPage: React.VFC = () => {
 					</ul>
 				</details>
 				<div className="hstack" style={{justifyContent: 'flex-end'}}>
-					<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>初期値に戻す</button>
+					<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>{t('resetToDefault')}</button>
 					<button className="btn primary" onClick={() => {
 						updateSettingWithDialog({ template: draft.template === '' ? null : draft.template });
 					}}>{t('save')}</button>

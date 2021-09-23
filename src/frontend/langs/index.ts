@@ -9,4 +9,11 @@ export const resources = {
 export const languageName = {
 	'en_US': 'English',
 	'ja_JP': '日本語',
+} as const;
+
+export type LanguageCode = keyof typeof resources;
+
+export const getBrowserLanguage = () => {
+	const lang = navigator.language;
+	return (Object.keys(resources) as LanguageCode[]).find(k => k.startsWith(lang)) ?? 'en_US';
 };

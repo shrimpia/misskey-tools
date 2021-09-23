@@ -34,6 +34,9 @@
 		no: "いいえ",
 		termsOfService: "利用規約",
 		name: "名前",
+		resetToDefault: "初期値に戻す",
+		error: "エラー",
+		retry: "やり直す",
 		_welcomeMessage: {
 			'pattern1': 'ついついノートしすぎていませんか？',
 			'pattern2': 'Misskey, しすぎていませんか？',
@@ -94,6 +97,18 @@
 		_template: {
 			description: "アラートの自動投稿をカスタマイズできます。",
 			description2: "ハッシュタグ #misshaialert は、テンプレートに関わらず自動付与されます。",
+			default: "昨日のMisskeyの活動は\n\nノート: {notesCount}({notesDelta})\nフォロー : {followingCount}({followingDelta})\nフォロワー :{followersCount}({followersDelta})\n\nでした。\n{url}",
+		},
+		_error: {
+			sorry: "問題が発生しました。お手数ですが、やり直してください。",
+			additionalInfo: "追加情報: ",
+			hitorisskeyIsDenied: "ひとりすきーは連携できません。",
+			teapot: "I'm a teapot.",
+			sessionRequired: "セッションがありません。",
+			tokenRequired: "トークンがありません。",
+			invalidParameter: "パラメータが不正です。",
+			notAuthorized: "権限がありません。",
+			other: "なし",
 		},
 	},
 }
