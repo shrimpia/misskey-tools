@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { welcomeMessage } from '../misc/welcome-message';
 
 import { useTranslation } from 'react-i18next';
 

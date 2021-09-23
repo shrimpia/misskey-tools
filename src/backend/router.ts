@@ -7,13 +7,8 @@ import { v4 as uuid } from 'uuid';
 import ms from 'ms';
 
 import { config } from '../config';
-import { upsertUser, getUser, updateUser, updateUsersMisshaiToken, getUserByMisshaiToken, deleteUser } from './functions/users';
+import { upsertUser, getUser, updateUser, updateUsersMisshaiToken } from './functions/users';
 import { api } from './services/misskey';
-import { AlertMode, alertModes } from '../common/types/alert-mode';
-import { Users } from './models';
-import { sendAlert } from './services/send-alert';
-import { visibilities, Visibility } from '../common/types/visibility';
-import { defaultTemplate } from '../common/default-template';
 import { die } from './die';
 
 export const router = new Router<DefaultState, Context>();
@@ -23,15 +18,14 @@ const tokenSecretCache: Record<string, string> = {};
 
 router.get('/login', async ctx => {
 	let host = ctx.query.host as string | undefined;
-
 	if (!host) {
-		await die(ctx, 'host is empty');
+		await die(ctx, 'invalidParamater');
 		return;
 	}
-	const meta = await api<{ name: string, uri: string, version: string, features: Record<string, boolean | undefined> }>(host, 'meta', {});
 
+	const meta = await api<{ name: string, uri: string, version: string, features: Record<string, boolean | undefined> }>(host, 'meta', {});
 	if (meta.version.includes('hitori')) {
-		await die(ctx, 'ひとりすきーは連携できません。');
+		await die(ctx, 'hitorisskeyIsDenied');
 		return;
 	}
 
@@ -42,7 +36,7 @@ router.get('/login', async ctx => {
 	const permission = ['write:notes', 'write:notifications'];
 
 	if (meta.features.miauth) {
-		// Use MiAuth
+		// MiAuthを使用する
 		const callback = encodeURI(`${config.url}/miauth`);
 
 		const session = uuid();
@@ -51,7 +45,7 @@ router.get('/login', async ctx => {
 
 		ctx.redirect(url);
 	} else {
-		// Use legacy authentication
+		// 旧型認証を使用する
 		const callbackUrl = encodeURI(`${config.url}/legacy-auth`);
 
 		const { secret } = await api<{ secret: string }>(host, 'app/create', {
@@ -70,13 +64,13 @@ router.get('/login', async ctx => {
 });
 
 router.get('/teapot', async ctx => {
-	await die(ctx, 'I\'m a teapot', 418);
+	await die(ctx, 'teapot', 418);
 });
 
 router.get('/miauth', async ctx => {
 	const session = ctx.query.session as string | undefined;
 	if (!session) {
-		await die(ctx, 'session required');
+		await die(ctx, 'sessionRequired');
 		return;
 	}
 	const host = sessionHostCache[session];
@@ -101,7 +95,7 @@ router.get('/miauth', async ctx => {
 router.get('/legacy-auth', async ctx => {
 	const token = ctx.query.token as string | undefined;
 	if (!token) {
-		await die(ctx, 'token required');
+		await die(ctx, 'tokenRequired');
 		return;
 	}
 	const host = sessionHostCache[token];
@@ -123,97 +117,6 @@ router.get('/legacy-auth', async ctx => {
 	const i = crypto.createHash('sha256').update(accessToken + appSecret, 'utf8').digest('hex');
 
 	await login(ctx, user, host, i);
-});
-
-router.post('/update-settings', async ctx => {
-	const mode = ctx.request.body.alertMode as AlertMode;
-	// 一応型チェック
-	if (!alertModes.includes(mode)) {
-		await die(ctx, `${mode} is an invalid value`);
-		return;
-	}
-	const visibility = ctx.request.body.visibility as Visibility;
-	// 一応型チェック
-	if (!visibilities.includes(visibility)) {
-		await die(ctx, `${mode} is an invalid value`);
-		return;
-	}
-
-	const flag = ctx.request.body.flag;
-
-	const template = ctx.request.body.template?.trim();
-
-	const token = ctx.cookies.get('token');
-	if (!token) {
-		await die(ctx, 'ログインしていません');
-		return;
-	}
-
-	const u = await getUserByMisshaiToken(token);
-
-	if (!u) {
-		await die(ctx);
-		return;
-	}
-
-	await Users.update(u.id, {
-		alertMode: mode,
-		localOnly: flag === 'localOnly',
-		remoteFollowersOnly: flag === 'remoteFollowersOnly',
-		template: template === defaultTemplate || !template ? null : template,
-		visibility,
-	});
-
-	ctx.redirect('/?from=updateSettings');
-});
-
-
-
-router.post('/logout', async ctx => {
-	const token = ctx.cookies.get('token');
-	if (!token) {
-		await die(ctx, 'ログインしていません');
-		return;
-	}
-	ctx.cookies.set('token', '');
-	ctx.redirect('/?from=logout');
-});
-
-router.post('/optout', async ctx => {
-	const token = ctx.cookies.get('token');
-	if (!token) {
-		await die(ctx, 'ログインしていません');
-		return;
-	}
-	ctx.cookies.set('token', '');
-
-	const u = await getUserByMisshaiToken(token);
-
-	if (!u) {
-		await die(ctx);
-		return;
-	}
-
-	await deleteUser(u.username, u.host);
-
-	ctx.redirect('/?from=optout');
-});
-
-router.post('/send', async ctx => {
-	const token = ctx.cookies.get('token');
-	if (!token) {
-		await die(ctx, 'ログインしていません');
-		return;
-	}
-
-	const u = await getUserByMisshaiToken(token);
-
-	if (!u) {
-		await die(ctx);
-		return;
-	}
-	await sendAlert(u).catch(() => die(ctx));
-	ctx.redirect('/?from=send');
 });
 
 router.get('/assets/(.*)', async ctx => {
@@ -252,8 +155,5 @@ async function login(ctx: Context, user: Record<string, unknown>, host: string, 
 
 	const misshaiToken = await updateUsersMisshaiToken(u);
 
-	ctx.cookies.set('token', misshaiToken, { signed: false, httpOnly: false });
-
-	// await ctx.render('logined', { user: u });
-	ctx.redirect('/');
+	await ctx.render('frontend', { token: misshaiToken });
 }

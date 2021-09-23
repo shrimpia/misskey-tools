@@ -1,6 +1,7 @@
 import { Context } from 'koa';
+import { ErrorCode } from '../common/types/error-code';
 
-export const die = (ctx: Context, error = '問題が発生しました。お手数ですが、最初からやり直してください。', status = 400): Promise<void> => {
+export const die = (ctx: Context, error: ErrorCode = 'other', status = 400): Promise<void> => {
 	ctx.status = status;
-	return ctx.render('error', { error });
+	return ctx.render('frontend', { error });
 };

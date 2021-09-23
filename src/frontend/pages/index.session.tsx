@@ -7,6 +7,7 @@ import { Tab, TabItem } from '../components/Tab';
 import { SettingPage } from '../components/SettingPage';
 import { useTranslation } from 'react-i18next';
 
+
 export const IndexSessionPage: React.VFC = () => {
 	const [selectedTab, setSelectedTab] = useState<number>(0);
 	const {t, i18n} = useTranslation();
