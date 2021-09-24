@@ -24,6 +24,11 @@ router.get('/login', async ctx => {
 	}
 
 	const meta = await api<{ name: string, uri: string, version: string, features: Record<string, boolean | undefined> }>(host, 'meta', {});
+	if (typeof meta !== 'object') {
+		await die(ctx, 'other');
+		return;
+	}
+
 	if (meta.version.includes('hitori')) {
 		await die(ctx, 'hitorisskeyIsDenied');
 		return;
