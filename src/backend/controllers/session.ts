@@ -3,10 +3,10 @@
  * @author Xeltica
  */
 
-import { Body, CurrentUser, Get, JsonController, OnUndefined, Post, Put } from 'routing-controllers';
+import { Body, CurrentUser, Delete, Get, JsonController, OnUndefined, Post, Put } from 'routing-controllers';
 import { DeepPartial } from 'typeorm';
 import { getScores } from '../functions/get-scores';
-import { updateUser } from '../functions/users';
+import { deleteUser, updateUser } from '../functions/users';
 import { User } from '../models/entities/user';
 import { sendAlert } from '../services/send-alert';
 import { UserSetting } from './UserSetting';
@@ -37,6 +37,11 @@ export class SessionController {
 	@OnUndefined(204)
 	@Post('/alert') async testAlert(@CurrentUser({ required: true }) user: User) {
 		await sendAlert(user);
+	}
+
+	@OnUndefined(204)
+	@Delete() async delete(@CurrentUser({ required: true }) user: User) {
+		await deleteUser(user.username, user.host);
 	}
 }
 

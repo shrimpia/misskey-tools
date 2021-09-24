@@ -4,6 +4,7 @@ export interface ModalTypeDialog {
 	message: string;
 	icon?: DialogIcon;
 	buttons?: DialogButtonType;
+	primaryClassName?: string;
 	onSelect?: (clickedButtonIndex: number) => void;
 }
 

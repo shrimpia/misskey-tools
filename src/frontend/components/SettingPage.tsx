@@ -1,4 +1,7 @@
 import React, { useCallback, useEffect, useReducer } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+
 import { alertModes } from '../../common/types/alert-mode';
 import { IUser } from '../../common/types/user';
 import { Visibility } from '../../common/types/visibility';
@@ -6,11 +9,22 @@ import { useGetSessionQuery } from '../services/session';
 import { Card } from './Card';
 import { Theme, themes } from '../misc/theme';
 import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
-import { useDispatch } from 'react-redux';
 import { changeLang, changeTheme, showModal } from '../store/slices/screen';
 import { useSelector } from '../store';
 import { languageName } from '../langs';
-import { useTranslation } from 'react-i18next';
+
+const variables = [
+	'notesCount',
+	'followingCount',
+	'followersCount',
+	'notesDelta',
+	'followingDelta',
+	'followersDelta',
+	'url',
+	'username',
+	'host',
+	'rating',
+] as const;
 
 type SettingDraftType = Partial<Pick<IUser,
 	| 'alertMode'
@@ -90,13 +104,41 @@ export const SettingPage: React.VFC = () => {
 		}
 	}, [data]);
 
+	const onClickInsertVariables = useCallback<React.MouseEventHandler>((e) => {
+		dispatch(showModal({
+			type: 'menu',
+			screenX: e.screenX,
+			screenY: e.screenY,
+			items: Object.keys(variables).map(key => ({
+				name: '_template.variables.' + key,
+				onClick: () => { console.log(key); },
+			})),
+		}));
+	}, [dispatch, t, variables]);
+
+	const onClickInsertVariablesHelp = useCallback(() => {
+		dispatch(showModal({
+			type: 'dialog',
+			icon: 'info',
+			message: t('_template.insertVariablesHelp'),
+		}));
+	}, [dispatch, t]);
+
 	const onClickSendAlert = useCallback(() => {
 		dispatch(showModal({
 			type: 'dialog',
-			title: 'アラートをテスト送信しますか？',
-			message: '現在の設定でアラートを送信します。設定が保存済みであるかどうか、実行前に必ずご確認ください。',
+			title: t('_sendTest.title'),
+			message: t('_sendTest.message'),
 			icon: 'question',
-			buttons: 'yesNo',
+			buttons: [
+				{
+					text: t('_sendTest.yes'),
+					style: 'primary',
+				},
+				{
+					text: t('_sendTest.no'),
+				},
+			],
 			onSelect(i) {
 				if (i === 0) {
 					fetch(`${API_ENDPOINT}session/alert`, {
@@ -107,29 +149,37 @@ export const SettingPage: React.VFC = () => {
 					}).then(() => {
 						dispatch(showModal({
 							type: 'dialog',
-							message: '送信しました。',
+							message: t('_logout.success'),
 							icon: 'info',
 						}));
 					}).catch((e) => {
 						console.error(e);
 						dispatch(showModal({
 							type: 'dialog',
-							message: '送信に失敗しました。',
+							message: t('_logout.failure'),
 							icon: 'error',
 						}));
 					});
 				}
 			},
 		}));
-	}, [dispatch]);
+	}, [dispatch, t]);
 
 	const onClickLogout = useCallback(() => {
 		dispatch(showModal({
 			type: 'dialog',
-			title: 'ログアウトしてもよろしいですか？',
-			message: 'ログアウトしても、アラート送信や、お使いのMisskeyアカウントのデータ収集といった機能は動作し続けます。Misskey Toolsの利用を停止したい場合は、「アカウント連携を解除する」ボタンを押下して下さい。',
+			title: t('_logout.title'),
+			message: t('_logout.message'),
 			icon: 'question',
-			buttons: 'yesNo',
+			buttons: [
+				{
+					text: t('_logout.yes'),
+					style: 'primary',
+				},
+				{
+					text: t('_logout.no'),
+				},
+			],
 			onSelect(i) {
 				if (i === 0) {
 					localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
@@ -137,14 +187,52 @@ export const SettingPage: React.VFC = () => {
 				}
 			},
 		}));
-	}, [dispatch]);
+	}, [dispatch, t]);
 
 	const onClickDeleteAccount = useCallback(() => {
 		dispatch(showModal({
 			type: 'dialog',
-			message: 'WIP',
+			title: t('_deactivate.title'),
+			message: t('_deactivate.message'),
+			icon: 'question',
+			buttons: [
+				{
+					text: t('_deactivate.yes'),
+					style: 'danger',
+				},
+				{
+					text: t('_deactivate.no'),
+				},
+			],
+			primaryClassName: 'danger',
+			onSelect(i) {
+				if (i === 0) {
+					fetch(`${API_ENDPOINT}session`, {
+						method: 'DELETE',
+						headers: {
+							'Authorization': `Bearer ${localStorage[LOCALSTORAGE_KEY_TOKEN]}`,
+						},
+					}).then(() => {
+						dispatch(showModal({
+							type: 'dialog',
+							message: t('_deactivate.success'),
+							icon: 'info',
+							onSelect() {
+								location.reload();
+							}
+						}));
+					}).catch((e) => {
+						console.error(e);
+						dispatch(showModal({
+							type: 'dialog',
+							message: t('_deactivate.failure'),
+							icon: 'error',
+						}));
+					});
+				}
+			},
 		}));
-	}, [dispatch]);
+	}, [dispatch, t]);
 
 	const defaultTemplate = t('_template.default');
 
@@ -221,21 +309,29 @@ export const SettingPage: React.VFC = () => {
 						))
 					}
 				</select>
+				<div className="alert bg-info mt-2">
+					<i className="icon bi bi-translate" />
+					{t('translatedByTheCommunity')}&nbsp;
+					<a href="#TODO" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
+				</div>
 			</Card>
 
 			<Card bodyClassName="vstack">
 				<h1>{t('template')}</h1>
 				<p>{t('_template.description')}</p>
+				<div className="hstack dense">
+					<button className="btn" onClick={onClickInsertVariables}>
+						<i className="bi bi-braces" />&nbsp;
+						{t('_template.insertVariables')}
+					</button>
+					<button className="btn link text-info" onClick={onClickInsertVariablesHelp}>
+						<i className="bi bi-question-circle" />
+					</button>
+				</div>
 				<textarea className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
 					dispatchDraft({ template: e.target.value });
 				}} />
 				<small className="text-dimmed">{t('_template.description2')}</small>
-				<details>
-					<summary>{t('help')}</summary>
-					<ul className="fade">
-						<li><code>{'{'}notesCount{'}'}</code>といった形式のテキストは変数として扱われ、これを含めると投稿時に自動的に値が埋め込まれます。</li>
-					</ul>
-				</details>
 				<div className="hstack" style={{justifyContent: 'flex-end'}}>
 					<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>{t('resetToDefault')}</button>
 					<button className="btn primary" onClick={() => {

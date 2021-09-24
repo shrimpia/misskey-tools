@@ -1,5 +1,4 @@
 import { config } from '../../config';
-import { User } from '../../backend/models/entities/user';
 import { Score } from '../types/score';
 import { defaultTemplate } from '../../backend/const';
 import { IUser } from '../types/user';
@@ -8,7 +7,7 @@ import { IUser } from '../types/user';
  * 埋め込み変数の型
  */
 export type Variable = {
-	replace?: string | ((score: Score, user: User) => string);
+	replace?: string | ((score: Score, user: IUser) => string);
 };
 
 /**
