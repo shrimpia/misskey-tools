@@ -1,9 +1,9 @@
-import enUS from './en_US.json5';
-import jaJP from './ja_JP.json5';
+import enUS from './en_US.json';
+import jaJP from './ja_JP.json';
 
 export const resources = {
-	'en_US': enUS,
-	'ja_JP': jaJP,
+	'en_US': { translation: enUS },
+	'ja_JP': { translation: jaJP },
 };
 
 export const languageName = {
