@@ -55,7 +55,7 @@
 	"_missHai": {
 		"ranking": "Miss-hai Ranking",
 		"rankingDescription1": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。みす廃レートは、次のような条件で算出されます。",
-		"rankingFormula": "(ノート数) / (アカウント登録からの経過日数)",
+		"rankingFormula": "(Number of notes) / (Number of days passed from SignUp)",
 		"rankingDescription2": "廃人を極めるか、ノート数を控えるか、全てあなた次第！",
 		"showAll": "Show All",
 		"data": "Miss-hai Data",
