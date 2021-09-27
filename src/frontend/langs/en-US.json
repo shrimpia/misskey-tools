@@ -1,7 +1,7 @@
 {
 	"title": "Misskey Tools",
 	"description1": "Misskey is fun thing. When you realized it, you have been used Misskey all day long.",
-	"description2": "Let's get Misskey Tools account to know your activity on Misskey.",
+	"description2": "Let's get Misskey Tools account and know your activity.",
 	"notes": "Notes",
 	"following": "Following",
 	"followers": "Followers",
@@ -54,9 +54,9 @@
 	},
 	"_missHai": {
 		"ranking": "Miss-hai Ranking",
-		"rankingDescription1": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。みす廃レートは、次のような条件で算出されます。",
+		"rankingDescription1": "This tool calculates your \"rate of MissHai\" and displays a runking in descending order of its high. MissHai rate is calculated under a following condition.",
 		"rankingFormula": "(Number of notes) / (Number of days passed from SignUp)",
-		"rankingDescription2": "廃人を極めるか、ノート数を控えるか、全てあなた次第！",
+		"rankingDescription2": "Master Misskey freak or reduce your posting Notes. It all depends on you!",
 		"showAll": "Show All",
 		"data": "Miss-hai Data",
 		"dataBody": "内容",
