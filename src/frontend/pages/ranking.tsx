@@ -10,9 +10,7 @@ export const RankingPage: React.VFC = () => {
 		<article className="xarticle">
 			<h2>{t('_missHai.ranking')}</h2>
 			<section>
-				<p>{t('_missHai.rankingDescription1')}</p>
-				<p><strong>{t('_missHai.rankingFormula')}</strong></p>
-				<p>{t('_missHai.rankingDescription2')}</p>
+				<p>{t('_missHai.rankingDescription')}</p>
 			</section>
 			<section className="pt-2">
 				<Ranking />
