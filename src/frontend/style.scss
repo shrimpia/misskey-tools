@@ -69,6 +69,10 @@ small {
     align-items: center;
     background: #000000c0;
     z-index: 40000;
+    &.top-left {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
 }
 
 .card.dialog {
@@ -77,4 +81,14 @@ small {
     }
     min-width: min(100vw, 320px);
     max-width: min(100vw, 600px);
+}
+
+.modal-menu-wrapper {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    min-width: min(100vw, 240px);
+    border-radius: var(--radius);
+    padding: calc(var(--margin) / 2);
+    background: var(--panel);
 }

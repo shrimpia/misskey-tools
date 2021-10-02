@@ -12,6 +12,7 @@ import {
 import { Modal } from './modal/modal';
 import { useDispatch } from 'react-redux';
 import { hideModal } from './store/slices/screen';
+import { ModalTypeMenu } from './modal/menu';
 
 const getButtons = (button: DialogButtonType): DialogButton[] => {
 	if (typeof button === 'object') return button;
@@ -59,10 +60,34 @@ const Dialog: React.VFC<{modal: ModalTypeDialog}> = ({modal}) => {
 	);
 };
 
+const Menu: React.VFC<{modal: ModalTypeMenu}> = ({modal}) => {
+	const dispatch = useDispatch();
+
+	return (
+		<div className="modal-menu-wrapper menu shadow-2" style={{
+			transform: `translate(${modal.screenX}px, ${modal.screenY}px)`
+		}}>
+			{
+				modal.items.map((item, i) => (
+					<button className={`item ${item.disabled ? 'disabled' : ''} ${item.danger ? 'text-danger' : ''}`} onClick={() => {
+						dispatch(hideModal());
+						if (item.onClick) {
+							item.onClick();
+						}
+					}} key={i}>
+						{item.icon && <i className={item.icon} />}
+						{item.name}
+					</button>
+				))
+			}
+		</div>
+	);
+};
+
 const ModalInner = (modal: Modal) => {
 	switch (modal.type) {
 		case 'dialog': return <Dialog modal={modal} />;
-		case 'menu': return <p>Not Implemented</p>;
+		case 'menu': return <Menu modal={modal} />;
 	}
 };
 
@@ -73,7 +98,7 @@ export const ModalComponent: React.VFC = () => {
 	if (!shown || !modal) return null;
 
 	return (
-		<div className="modal fade" onClick={() => dispatch(hideModal())}>
+		<div className={`modal fade ${modal.type === 'menu' ? 'top-left' : ''}`} onClick={() => dispatch(hideModal())}>
 			<div className="fade up" onClick={(e) => e.stopPropagation()}>
 				{ ModalInner(modal) }
 			</div>

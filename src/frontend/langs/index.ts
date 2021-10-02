@@ -1,5 +1,5 @@
-import enUS from './en_US.json';
-import jaJP from './ja_JP.json';
+import enUS from './en-US.json';
+import jaJP from './ja-JP.json';
 
 export const resources = {
 	'en_US': { translation: enUS },

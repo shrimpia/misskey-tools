@@ -107,10 +107,10 @@ export const SettingPage: React.VFC = () => {
 	const onClickInsertVariables = useCallback<React.MouseEventHandler>((e) => {
 		dispatch(showModal({
 			type: 'menu',
-			screenX: e.screenX,
-			screenY: e.screenY,
-			items: Object.keys(variables).map(key => ({
-				name: '_template.variables.' + key,
+			screenX: e.clientX,
+			screenY: e.clientY,
+			items: variables.map(key => ({
+				name: t('_template._variables.' + key),
 				onClick: () => { console.log(key); },
 			})),
 		}));
