@@ -29,7 +29,7 @@ export class SessionController {
 		if (setting.visibility != null) s.visibility = setting.visibility;
 		if (setting.localOnly != null) s.localOnly = setting.localOnly;
 		if (setting.remoteFollowersOnly != null) s.remoteFollowersOnly = setting.remoteFollowersOnly;
-		if (setting.template != null) s.template = setting.template;
+		if (setting.template !== undefined) s.template = setting.template;
 		if (Object.keys(s).length === 0) return;
 		await updateUser(user.username, user.host, s);
 	}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
@@ -12,6 +12,7 @@ import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { changeLang, changeTheme, showModal } from '../store/slices/screen';
 import { useSelector } from '../store';
 import { languageName } from '../langs';
+import insertTextAtCursor from 'insert-text-at-cursor';
 
 const variables = [
 	'notesCount',
@@ -55,6 +56,8 @@ export const SettingPage: React.VFC = () => {
 
 	const currentTheme = useSelector(state => state.screen.theme);
 	const currentLang = useSelector(state => state.screen.language);
+
+	const templateTextarea = useRef<HTMLTextAreaElement>(null);
 
 	const availableVisibilities: Visibility[] = [
 		'public',
@@ -111,10 +114,14 @@ export const SettingPage: React.VFC = () => {
 			screenY: e.clientY,
 			items: variables.map(key => ({
 				name: t('_template._variables.' + key),
-				onClick: () => { console.log(key); },
+				onClick: () => {
+					if (templateTextarea.current) {
+						insertTextAtCursor(templateTextarea.current, `{${key}}`);
+					}
+				},
 			})),
 		}));
-	}, [dispatch, t, variables]);
+	}, [dispatch, t, variables, templateTextarea.current]);
 
 	const onClickInsertVariablesHelp = useCallback(() => {
 		dispatch(showModal({
@@ -149,14 +156,14 @@ export const SettingPage: React.VFC = () => {
 					}).then(() => {
 						dispatch(showModal({
 							type: 'dialog',
-							message: t('_logout.success'),
+							message: t('_sendTest.success'),
 							icon: 'info',
 						}));
 					}).catch((e) => {
 						console.error(e);
 						dispatch(showModal({
 							type: 'dialog',
-							message: t('_logout.failure'),
+							message: t('_sendTest.failure'),
 							icon: 'error',
 						}));
 					});
@@ -328,7 +335,7 @@ export const SettingPage: React.VFC = () => {
 						<i className="bi bi-question-circle" />
 					</button>
 				</div>
-				<textarea className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
+				<textarea ref={templateTextarea} className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
 					dispatchDraft({ template: e.target.value });
 				}} />
 				<small className="text-dimmed">{t('_template.description2')}</small>
@@ -340,8 +347,8 @@ export const SettingPage: React.VFC = () => {
 				</div>
 			</Card>
 			<Card bodyClassName="vstack">
-				<button className="btn block" onClick={onClickSendAlert}>{t('sendAlert')}</button>
-				<p className="text-dimmed">{t('sendAlertDescription')}</p>
+				<button className="btn block" onClick={onClickSendAlert} disabled={draft.alertMode === 'nothing'}>{t('sendAlert')}</button>
+				<p className="text-dimmed">{t(draft.alertMode === 'nothing' ? 'sendAlertDisabled' : 'sendAlertDescription')}</p>
 			</Card>
 			<Card bodyClassName="vstack">
 				<button className="btn block" onClick={onClickLogout}>{t('logout')}</button>

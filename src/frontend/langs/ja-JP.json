@@ -12,6 +12,7 @@
 	"template": "テンプレート",
 	"sendAlert": "アラートをテスト送信する",
 	"sendAlertDescription": "現在の設定を用いて、アラート送信をテストします。",
+	"sendAlertDisabled": "アラート送信方法が「通知しない」のため、送信をテストすることはできません。",
 	"logout": "ログアウトする",
 	"logoutDescription": "ログアウトしても、アラートは送信されます。",
 	"deleteAccount": "アカウント連携を解除する",
