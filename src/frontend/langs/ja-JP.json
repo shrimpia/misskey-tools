@@ -37,7 +37,7 @@
 	"error": "エラー",
 	"retry": "やり直す",
 	"disclaimerForMisskeyHq": "Misskey Toolsは、Misskey HQの公式ツールでは<b>ありません</b>。",
-	"translatedByTheCommunity": "Misskey Toolsはコミュニティによって翻訳されています。",
+	"translatedByTheCommunity": "Misskey Toolsはボランティアによって翻訳されています。",
 	"helpTranslation": "翻訳に協力する",
 	"_welcomeMessage": {
 		"pattern1": "ついついノートしすぎていませんか？",

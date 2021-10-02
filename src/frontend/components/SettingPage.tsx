@@ -312,7 +312,7 @@ export const SettingPage: React.VFC = () => {
 				<div className="alert bg-info mt-2">
 					<i className="icon bi bi-translate" />
 					{t('translatedByTheCommunity')}&nbsp;
-					<a href="#TODO" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
+					<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
 				</div>
 			</Card>
 
