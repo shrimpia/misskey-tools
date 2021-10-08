@@ -1,11 +1,10 @@
 import React, { useMemo, useState }  from 'react';
 
 import { Header } from '../components/Header';
-import { SessionDataPage } from '../components/SessionDataPage';
+import { MisshaiPage } from '../components/MisshaiPage';
 import { Tab, TabItem } from '../components/Tab';
 import { SettingPage } from '../components/SettingPage';
 import { useTranslation } from 'react-i18next';
-import { RankingPage } from '../components/RankingPage';
 
 
 export const IndexSessionPage: React.VFC = () => {
@@ -13,16 +12,14 @@ export const IndexSessionPage: React.VFC = () => {
 	const {t, i18n} = useTranslation();
 
 	const items = useMemo<TabItem[]>(() => ([
-		{ label: t('_nav.data') },
-		{ label: t('_nav.ranking') },
+		{ label: t('_nav.misshai') },
 		{ label: t('_nav.settings') },
 	]), [i18n.language]);
 
 	const component = useMemo(() => {
 		switch (selectedTab) {
-			case 0: return <SessionDataPage />;
-			case 1: return <RankingPage/>;
-			case 2: return <SettingPage/>;
+			case 0: return <MisshaiPage />;
+			case 1: return <SettingPage/>;
 			default: return null;
 		}
 	}, [selectedTab]);

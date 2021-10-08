@@ -58,15 +58,14 @@
 		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
 	},
 	"_nav": {
-		"data": "データ",
-		"ranking": "ランキング",
+		"misshai": "ミス廃",
 		"settings": "設定"
 	},
 	"_missHai": {
 		"ranking": "ミス廃ランキング",
-		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
+		"rankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
 		"showAll": "全員分見る",
-		"data": "みす廃データ",
+		"data": "ミス廃データ",
 		"dataBody": "内容",
 		"dataScore": "スコア",
 		"dataDelta": "前日比",
