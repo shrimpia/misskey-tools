@@ -59,6 +59,7 @@
 	},
 	"_nav": {
 		"misshai": "Miss-hai",
+		"accounts": "アカウント",
 		"settings": "Settings"
 	},
 	"_missHai": {
@@ -72,6 +73,11 @@
 		"rating": "Rating",
 		"order": "Order",
 		"showRanking": "Show Ranking"
+	},
+	"_accounts": {
+		"currentAccount": "現在ログインしているアカウント",
+		"switchAccount": "アカウント切り替え",
+		"useAnother": "他のアカウントで登録する"
 	},
 	"_developerInfo": {
 		"title": "Developer",
