@@ -10,7 +10,7 @@ export const LoginForm: React.VFC = () => {
 			<div>
 				<strong>{t('instanceUrl')}</strong>
 			</div>
-			<div className="hgroup">
+			<div className="hgroup login-form">
 				<input
 					className="input-field"
 					type="text"

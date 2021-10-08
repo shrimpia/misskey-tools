@@ -1,6 +1,6 @@
 {
-	"name": "misshaialert",
-	"version": "1.5.1",
+	"name": "misskey-tools",
+	"version": "2.0.0",
 	"description": "",
 	"main": "built/app.js",
 	"author": "Xeltica",

@@ -92,3 +92,8 @@ small {
     padding: calc(var(--margin) / 2);
     background: var(--panel);
 }
+
+.login-form {
+    background: var(--panel);
+    border-radius: var(--radius);
+}

@@ -31,7 +31,14 @@ html
 
 		if token
 			script.
-				localStorage.setItem('token', '#{token}');
+				const token = '#{token}';
+				const previousToken = localStorage.getItem('token');
+				const accounts = JSON.parse(localStorage.getItem('accounts') && '[]');
+				if (previousToken && !accounts.includes(previousToken)) {
+					accounts.push(previousToken);
+				}
+				localStorage.setItem('accounts', JSON.stringify(accounts));
+				localStorage.setItem('token', token);
 				history.replaceState(null, null, '/');
 
 		if error

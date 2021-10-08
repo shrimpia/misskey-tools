@@ -35,7 +35,7 @@ export const IndexWelcomePage: React.VFC = () => {
 				<article>
 					<h3>{t('_welcome.misshaiAlertTitle')}</h3>
 					<p>{t('_welcome.misshaiAlertDescription')}</p>
-					<div className="card ma-2 shadow-2" style={{maxWidth: 320}}>
+					<div className="card ma-2 shadow-2" style={{maxWidth: 360}}>
 						<div className="body">
 							<pre>{example}</pre>
 						</div>
