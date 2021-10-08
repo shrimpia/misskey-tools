@@ -37,30 +37,32 @@ export const AccountsPage: React.VFC = () => {
 					<p>@{data.username}@{data.host}</p>
 				</div>
 			</div>
-			<article>
-				<h2>{t('_accounts.switchAccount')}</h2>
-				<div className="menu large fluid mb-2">
-					{
-						accounts.length === accountTokens.length ? (
-							accounts.map(account => (
-								<button className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
-									<i className="icon bi bi-chevron-right" />
-									@{account.username}@{account.host}
-									<button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {
-										const filteredAccounts = accounts.filter(ac => ac.id !== account.id);
-										dispatch(setAccounts(filteredAccounts));
-										e.stopPropagation();
-									}}>
-										<i className="bi bi-trash"/>
+			<article className="card">
+				<div className="body">
+					<h1>{t('_accounts.switchAccount')}</h1>
+					<div className="menu large fluid mb-2">
+						{
+							accounts.length === accountTokens.length ? (
+								accounts.map(account => (
+									<button className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
+										<i className="icon bi bi-chevron-right" />
+										@{account.username}@{account.host}
+										<button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {
+											const filteredAccounts = accounts.filter(ac => ac.id !== account.id);
+											dispatch(setAccounts(filteredAccounts));
+											e.stopPropagation();
+										}}>
+											<i className="bi bi-trash"/>
+										</button>
 									</button>
-								</button>
-							))
-						) : (
-							<div className="item">...</div>
-						)
-					}
+								))
+							) : (
+								<div className="item">...</div>
+							)
+						}
+					</div>
+					<LoginForm />
 				</div>
-				<LoginForm />
 			</article>
 		</div>
 	);

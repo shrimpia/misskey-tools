@@ -33,7 +33,7 @@ html
 			script.
 				const token = '#{token}';
 				const previousToken = localStorage.getItem('token');
-				const accounts = JSON.parse(localStorage.getItem('accounts') && '[]');
+				const accounts = JSON.parse(localStorage.getItem('accounts') || '[]');
 				if (previousToken && !accounts.includes(previousToken)) {
 					accounts.push(previousToken);
 				}
