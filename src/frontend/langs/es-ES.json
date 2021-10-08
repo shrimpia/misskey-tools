@@ -48,9 +48,17 @@
 		"pattern5": "息するように Misskey、そんなあなたへ。",
 		"pattern6": "あなたは真の Misskey 廃人ですか？"
 	},
+	"_welcome": {
+		"title": "プロ仕様のツールキット",
+		"description": "Misskey Toolsでは、Misskeyのために設計された、Misskeyをより楽しめるツールを取り揃えています。",
+		"misshaiAlertTitle": "ミス廃アラート",
+		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
+		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
+		"nextFeaturesTitle": "今後も追加予定。",
+		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
+	},
 	"_nav": {
-		"data": "データ",
-		"ranking": "ランキング",
+		"misshai": "ミス廃",
 		"settings": "設定"
 	},
 	"_missHai": {
@@ -62,7 +70,8 @@
 		"dataScore": "スコア",
 		"dataDelta": "前日比",
 		"rating": "レート",
-		"order": "順位"
+		"order": "順位",
+		"showRanking": "ランキングを見る"
 	},
 	"_developerInfo": {
 		"title": "開発者",
