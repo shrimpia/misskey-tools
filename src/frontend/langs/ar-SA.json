@@ -1,22 +1,22 @@
 {
 	"title": "Misskey Tools",
 	"description1": "Misskey هو شيء ممتع. عندما أدركت ذلك ، فقد استخدمت Misskey طوال اليوم.",
-	"description2": "さあ、今すぐMisskey Toolsをインストールして、あなたの活動を把握しよう。",
-	"notes": "ノート",
+	"description2": "دعنا نحصل على حساب Misskey Tools ونعرف نشاطك.",
+	"notes": "ملاحظات",
 	"following": "Following",
-	"followers": "Followers",
-	"welcomeBack": "Welcome back, {{acct}}.",
-	"alertMode": "How to Send Alerts",
-	"visibility": "Visibility",
-	"appearance": "Appearance",
-	"template": "Template",
-	"sendAlert": "Test your alert",
-	"sendAlertDescription": "Send your alert with current settings to test.",
-	"sendAlertDisabled": "You cannot test sending alert because the \"How to Send Alerts\" setting is \"Do Nothing\".",
-	"logout": "Log Out",
-	"logoutDescription": "If you log out, your alerts will be sent automatically.",
-	"deleteAccount": "Deactivate account integration",
-	"deleteAccountDescription": "Delete your Misskey Tools account. This will deactivate integration with Misskey.",
+	"followers": "المتابعون",
+	"welcomeBack": "مرحبا بعودتك، {{acct}}.",
+	"alertMode": "كيفية إرسال التنبيهات",
+	"visibility": "الوضوح",
+	"appearance": "مظهر",
+	"template": "نموذج",
+	"sendAlert": "اختبر تنبيهك",
+	"sendAlertDescription": "أرسل تنبيهك بالإعدادات الحالية للاختبار.",
+	"sendAlertDisabled": "لا يمكنك اختبار إرسال التنبيه لأن إعداد \"كيفية إرسال التنبيهات\" هو \"لا تفعل شيئًا\".",
+	"logout": "تسجيل خروج",
+	"logoutDescription": "إذا قمت بتسجيل الخروج ، فسيتم إرسال تنبيهاتك تلقائيًا.",
+	"deleteAccount": "تعطيل تكامل الحساب",
+	"deleteAccountDescription": "حذف حساب Misskey Tools الخاص بك. سيؤدي هذا إلى تعطيل التكامل مع Misskey.",
 	"instanceUrl": "Instance URL",
 	"login": "Login",
 	"localOnly": "Local Only",
@@ -39,13 +39,13 @@
 	"retry": "Try again",
 	"disclaimerForMisskeyHq": "Misskey Tools is <b>not</b> a official tool by Misskey HQ.",
 	"translatedByTheCommunity": "Misskey Tools is translated by volunteers.",
-	"helpTranslation": "Submit translations",
+	"helpTranslation": "إرسال الترجمات",
 	"_welcomeMessage": {
-		"pattern1": "Are you overnoting?",
-		"pattern2": "Are you overusing Misskey?",
-		"pattern3": "How many notes did you write today?",
-		"pattern4": "Do you really think you're lite-misskist?",
-		"pattern5": "Misskey is my breathing!",
+		"pattern1": "هل أنت متفرغ؟",
+		"pattern2": "هل تفرط في استخدام Misskey؟",
+		"pattern3": "كم عدد الملاحظات التي كتبتها اليوم؟",
+		"pattern4": "هل تعتقد حقًا أنك مخطئ؟",
+		"pattern5": "Misskey هو أنفاسي!",
 		"pattern6": "I'm Misskey freak!"
 	},
 	"_welcome": {
@@ -59,7 +59,7 @@
 	},
 	"_nav": {
 		"misshai": "Miss-hai",
-		"accounts": "アカウント",
+		"accounts": "حسابات",
 		"settings": "Settings"
 	},
 	"_missHai": {
@@ -75,9 +75,9 @@
 		"showRanking": "Show Ranking"
 	},
 	"_accounts": {
-		"currentAccount": "現在ログインしているアカウント",
-		"switchAccount": "アカウント切り替え",
-		"useAnother": "他のアカウントで登録する"
+		"currentAccount": "الحساب الحالي",
+		"switchAccount": "تبديل حسابك",
+		"useAnother": "سجل بحساب آخر"
 	},
 	"_developerInfo": {
 		"title": "Developer",
