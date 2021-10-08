@@ -91,21 +91,21 @@
 		"note": "ملاحظة تلقائية",
 		"notification": "تنبيه حسابك (افتراضي)",
 		"nothing": "لا تفعل شيئا",
-		"notificationWarning": "'Notify to your account' option will not be work on legacy versions of Misskey."
+		"notificationWarning": "لن يعمل خيار \"تنبيه حسابك\" على الإصدارات القديمة من Misskey."
 	},
 	"_visibility": {
-		"public": "Public",
-		"home": "Home",
-		"followers": "Followers",
-		"users": "Logged-in Users"
+		"public": "عام",
+		"home": "الصفحة الرئيسية",
+		"followers": "المتابعون",
+		"users": "المستخدمون المسجلون"
 	},
 	"_themes": {
-		"light": "Light",
-		"dark": "Dark",
-		"system": "Follows System Preferences"
+		"light": "إضاءة",
+		"dark": "مظلم",
+		"system": "حسب إعدادات النظام"
 	},
 	"_template": {
-		"description": "Customize template of your alert.",
+		"description": "تخصيص نموذج التنبيه الخاص بك.",
 		"description2": "Hashtag '#misshaialert' will be appended regardless of the template.",
 		"default": "My Misskey activity yesterday was:\n\nNotes: {notesCount}({notesDelta})\nFollowing: {followingCount}({followingDelta})\nFollowers: {followersCount}({followersDelta})\n\n{url}",
 		"insertVariables": "Insert variables",
