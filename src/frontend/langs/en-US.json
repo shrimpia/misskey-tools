@@ -12,7 +12,7 @@
 	"template": "Template",
 	"sendAlert": "Test your alert",
 	"sendAlertDescription": "Send your alert with current settings to test.",
-	"sendAlertDisabled": "アラート送信方法が「通知しない」のため、送信をテストすることはできません。",
+	"sendAlertDisabled": "You cannot test sending alert because the \"How to Send Alerts\" setting is \"Do Nothing\".",
 	"logout": "Log Out",
 	"logoutDescription": "If you log out, your alerts will be sent automatically.",
 	"deleteAccount": "Deactivate account integration",
@@ -48,21 +48,30 @@
 		"pattern5": "Misskey is my breathing!",
 		"pattern6": "I'm Misskey freak!"
 	},
+	"_welcome": {
+		"title": "Toolkit for Professional.",
+		"description": "All tools are designed for Misskey, in order to make Misskey more enjoyable.",
+		"misshaiAlertTitle": "Miss-hai Alert",
+		"misshaiAlertDescription": "Are you worried about overusing Misskey? With Miss-hai Alert, you can automatically post your activities on Misskey as below.",
+		"misshaiRankingDescription": "Miss-hai Ranking shows your quantified activities on Misskey.",
+		"nextFeaturesTitle": "Will update in the future.",
+		"nextFeaturesDescription": "This is not all. We will add more tools by updates in the future."
+	},
 	"_nav": {
-		"data": "Data",
-		"ranking": "Ranking",
+		"misshai": "Miss-hai",
 		"settings": "Settings"
 	},
 	"_missHai": {
 		"ranking": "Miss-hai Ranking",
-		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
+		"rankingDescription": "This ranking shows users \"Misshai Rating\" in order of the highest to lowest.",
 		"showAll": "Show All",
 		"data": "Miss-hai Data",
 		"dataBody": "内容",
 		"dataScore": "Score",
 		"dataDelta": "Difference",
 		"rating": "Rating",
-		"order": "Order"
+		"order": "Order",
+		"showRanking": "Show Ranking"
 	},
 	"_developerInfo": {
 		"title": "Developer",
@@ -96,16 +105,16 @@
 		"insertVariables": "Insert variables",
 		"insertVariablesHelp": "The string enclosed in { } is called \"variables\" and has a special meaning. If you include this, it will be automatically replaced to the actual value when alerts created.",
 		"_variables": {
-			"notesCount": "ノート数",
-			"followingCount": "フォロー数",
-			"followersCount": "フォロワー数",
-			"notesDelta": "ノート数の前日比",
-			"followingDelta": "フォロー数の前日比",
-			"followersDelta": "フォロワー数の前日比",
-			"url": "本サイトのURL",
-			"username": "アカウントのユーザー名",
-			"host": "アカウントの所属ホスト名",
-			"rating": "レート"
+			"notesCount": "Notes Count",
+			"followingCount": "Following Count",
+			"followersCount": "Followers Count",
+			"notesDelta": "Notes Count (day-over-day difference)",
+			"followingDelta": "Following Count (day-over-day difference)",
+			"followersDelta": "Followers Count (day-over-day difference)",
+			"url": "URL of this site",
+			"username": "Your Username",
+			"host": "Your host",
+			"rating": "Your rating"
 		}
 	},
 	"_error": {
