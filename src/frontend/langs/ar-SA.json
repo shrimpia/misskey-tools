@@ -144,16 +144,16 @@
 	},
 	"_logout": {
 		"title": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-		"message": "Even if you log out, features such as sending alerts and collecting data from your Misskey account will continue to work. If you wish to stop using Misskey Tools, click the \"Deactivate account integration\" button.",
-		"yes": "Logout",
-		"no": "Cancel"
+		"message": "حتى إذا قمت بتسجيل الخروج ، ستستمر ميزات مثل إرسال التنبيهات وجمع البيانات من حساب Misskey الخاص بك في العمل. إذا كنت ترغب في التوقف عن استخدام Misskey Tools ، فانقر فوق الزر \"تعطيل تكامل الحساب\".",
+		"yes": "تسجيل خروج",
+		"no": "إلغاء"
 	},
 	"_deactivate": {
-		"title": "Do you want to deactivate your accounts?",
-		"message": "All data, including collected data and personal settings, will be deleted. You cannot undo this operation. You cannot undo this operation.",
-		"yes": "Deactivate",
-		"no": "Cancel",
-		"success": "Your account has been deactivated. Return to the top screen.",
-		"failure": "Failed to delete account."
+		"title": "هل تريد تعطيل حساباتك؟",
+		"message": "سيتم حذف جميع البيانات ، بما في ذلك البيانات التي تم جمعها والإعدادات الشخصية. لا يمكنك التراجع عن هذه العملية.",
+		"yes": "تعطيل",
+		"no": "إلغاء",
+		"success": "حسابك تم تعطيله. العودة إلى أعلى الشاشة.",
+		"failure": "فشل حذف الحساب."
 	}
 }
