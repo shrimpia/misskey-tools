@@ -66,6 +66,7 @@ const AppInner : React.VFC = () => {
 			</Switch>
 			<footer className="text-center pa-5">
 				<p>(C)2020-2021 Xeltica</p>
+				<p dangerouslySetInnerHTML={{__html: t('disclaimerForMisskeyHq')}} />
 				<p><Link to="/term">{t('termsOfService')}</Link></p>
 			</footer>
 			<ModalComponent />
