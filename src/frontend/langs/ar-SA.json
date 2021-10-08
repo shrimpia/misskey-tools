@@ -125,25 +125,25 @@
 	},
 	"_error": {
 		"sorry": "هناك خطأ ما. يرجى المحاولة مجددا.",
-		"additionalInfo": "Additional Info: ",
-		"hitorisskeyIsDenied": "You cannot integrate with hitorisskey.",
-		"teapot": "I'm a teapot.",
-		"sessionRequired": "Session is required.",
-		"tokenRequired": "Token is required.",
-		"invalidParameter": "Invalid parameter.",
-		"notAuthorized": "Not authorized.",
-		"other": "None"
+		"additionalInfo": "معلومات اضافية: ",
+		"hitorisskeyIsDenied": "لا يمكنك التكامل مع hitorisskey.",
+		"teapot": "أنا إبريق شاي.",
+		"sessionRequired": "الجلسة مطلوبة.",
+		"tokenRequired": "الرمز مطلوب.",
+		"invalidParameter": "معلمة غير صالحة.",
+		"notAuthorized": "غير مخول.",
+		"other": "لا شيء"
 	},
 	"_sendTest": {
-		"title": "Are you sure you want to test the alert?",
-		"message": "Send an alert with the current settings. Be sure to check that the settings have been saved before sending.",
-		"yes": "Send",
-		"no": "Cancel",
-		"success": "Alert sent.",
-		"failure": "Failed to sent the alert."
+		"title": "هل أنت متأكد أنك تريد اختبار التنبيه؟",
+		"message": "إرسال تنبيه بالإعدادات الحالية. تأكد من التحقق من حفظ الإعدادات قبل الإرسال.",
+		"yes": "إرسال",
+		"no": "إلغاء",
+		"success": "أرسل التنبيه.",
+		"failure": "فشل ارسال التنبيه."
 	},
 	"_logout": {
-		"title": "Are you sure you want to logout?",
+		"title": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
 		"message": "Even if you log out, features such as sending alerts and collecting data from your Misskey account will continue to work. If you wish to stop using Misskey Tools, click the \"Deactivate account integration\" button.",
 		"yes": "Logout",
 		"no": "Cancel"
