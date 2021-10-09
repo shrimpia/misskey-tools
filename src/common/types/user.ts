@@ -18,5 +18,6 @@ export interface IUser {
 	prevRating: number;
 	rating: number;
 	bannedFromRanking: boolean;
+	isAdmin?: boolean;
 }
 

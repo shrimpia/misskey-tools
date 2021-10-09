@@ -7,7 +7,7 @@ import { v4 as uuid } from 'uuid';
 import ms from 'ms';
 
 import { config } from '../config';
-import { upsertUser, getUser, updateUser, updateUsersMisshaiToken } from './functions/users';
+import { upsertUser, getUser, updateUser, updateUsersToolsToken } from './functions/users';
 import { api } from './services/misskey';
 import { die } from './die';
 
@@ -158,7 +158,7 @@ async function login(ctx: Context, user: Record<string, unknown>, host: string, 
 		});
 	}
 
-	const misshaiToken = await updateUsersMisshaiToken(u);
+	const toolsToken = await updateUsersToolsToken(u);
 
-	await ctx.render('frontend', { token: misshaiToken });
+	await ctx.render('frontend', { token: toolsToken });
 }

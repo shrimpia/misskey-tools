@@ -2,6 +2,21 @@ import { User } from '../models/entities/user';
 import { Users } from '../models';
 import { DeepPartial } from 'typeorm';
 import { genToken } from './gen-token';
+import { IUser } from '../../common/types/user';
+import { config } from '../../config';
+
+/**
+ * IUser インターフェイスに変換します。
+ */
+const packUser = (user: User | undefined): IUser | undefined => {
+	if (!user) return undefined;
+	const { username: adminName, host: adminHost } = config.admin;
+
+	return {
+		...user,
+		isAdmin: adminName === user.username && adminHost === user.host,
+	};
+};
 
 /**
  * ユーザーを取得します
@@ -9,8 +24,8 @@ import { genToken } from './gen-token';
  * @param host ホスト名
  * @returns ユーザー
  */
-export const getUser = (username: string, host: string): Promise<User | undefined> => {
-	return Users.findOne({ username, host });
+export const getUser = (username: string, host: string): Promise<IUser | undefined> => {
+	return Users.findOne({ username, host }).then(packUser);
 };
 
 /**
@@ -18,7 +33,7 @@ export const getUser = (username: string, host: string): Promise<User | undefine
  * @param user ユーザー
  * @returns ミス廃トークン
  */
-export const updateUsersMisshaiToken = async (user: User | User['id']): Promise<string> => {
+export const updateUsersToolsToken = async (user: User | User['id']): Promise<string> => {
 	const u = typeof user === 'number'
 		? user
 		: user.id;
@@ -33,8 +48,8 @@ export const updateUsersMisshaiToken = async (user: User | User['id']): Promise<
  * @param token ミス廃トークン
  * @returns ユーザー
  */
-export const getUserByMisshaiToken = (token: string): Promise<User | undefined> => {
-	return Users.findOne({ misshaiToken: token });
+export const getUserByToolsToken = (token: string): Promise<User | undefined> => {
+	return Users.findOne({ misshaiToken: token }).then(packUser);
 };
 
 /**
