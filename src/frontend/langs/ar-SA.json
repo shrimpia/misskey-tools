@@ -37,9 +37,11 @@
 	"resetToDefault": "إعادة تعيين إلى الافتراضي",
 	"error": "خطأ",
 	"retry": "حاول مجددا",
+	"saved": "保存しました。",
 	"disclaimerForMisskeyHq": "Misskey Tools هي<b> ليست</b> أداة رسمية من Misskey HQ.",
 	"translatedByTheCommunity": "يقوم متطوعون بترجمة Misskey Tools.",
 	"helpTranslation": "إرسال الترجمات",
+	"announcements": "お知らせ",
 	"_welcomeMessage": {
 		"pattern1": "هل أنت متفرغ؟",
 		"pattern2": "هل تفرط في استخدام Misskey؟",
