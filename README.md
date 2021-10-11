@@ -27,3 +27,8 @@ yarn dev
 ## LICENSE
 
 [AGPL 3.0](LICENSE)
+
+## Conrtibutors
+
+- @Xeltica (Main Developer)
+- @4ioskd (English initial Translator)
