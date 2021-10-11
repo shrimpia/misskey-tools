@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { LoginForm } from '../components/LoginForm';
 import { Header } from '../components/Header';
+import { AnnouncementList } from '../components/AnnouncementList';
 export const IndexWelcomePage: React.VFC = () => {
 	const {t} = useTranslation();
 
@@ -27,6 +28,9 @@ export const IndexWelcomePage: React.VFC = () => {
 				</article>
 				<LoginForm />
 			</Header>
+			<article className="xarticle">
+				<AnnouncementList />
+			</article>
 			<article className="xarticle vstack pa-2">
 				<header>
 					<h2>{t('_welcome.title')}</h2>

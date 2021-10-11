@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux';
 import { alertModes } from '../../common/types/alert-mode';
 import { IUser } from '../../common/types/user';
 import { Visibility } from '../../common/types/visibility';
-import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
+import { LOCALSTORAGE_KEY_TOKEN } from '../const';
+import { $post, $put } from '../misc/api';
 import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
 import { showModal } from '../store/slices/screen';
+import { AnnouncementList } from './AnnouncementList';
 import { Card } from './Card';
 import { Ranking } from './Ranking';
 import { Skeleton } from './Skeleton';
@@ -42,6 +44,7 @@ export const MisshaiPage: React.VFC = () => {
 	const session = useGetSessionQuery(undefined);
 	const data = session.data;
 	const score = useGetScoreQuery(undefined);
+
 	const {t} = useTranslation();
 
 	const [draft, dispatchDraft] = useReducer<DraftReducer>((state, action) => {
@@ -65,14 +68,7 @@ export const MisshaiPage: React.VFC = () => {
 	const updateSetting = useCallback((obj: SettingDraftType) => {
 		const previousDraft = draft;
 		dispatchDraft(obj);
-		return fetch(`${API_ENDPOINT}session`, {
-			method: 'PUT',
-			headers: {
-				'Authorization': `Bearer ${localStorage[LOCALSTORAGE_KEY_TOKEN]}`,
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(obj),
-		})
+		return $put('session', obj)
 			.catch(e => {
 				dispatch(showModal({
 					type: 'dialog',
@@ -145,12 +141,7 @@ export const MisshaiPage: React.VFC = () => {
 			],
 			onSelect(i) {
 				if (i === 0) {
-					fetch(`${API_ENDPOINT}session/alert`, {
-						method: 'POST',
-						headers: {
-							'Authorization': `Bearer ${localStorage[LOCALSTORAGE_KEY_TOKEN]}`,
-						},
-					}).then(() => {
+					$post('session/alert').then(() => {
 						dispatch(showModal({
 							type: 'dialog',
 							message: t('_sendTest.success'),
@@ -203,6 +194,7 @@ export const MisshaiPage: React.VFC = () => {
 					</p>
 				</section>
 			)}
+			<AnnouncementList />
 			{score.data && (
 				<>
 					<section>

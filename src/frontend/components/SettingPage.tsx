@@ -5,10 +5,11 @@ import { useDispatch } from 'react-redux';
 import { useGetSessionQuery } from '../services/session';
 import { Card } from './Card';
 import { Theme, themes } from '../misc/theme';
-import { API_ENDPOINT, LOCALSTORAGE_KEY_TOKEN } from '../const';
+import { LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { changeLang, changeTheme, showModal } from '../store/slices/screen';
 import { useSelector } from '../store';
 import { languageName } from '../langs';
+import { $delete } from '../misc/api';
 
 export const SettingPage: React.VFC = () => {
 	const session = useGetSessionQuery(undefined);
@@ -62,12 +63,7 @@ export const SettingPage: React.VFC = () => {
 			primaryClassName: 'danger',
 			onSelect(i) {
 				if (i === 0) {
-					fetch(`${API_ENDPOINT}session`, {
-						method: 'DELETE',
-						headers: {
-							'Authorization': `Bearer ${localStorage[LOCALSTORAGE_KEY_TOKEN]}`,
-						},
-					}).then(() => {
+					$delete('session').then(() => {
 						dispatch(showModal({
 							type: 'dialog',
 							message: t('_deactivate.success'),

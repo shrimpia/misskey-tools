@@ -48,7 +48,7 @@ export const updateUsersToolsToken = async (user: User | User['id']): Promise<st
  * @param token ミス廃トークン
  * @returns ユーザー
  */
-export const getUserByToolsToken = (token: string): Promise<User | undefined> => {
+export const getUserByToolsToken = (token: string): Promise<IUser | undefined> => {
 	return Users.findOne({ misshaiToken: token }).then(packUser);
 };
 

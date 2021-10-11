@@ -2,10 +2,12 @@ import { getConnection, createConnection, Connection } from 'typeorm';
 import { config } from '../../config';
 import { User } from '../models/entities/user';
 import { UsedToken } from '../models/entities/used-token';
+import { Announcement } from '../models/entities/announcement';
 
 export const entities = [
 	User,
 	UsedToken,
+	Announcement,
 ];
 
 /**

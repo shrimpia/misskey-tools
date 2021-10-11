@@ -17,6 +17,7 @@ import { LOCALSTORAGE_KEY_LANG } from './const';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
+import { AnnouncementPage } from './pages/announcement';
 
 document.body.classList.add('dark');
 
@@ -63,6 +64,7 @@ const AppInner : React.VFC = () => {
 				<Route exact path="/" component={IndexPage} />
 				<Route exact path="/ranking" component={RankingPage} />
 				<Route exact path="/term" component={TermPage} />
+				<Route exact path="/announcements/:id" component={AnnouncementPage} />
 			</Switch>
 			<footer className="text-center pa-5">
 				<p>(C)2020-2021 Xeltica</p>

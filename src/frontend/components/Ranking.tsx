@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { $get } from '../misc/api';
 
 interface RankingResponse {
 	isCalculating: boolean;
@@ -27,8 +28,7 @@ export const Ranking: React.VFC<RankingProps> = ({limit}) => {
 	// APIコール
 	useEffect(() => {
 		setIsFetching(true);
-		fetch(`//${location.host}/api/v1/ranking?limit=${limit ?? ''}`)
-			.then((r) => (r.json() as unknown) as RankingResponse)
+		$get<RankingResponse>(`ranking?limit=${limit ?? ''}`)
 			.then((result) => {
 				setResponse(result);
 				setIsFetching(false);

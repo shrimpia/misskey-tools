@@ -9,7 +9,7 @@ import { getScores } from '../functions/get-scores';
 import { deleteUser, updateUser } from '../functions/users';
 import { User } from '../models/entities/user';
 import { sendAlert } from '../services/send-alert';
-import { UserSetting } from './UserSetting';
+import { UserSetting } from './body/user-setting';
 
 @JsonController('/session')
 export class SessionController {

@@ -1,7 +1,6 @@
 import { IsIn, IsOptional } from 'class-validator';
-import { AlertMode, alertModes } from '../../common/types/alert-mode';
-import { visibilities, Visibility } from '../../common/types/visibility';
-
+import { AlertMode, alertModes } from '../../../common/types/alert-mode';
+import { visibilities, Visibility } from '../../../common/types/visibility';
 
 export class UserSetting {
 	@IsIn(alertModes)

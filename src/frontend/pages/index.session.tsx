@@ -7,41 +7,41 @@ import { SettingPage } from '../components/SettingPage';
 import { useTranslation } from 'react-i18next';
 import { AccountsPage } from '../components/AccountsPage';
 import { useDispatch } from 'react-redux';
-import { API_ENDPOINT, LOCALSTORAGE_KEY_ACCOUNTS } from '../const';
+import { LOCALSTORAGE_KEY_ACCOUNTS } from '../const';
 import { IUser } from '../../common/types/user';
 import { setAccounts } from '../store/slices/screen';
-
-const getSession = (token: string) => {
-	return fetch(`${API_ENDPOINT}session`, {
-		method: 'GET',
-		headers: {
-			'Authorization': `Bearer ${token}`,
-			'Content-Type': 'application/json',
-		},
-	}).then(r => r.json()).then(r => r as IUser);
-};
+import { useGetSessionQuery } from '../services/session';
+import { AdminPage } from '../components/AdminPage';
+import { $get } from '../misc/api';
 
 export const IndexSessionPage: React.VFC = () => {
-	const [selectedTab, setSelectedTab] = useState<number>(0);
+	const [selectedTab, setSelectedTab] = useState<string>('misshai');
 	const {t, i18n} = useTranslation();
 	const dispatch = useDispatch();
+	const { data } = useGetSessionQuery(undefined);
 
 	useEffect(() => {
 		const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
-		Promise.all(accounts.map(getSession)).then(a => dispatch(setAccounts(a)));
+		Promise.all(accounts.map(token => $get<IUser>('session', token))).then(a => dispatch(setAccounts(a as IUser[])));
 	}, [dispatch]);
 
-	const items = useMemo<TabItem[]>(() => ([
-		{ label: t('_nav.misshai') },
-		{ label: t('_nav.accounts') },
-		{ label: t('_nav.settings') },
-	]), [i18n.language]);
+	const items = useMemo<TabItem[]>(() => {
+		const it: TabItem[] = [];
+		it.push({ label: t('_nav.misshai'), key: 'misshai' });
+		it.push({ label: t('_nav.accounts'), key: 'accounts' });
+		if (data?.isAdmin) {
+			it.push({ label: 'Admin', key: 'admin' });
+		}
+		it.push({ label: t('_nav.settings'), key: 'settings' });
+		return it;
+	}, [i18n.language, data]);
 
 	const component = useMemo(() => {
 		switch (selectedTab) {
-			case 0: return <MisshaiPage />;
-			case 1: return <AccountsPage />;
-			case 2: return <SettingPage/>;
+			case 'misshai': return <MisshaiPage />;
+			case 'accounts': return <AccountsPage />;
+			case 'admin': return <AdminPage />;
+			case 'settings': return <SettingPage/>;
 			default: return null;
 		}
 	}, [selectedTab]);

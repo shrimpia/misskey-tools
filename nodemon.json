@@ -6,5 +6,5 @@
 		"src/frontend/*"
 	],
 	"ext": "ts,tsx,pug,scss",
-	"exec": "run-s build start"
+	"exec": "run-s build:backend start"
 }
