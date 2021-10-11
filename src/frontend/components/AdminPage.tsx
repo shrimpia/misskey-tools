@@ -4,7 +4,7 @@ import { LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { useGetSessionQuery } from '../services/session';
 import { Skeleton } from './Skeleton';
 import { IAnnouncement } from '../../common/types/announcement';
-import { $get, $post, $put } from '../misc/api';
+import { $delete, $get, $post, $put } from '../misc/api';
 import { Card } from './Card';
 
 
@@ -15,29 +15,34 @@ export const AdminPage: React.VFC = () => {
 	const [selectedAnnouncement, selectAnnouncement] = useState<IAnnouncement | null>(null);
 	const [isAnnouncementsLoaded, setAnnouncementsLoaded] = useState(false);
 	const [isEditMode, setEditMode] = useState(false);
+	const [isDeleteMode, setDeleteMode] = useState(false);
 	const [draftTitle, setDraftTitle] = useState('');
 	const [draftBody, setDraftBody] = useState('');
 
 	const submitAnnouncement = async () => {
-		try {
-			if (selectedAnnouncement) {
-				await $put('announcements', {
-					id: selectedAnnouncement.id,
-					title: draftTitle,
-					body: draftBody,
-				});
-			} else {
-				await $post('announcements', {
-					title: draftTitle,
-					body: draftBody,
-				});
-			}
-			selectAnnouncement(null);
-			setEditMode(false);
-			fetchAll();
-		} catch (e: unknown) {
-			// todo
+		if (selectedAnnouncement) {
+			await $put('announcements', {
+				id: selectedAnnouncement.id,
+				title: draftTitle,
+				body: draftBody,
+			});
+		} else {
+			await $post('announcements', {
+				title: draftTitle,
+				body: draftBody,
+			});
 		}
+		selectAnnouncement(null);
+		setDraftTitle('');
+		setDraftBody('');
+		setEditMode(false);
+		fetchAll();
+	};
+
+	const deleteAnnouncement = ({id}: IAnnouncement) => {
+		$delete('announcements', {id}).then(() => {
+			fetchAll();
+		});
 	};
 
 	const fetchAll = () => {
@@ -60,6 +65,15 @@ export const AdminPage: React.VFC = () => {
 			location.reload();
 		}
 	}, [error]);
+
+	/**
+	 * Edit Modeがオンのとき、Delete Modeを無効化する（誤操作防止）
+	 */
+	useEffect(() => {
+		if (isEditMode) {
+			setDeleteMode(false);
+		}
+	}, [isEditMode]);
 
 	/**
 	 * お知らせ取得
@@ -94,22 +108,39 @@ export const AdminPage: React.VFC = () => {
 					<>
 						<article>
 							<h2>Announcements</h2>
+							{!isEditMode && (
+								<label className="input-switch mb-1">
+									<input type="checkbox" checked={isDeleteMode} onChange={e => setDeleteMode(e.target.checked)}/>
+									<div className="switch"></div>
+									<span>Delete Mode</span>
+								</label>
+							)}
 							<Card bodyClassName={isEditMode ? '' : 'px-0'}>
 								{ !isEditMode ? (
-									<div className="large menu">
-										{announcements.map(a => (
-											<button className="item fluid" key={a.id} onClick={() => {
-												selectAnnouncement(a);
-												setEditMode(true);
-											}}>
-												{a.title}
-											</button>
-										))}
-										<button className="item fluid" onClick={() => setEditMode(true)}>
-											<i className="icon bi bi-plus"/ >
-											Create New
-										</button>
-									</div>
+									<>
+										{isDeleteMode && <div className="ml-2 text-danger">Click the item to delete.</div>}
+										<div className="large menu">
+											{announcements.map(a => (
+												<button className="item fluid" key={a.id} onClick={() => {
+													if (isDeleteMode) {
+														deleteAnnouncement(a);
+													} else {
+														selectAnnouncement(a);
+														setEditMode(true);
+													}
+												}}>
+													{isDeleteMode && <i className="icon bi bi-trash text-danger" />}
+													{a.title}
+												</button>
+											))}
+											{!isDeleteMode && (
+												<button className="item fluid" onClick={() => setEditMode(true)}>
+													<i className="icon bi bi-plus"/ >
+													Create New
+												</button>
+											)}
+										</div>
+									</>
 								) : (
 									<div className="vstack">
 										<label className="input-field">
@@ -121,10 +152,10 @@ export const AdminPage: React.VFC = () => {
 											<textarea className="input-field" value={draftBody} rows={10} onChange={e => setDraftBody(e.target.value)}/>
 										</label>
 										<div className="hstack" style={{justifyContent: 'flex-end'}}>
-											<button className="btn primary" onClick={() => submitAnnouncement()} disabled={!draftTitle || !draftBody}>
+											<button className="btn primary" onClick={submitAnnouncement} disabled={!draftTitle || !draftBody}>
 												Submit
 											</button>
-											<button className="btn danger" onClick={() => {
+											<button className="btn" onClick={() => {
 												selectAnnouncement(null);
 												setEditMode(false);
 											}}>
