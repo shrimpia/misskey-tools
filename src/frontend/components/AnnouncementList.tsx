@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { IAnnouncement } from '../../common/types/announcement';
@@ -7,6 +8,7 @@ import { Card } from './Card';
 
 export const AnnouncementList: React.VFC = () => {
 	const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
+	const {t} = useTranslation();
 
 	const fetchAllAnnouncements = () => {
 		setAnnouncements([]);
@@ -23,7 +25,7 @@ export const AnnouncementList: React.VFC = () => {
 
 	return (
 		<Card>
-			<h1>お知らせ</h1>
+			<h1>{t('announcements')}</h1>
 			<div className="large menu fade">
 				{announcements.map(a => (
 					<Link className="item fluid" key={a.id} to={`/announcements/${a.id}`}>

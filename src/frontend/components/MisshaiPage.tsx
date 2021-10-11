@@ -73,7 +73,7 @@ export const MisshaiPage: React.VFC = () => {
 				dispatch(showModal({
 					type: 'dialog',
 					icon: 'error',
-					message: 'エラー'
+					message: t('error'),
 				}));
 				dispatchDraft(previousDraft);
 			});
@@ -84,7 +84,7 @@ export const MisshaiPage: React.VFC = () => {
 			.then(() => dispatch(showModal({
 				type: 'dialog',
 				icon: 'info',
-				message: '保存しました。'
+				message: t('saved'),
 			})));
 	}, [updateSetting]);
 
