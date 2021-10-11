@@ -37,9 +37,11 @@
 	"resetToDefault": "Reset to default",
 	"error": "Error",
 	"retry": "Try again",
+	"saved": "保存しました。",
 	"disclaimerForMisskeyHq": "Misskey Tools is <b>not</b> a official tool by Misskey HQ.",
 	"translatedByTheCommunity": "Misskey Tools is translated by volunteers.",
 	"helpTranslation": "Submit translations",
+	"announcements": "お知らせ",
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
 		"pattern2": "Are you overusing Misskey?",
@@ -59,6 +61,7 @@
 	},
 	"_nav": {
 		"misshai": "Miss-hai",
+		"accounts": "Accounts",
 		"settings": "Settings"
 	},
 	"_missHai": {
@@ -72,6 +75,11 @@
 		"rating": "Rating",
 		"order": "Order",
 		"showRanking": "Show Ranking"
+	},
+	"_accounts": {
+		"currentAccount": "Current Account",
+		"switchAccount": "Switch your account",
+		"useAnother": "Register with another account"
 	},
 	"_developerInfo": {
 		"title": "Developer",
