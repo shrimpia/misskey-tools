@@ -37,11 +37,11 @@
 	"resetToDefault": "Reset to default",
 	"error": "Error",
 	"retry": "Try again",
-	"saved": "保存しました。",
+	"saved": "Saved.",
 	"disclaimerForMisskeyHq": "Misskey Tools is <b>not</b> a official tool by Misskey HQ.",
 	"translatedByTheCommunity": "Misskey Tools is translated by volunteers.",
 	"helpTranslation": "Submit translations",
-	"announcements": "お知らせ",
+	"announcements": "Announcements",
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
 		"pattern2": "Are you overusing Misskey?",
