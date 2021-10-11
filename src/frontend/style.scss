@@ -1,0 +1,99 @@
+body {
+    --primary: rgb(134, 179, 0);
+    font-feature-settings: "pkna";
+}
+
+.xarticle {
+    margin: auto;
+    max-width: 720px;
+}
+
+.fade {
+    animation: 0.3s ease-out 0s fadeIn;
+    &.down {
+        animation-name: fadeInUp;
+    }
+    &.up {
+        animation-name: fadeInUp;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.block {
+    display: block !important;
+}
+
+.inline {
+    display: inline !important;
+}
+
+small {
+    font-size: 0.8rem;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000c0;
+    z-index: 40000;
+    &.top-left {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+.card.dialog {
+    .dark & {
+        background: var(--tone-2);
+    }
+    min-width: min(100vw, 320px);
+    max-width: min(100vw, 600px);
+}
+
+.modal-menu-wrapper {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    min-width: min(100vw, 240px);
+    border-radius: var(--radius);
+    padding: calc(var(--margin) / 2);
+    background: var(--panel);
+}
+
+.login-form {
+    background: var(--panel);
+    border-radius: var(--radius);
+}

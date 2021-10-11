@@ -1,6 +1,6 @@
 {
 	"port": 4000,
-	"url": "https://misshaialert.com",
+	"url": "https://misskey.tools",
 	"db": {
 		"host": "localhost",
 		"port": 5432,
@@ -8,5 +8,9 @@
 		"pass": "pass",
 		"db": "misshaialert",
 		"extra": {}
+	},
+	"admin": {
+		"username": "your_user_name",
+		"host": "your-instance-host"
 	}
 }

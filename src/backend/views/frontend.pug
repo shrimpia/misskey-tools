@@ -1,0 +1,48 @@
+doctype html
+html
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		block meta
+		- const title = 'Misskey Tools'
+		- const desc = '✨Misskey での1日のノート数、フォロー数、フォロワー数をカウントし、深夜0時にお知らせする便利サービスです。';
+		title= title
+		meta(name='description' content=desc)
+		meta(property='og:title' content=title)
+		meta(property='og:description' content=desc)
+		meta(property='og:type' content='website')
+		meta(name='twitter:card' content='summary')
+		meta(name='twitter:site' content='@Xeltica')
+		meta(name='twitter:creator' content='@Xeltica')
+		link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css")
+		style.
+			.loading {
+				display: flex;
+				position: fixed;
+				inset: 0;
+				background: #222;
+				color: #fff;
+				font-size: 16px;
+				align-items: center;
+				justify-content: center;
+			}
+	body
+		#app: .loading Loading...
+
+		if token
+			script.
+				const token = '#{token}';
+				const previousToken = localStorage.getItem('token');
+				const accounts = JSON.parse(localStorage.getItem('accounts') || '[]');
+				if (previousToken && !accounts.includes(previousToken)) {
+					accounts.push(previousToken);
+				}
+				localStorage.setItem('accounts', JSON.stringify(accounts));
+				localStorage.setItem('token', token);
+				history.replaceState(null, null, '/');
+
+		if error
+			script.
+				window.__misshaialert = { error: '#{error}' };
+
+		script(src=`/assets/fe.${version}.js` async defer)

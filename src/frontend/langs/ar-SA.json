@@ -1,0 +1,161 @@
+{
+	"title": "Misskey Tools",
+	"description1": "Misskey هو شيء ممتع. عندما أدركت ذلك ، فقد استخدمت Misskey طوال اليوم.",
+	"description2": "دعنا نحصل على حساب Misskey Tools ونعرف نشاطك.",
+	"notes": "ملاحظات",
+	"following": "متابعة",
+	"followers": "المتابعون",
+	"welcomeBack": "مرحبا بعودتك، {{acct}}.",
+	"alertMode": "كيفية إرسال التنبيهات",
+	"visibility": "الوضوح",
+	"appearance": "مظهر",
+	"template": "نموذج",
+	"sendAlert": "اختبر تنبيهك",
+	"sendAlertDescription": "أرسل تنبيهك بالإعدادات الحالية للاختبار.",
+	"sendAlertDisabled": "لا يمكنك اختبار إرسال التنبيه لأن إعداد \"كيفية إرسال التنبيهات\" هو \"لا تفعل شيئًا\".",
+	"logout": "تسجيل خروج",
+	"logoutDescription": "إذا قمت بتسجيل الخروج ، فسيتم إرسال تنبيهاتك تلقائيًا.",
+	"deleteAccount": "تعطيل تكامل الحساب",
+	"deleteAccountDescription": "حذف حساب Misskey Tools الخاص بك. سيؤدي هذا إلى تعطيل التكامل مع Misskey.",
+	"instanceUrl": "Url المثيل",
+	"login": "تسجيل الدخول",
+	"localOnly": "محلي فقط",
+	"remoteFollowersOnly": "المتابعون عن بعد والمحليون فقط",
+	"help": "مساعدة",
+	"save": "حفظ",
+	"theme": "مظهر",
+	"language": "لغة",
+	"fetching": "جار الجلب……",
+	"failedToFetch": "فشل الجلب",
+	"registeredUsersCount": "المستخدمون",
+	"isCalculating": "يتم حسابه الآن. يرجى إعادة التحقق لاحقًا!",
+	"ok": "موافق",
+	"yes": "موافق",
+	"no": "لا",
+	"termsOfService": "شروط الخدمة",
+	"name": "اسم",
+	"resetToDefault": "إعادة تعيين إلى الافتراضي",
+	"error": "خطأ",
+	"retry": "حاول مجددا",
+	"saved": "保存しました。",
+	"disclaimerForMisskeyHq": "Misskey Tools هي<b> ليست</b> أداة رسمية من Misskey HQ.",
+	"translatedByTheCommunity": "يقوم متطوعون بترجمة Misskey Tools.",
+	"helpTranslation": "إرسال الترجمات",
+	"announcements": "お知らせ",
+	"_welcomeMessage": {
+		"pattern1": "هل أنت متفرغ؟",
+		"pattern2": "هل تفرط في استخدام Misskey؟",
+		"pattern3": "كم عدد الملاحظات التي كتبتها اليوم؟",
+		"pattern4": "هل تعتقد حقًا أنك مخطئ؟",
+		"pattern5": "Misskey هو أنفاسي!",
+		"pattern6": "I'm Misskey freak!"
+	},
+	"_welcome": {
+		"title": "Toolkit for Professional.",
+		"description": "All tools are designed for Misskey, in order to make Misskey more enjoyable.",
+		"misshaiAlertTitle": "Miss-hai Alert",
+		"misshaiAlertDescription": "هل أنت قلق من الإفراط في استخدام Misskey؟ باستخدام إنذار Misshai ، يمكنك نشر أنشطتك تلقائيًا على Misskey على النحو التالي.",
+		"misshaiRankingDescription": "يظهر ترتيب Misshai أنشطتك الكمية على Misskey.",
+		"nextFeaturesTitle": "سيتم التحديث في المستقبل.",
+		"nextFeaturesDescription": "هذا ليس كل شيء. سنضيف المزيد من الأدوات عن طريق التحديثات في المستقبل."
+	},
+	"_nav": {
+		"misshai": "Misshai",
+		"accounts": "حسابات",
+		"settings": "إعدادات"
+	},
+	"_missHai": {
+		"ranking": "ترتيب Misshai",
+		"rankingDescription": "يعرض هذا الترتيب للمستخدمين \"تقييم Misshai\" بالترتيب من الأعلى إلى الأدنى.",
+		"showAll": "عرض الكل",
+		"data": "بيانات Misshai",
+		"dataBody": "المحتوى",
+		"dataScore": "نتيجة",
+		"dataDelta": "الفرق",
+		"rating": "تقييم",
+		"order": "الطلب",
+		"showRanking": "عرض الترتيب"
+	},
+	"_accounts": {
+		"currentAccount": "الحساب الحالي",
+		"switchAccount": "تبديل حسابك",
+		"useAnother": "سجل بحساب آخر"
+	},
+	"_developerInfo": {
+		"title": "المطور",
+		"description": "إذا كنت تريد دعمًا ، أرسل رسائل إلى الحسابات أدناه."
+	},
+	"_timeline": {
+		"title": "الخط الزمني",
+		"description": "يظهر أحدث الملاحظات بما في ذلك علامات {{hashtag}}."
+	},
+	"_alertMode": {
+		"note": "ملاحظة تلقائية",
+		"notification": "تنبيه حسابك (افتراضي)",
+		"nothing": "لا تفعل شيئا",
+		"notificationWarning": "لن يعمل خيار \"تنبيه حسابك\" على الإصدارات القديمة من Misskey."
+	},
+	"_visibility": {
+		"public": "عام",
+		"home": "الصفحة الرئيسية",
+		"followers": "المتابعون",
+		"users": "المستخدمون المسجلون"
+	},
+	"_themes": {
+		"light": "إضاءة",
+		"dark": "مظلم",
+		"system": "حسب إعدادات النظام"
+	},
+	"_template": {
+		"description": "تخصيص نموذج التنبيه الخاص بك.",
+		"description2": "سيتم إلحاق هاشتاج '#misshaialert' بغض النظر عن نموذج.",
+		"default": "كان نشاطي على Misskey بالأمس:\n\nملاحظات: {notesCount}({notesDelta})\nمتابعة {followingCount}({followingDelta})\nالمتابعون: {followersCount}({followersDelta})\n\n{url}",
+		"insertVariables": "أدخل متغيرات",
+		"insertVariablesHelp": "السلسلة المضمنة في{ } تسمى \"المتغيرات\" ولها معنى خاص. إذا قمت بتضمين هذا ، فسيتم استبداله تلقائيًا بالقيمة الفعلية عند إنشاء التنبيهات.",
+		"_variables": {
+			"notesCount": "عدد الملاحظات",
+			"followingCount": "عدد المتابعات",
+			"followersCount": "عدد المتابعين",
+			"notesDelta": "عدد الملاحظات (فرق يوم بعد يوم)",
+			"followingDelta": "عدد المتابعات (فرق يوم بعد يوم)",
+			"followersDelta": "عدد المتابعين (فرق يوم بعد يوم)",
+			"url": "عنوان Url لهذا الموقع",
+			"username": "اسم المستخدم الخاص بك",
+			"host": "مضيفك",
+			"rating": "تقييمك"
+		}
+	},
+	"_error": {
+		"sorry": "هناك خطأ ما. يرجى المحاولة مجددا.",
+		"additionalInfo": "معلومات اضافية: ",
+		"hitorisskeyIsDenied": "لا يمكنك التكامل مع hitorisskey.",
+		"teapot": "أنا إبريق شاي.",
+		"sessionRequired": "الجلسة مطلوبة.",
+		"tokenRequired": "الرمز مطلوب.",
+		"invalidParameter": "معلمة غير صالحة.",
+		"notAuthorized": "غير مخول.",
+		"other": "لا شيء"
+	},
+	"_sendTest": {
+		"title": "هل أنت متأكد أنك تريد اختبار التنبيه؟",
+		"message": "إرسال تنبيه بالإعدادات الحالية. تأكد من التحقق من حفظ الإعدادات قبل الإرسال.",
+		"yes": "إرسال",
+		"no": "إلغاء",
+		"success": "أرسل التنبيه.",
+		"failure": "فشل ارسال التنبيه."
+	},
+	"_logout": {
+		"title": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+		"message": "حتى إذا قمت بتسجيل الخروج ، ستستمر ميزات مثل إرسال التنبيهات وجمع البيانات من حساب Misskey الخاص بك في العمل. إذا كنت ترغب في التوقف عن استخدام Misskey Tools ، فانقر فوق الزر \"تعطيل تكامل الحساب\".",
+		"yes": "تسجيل خروج",
+		"no": "إلغاء"
+	},
+	"_deactivate": {
+		"title": "هل تريد تعطيل حساباتك؟",
+		"message": "سيتم حذف جميع البيانات ، بما في ذلك البيانات التي تم جمعها والإعدادات الشخصية. لا يمكنك التراجع عن هذه العملية.",
+		"yes": "تعطيل",
+		"no": "إلغاء",
+		"success": "حسابك تم تعطيله. العودة إلى أعلى الشاشة.",
+		"failure": "فشل حذف الحساب."
+	}
+}

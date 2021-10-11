@@ -1,8 +1,8 @@
-import { initDb } from './services/db';
+import { initDb } from './backend/services/db';
 import 'reflect-metadata';
 
 (async () => {
 	await initDb();
-	(await import('./services/worker')).default();
-	(await import('./server/server')).default();
+	(await import('./backend/services/worker')).default();
+	(await import('./backend/server')).default();
 })();

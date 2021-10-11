@@ -1,5 +1,10 @@
 {
-    "watch": ["src", ["styles"]],
-    "ext": "ts,pug,scss",
-    "exec": "run-s build start"
+	"watch": [
+		"src"
+	],
+	"ignore": [
+		"src/frontend/*"
+	],
+	"ext": "ts,tsx,pug,scss",
+	"exec": "run-s build:backend start"
 }

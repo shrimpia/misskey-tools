@@ -18,11 +18,10 @@ module.exports = {
 	'rules': {
 		'indent': [
 			'error',
-			'tab'
-		],
-		'linebreak-style': [
-			'error',
-			'unix'
+			'tab',
+			{
+				'SwitchCase': 1,
+			}
 		],
 		'quotes': [
 			'error',

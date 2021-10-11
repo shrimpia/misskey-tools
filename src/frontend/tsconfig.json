@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"strictNullChecks": true,
+		"noUnusedLocals": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
+		"outDir": "./built/assets/",
+		"sourceMap": true,
+		"noImplicitAny": true,
+		"lib": [
+			"dom"
+		],
+		"module": "ESNext",
+		"target": "es5",
+		"moduleResolution": "node",
+		"jsx": "react",
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true
+	}
+}
