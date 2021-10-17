@@ -1,7 +1,6 @@
 import axios from 'axios';
-import _const from '../const';
 
-export const ua = `Mozilla/5.0 MisskeyTools/${_const.version} +https://github.com/Xeltica/MisskeyTools Node/${process.version}`;
+export const ua = `Mozilla/5.0 MisskeyTools +https://github.com/Xeltica/MisskeyTools Node/${process.version}`;
 
 axios.defaults.headers['User-Agent'] = ua;
 axios.defaults.validateStatus = (stat) => stat < 500;

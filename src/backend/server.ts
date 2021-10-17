@@ -2,7 +2,6 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import { Action, useKoaServer } from 'routing-controllers';
 
-import constant from './const';
 import { config } from '../config';
 import { render } from './render';
 import { router } from './router';
@@ -13,7 +12,7 @@ import 'reflect-metadata';
 export default (): void => {
 	const app = new Koa();
 
-	console.log('Misskey Tools v' + constant.version);
+	console.log('Misskey Tools');
 
 	console.log('Initializing DB connection...');
 
