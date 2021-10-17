@@ -6,11 +6,12 @@
 	"author": "Xeltica",
 	"private": true,
 	"scripts": {
-		"build": "run-p build:*",
+		"build": "run-s build:backend build:frontend build:meta",
 		"build:frontend": "webpack",
 		"build:backend": "run-p build:backend-source build:views build:styles",
 		"build:backend-source": "tsc",
 		"build:views": "copyfiles -u 1 src/backend/views/*.pug ./built/",
+		"build:meta": "node ./build-meta.js",
 		"build:styles": "sass styles/:built/assets",
 		"start": "node built/app.js",
 		"dev": "run-p dev:*",

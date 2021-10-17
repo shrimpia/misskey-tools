@@ -1,5 +1,5 @@
 import views from 'koa-views';
-import { version } from '../../package.json';
+import { version } from '../meta.json';
 
 export const render = views(__dirname + '/views', {
 	extension: 'pug',

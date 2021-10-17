@@ -6,13 +6,14 @@ import { config } from '../config';
 import { render } from './render';
 import { router } from './router';
 import { getUserByToolsToken } from './functions/users';
+import { version } from '../meta.json';
 
 import 'reflect-metadata';
 
 export default (): void => {
 	const app = new Koa();
 
-	console.log('Misskey Tools');
+	console.log('Misskey Tools v' + version);
 
 	console.log('Initializing DB connection...');
 
