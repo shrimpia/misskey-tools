@@ -1,14 +1,14 @@
 {
 	"name": "misskey-tools",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "",
 	"main": "built/app.js",
 	"author": "Xeltica",
 	"private": true,
 	"scripts": {
-		"build": "run-s build:backend build:frontend build:meta",
+		"build": "run-s build:backend build:frontend",
 		"build:frontend": "webpack",
-		"build:backend": "run-s build:backend-source build:views build:styles",
+		"build:backend": "run-s build:backend-source build:views build:styles build:meta",
 		"build:backend-source": "tsc",
 		"build:views": "copyfiles -u 1 src/backend/views/*.pug ./built/",
 		"build:meta": "node ./build-meta.js",
