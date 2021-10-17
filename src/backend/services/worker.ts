@@ -19,22 +19,39 @@ export default (): void => {
 export const work = async () => {
 	Store.dispatch({ nowCalculating: true });
 
+	clearLog();
+
+	printLog('[Miss-hai Worker] Started.');
+
 	try {
 		const users = await Users.find({ alertMode: Not<AlertMode>('nothing') });
 		for (const user of users) {
 			await update(user).catch(e => handleError(user, e));
+			printLog(`[Miss-hai Worker] processed for ${user.username}@${user.host}`);
 
 			if (user.alertMode === 'note') {
 				return delay(3000);
 			}
 		}
-		Store.dispatch({ misshaiWorkerRecentError: null });
+		printLog('[Miss-hai Worker] finished successfully.');
 	} catch (e) {
 		const msg = String(e instanceof Error ? e.stack : e);
-		Store.dispatch({ misshaiWorkerRecentError: msg });
+		printLog(msg);
+		printLog('[Miss-hai Worker] stopped wrongly.');
 	} finally {
 		Store.dispatch({ nowCalculating: false });
 	}
+};
+
+const clearLog = () => {
+	Store.dispatch({ misshaiWorkerLog: [] });
+};
+
+const printLog = (log: any) => {
+	Store.dispatch({ misshaiWorkerLog: [
+		...Store.getState().misshaiWorkerLog,
+		String(log),
+	] });
 };
 
 /**
@@ -60,13 +77,13 @@ const handleError = async (user: User, e: any) => {
 	if (e.code) {
 		if (e.code === 'NO_SUCH_USER' || e.code === 'AUTHENTICATION_FAILED') {
 			// ユーザーが削除されている場合、レコードからも消してとりやめ
-			console.info(`${user.username}@${user.host} is deleted, so delete this user from the system`);
+			printLog(`${user.username}@${user.host} is deleted, so delete this user from the system`);
 			await deleteUser(user.username, user.host);
 		} else {
-			console.error(`Misskey Error: ${JSON.stringify(e)}`);
+			printLog(`Misskey Error: ${JSON.stringify(e)}`);
 		}
 	} else {
 		// おそらく通信エラー
-		console.error(`Unknown error: ${e.name} ${e.message}`);
+		printLog(`Unknown error: ${e.name} ${e.message}`);
 	}
 };

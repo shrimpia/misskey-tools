@@ -19,12 +19,12 @@ export class AdminController {
 		};
 	}
 
-	@Get('/misshai/error') getMisshaiError(@CurrentUser({ required: true }) user: IUser) {
+	@Get('/misshai/log') getMisshaiLog(@CurrentUser({ required: true }) user: IUser) {
 		if (!user.isAdmin) {
 			throw new BadRequestError('Not an Admin');
 		}
 
-		return Store.getState().misshaiWorkerRecentError;
+		return Store.getState().misshaiWorkerLog;
 	}
 
 	@OnUndefined(204)

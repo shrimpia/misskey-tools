@@ -8,7 +8,7 @@
 	"scripts": {
 		"build": "run-s build:backend build:frontend build:meta",
 		"build:frontend": "webpack",
-		"build:backend": "run-p build:backend-source build:views build:styles",
+		"build:backend": "run-s build:backend-source build:views build:styles",
 		"build:backend-source": "tsc",
 		"build:views": "copyfiles -u 1 src/backend/views/*.pug ./built/",
 		"build:meta": "node ./build-meta.js",

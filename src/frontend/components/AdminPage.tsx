@@ -7,10 +7,13 @@ import { IAnnouncement } from '../../common/types/announcement';
 import { $delete, $get, $post, $put } from '../misc/api';
 import { Card } from './Card';
 import { showModal } from '../store/slices/screen';
+import { useDispatch } from 'react-redux';
 
 
 export const AdminPage: React.VFC = () => {
 	const { data, error } = useGetSessionQuery(undefined);
+
+	const dispatch = useDispatch();
 
 	const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
 	const [selectedAnnouncement, selectAnnouncement] = useState<IAnnouncement | null>(null);
@@ -20,7 +23,7 @@ export const AdminPage: React.VFC = () => {
 	const [draftTitle, setDraftTitle] = useState('');
 	const [draftBody, setDraftBody] = useState('');
 
-	const [misshaiError, setMisshaiError] = useState<string | null>(null);
+	const [misshaiLog, setMisshaiLog] = useState<string[] | null>(null);
 
 	const submitAnnouncement = async () => {
 		if (selectedAnnouncement) {
@@ -55,7 +58,11 @@ export const AdminPage: React.VFC = () => {
 			setAnnouncements(announcements ?? []);
 			setAnnouncementsLoaded(true);
 		});
-		$get<string | null>('admin/misshai/error').then(setMisshaiError);
+		fetchLog();
+	};
+
+	const fetchLog = () => {
+		$get<string[]>('admin/misshai/log').then(setMisshaiLog);
 	};
 
 	const onClickStartMisshaiAlertWorkerButton = () => {
@@ -192,7 +199,7 @@ export const AdminPage: React.VFC = () => {
 									ミス廃アラートワーカーを強制起動する
 								</button>
 								<h3>直近のワーカーエラー</h3>
-								<pre><code>{misshaiError ?? 'なし'}</code></pre>
+								<pre><code>{misshaiLog?.join('\n') ?? 'なし'}</code></pre>
 							</div>
 						</article>
 					</>
@@ -201,9 +208,3 @@ export const AdminPage: React.VFC = () => {
 		</div>
 	);
 };
-
-
-function dispatch(arg0: any) {
-	throw new Error('Function not implemented.');
-}
-
