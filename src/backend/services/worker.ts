@@ -21,23 +21,24 @@ export const work = async () => {
 
 	clearLog();
 
-	printLog('[Miss-hai Worker] Started.');
+	printLog('Started.');
 
 	try {
 		const users = await Users.find({ alertMode: Not<AlertMode>('nothing') });
+		printLog('will process ' + users.length + ' accounts.');
 		for (const user of users) {
 			await update(user).catch(e => handleError(user, e));
-			printLog(`[Miss-hai Worker] processed for ${user.username}@${user.host}`);
+			printLog(`processed for ${user.username}@${user.host}`);
 
 			if (user.alertMode === 'note') {
-				return delay(3000);
+				await delay(3000);
 			}
 		}
-		printLog('[Miss-hai Worker] finished successfully.');
+		printLog('finished successfully.');
 	} catch (e) {
 		const msg = String(e instanceof Error ? e.stack : e);
 		printLog(msg);
-		printLog('[Miss-hai Worker] stopped wrongly.');
+		printLog('stopped wrongly.');
 	} finally {
 		Store.dispatch({ nowCalculating: false });
 	}
