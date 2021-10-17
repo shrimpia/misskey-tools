@@ -6,6 +6,7 @@ import { Skeleton } from './Skeleton';
 import { IAnnouncement } from '../../common/types/announcement';
 import { $delete, $get, $post, $put } from '../misc/api';
 import { Card } from './Card';
+import { showModal } from '../store/slices/screen';
 
 
 export const AdminPage: React.VFC = () => {
@@ -18,6 +19,8 @@ export const AdminPage: React.VFC = () => {
 	const [isDeleteMode, setDeleteMode] = useState(false);
 	const [draftTitle, setDraftTitle] = useState('');
 	const [draftBody, setDraftBody] = useState('');
+
+	const [misshaiError, setMisshaiError] = useState<string | null>(null);
 
 	const submitAnnouncement = async () => {
 		if (selectedAnnouncement) {
@@ -51,6 +54,22 @@ export const AdminPage: React.VFC = () => {
 		$get<IAnnouncement[]>('announcements').then(announcements => {
 			setAnnouncements(announcements ?? []);
 			setAnnouncementsLoaded(true);
+		});
+		$get<string | null>('admin/misshai/error').then(setMisshaiError);
+	};
+
+	const onClickStartMisshaiAlertWorkerButton = () => {
+		$post('admin/misshai/start').then(() => {
+			dispatch(showModal({
+				type: 'dialog',
+				message: '開始',
+			}));
+		}).catch((e) => {
+			dispatch(showModal({
+				type: 'dialog',
+				icon: 'error',
+				message: e.message,
+			}));
 		});
 	};
 
@@ -166,6 +185,16 @@ export const AdminPage: React.VFC = () => {
 								)}
 							</Card>
 						</article>
+						<article>
+							<h2>Misshai</h2>
+							<div className="vstack">
+								<button className="btn danger" onClick={onClickStartMisshaiAlertWorkerButton}>
+									ミス廃アラートワーカーを強制起動する
+								</button>
+								<h3>直近のワーカーエラー</h3>
+								<pre><code>{misshaiError ?? 'なし'}</code></pre>
+							</div>
+						</article>
 					</>
 				)
 			}
@@ -173,4 +202,8 @@ export const AdminPage: React.VFC = () => {
 	);
 };
 
+
+function dispatch(arg0: any) {
+	throw new Error('Function not implemented.');
+}
 

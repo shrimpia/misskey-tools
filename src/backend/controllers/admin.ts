@@ -1,10 +1,13 @@
 /**
- * バージョン情報など、サーバーのメタデータを返すAPI
+ * Admin API
  * @author Xeltica
  */
 
-import { Get, JsonController } from 'routing-controllers';
+import { BadRequestError, CurrentUser, Get, JsonController, OnUndefined, Post } from 'routing-controllers';
+import { IUser } from '../../common/types/user';
 import { config } from '../../config';
+import { work } from '../services/worker';
+import * as Store from '../store';
 
  @JsonController('/admin')
 export class AdminController {
@@ -14,5 +17,25 @@ export class AdminController {
 			username, host,
 			acct: `@${username}@${host}`,
 		};
+	}
+
+	@Get('/misshai/error') getMisshaiError(@CurrentUser({ required: true }) user: IUser) {
+		if (!user.isAdmin) {
+			throw new BadRequestError('Not an Admin');
+		}
+
+		return Store.getState().misshaiWorkerRecentError;
+	}
+
+	@OnUndefined(204)
+	@Post('/misshai/start') startMisshai(@CurrentUser({ required: true }) user: IUser) {
+		if (!user.isAdmin) {
+			throw new BadRequestError('Not an Admin');
+		}
+		if (Store.getState().nowCalculating) {
+			throw new BadRequestError('Already started');
+		}
+
+		work();
 	}
 }

@@ -7,6 +7,7 @@
  */
 const defaultState: State = {
 	nowCalculating: false,
+	misshaiWorkerRecentError: null,
 };
 
 let _state: Readonly<State> = defaultState;
@@ -16,6 +17,7 @@ let _state: Readonly<State> = defaultState;
  */
 export type State = {
 	nowCalculating: boolean,
+	misshaiWorkerRecentError: string | null,
 };
 
 /**

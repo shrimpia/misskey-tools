@@ -13,9 +13,13 @@ import * as Store from '../store';
 import { User } from '../models/entities/user';
 
 export default (): void => {
-	cron.schedule('0 0 0 * * *', async () => {
-		Store.dispatch({ nowCalculating: true });
+	cron.schedule('0 0 0 * * *', work);
+};
 
+export const work = async () => {
+	Store.dispatch({ nowCalculating: true });
+
+	try {
 		const users = await Users.find({ alertMode: Not<AlertMode>('nothing') });
 		for (const user of users) {
 			await update(user).catch(e => handleError(user, e));
@@ -24,9 +28,13 @@ export default (): void => {
 				return delay(3000);
 			}
 		}
-
+		Store.dispatch({ misshaiWorkerRecentError: null });
+	} catch (e) {
+		const msg = String(e instanceof Error ? e.stack : e);
+		Store.dispatch({ misshaiWorkerRecentError: msg });
+	} finally {
 		Store.dispatch({ nowCalculating: false });
-	});
+	}
 };
 
 /**
