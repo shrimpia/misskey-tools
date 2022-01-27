@@ -20,25 +20,27 @@ export const AnnouncementPage: React.VFC = () => {
 	return (
 		<article className="xarticle">
 			{!announcement ? <Skeleton width="100%" height="10rem" /> : (
-				<>
-					<header className="mb-4">
-						<h2 className="mb-0">{announcement.title}</h2>
-						<aside className="text-dimmed">
-							<i className="bi bi-clock" />&nbsp;
-							{dayjs(announcement.createdAt).locale(lang.split('_')[0]).fromNow()}
-						</aside>
-					</header>
-					<section>
-						{(() => {
-							const res: ReactNodeArray = [];
-							announcement.body.split('\n').forEach(s => {
-								res.push(<>{s}</>);
-								res.push(<br />);
-							});
-							return res;
-						})()}
-					</section>
-				</>
+				<div className="card">
+					<div className="body">
+						<header className="mb-4">
+							<h2 className="mb-0">{announcement.title}</h2>
+							<aside className="text-dimmed">
+								<i className="bi bi-clock" />&nbsp;
+								{dayjs(announcement.createdAt).locale(lang.split('_')[0]).fromNow()}
+							</aside>
+						</header>
+						<section>
+							{(() => {
+								const res: ReactNodeArray = [];
+								announcement.body.split('\n').forEach(s => {
+									res.push(<>{s}</>);
+									res.push(<br />);
+								});
+								return res;
+							})()}
+						</section>
+					</div>
+				</div>
 			)}
 		</article>
 	);

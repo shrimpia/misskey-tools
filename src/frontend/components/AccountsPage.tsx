@@ -31,12 +31,11 @@ export const AccountsPage: React.VFC = () => {
 		</div>
 	) :  (
 		<div className="fade vstack">
-			<div className="card">
-				<div className="body">
-					<h1>{t('_accounts.currentAccount')}</h1>
-					<p>@{data.username}@{data.host}</p>
-				</div>
-			</div>
+			<article>
+				<p>
+					<b>{t('_accounts.currentAccount')}:</b> @{data.username}@{data.host}
+				</p>
+			</article>
 			<article className="card">
 				<div className="body">
 					<h1>{t('_accounts.switchAccount')}</h1>

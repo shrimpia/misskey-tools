@@ -93,7 +93,7 @@ export const SettingPage: React.VFC = () => {
 			<Card bodyClassName="vstack">
 				<h1>{t('appearance')}</h1>
 				<h2>{t('theme')}</h2>
-				<div>
+				<div className="vstack">
 					{
 						themes.map(theme => (
 							<label key={theme} className="input-check">
@@ -120,14 +120,22 @@ export const SettingPage: React.VFC = () => {
 					<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
 				</div>
 			</Card>
-			<Card bodyClassName="vstack">
-				<button className="btn block" onClick={onClickLogout}>{t('logout')}</button>
-				<p className="text-dimmed">{t('logoutDescription')}</p>
-			</Card>
-			<Card bodyClassName="vstack">
-				<button className="btn danger block" onClick={onClickDeleteAccount}>{t('deleteAccount')}</button>
-				<p className="text-dimmed">{t('deleteAccountDescription')}</p>
-			</Card>
+			<div className="list-form">
+				<button className="item" onClick={onClickLogout}>
+					<i className="icon bi bi-box-arrow-right" />
+					<div className="body">
+						<h1>{t('logout')}</h1>
+						<p className="desc">{t('logoutDescription')}</p>
+					</div>
+				</button>
+				<button className="item text-danger" onClick={onClickDeleteAccount}>
+					<i className="icon bi bi-trash-fill" />
+					<div className="body">
+						<h1>{t('deleteAccount')}</h1>
+						<p className="desc">{t('deleteAccountDescription')}</p>
+					</div>
+				</button>
+			</div>
 		</div>
 	);
 };

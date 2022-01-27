@@ -24,8 +24,8 @@ export const AnnouncementList: React.VFC = () => {
 	if (announcements.length === 0) return null;
 
 	return (
-		<Card>
-			<h1>{t('announcements')}</h1>
+		<>
+			<h2 className="mb-0">{t('announcements')}</h2>
 			<div className="large menu fade">
 				{announcements.map(a => (
 					<Link className="item fluid" key={a.id} to={`/announcements/${a.id}`}>
@@ -33,6 +33,6 @@ export const AnnouncementList: React.VFC = () => {
 					</Link>
 				))}
 			</div>
-		</Card>
+		</>
 	);
 };
