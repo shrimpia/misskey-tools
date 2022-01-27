@@ -42,6 +42,9 @@
 	"translatedByTheCommunity": "Misskey Tools is translated by volunteers.",
 	"helpTranslation": "Submit translations",
 	"announcements": "Announcements",
+	"upload": "アップロード",
+	"preview": "プレビュー",
+	"catAdjuster": "ねこみみアジャスター",
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
 		"pattern2": "Are you overusing Misskey?",
@@ -56,13 +59,15 @@
 		"misshaiAlertTitle": "Miss-hai Alert",
 		"misshaiAlertDescription": "Are you worried about overusing Misskey? With Miss-hai Alert, you can automatically post your activities on Misskey as below.",
 		"misshaiRankingDescription": "Miss-hai Ranking shows your quantified activities on Misskey.",
+		"catAdjusterDescription": "CATモードの猫耳がアイコンに合わなくてお悩みのあなたへ。かわいいアイコンを猫耳に合わせてトリミングできます。",
 		"nextFeaturesTitle": "Will update in the future.",
 		"nextFeaturesDescription": "This is not all. We will add more tools by updates in the future."
 	},
 	"_nav": {
 		"misshai": "Miss-hai",
 		"accounts": "Accounts",
-		"settings": "Settings"
+		"settings": "Settings",
+		"catAdjuster": "ねこみみ"
 	},
 	"_missHai": {
 		"ranking": "Miss-hai Ranking",
