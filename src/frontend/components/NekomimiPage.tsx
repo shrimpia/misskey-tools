@@ -1,21 +1,75 @@
 import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ReactCrop, { Crop } from 'react-image-crop';
 
 import 'react-image-crop/dist/ReactCrop.css';
+import { useDispatch } from 'react-redux';
+import { useGetSessionQuery } from '../services/session';
+import { showModal } from '../store/slices/screen';
 
 export const NekomimiPage: React.VFC = () => {
+	const {t} = useTranslation();
+	const dispatch = useDispatch();
+
 	const [blobUrl, setBlobUrl] = useState<string | null>(null);
+	const [fileName, setFileName] = useState<string | null>(null);
+	const [percentage, setPercentage] = useState(0);
+	const [isUploading, setUploading] = useState(false);
 	const [image, setImage] = useState<HTMLImageElement | null>(null);
 	const [crop, setCrop] = useState<Partial<Crop>>({unit: '%', width: 100, aspect: 1 / 1});
 	const [completedCrop, setCompletedCrop] = useState<Crop>();
 
 	const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 
+	const {data} = useGetSessionQuery(undefined);
+
+	const beginUpload = async () => {
+
+		if (!previewCanvasRef.current) return;
+		if (!data) return;
+
+		const canvas = previewCanvasRef.current;
+		const blob = await new Promise<Blob | null>(res => canvas.toBlob(res));
+		if (!blob) return;
+
+		const formData = new FormData();
+		formData.append('i', data.token);
+		formData.append('force', 'true');
+		formData.append('file', blob);
+		formData.append('name', `(Cropped) ${fileName ?? 'File'}`);
+
+		await new Promise<void>((res, rej) => {
+			const xhr = new XMLHttpRequest();
+			xhr.open('POST', `https://${data.host}/api/drive/files/create`, true);
+			xhr.onload = (e) => {
+				setPercentage(100);
+				const {id: avatarId} = JSON.parse(xhr.responseText);
+				fetch(`https://${data.host}/api/i/update`, {
+					method: 'POST',
+					body: JSON.stringify({ i: data.token, avatarId }),
+				}).then(() => res()).catch(rej);
+			};
+			xhr.onerror = rej;
+			xhr.upload.onprogress = e => {
+				setPercentage(Math.floor(e.loaded / e.total * 100));
+			};
+			xhr.send(formData);
+		});
+
+		dispatch(showModal({
+			type: 'dialog',
+			icon: 'info',
+			message: t('saved'),
+		}));
+	};
+
 	const onChangeFile: ChangeEventHandler<HTMLInputElement> = (e) => {
 		if (e.target.files === null || e.target.files.length === 0) return;
+		const file = e.target.files[0];
 		const reader = new FileReader();
+		setFileName(file.name);
 		reader.addEventListener('load', () => setBlobUrl(reader.result as string));
-		reader.readAsDataURL(e.target.files[0]);
+		reader.readAsDataURL(file);
 		setCrop({unit: '%', width: 100, aspect: 1 / 1});
 	};
 
@@ -52,9 +106,19 @@ export const NekomimiPage: React.VFC = () => {
 		);
 	}, [completedCrop]);
 
+	const onClickUpload = async () => {
+		setUploading(true);
+		setPercentage(0);
+		try {
+			await beginUpload();
+		} finally {
+			setUploading(false);
+		}
+	};
+
 	return (
 		<div className="fade">
-			<h2>ネコミミアジャスター</h2>
+			<h2>{t('catAdjuster')}</h2>
 			<input type="file" className="input-field" accept="image/*" onChange={onChangeFile} />
 			{blobUrl && (
 				<div className="row mt-2">
@@ -66,7 +130,7 @@ export const NekomimiPage: React.VFC = () => {
 						/>
 					</div>
 					<div className="col-4 col-12-sm">
-						<h3 className="text-100 text-bold">プレビュー</h3>
+						<h3 className="text-100 text-bold">{t('preview')}</h3>
 						<div className="cat mt-4 mb-2" style={{position: 'relative', width: 96, height: 96}}>
 							<canvas
 								ref={previewCanvasRef}
@@ -80,7 +144,9 @@ export const NekomimiPage: React.VFC = () => {
 								}}
 							/>
 						</div>
-						<button className="btn primary">アップロード</button>
+						<button className="btn primary" onClick={onClickUpload} disabled={isUploading}>
+							{isUploading ? `${percentage}%` : t('upload')}
+						</button>
 					</div>
 				</div>
 			)}

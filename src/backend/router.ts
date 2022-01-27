@@ -38,7 +38,7 @@ router.get('/login', async ctx => {
 	host = meta.uri.replace(/^https?:\/\//, '');
 	const name = 'みす廃あらーと';
 	const description = 'ついついノートしすぎていませんか？';
-	const permission = ['write:notes', 'write:notifications'];
+	const permission = ['write:notes', 'write:notifications', 'write:drive', 'read:account', 'write:account'];
 
 	if (meta.features.miauth) {
 		// MiAuthを使用する

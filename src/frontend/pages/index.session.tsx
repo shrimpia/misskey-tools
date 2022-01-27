@@ -30,7 +30,7 @@ export const IndexSessionPage: React.VFC = () => {
 		const it: TabItem[] = [];
 		it.push({ label: t('_nav.misshai'), key: 'misshai' });
 		it.push({ label: t('_nav.accounts'), key: 'accounts' });
-		it.push({ label: 'ネコミミ', key: 'nekomimi' });
+		it.push({ label: t('_nav.catAdjuster'), key: 'nekomimi' });
 		if (data?.isAdmin) {
 			it.push({ label: 'Admin', key: 'admin' });
 		}

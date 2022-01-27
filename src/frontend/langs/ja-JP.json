@@ -42,6 +42,9 @@
 	"translatedByTheCommunity": "Misskey Toolsはボランティアによって翻訳されています。",
 	"helpTranslation": "翻訳に協力する",
 	"announcements": "お知らせ",
+	"upload": "アップロード",
+	"preview": "プレビュー",
+	"catAdjuster": "ねこみみアジャスター",
 	"_welcomeMessage": {
 		"pattern1": "ついついノートしすぎていませんか？",
 		"pattern2": "Misskey, しすぎていませんか？",
@@ -159,8 +162,5 @@
 		"no": "キャンセル",
 		"success": "アカウントを解除しました。トップ画面に戻ります。",
 		"failure": "アカウントを解除できませんでした。"
-	},
-	"_catAdjuster": {
-		"title": "ねこみみアジャスター"
 	}
 }

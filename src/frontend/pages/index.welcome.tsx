@@ -39,7 +39,7 @@ export const IndexWelcomePage: React.VFC = () => {
 						<Link to="/ranking">{t('_missHai.showRanking')}</Link>
 					</article>
 					<div className="col-4 col-12-sm">
-						<h3><i className="bi bi-crop"/> {t('_catAdjuster.title')}</h3>
+						<h3><i className="bi bi-crop"/> {t('catAdjuster')}</h3>
 						<p>{t('_welcome.catAdjusterDescription')}</p>
 					</div>
 				</div>
