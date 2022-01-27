@@ -31,7 +31,6 @@ export const AccountsPage: React.VFC = () => {
 		</div>
 	) :  (
 		<article className="fade">
-			<h1 className="text-125 text-bold">{data.username}<span className="text-dimmed">@{data.host}</span></h1>
 			<div>
 				<strong>{t('_accounts.switchAccount')}</strong>
 			</div>

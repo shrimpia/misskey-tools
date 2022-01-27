@@ -13,6 +13,9 @@ import { setAccounts } from '../store/slices/screen';
 import { useGetSessionQuery } from '../services/session';
 import { AdminPage } from '../components/AdminPage';
 import { $get } from '../misc/api';
+import { NekomimiPage } from '../components/NekomimiPage';
+import { CurrentUser } from '../components/CurrentUser';
+import { Card } from '../components/Card';
 
 export const IndexSessionPage: React.VFC = () => {
 	const [selectedTab, setSelectedTab] = useState<string>('misshai');
@@ -29,6 +32,7 @@ export const IndexSessionPage: React.VFC = () => {
 		const it: TabItem[] = [];
 		it.push({ label: t('_nav.misshai'), key: 'misshai' });
 		it.push({ label: t('_nav.accounts'), key: 'accounts' });
+		it.push({ label: 'ネコミミ', key: 'nekomimi' });
 		if (data?.isAdmin) {
 			it.push({ label: 'Admin', key: 'admin' });
 		}
@@ -41,6 +45,7 @@ export const IndexSessionPage: React.VFC = () => {
 			case 'misshai': return <MisshaiPage />;
 			case 'accounts': return <AccountsPage />;
 			case 'admin': return <AdminPage />;
+			case 'nekomimi': return <NekomimiPage />;
 			case 'settings': return <SettingPage/>;
 			default: return null;
 		}
@@ -48,11 +53,13 @@ export const IndexSessionPage: React.VFC = () => {
 
 	return (
 		<>
-			<Header />
-			<div className="xarticle card" style={{borderRadius: 'var(--radius)'}}>
-				<Tab items={items} selected={selectedTab} onSelect={setSelectedTab}/>
+			<div className="xarticle vgroup shadow-4" style={{position: 'sticky', top: 0, zIndex: 100}}>
+				<Header />
+				<div className="card">
+					<Tab items={items} selected={selectedTab} onSelect={setSelectedTab}/>
+				</div>
 			</div>
-			<article className="xarticle mt-4">
+			<article className="xarticle mt-2">
 				{component}
 			</article>
 		</>
