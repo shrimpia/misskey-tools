@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { IAnnouncement } from '../../common/types/announcement';
 import { $get } from '../misc/api';
-import { Card } from './Card';
 
 export const AnnouncementList: React.VFC = () => {
 	const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);

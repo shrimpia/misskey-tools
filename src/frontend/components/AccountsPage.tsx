@@ -30,39 +30,33 @@ export const AccountsPage: React.VFC = () => {
 			<Skeleton />
 		</div>
 	) :  (
-		<div className="fade vstack">
-			<article>
-				<p>
-					<b>{t('_accounts.currentAccount')}:</b> @{data.username}@{data.host}
-				</p>
-			</article>
-			<article className="card">
-				<div className="body">
-					<h1>{t('_accounts.switchAccount')}</h1>
-					<div className="menu large fluid mb-2">
-						{
-							accounts.length === accountTokens.length ? (
-								accounts.map(account => (
-									<button className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
-										<i className="icon bi bi-chevron-right" />
+		<article className="fade">
+			<h1 className="text-125 text-bold">{data.username}<span className="text-dimmed">@{data.host}</span></h1>
+			<div>
+				<strong>{t('_accounts.switchAccount')}</strong>
+			</div>
+			<div className="menu large fluid mb-2">
+				{
+					accounts.length === accountTokens.length ? (
+						accounts.map(account => (
+							<button className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
+								<i className="icon bi bi-chevron-right" />
 										@{account.username}@{account.host}
-										<button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {
-											const filteredAccounts = accounts.filter(ac => ac.id !== account.id);
-											dispatch(setAccounts(filteredAccounts));
-											e.stopPropagation();
-										}}>
-											<i className="bi bi-trash"/>
-										</button>
-									</button>
-								))
-							) : (
-								<div className="item">...</div>
-							)
-						}
-					</div>
-					<LoginForm />
-				</div>
-			</article>
-		</div>
+								<button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {
+									const filteredAccounts = accounts.filter(ac => ac.id !== account.id);
+									dispatch(setAccounts(filteredAccounts));
+									e.stopPropagation();
+								}}>
+									<i className="bi bi-trash"/>
+								</button>
+							</button>
+						))
+					) : (
+						<div className="item">...</div>
+					)
+				}
+			</div>
+			<LoginForm />
+		</article>
 	);
 };
