@@ -3,6 +3,7 @@ import React from 'react';
 export type TabItem = {
 	label: string;
 	key: string;
+	isNew?: boolean;
 };
 
 export type TabProps = {
@@ -23,6 +24,7 @@ export const Tab: React.VFC<TabProps> = (props) => {
 						onClick={() => props.onSelect(item.key)}
 					>
 						{item.label}
+						{item.isNew && <sup className="text-primary text-bold" style={{marginLeft: 2}}>NEW!</sup>}
 					</button>
 				);
 			})}
