@@ -59,7 +59,7 @@ const AppInner : React.VFC = () => {
 		</div>
 	) : (
 		<div className="container">
-			{$location.pathname !== '/' && <Header hasTopLink />}
+			{$location.pathname !== '/' && <Header hasTopLink className="xarticle mb-2" />}
 			<Switch>
 				<Route exact path="/" component={IndexPage} />
 				<Route exact path="/ranking" component={RankingPage} />

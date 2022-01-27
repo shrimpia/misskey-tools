@@ -1,11 +1,9 @@
 import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import ReactCrop, { Crop } from 'react-image-crop';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
 export const NekomimiPage: React.VFC = () => {
-	const {t} = useTranslation();
 	const [blobUrl, setBlobUrl] = useState<string | null>(null);
 	const [image, setImage] = useState<HTMLImageElement | null>(null);
 	const [crop, setCrop] = useState<Partial<Crop>>({unit: '%', width: 100, aspect: 1 / 1});

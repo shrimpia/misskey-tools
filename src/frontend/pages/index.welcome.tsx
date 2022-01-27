@@ -1,4 +1,4 @@
-import React, { useMemo }  from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -8,49 +8,42 @@ import { AnnouncementList } from '../components/AnnouncementList';
 export const IndexWelcomePage: React.VFC = () => {
 	const {t} = useTranslation();
 
-	const example = useMemo(() => (
-		t('_template.default')
-			.replace('{notesCount}', '32000')
-			.replace('{notesDelta}', '+190')
-			.replace('{followingCount}', '510')
-			.replace('{followingDelta}', '+3')
-			.replace('{followersCount}', '1020')
-			.replace('{followersDelta}', '-1')
-			.replace('{url}', 'https://misskey.tools')
-	), []);
-
 	return (
 		<>
-			<Header>
+			<Header className="xarticle mb-4">
 				<article className="mt-4">
 					<p>{t('description1')}</p>
 					<p>{t('description2')}</p>
 				</article>
 				<LoginForm />
 			</Header>
-			<article className="xarticle">
-				<AnnouncementList />
+			<article className="xarticle card">
+				<div className="body">
+					<AnnouncementList />
+				</div>
 			</article>
+			<hr />
 			<article className="xarticle vstack pa-2">
 				<header>
 					<h2>{t('_welcome.title')}</h2>
 					<p>{t('_welcome.description')}</p>
 				</header>
-				<article>
-					<h3>{t('_welcome.misshaiAlertTitle')}</h3>
-					<p>{t('_welcome.misshaiAlertDescription')}</p>
-					<div className="card ma-2 shadow-2" style={{maxWidth: 360}}>
-						<div className="body">
-							<pre>{example}</pre>
-						</div>
+				<div className="row">
+					<article className="col-4 col-12-sm">
+						<h3><i className="bi bi-megaphone-fill"/> {t('_welcome.misshaiAlertTitle')}</h3>
+						<p>{t('_welcome.misshaiAlertDescription')}</p>
+					</article>
+					<article className="col-4 col-12-sm">
+						<h3><i className="bi bi-bar-chart-fill"/> {t('_missHai.ranking')}</h3>
+						<p>{t('_welcome.misshaiRankingDescription')}</p>
+						<Link to="/ranking">{t('_missHai.showRanking')}</Link>
+					</article>
+					<div className="col-4 col-12-sm">
+						<h3><i className="bi bi-crop"/> {t('_catAdjuster.title')}</h3>
+						<p>{t('_welcome.catAdjusterDescription')}</p>
 					</div>
-				</article>
-				<article>
-					<h3 className="mb-1">{t('_missHai.ranking')}</h3>
-					<p>{t('_welcome.misshaiRankingDescription')}</p>
-					<Link to="/ranking">{t('_missHai.showRanking')}</Link>
-				</article>
-				<article>
+				</div>
+				<article className="mt-5">
 					<h3>{t('_welcome.nextFeaturesTitle')}</h3>
 					<p>{t('_welcome.nextFeaturesDescription')}</p>
 				</article>

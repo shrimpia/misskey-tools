@@ -10,9 +10,10 @@ import { $post, $put } from '../misc/api';
 import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
 import { showModal } from '../store/slices/screen';
 import { AnnouncementList } from './AnnouncementList';
-import { Card } from './Card';
 import { Ranking } from './Ranking';
 import { Skeleton } from './Skeleton';
+
+import './MisshaiPage.scss';
 
 const variables = [
 	'notesCount',
@@ -174,7 +175,7 @@ export const MisshaiPage: React.VFC = () => {
 
 	const defaultTemplate = t('_template.default');
 
-	return session.isLoading || score.isLoading ? (
+	return session.isLoading || score.isLoading || !session.data || !score.data ? (
 		<div className="vstack">
 			<Skeleton width="100%" height="1rem" />
 			<Skeleton width="100%" height="1rem" />
@@ -182,23 +183,16 @@ export const MisshaiPage: React.VFC = () => {
 			<Skeleton width="100%" height="160px" />
 		</div>
 	) : (
-		<div className="fade vstack">
-			{session.data && (
-				<section>
-					<p>{t('welcomeBack', {acct: `@${session.data.username}@${session.data.host}`})}</p>
-					<p>
-						<strong>
-							{t('_missHai.rating')}{': '}
-						</strong>
-						{session.data.rating}
-					</p>
-				</section>
-			)}
-			<AnnouncementList />
-			{score.data && (
-				<>
-					<section>
-						<h2>{t('_missHai.data')}</h2>
+		<div className="vstack">
+			<section className="card announcement">
+				<div className="body">
+					<AnnouncementList />
+				</div>
+			</section>
+			<div className="misshaiPageLayout">
+				<section className="card misshaiData">
+					<div className="body">
+						<h1>{t('_missHai.data')}</h1>
 						<table className="table fluid">
 							<thead>
 								<tr>
@@ -225,88 +219,104 @@ export const MisshaiPage: React.VFC = () => {
 								</tr>
 							</tbody>
 						</table>
-					</section>
-					<section>
-						<h2>{t('_missHai.ranking')}</h2>
+						<p>
+							<strong>
+								{t('_missHai.rating')}{': '}
+							</strong>
+							{session.data.rating}
+						</p>
+					</div>
+				</section>
+				<section className="card misshaiRanking">
+					<div className="body">
+						<h1>{t('_missHai.ranking')}</h1>
 						<Ranking limit={limit} />
 						{limit && <button className="btn link" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
-					</section>
-					<section className="vstack mt-2">
-						<Card bodyClassName="vstack">
-							<h1>{t('alertMode')}</h1>
-							<div>
-								{
-									alertModes.map((mode) => (
-										<label key={mode} className="input-check">
-											<input type="radio" checked={mode === draft.alertMode} onChange={() => {
-												updateSetting({ alertMode: mode });
-											}} />
-											<span>{t(`_alertMode.${mode}`)}</span>
-										</label>
-									))
-								}
-							</div>
-
-							{ draft.alertMode === 'notification' && (
-								<div className="alert bg-danger mt-2">
-									<i className="icon bi bi-exclamation-circle"></i>
-									{t('_alertMode.notificationWarning')}
-								</div>
-							)}
-							{ draft.alertMode === 'note' && (
-								<>
-									<h2>{t('visibility')}</h2>
-									<div>
-										{
-											availableVisibilities.map((visibility) => (
-												<label key={visibility} className="input-check">
-													<input type="radio" checked={visibility === draft.visibility} onChange={() => {
-														updateSetting({ visibility });
-													}} />
-													<span>{t(`_visibility.${visibility}`)}</span>
-												</label>
-											))
-										}
-									</div>
-									<label className="input-check mt-2">
-										<input type="checkbox" checked={draft.localOnly} onChange={(e) => {
-											updateSetting({ localOnly: e.target.checked });
+					</div>
+				</section>
+			</div>
+			<div className="misshaiPageLayout">
+				<section className="card alertModeSetting">
+					<div className="body">
+						<h1 className="mb-2">{t('alertMode')}</h1>
+						<div className="vstack">
+							{
+								alertModes.map((mode) => (
+									<label key={mode} className="input-check">
+										<input type="radio" checked={mode === draft.alertMode} onChange={() => {
+											updateSetting({ alertMode: mode });
 										}} />
-										<span>{t('localOnly')}</span>
+										<span>{t(`_alertMode.${mode}`)}</span>
 									</label>
-								</>
-							)}
-						</Card>
-						<Card bodyClassName="vstack">
-							<h1>{t('template')}</h1>
-							<p>{t('_template.description')}</p>
-							<div className="hstack dense">
-								<button className="btn" onClick={onClickInsertVariables}>
-									<i className="bi bi-braces" />&nbsp;
-									{t('_template.insertVariables')}
-								</button>
-								<button className="btn link text-info" onClick={onClickInsertVariablesHelp}>
-									<i className="bi bi-question-circle" />
-								</button>
+								))
+							}
+						</div>
+						{ draft.alertMode === 'notification' && (
+							<div className="alert bg-danger mt-2">
+								<i className="icon bi bi-exclamation-circle"></i>
+								{t('_alertMode.notificationWarning')}
 							</div>
-							<textarea ref={templateTextarea} className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
-								dispatchDraft({ template: e.target.value });
-							}} />
-							<small className="text-dimmed">{t('_template.description2')}</small>
-							<div className="hstack" style={{justifyContent: 'flex-end'}}>
-								<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>{t('resetToDefault')}</button>
-								<button className="btn primary" onClick={() => {
-									updateSettingWithDialog({ template: draft.template === '' ? null : draft.template });
-								}}>{t('save')}</button>
-							</div>
-						</Card>
-						<Card bodyClassName="vstack">
-							<button className="btn block" onClick={onClickSendAlert} disabled={draft.alertMode === 'nothing'}>{t('sendAlert')}</button>
-							<p className="text-dimmed">{t(draft.alertMode === 'nothing' ? 'sendAlertDisabled' : 'sendAlertDescription')}</p>
-						</Card>
-					</section>
-				</>
-			)}
+						)}
+						{ draft.alertMode === 'note' && (
+							<>
+								<h2 className="mt-2 mb-1">{t('visibility')}</h2>
+								<div className="vstack">
+									{
+										availableVisibilities.map((visibility) => (
+											<label key={visibility} className="input-check">
+												<input type="radio" checked={visibility === draft.visibility} onChange={() => {
+													updateSetting({ visibility });
+												}} />
+												<span>{t(`_visibility.${visibility}`)}</span>
+											</label>
+										))
+									}
+								</div>
+								<label className="input-check mt-2">
+									<input type="checkbox" checked={draft.localOnly} onChange={(e) => {
+										updateSetting({ localOnly: e.target.checked });
+									}} />
+									<span>{t('localOnly')}</span>
+								</label>
+							</>
+						)}
+					</div>
+				</section>
+				<section className="card templateSetting">
+					<div className="body">
+						<h1>{t('template')}</h1>
+						<p>{t('_template.description')}</p>
+						<div className="hstack dense mb-2">
+							<button className="btn" onClick={onClickInsertVariables}>
+								<i className="bi bi-braces" />&nbsp;
+								{t('_template.insertVariables')}
+							</button>
+							<button className="btn link text-info" onClick={onClickInsertVariablesHelp}>
+								<i className="bi bi-question-circle" />
+							</button>
+						</div>
+						<textarea ref={templateTextarea} className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
+							dispatchDraft({ template: e.target.value });
+						}} />
+						<small className="text-dimmed">{t('_template.description2')}</small>
+						<div className="hstack mt-2" style={{justifyContent: 'flex-end'}}>
+							<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>{t('resetToDefault')}</button>
+							<button className="btn primary" onClick={() => {
+								updateSettingWithDialog({ template: draft.template === '' ? null : draft.template });
+							}}>{t('save')}</button>
+						</div>
+					</div>
+				</section>
+			</div>
+			<section className="list-form mt-2">
+				<button className="item" onClick={onClickSendAlert} disabled={draft.alertMode === 'nothing'}>
+					<i className="icon bi bi-send" />
+					<div className="body">
+						<h1>{t('sendAlert')}</h1>
+						<p className="desc">{t(draft.alertMode === 'nothing' ? 'sendAlertDisabled' : 'sendAlertDescription')}</p>
+					</div>
+				</button>
+			</section>
 		</div>
 	);
 };

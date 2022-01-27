@@ -54,15 +54,17 @@
 		"title": "プロ仕様のツールキット",
 		"description": "Misskey Toolsでは、Misskeyのために設計された、Misskeyをより楽しめるツールを取り揃えています。",
 		"misshaiAlertTitle": "ミス廃アラート",
-		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
+		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
 		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
+		"catAdjusterDescription": "CATモードの猫耳がアイコンに合わなくてお悩みのあなたへ。かわいいアイコンを猫耳に合わせてトリミングできます。",
 		"nextFeaturesTitle": "今後も追加予定。",
 		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
 	},
 	"_nav": {
 		"misshai": "ミス廃",
 		"accounts": "アカウント",
-		"settings": "設定"
+		"settings": "設定",
+		"catAdjuster": "ねこみみ"
 	},
 	"_missHai": {
 		"ranking": "ミス廃ランキング",
@@ -157,5 +159,8 @@
 		"no": "キャンセル",
 		"success": "アカウントを解除しました。トップ画面に戻ります。",
 		"failure": "アカウントを解除できませんでした。"
+	},
+	"_catAdjuster": {
+		"title": "ねこみみアジャスター"
 	}
 }

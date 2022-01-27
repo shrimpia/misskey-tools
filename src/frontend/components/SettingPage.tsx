@@ -129,7 +129,7 @@ export const SettingPage: React.VFC = () => {
 					</div>
 				</button>
 				<button className="item text-danger" onClick={onClickDeleteAccount}>
-					<i className="icon bi bi-trash-fill" />
+					<i className="icon bi bi-trash" />
 					<div className="body">
 						<h1>{t('deleteAccount')}</h1>
 						<p className="desc">{t('deleteAccountDescription')}</p>

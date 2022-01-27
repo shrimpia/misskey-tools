@@ -30,32 +30,34 @@ export const AccountsPage: React.VFC = () => {
 			<Skeleton />
 		</div>
 	) :  (
-		<article className="fade">
-			<div>
-				<strong>{t('_accounts.switchAccount')}</strong>
-			</div>
-			<div className="menu large fluid mb-2">
-				{
-					accounts.length === accountTokens.length ? (
-						accounts.map(account => (
-							<button className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
-								<i className="icon bi bi-chevron-right" />
+		<article className="card fade">
+			<div className="body">
+				<div>
+					<strong>{t('_accounts.switchAccount')}</strong>
+				</div>
+				<div className="menu large fluid mb-2">
+					{
+						accounts.length === accountTokens.length ? (
+							accounts.map(account => (
+								<button className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
+									<i className="icon bi bi-chevron-right" />
 										@{account.username}@{account.host}
-								<button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {
-									const filteredAccounts = accounts.filter(ac => ac.id !== account.id);
-									dispatch(setAccounts(filteredAccounts));
-									e.stopPropagation();
-								}}>
-									<i className="bi bi-trash"/>
+									<button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {
+										const filteredAccounts = accounts.filter(ac => ac.id !== account.id);
+										dispatch(setAccounts(filteredAccounts));
+										e.stopPropagation();
+									}}>
+										<i className="bi bi-trash"/>
+									</button>
 								</button>
-							</button>
-						))
-					) : (
-						<div className="item">...</div>
-					)
-				}
+							))
+						) : (
+							<div className="item">...</div>
+						)
+					}
+				</div>
+				<LoginForm />
 			</div>
-			<LoginForm />
 		</article>
 	);
 };

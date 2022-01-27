@@ -1,12 +1,22 @@
 body {
     --primary: rgb(134, 179, 0);
+    --max-width: 1024px;
     font-family: "Koruri", sans-serif;
     font-feature-settings: "pkna";
 }
 
+hr {
+    height: 4px;
+    background: var(--dimmed);
+    border: none;
+    margin: 64px auto;
+    width: 50%;
+    max-width: 400px;
+}
+
 .xarticle {
     margin: auto;
-    max-width: 1024px;
+    max-width: var(--max-width);
 }
 
 .fade {

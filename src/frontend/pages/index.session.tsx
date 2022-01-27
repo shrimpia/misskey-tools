@@ -14,8 +14,6 @@ import { useGetSessionQuery } from '../services/session';
 import { AdminPage } from '../components/AdminPage';
 import { $get } from '../misc/api';
 import { NekomimiPage } from '../components/NekomimiPage';
-import { CurrentUser } from '../components/CurrentUser';
-import { Card } from '../components/Card';
 
 export const IndexSessionPage: React.VFC = () => {
 	const [selectedTab, setSelectedTab] = useState<string>('misshai');
@@ -59,7 +57,7 @@ export const IndexSessionPage: React.VFC = () => {
 					<Tab items={items} selected={selectedTab} onSelect={setSelectedTab}/>
 				</div>
 			</div>
-			<article className="xarticle mt-2">
+			<article className="xarticle mt-4">
 				{component}
 			</article>
 		</>
