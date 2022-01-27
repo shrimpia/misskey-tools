@@ -42,6 +42,9 @@
 	"translatedByTheCommunity": "Misskey Toolsはボランティアによって翻訳されています。",
 	"helpTranslation": "翻訳に協力する",
 	"announcements": "お知らせ",
+	"upload": "アップロード",
+	"preview": "プレビュー",
+	"catAdjuster": "ねこみみアジャスター",
 	"_welcomeMessage": {
 		"pattern1": "ついついノートしすぎていませんか？",
 		"pattern2": "Misskey, しすぎていませんか？",
@@ -56,13 +59,15 @@
 		"misshaiAlertTitle": "ミス廃アラート",
 		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
 		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
+		"catAdjusterDescription": "CATモードの猫耳がアイコンに合わなくてお悩みのあなたへ。かわいいアイコンを猫耳に合わせてトリミングできます。",
 		"nextFeaturesTitle": "今後も追加予定。",
 		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
 	},
 	"_nav": {
 		"misshai": "ミス廃",
 		"accounts": "アカウント",
-		"settings": "設定"
+		"settings": "設定",
+		"catAdjuster": "ねこみみ"
 	},
 	"_missHai": {
 		"ranking": "ミス廃ランキング",
