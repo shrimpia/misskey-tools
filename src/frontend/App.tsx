@@ -67,7 +67,7 @@ const AppInner : React.VFC = () => {
 				<Route exact path="/announcements/:id" component={AnnouncementPage} />
 			</Switch>
 			<footer className="text-center pa-5">
-				<p>(C)2020-2021 Xeltica</p>
+				<p>(C)2020-2022 Xeltica Studio</p>
 				<p dangerouslySetInnerHTML={{__html: t('disclaimerForMisskeyHq')}} />
 				<p><Link to="/term">{t('termsOfService')}</Link></p>
 			</footer>
