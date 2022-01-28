@@ -6,13 +6,13 @@
 	"following": "팔로우",
 	"followers": "팔로워",
 	"welcomeBack": "환영합니다, {{acct}}님",
-	"alertMode": "アラート送信方法",
+	"alertMode": "알림 수단",
 	"visibility": "공개 범위",
 	"appearance": "인터페이스 설정",
 	"template": "템플릿",
 	"sendAlert": "테스트 알림 보내기",
 	"sendAlertDescription": "현재 설정으로 테스트 알림을 보냅니다.",
-	"sendAlertDisabled": "アラート送信方法が「通知しない」のため、送信をテストすることはできません。",
+	"sendAlertDisabled": "알림 수단이 '보내지 않음'으로 설정되어 있어 테스트하지 못했습니다.",
 	"logout": "로그아웃",
 	"logoutDescription": "로그아웃하더라도 알림은 계속해서 보내집니다.",
 	"deleteAccount": "계정 연동을 해제하기",
@@ -49,15 +49,15 @@
 	"update": "업데이트하기",
 	"_welcomeMessage": {
 		"pattern1": "ついついノートしすぎていませんか？",
-		"pattern2": "Misskey, しすぎていませんか？",
-		"pattern3": "今日、何ノート書いた？",
+		"pattern2": "Misskey, 너무 많이 하지 않으셨나요?",
+		"pattern3": "오늘 쓴 노트가 얼마나 되더라?",
 		"pattern4": "10000 ノートは初心者、そう思っていませんか？",
 		"pattern5": "息するように Misskey、そんなあなたへ。",
 		"pattern6": "あなたは真の Misskey 廃人ですか？"
 	},
 	"_welcome": {
 		"title": "프로를 위한 도구",
-		"description": "Misskey Toolsでは、Misskeyのために設計された、Misskeyをより楽しめるツールを取り揃えています。",
+		"description": "Misskey Tools는 더 즐거운 Misskey 생활을 위한 도구를 여러분께 제공합니다.",
 		"misshaiAlertTitle": "ミス廃アラート",
 		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
 		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
@@ -139,30 +139,30 @@
 		"teapot": "I'm a teapot.",
 		"sessionRequired": "세션이 누락되었습니다.",
 		"tokenRequired": "토큰이 누락되었습니다.",
-		"invalidParameter": "パラメータが不正です。",
-		"notAuthorized": "権限がありません。",
-		"other": "なし"
+		"invalidParameter": "매개변수가 올바르지 않습니다.",
+		"notAuthorized": "권한이 없습니다.",
+		"other": "없음"
 	},
 	"_sendTest": {
-		"title": "アラートをテスト送信しますか？",
-		"message": "現在の設定でアラートを送信します。設定が保存済みであるかどうか、実行前に必ずご確認ください。",
-		"yes": "送信する",
-		"no": "キャンセル",
-		"success": "送信しました。",
-		"failure": "送信に失敗しました。"
+		"title": "테스트 알림을 보내시겠습니까?",
+		"message": "현재 설정으로 알림을 보냅니다. 보내기 전에 설정을 저장했는지 다시 한번 확인해 주세요.",
+		"yes": "보내기",
+		"no": "취소",
+		"success": "보냈습니다.",
+		"failure": "보내지 못했습니다."
 	},
 	"_logout": {
-		"title": "ログアウトしてもよろしいですか？",
-		"message": "ログアウトしても、アラート送信や、お使いのMisskeyアカウントのデータ収集といった機能は動作し続けます。Misskey Toolsの利用を停止したい場合は、「アカウント連携を解除する」ボタンを押下して下さい。",
-		"yes": "ログアウトする",
-		"no": "キャンセル"
+		"title": "로그아웃하시겠습니까?",
+		"message": "로그아웃하더라도 알림 송신과 Misskey 계정 정보 수집은 정지되지 않습니다. Misskey Tools를 더 이상 이용하지 않으시려면 '계정 연동을 해제하기'를 눌러 주세요.",
+		"yes": "로그아웃",
+		"no": "취소"
 	},
 	"_deactivate": {
-		"title": "アカウント連携を解除しますか？",
-		"message": "収集されたデータや個人設定など、全てのデータが削除されます。この操作は取り消すことができません。",
-		"yes": "解除する",
-		"no": "キャンセル",
-		"success": "アカウントを解除しました。トップ画面に戻ります。",
-		"failure": "アカウントを解除できませんでした。"
+		"title": "계정 연동을 해제하시겠습니까?",
+		"message": "수집된 데이터나 개인 설정 등을 바롯한 모든 데이터가 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+		"yes": "해제하기",
+		"no": "취소",
+		"success": "계정 연동을 해제했습니다. 메인 화면으로 돌아갑니다.",
+		"failure": "계정 연동을 해제할 수 없습니다."
 	}
 }
