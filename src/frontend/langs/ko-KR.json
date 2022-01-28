@@ -61,84 +61,84 @@
 		"misshaiAlertTitle": "ミス廃アラート",
 		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
 		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
-		"catAdjusterDescription": "CATモードの猫耳がアイコンに合わなくてお悩みのあなたへ。かわいいアイコンを猫耳に合わせてトリミングできます。",
-		"nextFeaturesTitle": "今後も追加予定。",
-		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
+		"catAdjusterDescription": "고양이 모드로 설정했지만 프로필 사진에 고양이 귀가 어색하게 보일 때, 프로필 사진을 고양이 귀에 어울리게 조절할 수 있습니다.",
+		"nextFeaturesTitle": "앞으로도 추가될 예정",
+		"nextFeaturesDescription": "이것 뿐만이 아닙니다. 앞으로도 업데이트를 통해 다양한 기능을 추가할 예정입니다!"
 	},
 	"_nav": {
 		"misshai": "ミス廃",
-		"accounts": "アカウント",
-		"settings": "設定",
-		"catAdjuster": "ねこみみ"
+		"accounts": "계정",
+		"settings": "설정",
+		"catAdjuster": "고양이귀"
 	},
 	"_missHai": {
 		"ranking": "ミス廃ランキング",
 		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
-		"showAll": "全員分見る",
+		"showAll": "모두 보이기",
 		"data": "みす廃データ",
-		"dataBody": "内容",
-		"dataScore": "スコア",
-		"dataDelta": "前日比",
-		"rating": "レート",
-		"order": "順位",
-		"showRanking": "ランキングを見る"
+		"dataBody": "내용",
+		"dataScore": "점수",
+		"dataDelta": "어제보다",
+		"rating": "평가",
+		"order": "순위",
+		"showRanking": "순위를 보기"
 	},
 	"_accounts": {
-		"currentAccount": "現在ログインしているアカウント",
-		"switchAccount": "アカウント切り替え",
-		"useAnother": "他のアカウントで登録する"
+		"currentAccount": "현재 로그인한 계정",
+		"switchAccount": "계정 전환",
+		"useAnother": "다른 계정 등록하기"
 	},
 	"_developerInfo": {
-		"title": "開発者",
-		"description": "何か困ったことがあったら、以下のアカウントにメッセージを送ってください。"
+		"title": "개발자",
+		"description": "도움이 필요하시면 아래 계정으로 메세지를 보내 주세요."
 	},
 	"_timeline": {
-		"title": "タイムライン",
-		"description": "{{hashtag}} タグを含む最新ノートを表示します。"
+		"title": "타임라인",
+		"description": "{{hashtag}} 해시태그를 포함한 최신 노트를 표시합니다."
 	},
 	"_alertMode": {
-		"note": "自動的にノートを投稿",
-		"notification": "Misskeyに通知(標準)",
-		"nothing": "通知しない",
-		"notificationWarning": "「Misskey に通知」オプションは古いMisskeyでは動作しません。"
+		"note": "노트로 보내기",
+		"notification": "Misskey 알림으로 보내기 (기본값)",
+		"nothing": "보내지 않기",
+		"notificationWarning": "\"Misskey 알림으로 보내기\"는 구형 Misskey에서는 작동하지 않습니다."
 	},
 	"_visibility": {
-		"public": "パブリック",
-		"home": "ホーム",
-		"followers": "フォロワー",
-		"users": "ログインユーザー"
+		"public": "공개",
+		"home": "홈",
+		"followers": "팔로워",
+		"users": "로그인한 유저"
 	},
 	"_themes": {
-		"light": "ライトテーマ",
-		"dark": "ダークテーマ",
-		"system": "システム設定に準じる"
+		"light": "밝은 테마",
+		"dark": "어두운 테마",
+		"system": "시스템 설정에 따르기"
 	},
 	"_template": {
-		"description": "アラートの自動投稿をカスタマイズできます。",
-		"description2": "ハッシュタグ #misshaialert は、テンプレートに関わらず自動付与されます。",
-		"default": "昨日のMisskeyの活動は\n\nノート: {notesCount}({notesDelta})\nフォロー : {followingCount}({followingDelta})\nフォロワー :{followersCount}({followersDelta})\n\nでした。\n{url}",
-		"insertVariables": "変数を挿入する",
-		"insertVariablesHelp": "{ } で囲われた文字列は変数と呼ばれ、特別な意味を持ちます。これを含めると、投稿時に自動的に値が埋め込まれます。",
+		"description": "알림 템플릿을 수정할 수 있습니다.",
+		"description2": "'#misshaialert' 해시태그가 자동으로 맨 아래에 추가됩니다.",
+		"default": "어제 하루동안의 Misskey 사용량이에요!\n\n노트: {notesCount}({notesDelta})\n팔로우 : {followingCount}({followingDelta})\n팔로워 :{followersCount}({followersDelta})\n\n입니다.\n{url}",
+		"insertVariables": "변수 입력",
+		"insertVariablesHelp": "{ } 으로 감싼 문자열은 변수라고 하며 특별한 기능을 가집니다. 변수는 알림을 전송할 때 자동으로 변환됩니다.",
 		"_variables": {
-			"notesCount": "ノート数",
-			"followingCount": "フォロー数",
-			"followersCount": "フォロワー数",
-			"notesDelta": "ノート数の前日比",
-			"followingDelta": "フォロー数の前日比",
-			"followersDelta": "フォロワー数の前日比",
-			"url": "本サイトのURL",
-			"username": "アカウントのユーザー名",
-			"host": "アカウントの所属ホスト名",
-			"rating": "レート"
+			"notesCount": "노트 수",
+			"followingCount": "팔로우 수",
+			"followersCount": "팔로워 수",
+			"notesDelta": "노트 수 (어제보다)",
+			"followingDelta": "팔로우 수 (어제보다)",
+			"followersDelta": "팔로워 수 (어제보다)",
+			"url": "이 사이트의 URL",
+			"username": "나의 유저네임",
+			"host": "나의 인스턴스 호스트",
+			"rating": "평가"
 		}
 	},
 	"_error": {
-		"sorry": "問題が発生しました。お手数ですが、やり直してください。",
-		"additionalInfo": "追加情報: ",
-		"hitorisskeyIsDenied": "ひとりすきーは連携できません。",
+		"sorry": "문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
+		"additionalInfo": "추가 정보: ",
+		"hitorisskeyIsDenied": "Hitorisskey는 연동할 수 없습니다.",
 		"teapot": "I'm a teapot.",
-		"sessionRequired": "セッションがありません。",
-		"tokenRequired": "トークンがありません。",
+		"sessionRequired": "세션이 누락되었습니다.",
+		"tokenRequired": "토큰이 누락되었습니다.",
 		"invalidParameter": "パラメータが不正です。",
 		"notAuthorized": "権限がありません。",
 		"other": "なし"
