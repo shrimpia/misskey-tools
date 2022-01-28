@@ -45,8 +45,8 @@
 	"upload": "Upload",
 	"preview": "Preview",
 	"catAdjuster": "Cat Adjuster",
-	"shouldUpdateToken": "認証トークンの更新が必要です。更新しないと一部機能が正常に動作しません。",
-	"update": "更新する",
+	"shouldUpdateToken": "Please update your authentication token, or some functions will not work properly.",
+	"update": "Update",
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
 		"pattern2": "Are you overusing Misskey?",
