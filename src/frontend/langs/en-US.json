@@ -45,6 +45,8 @@
 	"upload": "Upload",
 	"preview": "Preview",
 	"catAdjuster": "Cat Adjuster",
+	"shouldUpdateToken": "Please update your authentication token, or some functions will not work properly.",
+	"update": "Update",
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
 		"pattern2": "Are you overusing Misskey?",
