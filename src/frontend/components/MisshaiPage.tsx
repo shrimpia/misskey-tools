@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { alertModes } from '../../common/types/alert-mode';
 import { IUser } from '../../common/types/user';
 import { Visibility } from '../../common/types/visibility';
-import { LOCALSTORAGE_KEY_TOKEN } from '../const';
+import { LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { $post, $put } from '../misc/api';
 import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
 import { showModal } from '../store/slices/screen';
@@ -169,6 +169,13 @@ export const MisshaiPage: React.VFC = () => {
 		if (session.error) {
 			console.error(session.error);
 			localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
+			const a = localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS);
+			if (a) {
+				const accounts = JSON.parse(a) as string[];
+				if (accounts.length > 0) {
+					localStorage.setItem(LOCALSTORAGE_KEY_TOKEN, accounts[0]);
+				}
+			}
 			location.reload();
 		}
 	}, [session.error]);

@@ -10,6 +10,7 @@ import { config } from '../config';
 import { upsertUser, getUser, updateUser, updateUsersToolsToken } from './functions/users';
 import { api } from './services/misskey';
 import { die } from './die';
+import { misskeyAppInfo } from './const';
 
 export const router = new Router<DefaultState, Context>();
 
@@ -36,9 +37,8 @@ router.get('/login', async ctx => {
 
 	// ホスト名の正規化
 	host = meta.uri.replace(/^https?:\/\//, '');
-	const name = 'みす廃あらーと';
-	const description = 'ついついノートしすぎていませんか？';
-	const permission = ['write:notes', 'write:notifications', 'write:drive', 'read:account', 'write:account'];
+
+	const { name, permission, description } = misskeyAppInfo;
 
 	if (meta.features.miauth) {
 		// MiAuthを使用する

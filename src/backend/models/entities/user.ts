@@ -98,4 +98,11 @@ export class User implements IUser {
 		default: false,
 	})
 	public bannedFromRanking: boolean;
+
+	@Column({
+		type: 'integer',
+		default: 1,
+		comment: 'Misskey API トークンのバージョン。現行と違う場合はアップデートを要求する',
+	})
+	public tokenVersion: number;
 }

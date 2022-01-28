@@ -13,7 +13,7 @@ import { store } from './store';
 import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
 import { getBrowserLanguage, resources } from './langs';
-import { LOCALSTORAGE_KEY_LANG } from './const';
+import { LOCALSTORAGE_KEY_LANG, XELTICA_STUDIO_URL } from './const';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
@@ -46,7 +46,7 @@ const AppInner : React.VFC = () => {
 
 	return error ? (
 		<div className="container">
-			<Header hasTopLink />
+			<Header hasTopLink className="xarticle mb-2" />
 			<div className="xarticle">
 				<h1>{t('error')}</h1>
 				<p>{t('_error.sorry')}</p>
@@ -67,7 +67,7 @@ const AppInner : React.VFC = () => {
 				<Route exact path="/announcements/:id" component={AnnouncementPage} />
 			</Switch>
 			<footer className="text-center pa-5">
-				<p>(C)2020-2022 Xeltica Studio</p>
+				<p>(C)2020-2022 <a href={XELTICA_STUDIO_URL} target="_blank" rel="noopener noreferrer">Xeltica Studio</a></p>
 				<p dangerouslySetInnerHTML={{__html: t('disclaimerForMisskeyHq')}} />
 				<p><Link to="/term">{t('termsOfService')}</Link></p>
 			</footer>

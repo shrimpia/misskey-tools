@@ -10,16 +10,19 @@ import { useDispatch } from 'react-redux';
 import { LOCALSTORAGE_KEY_ACCOUNTS } from '../const';
 import { IUser } from '../../common/types/user';
 import { setAccounts } from '../store/slices/screen';
-import { useGetSessionQuery } from '../services/session';
+import { useGetMetaQuery, useGetSessionQuery } from '../services/session';
 import { AdminPage } from '../components/AdminPage';
 import { $get } from '../misc/api';
 import { NekomimiPage } from '../components/NekomimiPage';
+import { Card } from '../components/Card';
+import { CurrentUser } from '../components/CurrentUser';
 
 export const IndexSessionPage: React.VFC = () => {
 	const [selectedTab, setSelectedTab] = useState<string>('misshai');
 	const {t, i18n} = useTranslation();
 	const dispatch = useDispatch();
-	const { data } = useGetSessionQuery(undefined);
+	const { data: session } = useGetSessionQuery(undefined);
+	const { data: meta } = useGetMetaQuery(undefined);
 
 	useEffect(() => {
 		const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
@@ -31,12 +34,12 @@ export const IndexSessionPage: React.VFC = () => {
 		it.push({ label: t('_nav.misshai'), key: 'misshai' });
 		it.push({ label: t('_nav.accounts'), key: 'accounts' });
 		it.push({ label: t('_nav.catAdjuster'), key: 'nekomimi', isNew: true });
-		if (data?.isAdmin) {
+		if (session?.isAdmin) {
 			it.push({ label: 'Admin', key: 'admin' });
 		}
 		it.push({ label: t('_nav.settings'), key: 'settings' });
 		return it;
-	}, [i18n.language, data]);
+	}, [i18n.language, session]);
 
 	const component = useMemo(() => {
 		switch (selectedTab) {
@@ -57,7 +60,16 @@ export const IndexSessionPage: React.VFC = () => {
 					<Tab items={items} selected={selectedTab} onSelect={setSelectedTab}/>
 				</div>
 			</div>
-			<article className="xarticle mt-4">
+			<article className="xarticle mt-2">
+				<Card className="mb-2">
+					<CurrentUser/>
+					{session && meta && meta.currentTokenVersion !== session.tokenVersion && (
+						<div className="text-danger mt-1">
+							{t('shouldUpdateToken')}
+							<a href={`/login?host=${encodeURIComponent(session.host)}`}>{t('update')}</a>
+						</div>
+					)}
+				</Card>
 				{component}
 			</article>
 		</>

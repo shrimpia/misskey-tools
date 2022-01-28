@@ -4,6 +4,7 @@ import { DeepPartial } from 'typeorm';
 import { genToken } from './gen-token';
 import { IUser } from '../../common/types/user';
 import { config } from '../../config';
+import { currentTokenVersion } from '../const';
 
 /**
  * IUser インターフェイスに変換します。
@@ -61,9 +62,9 @@ export const getUserByToolsToken = (token: string): Promise<IUser | undefined> =
 export const upsertUser = async (username: string, host: string, token: string): Promise<void> => {
 	const u = await getUser(username, host);
 	if (u) {
-		await Users.update(u.id, { token });
+		await Users.update(u.id, { token, tokenVersion: currentTokenVersion });
 	} else {
-		await Users.insert({ username, host, token });
+		await Users.insert({ username, host, token, tokenVersion: currentTokenVersion });
 	}
 };
 
