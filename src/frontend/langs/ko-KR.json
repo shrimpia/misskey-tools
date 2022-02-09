@@ -73,13 +73,13 @@
 	},
 	"_missHai": {
 		"ranking": "노트왕 랭킹",
-		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
+		"rankingDescription": "유저의 활동량에 따라 레이팅을 산출하여 높은 순으로 랭킹을 표시합니다.",
 		"showAll": "모두 보이기",
 		"data": "みす廃データ",
 		"dataBody": "내용",
 		"dataScore": "점수",
 		"dataDelta": "어제보다",
-		"rating": "평가",
+		"rating": "레이팅",
 		"order": "순위",
 		"showRanking": "순위를 보기"
 	},
@@ -129,7 +129,7 @@
 			"url": "이 사이트의 URL",
 			"username": "나의 유저네임",
 			"host": "나의 인스턴스 호스트",
-			"rating": "평가"
+			"rating": "레이팅"
 		}
 	},
 	"_error": {
