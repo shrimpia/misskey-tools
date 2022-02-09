@@ -1,7 +1,7 @@
 {
 	"title": "Misskey Tools",
-	"description1": "Misskeyをもっと効果的に。様々な機能を持ったオールインワンツール。",
-	"description2": "お使いのインスタンスURLを入力して、今すぐMisskey Toolsを使おう！",
+	"description1": "다양한 도구로 여러분의 Misskey 활동을 더욱 윤택하게.",
+	"description2": "이용 중인 인스턴스 URL을 입력해서 곧바로 사용해 보세요!",
 	"notes": "노트",
 	"following": "팔로우",
 	"followers": "팔로워",
@@ -48,12 +48,12 @@
 	"shouldUpdateToken": "인증 토큰을 업데이트해야 합니다. 업데이트하지 않으면 일부 기능이 정상적으로 동작하지 않습니다.",
 	"update": "업데이트하기",
 	"_welcomeMessage": {
-		"pattern1": "ついついノートしすぎていませんか？",
+		"pattern1": "Misskey와 함께라면 시간 가는 줄도 모르고",
 		"pattern2": "Misskey, 너무 많이 하지 않으셨나요?",
 		"pattern3": "오늘 쓴 노트가 얼마나 되더라?",
-		"pattern4": "10000 ノートは初心者、そう思っていませんか？",
-		"pattern5": "息するように Misskey、そんなあなたへ。",
-		"pattern6": "あなたは真の Misskey 廃人ですか？"
+		"pattern4": "여러분이 지금까지 쓴 노트 수를 보세요. 아직도 \b자신이 뉴비라고 생각하시나요?",
+		"pattern5": "들숨에 노트를 날숨에 리액션을 날리는 당신에게.",
+		"pattern6": "그러고도 당신이 Misskey 광인입니까?"
 	},
 	"_welcome": {
 		"title": "프로를 위한 도구",
