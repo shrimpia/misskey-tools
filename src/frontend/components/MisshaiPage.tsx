@@ -14,6 +14,7 @@ import { Ranking } from './Ranking';
 import { Skeleton } from './Skeleton';
 
 import './MisshaiPage.scss';
+import { DeveloperInfo } from './DeveloperInfo';
 
 const variables = [
 	'notesCount',
@@ -196,10 +197,17 @@ export const MisshaiPage: React.VFC = () => {
 					<AnnouncementList />
 				</div>
 			</section>
+			<section className="card misshaiRanking">
+				<div className="body">
+					<h1><i className="bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
+					<Ranking limit={limit} />
+					{limit && <button className="btn link" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
+				</div>
+			</section>
 			<div className="misshaiPageLayout">
 				<section className="card misshaiData">
 					<div className="body">
-						<h1>{t('_missHai.data')}</h1>
+						<h1><i className="bi-activity"></i> {t('_missHai.data')}</h1>
 						<table className="table fluid">
 							<thead>
 								<tr>
@@ -234,18 +242,16 @@ export const MisshaiPage: React.VFC = () => {
 						</p>
 					</div>
 				</section>
-				<section className="card misshaiRanking">
+				<section className="card developerInfo">
 					<div className="body">
-						<h1>{t('_missHai.ranking')}</h1>
-						<Ranking limit={limit} />
-						{limit && <button className="btn link" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
+						<DeveloperInfo />
 					</div>
 				</section>
 			</div>
 			<div className="misshaiPageLayout">
 				<section className="card alertModeSetting">
 					<div className="body">
-						<h1 className="mb-2">{t('alertMode')}</h1>
+						<h1 className="mb-2"><i className="bi-gear"></i> {t('alertMode')}</h1>
 						<div className="vstack">
 							{
 								alertModes.map((mode) => (
@@ -291,7 +297,7 @@ export const MisshaiPage: React.VFC = () => {
 				</section>
 				<section className="card templateSetting">
 					<div className="body">
-						<h1>{t('template')}</h1>
+						<h1><i className="bi-card-text"></i> {t('template')}</h1>
 						<p>{t('_template.description')}</p>
 						<div className="hstack dense mb-2">
 							<button className="btn" onClick={onClickInsertVariables}>

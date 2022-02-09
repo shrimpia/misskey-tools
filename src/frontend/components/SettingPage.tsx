@@ -91,7 +91,7 @@ export const SettingPage: React.VFC = () => {
 	) : (
 		<div className="vstack fade">
 			<Card bodyClassName="vstack">
-				<h1>{t('appearance')}</h1>
+				<h1><i className="bi-palette"></i> {t('appearance')}</h1>
 				<h2>{t('theme')}</h2>
 				<div className="vstack">
 					{

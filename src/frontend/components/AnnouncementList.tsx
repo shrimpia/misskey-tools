@@ -24,7 +24,7 @@ export const AnnouncementList: React.VFC = () => {
 
 	return (
 		<>
-			<h1 className="mb-0">{t('announcements')}</h1>
+			<h1 className="mb-0"><i className="bi-bell"></i> {t('announcements')}</h1>
 			<div className="large menu fade">
 				{announcements.map(a => (
 					<Link className="item fluid" key={a.id} to={`/announcements/${a.id}`}>

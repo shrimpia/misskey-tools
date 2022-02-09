@@ -1,14 +1,17 @@
-import enUS from './en-US.json';
 import jaJP from './ja-JP.json';
+import enUS from './en-US.json';
+import koKR from './ko-KR.json';
 
 export const resources = {
-	'en_US': { translation: enUS },
 	'ja_JP': { translation: jaJP },
+	'en_US': { translation: enUS },
+	'ko_KR': { translation: koKR },
 };
 
 export const languageName = {
-	'en_US': 'English',
 	'ja_JP': '日本語',
+	'en_US': 'English',
+	'ko_KR': '한국어',
 } as const;
 
 export type LanguageCode = keyof typeof resources;

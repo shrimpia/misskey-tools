@@ -3,10 +3,10 @@
     flex-wrap: wrap;
     gap: var(--margin);
     > .misshaiData {
-        flex: 1 0 300px;
+        flex: 3 0 300px;
     }
-    > .misshaiRanking {
-        flex: 5 0 300px;
+    > .developerInfo {
+        flex: 1 0 300px;
     }
     > .alertModeSetting {
         flex: 1 0 300px;
