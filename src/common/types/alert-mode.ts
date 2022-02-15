@@ -1,6 +1,7 @@
 export const alertModes = [
 	'note',
 	'notification',
+	'both',
 	'nothing'
 ] as const;
 

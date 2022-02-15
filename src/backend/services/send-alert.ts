@@ -16,6 +16,12 @@ export const sendAlert = async (user: User) => {
 		case 'notification':
 			await sendNotificationAlert(text, user);
 			break;
+		case 'both':
+			await Promise.all([
+				sendNotificationAlert(text, user),
+				sendNoteAlert(text, user),
+			]);
+			break;
 	}
 };
 

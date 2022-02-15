@@ -197,13 +197,6 @@ export const MisshaiPage: React.VFC = () => {
 					<AnnouncementList />
 				</div>
 			</section>
-			<section className="card misshaiRanking">
-				<div className="body">
-					<h1><i className="bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
-					<Ranking limit={limit} />
-					{limit && <button className="btn link" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
-				</div>
-			</section>
 			<div className="misshaiPageLayout">
 				<section className="card misshaiData">
 					<div className="body">
@@ -248,29 +241,34 @@ export const MisshaiPage: React.VFC = () => {
 					</div>
 				</section>
 			</div>
+			<section className="card misshaiRanking">
+				<div className="body">
+					<h1><i className="bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
+					<Ranking limit={limit} />
+					{limit && <button className="btn link" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
+				</div>
+			</section>
 			<div className="misshaiPageLayout">
 				<section className="card alertModeSetting">
 					<div className="body">
 						<h1 className="mb-2"><i className="bi-gear"></i> {t('alertMode')}</h1>
 						<div className="vstack">
-							{
-								alertModes.map((mode) => (
-									<label key={mode} className="input-check">
-										<input type="radio" checked={mode === draft.alertMode} onChange={() => {
-											updateSetting({ alertMode: mode });
-										}} />
-										<span>{t(`_alertMode.${mode}`)}</span>
-									</label>
-								))
-							}
+							{ alertModes.map((mode) => (
+								<label key={mode} className="input-check">
+									<input type="radio" checked={mode === draft.alertMode} onChange={() => {
+										updateSetting({ alertMode: mode });
+									}} />
+									<span>{t(`_alertMode.${mode}`)}</span>
+								</label>
+							))}
 						</div>
-						{ draft.alertMode === 'notification' && (
+						{ (draft.alertMode === 'notification' || draft.alertMode === 'both') && (
 							<div className="alert bg-danger mt-2">
 								<i className="icon bi bi-exclamation-circle"></i>
 								{t('_alertMode.notificationWarning')}
 							</div>
 						)}
-						{ draft.alertMode === 'note' && (
+						{ (draft.alertMode === 'note' || draft.alertMode === 'both') && (
 							<>
 								<h2 className="mt-2 mb-1">{t('visibility')}</h2>
 								<div className="vstack">
