@@ -1,7 +1,7 @@
 {
 	"title": "Misskey Tools",
-	"description1": "Misskeyをもっと効果的に。様々な機能を持ったオールインワンツール。",
-	"description2": "お使いのインスタンスURLを入力して、今すぐMisskey Toolsを使おう！",
+	"description1": "다양한 도구로 여러분의 Misskey 활동을 더욱 윤택하게.",
+	"description2": "이용 중인 인스턴스 URL을 입력해서 곧바로 사용해 보세요!",
 	"notes": "노트",
 	"following": "팔로우",
 	"followers": "팔로워",
@@ -48,38 +48,38 @@
 	"shouldUpdateToken": "인증 토큰을 업데이트해야 합니다. 업데이트하지 않으면 일부 기능이 정상적으로 동작하지 않습니다.",
 	"update": "업데이트하기",
 	"_welcomeMessage": {
-		"pattern1": "ついついノートしすぎていませんか？",
+		"pattern1": "Misskey와 함께라면 시간 가는 줄도 모르고",
 		"pattern2": "Misskey, 너무 많이 하지 않으셨나요?",
 		"pattern3": "오늘 쓴 노트가 얼마나 되더라?",
-		"pattern4": "10000 ノートは初心者、そう思っていませんか？",
-		"pattern5": "息するように Misskey、そんなあなたへ。",
-		"pattern6": "あなたは真の Misskey 廃人ですか？"
+		"pattern4": "여러분이 지금까지 쓴 노트 수를 보세요. 아직도 \b자신이 뉴비라고 생각하시나요?",
+		"pattern5": "들숨에 노트를 날숨에 리액션을 날리는 당신에게.",
+		"pattern6": "그러고도 당신이 Misskey 광인입니까?"
 	},
 	"_welcome": {
 		"title": "프로를 위한 도구",
 		"description": "Misskey Tools는 더 즐거운 Misskey 생활을 위한 도구를 여러분께 제공합니다.",
-		"misshaiAlertTitle": "ミス廃アラート",
+		"misshaiAlertTitle": "노트왕 알림",
 		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
-		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
+		"misshaiRankingDescription": "노트왕 랭킹에서는, Misskey에서의 활동을 수치화하여 랭킹의 형태로 보여 드립니다.",
 		"catAdjusterDescription": "고양이 모드로 설정했지만 프로필 사진에 고양이 귀가 어색하게 보일 때, 프로필 사진을 고양이 귀에 어울리게 조절할 수 있습니다.",
 		"nextFeaturesTitle": "앞으로도 추가될 예정",
 		"nextFeaturesDescription": "이것 뿐만이 아닙니다. 앞으로도 업데이트를 통해 다양한 기능을 추가할 예정입니다!"
 	},
 	"_nav": {
-		"misshai": "ミス廃",
+		"misshai": "노트왕",
 		"accounts": "계정",
 		"settings": "설정",
 		"catAdjuster": "고양이귀"
 	},
 	"_missHai": {
-		"ranking": "ミス廃ランキング",
-		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
+		"ranking": "노트왕 랭킹",
+		"rankingDescription": "유저의 활동량에 따라 레이팅을 산출하여 높은 순으로 랭킹을 표시합니다.",
 		"showAll": "모두 보이기",
 		"data": "みす廃データ",
 		"dataBody": "내용",
 		"dataScore": "점수",
 		"dataDelta": "어제보다",
-		"rating": "평가",
+		"rating": "레이팅",
 		"order": "순위",
 		"showRanking": "순위를 보기"
 	},
@@ -99,6 +99,7 @@
 	"_alertMode": {
 		"note": "노트로 보내기",
 		"notification": "Misskey 알림으로 보내기 (기본값)",
+		"both": "両方",
 		"nothing": "보내지 않기",
 		"notificationWarning": "\"Misskey 알림으로 보내기\"는 구형 Misskey에서는 작동하지 않습니다."
 	},
@@ -129,7 +130,7 @@
 			"url": "이 사이트의 URL",
 			"username": "나의 유저네임",
 			"host": "나의 인스턴스 호스트",
-			"rating": "평가"
+			"rating": "레이팅"
 		}
 	},
 	"_error": {
