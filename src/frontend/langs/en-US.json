@@ -99,7 +99,7 @@
 	"_alertMode": {
 		"note": "Automatic Note",
 		"notification": "Notify to your account (Default)",
-		"both": "両方",
+		"both": "Both",
 		"nothing": "Do Nothing",
 		"notificationWarning": "'Notify to your account' option will not be work on legacy versions of Misskey."
 	},
