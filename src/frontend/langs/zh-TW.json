@@ -99,6 +99,7 @@
 	"_alertMode": {
 		"note": "自動的にノートを投稿",
 		"notification": "Misskeyに通知(標準)",
+		"both": "両方",
 		"nothing": "通知しない",
 		"notificationWarning": "「Misskey に通知」オプションは古いMisskeyでは動作しません。"
 	},
