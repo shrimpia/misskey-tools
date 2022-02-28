@@ -10,7 +10,7 @@ export const DeveloperInfo: React.VFC = () => {
 			<div className="menu large">
 				<a className="item" href="http://groundpolis.app/@Lutica" target="_blank" rel="noopener noreferrer">
 					<i className="icon bi-at"></i>
-					X@groundpolis.app
+					Lutica@groundpolis.app
 				</a>
 				<a className="item" href="http://misskey.io/@ebi" target="_blank" rel="noopener noreferrer">
 					<i className="icon bi-at"></i>
