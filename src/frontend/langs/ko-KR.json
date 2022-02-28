@@ -99,7 +99,7 @@
 	"_alertMode": {
 		"note": "노트로 보내기",
 		"notification": "Misskey 알림으로 보내기 (기본값)",
-		"both": "両方",
+		"both": "양쪽 모두 보내기",
 		"nothing": "보내지 않기",
 		"notificationWarning": "\"Misskey 알림으로 보내기\"는 구형 Misskey에서는 작동하지 않습니다."
 	},
