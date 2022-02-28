@@ -60,7 +60,7 @@ export const IndexSessionPage: React.VFC = () => {
 					<Tab items={items} selected={selectedTab} onSelect={setSelectedTab}/>
 				</div>
 			</div>
-			<article className="xarticle mt-2">
+			<div className="xarticle mt-2">
 				<Card className="mb-2">
 					<CurrentUser/>
 					{session && meta && meta.currentTokenVersion !== session.tokenVersion && (
@@ -71,7 +71,7 @@ export const IndexSessionPage: React.VFC = () => {
 					)}
 				</Card>
 				{component}
-			</article>
+			</div>
 		</>
 	);
 };

@@ -192,13 +192,13 @@ export const MisshaiPage: React.VFC = () => {
 		</div>
 	) : (
 		<div className="vstack">
-			<section className="card announcement">
+			<div className="card announcement">
 				<div className="body">
 					<AnnouncementList />
 				</div>
-			</section>
+			</div>
 			<div className="misshaiPageLayout">
-				<section className="card misshaiData">
+				<div className="card misshaiData">
 					<div className="body">
 						<h1><i className="bi-activity"></i> {t('_missHai.data')}</h1>
 						<table className="table fluid">
@@ -234,22 +234,22 @@ export const MisshaiPage: React.VFC = () => {
 							{session.data.rating}
 						</p>
 					</div>
-				</section>
-				<section className="card developerInfo">
+				</div>
+				<div className="card developerInfo">
 					<div className="body">
 						<DeveloperInfo />
 					</div>
-				</section>
+				</div>
 			</div>
-			<section className="card misshaiRanking">
+			<div className="card misshaiRanking">
 				<div className="body">
 					<h1><i className="bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
 					<Ranking limit={limit} />
 					{limit && <button className="btn link" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
 				</div>
-			</section>
+			</div>
 			<div className="misshaiPageLayout">
-				<section className="card alertModeSetting">
+				<div className="card alertModeSetting">
 					<div className="body">
 						<h1 className="mb-2"><i className="bi-gear"></i> {t('alertMode')}</h1>
 						<div className="vstack">
@@ -292,8 +292,8 @@ export const MisshaiPage: React.VFC = () => {
 							</>
 						)}
 					</div>
-				</section>
-				<section className="card templateSetting">
+				</div>
+				<div className="card templateSetting">
 					<div className="body">
 						<h1><i className="bi-card-text"></i> {t('template')}</h1>
 						<p>{t('_template.description')}</p>
@@ -317,9 +317,9 @@ export const MisshaiPage: React.VFC = () => {
 							}}>{t('save')}</button>
 						</div>
 					</div>
-				</section>
+				</div>
 			</div>
-			<section className="list-form mt-2">
+			<div className="list-form mt-2">
 				<button className="item" onClick={onClickSendAlert} disabled={draft.alertMode === 'nothing'}>
 					<i className="icon bi bi-send" />
 					<div className="body">
@@ -327,7 +327,7 @@ export const MisshaiPage: React.VFC = () => {
 						<p className="desc">{t(draft.alertMode === 'nothing' ? 'sendAlertDisabled' : 'sendAlertDescription')}</p>
 					</div>
 				</button>
-			</section>
+			</div>
 		</div>
 	);
 };

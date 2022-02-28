@@ -3,7 +3,6 @@ body {
     --primary-d: rgb(52, 70, 0);
     --max-width: 1024px;
     font-family: "Koruri", sans-serif;
-    font-feature-settings: "pkna";
 }
 
 hr {
@@ -101,13 +100,9 @@ small {
     flex-direction: column;
     min-width: min(100vw, 240px);
     border-radius: var(--radius);
-    padding: calc(var(--margin) / 2);
+    padding: var(--slim-margin);
     background: var(--panel);
 }
-
-.login-form {
-}
-
 
 .cat {
     &:before, &:after {
