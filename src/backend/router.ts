@@ -5,17 +5,22 @@ import crypto from 'crypto';
 import koaSend from 'koa-send';
 import { v4 as uuid } from 'uuid';
 import ms from 'ms';
+import striptags from 'striptags';
+import MarkdownIt from 'markdown-it';
 
 import { config } from '../config';
 import { upsertUser, getUser, updateUser, updateUsersToolsToken } from './functions/users';
 import { api } from './services/misskey';
 import { die } from './die';
 import { misskeyAppInfo } from './const';
+import { Announcements } from './models';
 
 export const router = new Router<DefaultState, Context>();
 
 const sessionHostCache: Record<string, string> = {};
 const tokenSecretCache: Record<string, string> = {};
+
+const md = new MarkdownIt();
 
 router.get('/login', async ctx => {
 	let host = ctx.query.host as string | undefined;
@@ -133,6 +138,15 @@ router.get('/assets/(.*)', async ctx => {
 
 router.get('/api(.*)', async (ctx, next) => {
 	next();
+});
+
+router.get('/announcements/:id', async (ctx) => {
+	const a = await Announcements.findOne(ctx.params.id);
+	const stripped = striptags(md.render(a?.body ?? '').replace(/\n/g, ' '));
+	await ctx.render('frontend', a ? {
+		t: a.title,
+		d: stripped.length > 80 ? stripped.substring(0, 80) + '…' : stripped,
+	} : null);
 });
 
 router.get('(.*)', async (ctx) => {

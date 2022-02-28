@@ -4,8 +4,8 @@ html
 		meta(charset="UTF-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		block meta
-		- const title = 'Misskey Tools'
-		- const desc = '✨Misskey での1日のノート数、フォロー数、フォロワー数をカウントし、深夜0時にお知らせする便利サービスです。';
+		- const title = t ? `${t} | Misskey Tools`: 'Misskey Tools';
+		- const desc = d || '✨Misskey での1日のノート数、フォロー数、フォロワー数をカウントし、深夜0時にお知らせする便利サービスです。';
 		title= title
 		meta(name='description' content=desc)
 		meta(property='og:title' content=title)
