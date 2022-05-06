@@ -47,6 +47,8 @@
 	"catAdjuster": "Cat Adjuster",
 	"shouldUpdateToken": "Please update your authentication token, or some functions will not work properly.",
 	"update": "Update",
+	"shareMisskeyTools": "Share #MisskeyTools",
+	"shareMisskeyToolsNote": "Try #MisskeyTools !\n\nhttps://misskey.tools",
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
 		"pattern2": "Are you overusing Misskey?",
@@ -81,7 +83,8 @@
 		"dataDelta": "Difference",
 		"rating": "Rating",
 		"order": "Order",
-		"showRanking": "Show Ranking"
+		"showRanking": "Show Ranking",
+		"useRanking": "Join the Ranking"
 	},
 	"_accounts": {
 		"currentAccount": "Current Account",
