@@ -14,10 +14,11 @@ import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
 import { getBrowserLanguage, resources } from './langs';
 import { LOCALSTORAGE_KEY_LANG, XELTICA_STUDIO_URL } from './const';
+import { useGetSessionQuery } from './services/session';
+import { AnnouncementPage } from './pages/announcement';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
-import { AnnouncementPage } from './pages/announcement';
 
 document.body.classList.add('dark');
 
@@ -36,6 +37,7 @@ i18n
 	});
 
 const AppInner : React.VFC = () => {
+	const { data: session } = useGetSessionQuery(undefined);
 	const $location = useLocation();
 
 	useTheme();
@@ -70,6 +72,17 @@ const AppInner : React.VFC = () => {
 				<p>(C)2020-2022 <a href={XELTICA_STUDIO_URL} target="_blank" rel="noopener noreferrer">Xeltica Studio</a></p>
 				<p dangerouslySetInnerHTML={{__html: t('disclaimerForMisskeyHq')}} />
 				<p><Link to="/term">{t('termsOfService')}</Link></p>
+				{session && (
+					<p>
+						<a
+							className="btn primary"
+							href={`https://${session.host}/share?text=${encodeURIComponent(t('shareMisskeyToolsNote') as string)}`}
+							target="_blank"
+							rel="noreferrer noopener">
+							{t('shareMisskeyTools')}
+						</a>
+					</p>
+				)}
 			</footer>
 			<ModalComponent />
 		</div>
