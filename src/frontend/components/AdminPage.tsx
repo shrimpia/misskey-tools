@@ -132,76 +132,72 @@ export const AdminPage: React.VFC = () => {
 					<p>You are not an administrator and cannot open this page.</p>
 				) : (
 					<>
-						<article>
-							<h2>Announcements</h2>
-							{!isEditMode && (
-								<label className="input-switch mb-1">
-									<input type="checkbox" checked={isDeleteMode} onChange={e => setDeleteMode(e.target.checked)}/>
-									<div className="switch"></div>
-									<span>Delete Mode</span>
-								</label>
-							)}
-							<Card bodyClassName={isEditMode ? '' : 'px-0'}>
-								{ !isEditMode ? (
-									<>
-										{isDeleteMode && <div className="ml-2 text-danger">Click the item to delete.</div>}
-										<div className="large menu">
-											{announcements.map(a => (
-												<button className="item fluid" key={a.id} onClick={() => {
-													if (isDeleteMode) {
-														deleteAnnouncement(a);
-													} else {
-														selectAnnouncement(a);
-														setEditMode(true);
-													}
-												}}>
-													{isDeleteMode && <i className="icon bi bi-trash text-danger" />}
-													{a.title}
-												</button>
-											))}
-											{!isDeleteMode && (
-												<button className="item fluid" onClick={() => setEditMode(true)}>
-													<i className="icon bi bi-plus"/ >
-													Create New
-												</button>
-											)}
-										</div>
-									</>
-								) : (
-									<div className="vstack">
-										<label className="input-field">
-											Title
-											<input type="text" value={draftTitle} onChange={e => setDraftTitle(e.target.value)} />
-										</label>
-										<label className="input-field">
-											Body
-											<textarea className="input-field" value={draftBody} rows={10} onChange={e => setDraftBody(e.target.value)}/>
-										</label>
-										<div className="hstack" style={{justifyContent: 'flex-end'}}>
-											<button className="btn primary" onClick={submitAnnouncement} disabled={!draftTitle || !draftBody}>
-												Submit
-											</button>
-											<button className="btn" onClick={() => {
-												selectAnnouncement(null);
-												setEditMode(false);
+						<h2>Announcements</h2>
+						{!isEditMode && (
+							<label className="input-switch mb-1">
+								<input type="checkbox" checked={isDeleteMode} onChange={e => setDeleteMode(e.target.checked)}/>
+								<div className="switch"></div>
+								<span>Delete Mode</span>
+							</label>
+						)}
+						<Card bodyClassName={isEditMode ? '' : 'px-0'}>
+							{ !isEditMode ? (
+								<>
+									{isDeleteMode && <div className="ml-2 text-danger">Click the item to delete.</div>}
+									<div className="large menu">
+										{announcements.map(a => (
+											<button className="item fluid" key={a.id} onClick={() => {
+												if (isDeleteMode) {
+													deleteAnnouncement(a);
+												} else {
+													selectAnnouncement(a);
+													setEditMode(true);
+												}
 											}}>
-												Cancel
+												{isDeleteMode && <i className="icon bi bi-trash text-danger" />}
+												{a.title}
 											</button>
-										</div>
+										))}
+										{!isDeleteMode && (
+											<button className="item fluid" onClick={() => setEditMode(true)}>
+												<i className="icon bi bi-plus"/ >
+												Create New
+											</button>
+										)}
 									</div>
-								)}
-							</Card>
-						</article>
-						<article>
-							<h2>Misshai</h2>
-							<div className="vstack">
-								<button className="btn danger" onClick={onClickStartMisshaiAlertWorkerButton}>
-									ミス廃アラートワーカーを強制起動する
-								</button>
-								<h3>直近のワーカーエラー</h3>
-								<pre><code>{misshaiLog?.join('\n') ?? 'なし'}</code></pre>
-							</div>
-						</article>
+								</>
+							) : (
+								<div className="vstack">
+									<label className="input-field">
+										Title
+										<input type="text" value={draftTitle} onChange={e => setDraftTitle(e.target.value)} />
+									</label>
+									<label className="input-field">
+										Body
+										<textarea className="input-field" value={draftBody} rows={10} onChange={e => setDraftBody(e.target.value)}/>
+									</label>
+									<div className="hstack" style={{justifyContent: 'flex-end'}}>
+										<button className="btn primary" onClick={submitAnnouncement} disabled={!draftTitle || !draftBody}>
+											Submit
+										</button>
+										<button className="btn" onClick={() => {
+											selectAnnouncement(null);
+											setEditMode(false);
+										}}>
+											Cancel
+										</button>
+									</div>
+								</div>
+							)}
+						</Card>
+						<h2>Misshai</h2>
+						<div className="vstack">
+							<button className="btn danger" onClick={onClickStartMisshaiAlertWorkerButton}>
+								ミス廃アラートワーカーを強制起動する
+							</button>
+							<h3>直近のワーカーエラー</h3>
+							<pre><code>{misshaiLog?.join('\n') ?? 'なし'}</code></pre>
+						</div>
 					</>
 				)
 			}

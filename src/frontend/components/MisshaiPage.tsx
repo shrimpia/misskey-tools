@@ -27,6 +27,7 @@ const variables = [
 	'username',
 	'host',
 	'rating',
+	'gacha',
 ] as const;
 
 type SettingDraftType = Partial<Pick<IUser,
@@ -203,7 +204,7 @@ export const MisshaiPage: React.VFC = () => {
 			<div className="misshaiPageLayout">
 				<div className="card misshaiData">
 					<div className="body">
-						<h1><i className="bi-activity"></i> {t('_missHai.data')}</h1>
+						<h1><i className="bi bi-activity"></i> {t('_missHai.data')}</h1>
 						<table className="table fluid">
 							<thead>
 								<tr>
@@ -246,7 +247,7 @@ export const MisshaiPage: React.VFC = () => {
 			</div>
 			<div className="card misshaiRanking">
 				<div className="body">
-					<h1><i className="bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
+					<h1><i className="bi bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
 					<Ranking limit={limit} />
 					{limit && <button className="btn primary" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
 					<label className="input-check mt-2">
@@ -260,7 +261,7 @@ export const MisshaiPage: React.VFC = () => {
 			<div className="misshaiPageLayout">
 				<div className="card alertModeSetting">
 					<div className="body">
-						<h1 className="mb-2"><i className="bi-gear"></i> {t('alertMode')}</h1>
+						<h1 className="mb-2"><i className="bi bi-gear"></i> {t('alertMode')}</h1>
 						<div className="vstack">
 							{ alertModes.map((mode) => (
 								<label key={mode} className="input-check">

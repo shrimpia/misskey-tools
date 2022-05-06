@@ -1,9 +1,10 @@
-import React, { HTMLProps } from 'react';
+import React, { HTMLProps, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
-import { useGetMetaQuery } from '../services/session';
+import { useGetMetaQuery, useGetSessionQuery } from '../services/session';
 import { CHANGELOG_URL } from '../const';
+import { createGacha } from '../../common/functions/create-gacha';
 
 export type HeaderProps = {
 	hasTopLink?: boolean;
@@ -11,11 +12,15 @@ export type HeaderProps = {
 	style?: HTMLProps<HTMLElement>['style'],
 };
 
-const messageNumber = Math.floor(Math.random() * 6) + 1;
-
 export const Header: React.FC<HeaderProps> = ({hasTopLink, children, className, style}) => {
 	const {data: meta} = useGetMetaQuery(undefined);
+	const {data: session} = useGetSessionQuery(undefined);
 	const { t } = useTranslation();
+	const [generation, setGeneration] = useState(0);
+	const gacha = useMemo(() => createGacha(), [generation]);
+
+
+
 	return (
 		<header className={`card ${className ?? ''}`} style={style}>
 			<div className="body">
@@ -27,7 +32,21 @@ export const Header: React.FC<HeaderProps> = ({hasTopLink, children, className, 
 						</a>
 					)}
 				</h1>
-				<h2 className="text-dimmed ml-1">{t(`_welcomeMessage.pattern${messageNumber}`)}</h2>
+				<h2 className="text-dimmed">
+					<button onClick={() => setGeneration(g => g + 1)} className="text-primary">
+						<i className="bi bi-dice-5-fill" />
+					</button>
+					{gacha}
+					{session && (
+						<a
+							href={`https://${session.host}/share?text=${encodeURIComponent(`${gacha} https://misskey.tools`)}`}
+							target="_blank"
+							rel="noreferrer noopener"
+							className="ml-1">
+							<i className="bi bi-share-fill" />
+						</a>
+					)}
+				</h2>
 				{children}
 			</div>
 		</header>
