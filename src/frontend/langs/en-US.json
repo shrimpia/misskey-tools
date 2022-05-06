@@ -133,7 +133,8 @@
 			"url": "URL of this site",
 			"username": "Your Username",
 			"host": "Your host",
-			"rating": "Your rating"
+			"rating": "Your rating",
+			"gacha": "ガチャ"
 		}
 	},
 	"_error": {
