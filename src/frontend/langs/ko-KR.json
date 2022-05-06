@@ -47,6 +47,8 @@
 	"catAdjuster": "고양이귀 보정도구",
 	"shouldUpdateToken": "인증 토큰을 업데이트해야 합니다. 업데이트하지 않으면 일부 기능이 정상적으로 동작하지 않습니다.",
 	"update": "업데이트하기",
+	"shareMisskeyTools": "#MisskeyTools をシェアする",
+	"shareMisskeyToolsNote": "#MisskeyTools はいいぞ\n\nhttps://misskey.tools",
 	"_welcomeMessage": {
 		"pattern1": "Misskey와 함께라면 시간 가는 줄도 모르고",
 		"pattern2": "Misskey, 너무 많이 하지 않으셨나요?",
@@ -81,7 +83,8 @@
 		"dataDelta": "어제보다",
 		"rating": "레이팅",
 		"order": "순위",
-		"showRanking": "순위를 보기"
+		"showRanking": "순위를 보기",
+		"useRanking": "ランキングに参加する"
 	},
 	"_accounts": {
 		"currentAccount": "현재 로그인한 계정",
