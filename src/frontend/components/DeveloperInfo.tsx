@@ -12,13 +12,13 @@ export const DeveloperInfo: React.VFC = () => {
 					<i className="icon bi-at"></i>
 					Lutica@groundpolis.app
 				</a>
-				<a className="item" href="http://misskey.io/@ebi" target="_blank" rel="noopener noreferrer">
+				<a className="item" href="http://misskey.io/@le" target="_blank" rel="noopener noreferrer">
 					<i className="icon bi-at"></i>
-					ebi@misskey.io
+					le@misskey.io
 				</a>
-				<a className="item" href="http://twitter.com/@adxlw" target="_blank" rel="noopener noreferrer">
+				<a className="item" href="http://twitter.com/@EbiseLutica" target="_blank" rel="noopener noreferrer">
 					<i className="icon bi-at"></i>
-					adxlw@twitter.com
+					EbiseLutica@twitter.com
 				</a>
 			</div>
 		</>
