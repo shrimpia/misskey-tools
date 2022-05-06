@@ -47,8 +47,8 @@
 	"catAdjuster": "Cat Adjuster",
 	"shouldUpdateToken": "Please update your authentication token, or some functions will not work properly.",
 	"update": "Update",
-	"shareMisskeyTools": "#MisskeyTools をシェアする",
-	"shareMisskeyToolsNote": "#MisskeyTools はいいぞ\n\nhttps://misskey.tools",
+	"shareMisskeyTools": "Share #MisskeyTools",
+	"shareMisskeyToolsNote": "Try #MisskeyTools !\n\nhttps://misskey.tools",
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
 		"pattern2": "Are you overusing Misskey?",
@@ -84,7 +84,7 @@
 		"rating": "Rating",
 		"order": "Order",
 		"showRanking": "Show Ranking",
-		"useRanking": "ランキングに参加する"
+		"useRanking": "Join the Ranking"
 	},
 	"_accounts": {
 		"currentAccount": "Current Account",
