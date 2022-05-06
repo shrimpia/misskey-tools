@@ -30,6 +30,7 @@ export class SessionController {
 		if (setting.localOnly != null) s.localOnly = setting.localOnly;
 		if (setting.remoteFollowersOnly != null) s.remoteFollowersOnly = setting.remoteFollowersOnly;
 		if (setting.template !== undefined) s.template = setting.template;
+		if (setting.useRanking !== undefined) s.useRanking = setting.useRanking;
 		if (Object.keys(s).length === 0) return;
 		await updateUser(user.username, user.host, s);
 	}

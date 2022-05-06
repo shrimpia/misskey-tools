@@ -20,5 +20,6 @@ export interface IUser {
 	bannedFromRanking: boolean;
 	isAdmin?: boolean;
 	tokenVersion: number;
+	useRanking: boolean;
 }
 

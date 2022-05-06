@@ -38,7 +38,7 @@
 	"error": "エラー",
 	"retry": "やり直す",
 	"saved": "保存しました。",
-	"disclaimerForMisskeyHq": "Misskey Toolsは、Misskey HQの公式ツールでは<b>ありません</b>。",
+	"disclaimerForMisskeyHq": "Misskey Toolsは、Misskey Development Divisionの公式ツールでは<b>ありません</b>。",
 	"translatedByTheCommunity": "Misskey Toolsはボランティアによって翻訳されています。",
 	"helpTranslation": "翻訳に協力する",
 	"announcements": "お知らせ",
@@ -81,7 +81,8 @@
 		"dataDelta": "前日比",
 		"rating": "レート",
 		"order": "順位",
-		"showRanking": "ランキングを見る"
+		"showRanking": "ランキングを見る",
+		"useRanking": "ランキングに参加する"
 	},
 	"_accounts": {
 		"currentAccount": "現在ログインしているアカウント",

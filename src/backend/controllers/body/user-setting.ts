@@ -19,4 +19,7 @@ export class UserSetting {
 
 	@IsOptional()
 	template?: string;
+
+	@IsOptional()
+	useRanking?: boolean;
 }

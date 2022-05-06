@@ -97,6 +97,12 @@ export class User implements IUser {
 		type: 'boolean',
 		default: false,
 	})
+	public useRanking: boolean;
+
+	@Column({
+		type: 'boolean',
+		default: false,
+	})
 	public bannedFromRanking: boolean;
 
 	@Column({

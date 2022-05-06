@@ -35,6 +35,7 @@ type SettingDraftType = Partial<Pick<IUser,
 	| 'localOnly'
 	| 'remoteFollowersOnly'
 	| 'template'
+	| 'useRanking'
 >>;
 
 type DraftReducer = React.Reducer<SettingDraftType, Partial<SettingDraftType>>;
@@ -57,6 +58,7 @@ export const MisshaiPage: React.VFC = () => {
 		localOnly: data?.localOnly ?? false,
 		remoteFollowersOnly: data?.remoteFollowersOnly ?? false,
 		template: data?.template ?? null,
+		useRanking: data?.useRanking ?? false,
 	});
 
 	const templateTextarea = useRef<HTMLTextAreaElement>(null);
@@ -98,6 +100,7 @@ export const MisshaiPage: React.VFC = () => {
 				localOnly: data.localOnly,
 				remoteFollowersOnly: data.remoteFollowersOnly,
 				template: data.template,
+				useRanking: data.useRanking
 			});
 		}
 	}, [data]);
@@ -245,7 +248,13 @@ export const MisshaiPage: React.VFC = () => {
 				<div className="body">
 					<h1><i className="bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
 					<Ranking limit={limit} />
-					{limit && <button className="btn link" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
+					{limit && <button className="btn primary" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
+					<label className="input-check mt-2">
+						<input type="checkbox" checked={draft.useRanking} onChange={(e) => {
+							updateSetting({ useRanking: e.target.checked });
+						}}/>
+						<span>{t('_missHai.useRanking')}</span>
+					</label>
 				</div>
 			</div>
 			<div className="misshaiPageLayout">
