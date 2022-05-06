@@ -133,7 +133,8 @@
 			"url": "이 사이트의 URL",
 			"username": "나의 유저네임",
 			"host": "나의 인스턴스 호스트",
-			"rating": "레이팅"
+			"rating": "레이팅",
+			"gacha": "ガチャ"
 		}
 	},
 	"_error": {
