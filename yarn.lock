@@ -6258,10 +6258,8 @@ xdg-basedir@^4.0.0:
   integrity sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==
 
 xeltica-ui@xeltica/design-system:
-  version "1.0.0-beta.6"
-  resolved "https://codeload.github.com/xeltica/design-system/tar.gz/458f42d611f68855275a3dd3b6f4b3a498bd4059"
-  dependencies:
-    jstransformer-markdown-it "^2.1.0"
+  version "1.0.0-beta.7"
+  resolved "https://codeload.github.com/xeltica/design-system/tar.gz/d0b49b6487c379a10f6e568c0f9e37b0035ea7f2"
 
 xml2js@^0.4.17:
   version "0.4.23"
