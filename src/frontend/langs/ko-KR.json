@@ -12,7 +12,7 @@
 	"template": "템플릿",
 	"sendAlert": "테스트 알림 보내기",
 	"sendAlertDescription": "현재 설정으로 테스트 알림을 보냅니다.",
-	"sendAlertDisabled": "알림 수단이 '보내지 않음'으로 설정되어 있어 테스트하지 못했습니다.",
+	"sendAlertDisabled": "알림 수단이 '보내지 않음'으로 설정되어 있어 테스트할 수 없습니다.",
 	"logout": "로그아웃",
 	"logoutDescription": "로그아웃하더라도 알림은 계속해서 보내집니다.",
 	"deleteAccount": "계정 연동을 해제하기",
