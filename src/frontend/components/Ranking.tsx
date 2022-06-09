@@ -50,26 +50,37 @@ export const Ranking: React.VFC<RankingProps> = ({limit}) => {
 				{response.isCalculating ? (
 					<p>{t('isCalculating')}</p>
 				) : (
-					<table className="table mt-1 fluid">
-						<thead>
-							<tr>
-								<th>{t('_missHai.order')}</th>
-								<th>{t('name')}</th>
-								<th>{t('_missHai.rating')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{response.ranking.map((r, i) => (
-								<tr key={i}>
-									<td>{i + 1}</td>
-									<td>
-										{r.username}@{r.host}
-									</td>
-									<td>{r.rating}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
+					<div className="menu large">
+						{response.ranking.map((r, i) => (
+							<a href={`https://${r.host}/@${r.username}`} target="_blank" rel="noopener noreferrer nofollow" className="item flex" key={i}>
+								<div className="text-bold pr-2">{i + 1}</div>
+								<div>
+									{r.username}@{r.host}<br/>
+									<span className="text-dimmed text-75">{t('_missHai.rating')}: {r.rating}</span>
+								</div>
+							</a>
+						))}
+					</div>
+					// <table className="table mt-1 fluid">
+					// 	<thead>
+					// 		<tr>
+					// 			<th>{t('_missHai.order')}</th>
+					// 			<th>{t('name')}</th>
+					// 			<th>{t('_missHai.rating')}</th>
+					// 		</tr>
+					// 	</thead>
+					// 	<tbody>
+					// 		{response.ranking.map((r, i) => (
+					// 			<tr key={i}>
+					// 				<td>{i + 1}</td>
+					// 				<td>
+					// 					{r.username}@{r.host}
+					// 				</td>
+					// 				<td>{r.rating}</td>
+					// 			</tr>
+					// 		))}
+					// 	</tbody>
+					// </table>
 				)}
 			</>
 		) : null
