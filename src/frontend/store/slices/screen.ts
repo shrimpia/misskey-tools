@@ -16,6 +16,7 @@ interface ScreenState {
 	accounts: IUser[];
 	accountTokens: string[];
 	isMobile: boolean;
+	isDrawerShown: boolean;
 }
 
 const initialState: ScreenState = {
@@ -27,6 +28,7 @@ const initialState: ScreenState = {
 	accounts: [],
 	accountTokens: JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[],
 	isMobile: false,
+	isDrawerShown: false,
 };
 
 /**
@@ -64,9 +66,10 @@ export const screenSlice = createSlice({
 		}),
 		setMobile: generateSetter('isMobile'),
 		setTitle: generateSetter('title'),
+		setDrawerShown: generateSetter('isDrawerShown'),
 	},
 });
 
-export const { showModal, hideModal, changeTheme, changeLang, setAccounts, setMobile, setTitle } = screenSlice.actions;
+export const { showModal, hideModal, changeTheme, changeLang, setAccounts, setMobile, setTitle, setDrawerShown } = screenSlice.actions;
 
 export default screenSlice.reducer;

@@ -1,10 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { NavigationMenu } from './components/NavigationMenu';
 
 import { useGetMetaQuery, useGetSessionQuery } from './services/session';
 import { useSelector } from './store';
+import { setDrawerShown } from './store/slices/screen';
 
 type IsMobileProp = { isMobile: boolean };
 
@@ -43,16 +46,16 @@ const MobileHeader = styled.header`
 export const GeneralLayout: React.FC = ({children}) => {
 	const { data: session } = useGetSessionQuery(undefined);
 	const { data: meta } = useGetMetaQuery(undefined);
-	const { isMobile, title } = useSelector(state => state.screen);
+	const { isMobile, title, isDrawerShown } = useSelector(state => state.screen);
 	const {t} = useTranslation();
 
-	const navLinkClassName = (isActive: boolean) => `item ${isActive ? 'active' : ''}`;
+	const dispatch = useDispatch();
 
 	return (
 		<Container isMobile={isMobile}>
 			{isMobile && (
 				<MobileHeader className="navbar hstack f-middle shadow-2 pl-2">
-					<button className="btn flat">
+					<button className="btn flat" onClick={() => dispatch(setDrawerShown(true))}>
 						<i className="fas fa-bars"></i>
 					</button>
 					<h1>{t(title ?? 'title')}</h1>
@@ -61,43 +64,7 @@ export const GeneralLayout: React.FC = ({children}) => {
 			<div>
 				{!isMobile && (
 					<Sidebar className="pa-2">
-						<h1 className="text-175 text-primary mb-2">{t('title')}</h1>
-						<div className="menu">
-							<section>
-								<NavLink className={navLinkClassName} to="/" exact>
-									<i className="icon fas fa-home"></i>
-									{t('_sidebar.dashboard')}
-								</NavLink>
-							</section>
-							<section>
-								<h1>{t('_sidebar.tools')}</h1>
-								<NavLink className={navLinkClassName} to="/apps/miss-hai">
-									<i className="icon fas fa-tower-broadcast"></i>
-									{t('_sidebar.missHaiAlert')}
-								</NavLink>
-								<NavLink className={navLinkClassName} to="/apps/avatar-cropper">
-									<i className="icon fas fa-crop-simple"></i>
-									{t('_sidebar.cropper')}
-								</NavLink>
-							</section>
-							<section>
-								{session && <h1>{session.username}@{session.host}</h1>}
-								{session && (
-									<NavLink className={navLinkClassName} to="/account">
-										<i className="icon fas fa-circle-user"></i>
-										{t('_sidebar.accounts')}
-									</NavLink>
-								)}
-								<NavLink className={navLinkClassName} to="/settings">
-									<i className="icon fas fa-gear"></i>
-									{t('_sidebar.settings')}
-								</NavLink>
-								<NavLink className={navLinkClassName} to="/admin">
-									<i className="icon fas fa-lock"></i>
-									{t('_sidebar.admin')}
-								</NavLink>
-							</section>
-						</div>
+						<NavigationMenu />
 					</Sidebar>
 				)}
 				<Main isMobile={isMobile}>
@@ -112,6 +79,12 @@ export const GeneralLayout: React.FC = ({children}) => {
 					)}
 					{children}
 				</Main>
+			</div>
+			<div className={`drawer-container ${isDrawerShown ? 'active' : ''}`}>
+				<div className="backdrop" onClick={() => dispatch(setDrawerShown(false))}></div>
+				<div className="drawer pa-2" onClick={e => e.stopPropagation()}>
+					<NavigationMenu />
+				</div>
 			</div>
 		</Container>
 	);

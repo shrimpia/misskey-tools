@@ -119,8 +119,10 @@ export const SettingPage: React.VFC = () => {
 				</select>
 				<div className="alert bg-info mt-2">
 					<i className="icon fas fa-language" />
-					{t('translatedByTheCommunity')}&nbsp;
-					<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
+					<div>
+						{t('translatedByTheCommunity')}&nbsp;
+						<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
+					</div>
 				</div>
 			</Card>
 			<div className="list-form">
