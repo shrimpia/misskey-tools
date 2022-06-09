@@ -1,10 +1,12 @@
 import React  from 'react';
 import { useTranslation } from 'react-i18next';
-import { Ranking } from '../components/Ranking';
+import { Ranking } from '../../../components/Ranking';
+import { useTitle } from '../../../hooks/useTitle';
 
 
 export const RankingPage: React.VFC = () => {
 	const {t} = useTranslation();
+	useTitle('_missHai.ranking');
 
 	return (
 		<article className="xarticle">

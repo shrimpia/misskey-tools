@@ -5,13 +5,16 @@ import { LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { useGetSessionQuery } from '../services/session';
 import { useSelector } from '../store';
 import { setAccounts } from '../store/slices/screen';
-import { LoginForm } from './LoginForm';
-import { Skeleton } from './Skeleton';
+import { LoginForm } from '../components/LoginForm';
+import { Skeleton } from '../components/Skeleton';
+import { useTitle } from '../hooks/useTitle';
 
 export const AccountsPage: React.VFC = () => {
 	const {data} = useGetSessionQuery(undefined);
 	const {t} = useTranslation();
 	const dispatch = useDispatch();
+
+	useTitle('_sidebar.accounts');
 
 	const {accounts, accountTokens} = useSelector(state => state.screen);
 
@@ -40,14 +43,14 @@ export const AccountsPage: React.VFC = () => {
 						accounts.length === accountTokens.length ? (
 							accounts.map(account => (
 								<button className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
-									<i className="icon bi bi-chevron-right" />
+									<i className="icon fas fa-chevron-right" />
 										@{account.username}@{account.host}
 									<button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {
 										const filteredAccounts = accounts.filter(ac => ac.id !== account.id);
 										dispatch(setAccounts(filteredAccounts));
 										e.stopPropagation();
 									}}>
-										<i className="bi bi-trash"/>
+										<i className="fas fa-trash-can"/>
 									</button>
 								</button>
 							))

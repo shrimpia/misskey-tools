@@ -6,6 +6,7 @@ import { IAnnouncement } from '../../common/types/announcement';
 import { Skeleton } from '../components/Skeleton';
 import { $get } from '../misc/api';
 import { useSelector } from '../store';
+import { useTitle } from '../hooks/useTitle';
 
 export const AnnouncementPage: React.VFC = () => {
 	const { id } = useParams<{id: string}>();
@@ -14,6 +15,8 @@ export const AnnouncementPage: React.VFC = () => {
 	const [announcement, setAnnouncement] = useState<IAnnouncement | null>();
 
 	const lang = useSelector(state => state.screen.language);
+
+	useTitle('announcements');
 
 	useEffect(() => {
 		$get<IAnnouncement>('announcements/' + id).then(setAnnouncement);
@@ -25,7 +28,7 @@ export const AnnouncementPage: React.VFC = () => {
 					<h2>
 						{announcement.title}
 						<aside className="inline ml-1 text-dimmed text-100">
-							<i className="bi bi-clock" />&nbsp;
+							<i className="fas fa-clock" />&nbsp;
 							{dayjs(announcement.createdAt).locale(lang.split('_')[0]).fromNow()}
 						</aside>
 					</h2>

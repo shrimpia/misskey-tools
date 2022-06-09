@@ -23,10 +23,10 @@ const getButtons = (button: DialogButtonType): DialogButton[] => {
 };
 
 const dialogIconPattern: Record<DialogIcon, string> = {
-	error: 'bi bi-x-circle-fill text-danger',
-	info: 'bi bi-info-circle-fill text-primary',
-	question: 'bi bi-question-circle-fill text-primary',
-	warning: 'bi bi-exclamation-circle-fill text-warning',
+	error: 'fas fa-circle-xmark text-danger',
+	info: 'fas fa-circle-info text-primary',
+	question: 'fas fa-circle-question text-primary',
+	warning: 'fas fa-circle-exclamation text-warning',
 };
 
 const Dialog: React.VFC<{modal: ModalTypeDialog}> = ({modal}) => {

@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { LoginForm } from '../components/LoginForm';
-import { Header } from '../components/Header';
+import { Header } from '../Header';
 import { AnnouncementList } from '../components/AnnouncementList';
 export const IndexWelcomePage: React.VFC = () => {
 	const {t} = useTranslation();
 
 	return (
 		<>
-			<Header className="xarticle mb-4">
+			<Header>
 				<article className="mt-4">
 					<p>{t('description1')}</p>
 					<p>{t('description2')}</p>
@@ -30,16 +30,16 @@ export const IndexWelcomePage: React.VFC = () => {
 				</header>
 				<div className="row">
 					<article className="col-4 col-12-sm">
-						<h3><i className="bi bi-megaphone-fill"/> {t('_welcome.misshaiAlertTitle')}</h3>
+						<h3><i className="fas fa-bullhone"/> {t('_welcome.misshaiAlertTitle')}</h3>
 						<p>{t('_welcome.misshaiAlertDescription')}</p>
 					</article>
 					<article className="col-4 col-12-sm">
-						<h3><i className="bi bi-bar-chart-fill"/> {t('_missHai.ranking')}</h3>
+						<h3><i className="fas fa-ranking-star"/> {t('_missHai.ranking')}</h3>
 						<p>{t('_welcome.misshaiRankingDescription')}</p>
-						<Link to="/ranking">{t('_missHai.showRanking')}</Link>
+						<Link to="/apps/miss-hai/ranking">{t('_missHai.showRanking')}</Link>
 					</article>
 					<div className="col-4 col-12-sm">
-						<h3><i className="bi bi-crop"/> {t('catAdjuster')}</h3>
+						<h3><i className="fas fa-crop-simple"/> {t('catAdjuster')}</h3>
 						<p>{t('_welcome.catAdjusterDescription')}</p>
 					</div>
 				</div>
