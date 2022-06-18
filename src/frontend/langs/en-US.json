@@ -1,7 +1,7 @@
 {
 	"title": "Misskey Tools",
-	"description1": "Misskey is fun thing. When you realized it, you have been used Misskey all day long.",
-	"description2": "Let's get Misskey Tools account and know your activity.",
+	"description1": "Make Misskey more effective! All-in-one tools with various features.",
+	"description2": "Let's input your instance URL and use Misskey Tools now!",
 	"notes": "Notes",
 	"following": "Following",
 	"followers": "Followers",
@@ -38,7 +38,7 @@
 	"error": "Error",
 	"retry": "Try again",
 	"saved": "Saved.",
-	"disclaimerForMisskeyHq": "Misskey Tools is <b>not</b> a official tool by Misskey HQ.",
+	"disclaimerForMisskeyHq": "Misskey Tools is <b>not</b> a official tool by Misskey Development Division.",
 	"translatedByTheCommunity": "Misskey Tools is translated by volunteers.",
 	"helpTranslation": "Submit translations",
 	"announcements": "Announcements",
