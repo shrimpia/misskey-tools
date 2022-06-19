@@ -62,64 +62,64 @@
 		"description": "Misskeyは設計します、Misskey Toolsはあなたをよりエンジョイする品揃え",
 		"misshaiAlertTitle": "ミス廃アラート",
 		"misshaiAlertDescription": "あなたはMisskeyを飲み込みますか？ミス廃アラートを使ってください、毎日のMisskeyをアクティビティは投稿する",
-		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
-		"catAdjusterDescription": "CATモードの猫耳がアイコンに合わなくてお悩みのあなたへ。かわいいアイコンを猫耳に合わせてトリミングできます。",
-		"nextFeaturesTitle": "今後も追加予定。",
-		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
+		"misshaiRankingDescription": "ミス廃ランキングはMisskeyの活動の数を並べます、ランキングはあなたを見せつける",
+		"catAdjusterDescription": "CATモードはあなたの猫を耳にしません、非常にあなたは悩ましい。キュートな像はあなたの猫の耳を切り取ります。",
+		"nextFeaturesTitle": "すぐに追加します、予定。",
+		"nextFeaturesDescription": "これは全てではない。私たちはアップデートに様々な機能を追加します！"
 	},
 	"_nav": {
 		"misshai": "ミス廃",
-		"accounts": "アカウント",
+		"accounts": "アかーウント",
 		"settings": "設定",
-		"catAdjuster": "ねこみみ"
+		"catAdjuster": "猫ちゃんの耳"
 	},
 	"_missHai": {
-		"ranking": "ミス廃ランキング",
-		"rankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
-		"showAll": "全員分見る",
-		"data": "ミス廃データ",
-		"dataBody": "内容",
-		"dataScore": "スコア",
+		"ranking": "ミス廃をランク付け",
+		"rankingDescription": "利用者はレートを計算しなさい、高い物をランク付けし、あなたを見る！",
+		"showAll": "全てを見なさい",
+		"data": "ミス廃の情報",
+		"dataBody": "体",
+		"dataScore": "得点",
 		"dataDelta": "前日比",
-		"rating": "レート",
+		"rating": "率",
 		"order": "順位",
-		"showRanking": "ランキングを見る",
-		"useRanking": "ランキングに参加する"
+		"showRanking": "ランキングを見ゑ",
+		"useRanking": "ランキングを参加ゑ"
 	},
 	"_accounts": {
-		"currentAccount": "現在ログインしているアカウント",
-		"switchAccount": "アカウント切り替え",
-		"useAnother": "他のアカウントで登録する"
+		"currentAccount": "アカウントは今にログインします",
+		"switchAccount": "アカウントをスイッチ",
+		"useAnother": "さらなるアカウントを登録すゑ"
 	},
 	"_developerInfo": {
-		"title": "開発者",
-		"description": "何か困ったことがあったら、以下のアカウントにメッセージを送ってください。"
+		"title": "デベッロパ",
+		"description": "何かあなたを困らせるなら、下の人に言葉を送りなさい。"
 	},
 	"_timeline": {
-		"title": "タイムライン",
-		"description": "{{hashtag}} タグを含む最新ノートを表示します。"
+		"title": "時間",
+		"description": "新しい、それはタグを含みます {{hashtag}} ノートを見てください。"
 	},
 	"_alertMode": {
-		"note": "自動的にノートを投稿",
-		"notification": "Misskeyに通知(標準)",
-		"both": "両方",
-		"nothing": "通知しない",
-		"notificationWarning": "「Misskey に通知」オプションは古いMisskeyでは動作しません。"
+		"note": "自動的にメモを提出します",
+		"notification": "Misskeyさんは通知してください(標準)",
+		"both": "どちらも",
+		"nothing": "何も無",
+		"notificationWarning": "オプションはMisskeyに通知します。古いMisskeyは使われません。"
 	},
 	"_visibility": {
-		"public": "パブリック",
-		"home": "ホーム",
-		"followers": "フォロワー",
-		"users": "ログインユーザー"
+		"public": "公衆",
+		"home": "あなたの家",
+		"followers": "支持者",
+		"users": "ログインして使用する"
 	},
 	"_themes": {
-		"light": "ライトテーマ",
-		"dark": "ダークテーマ",
-		"system": "システム設定に準じる"
+		"light": "明るいTheme",
+		"dark": "闇Theme",
+		"system": "貴様はシステムに服従た"
 	},
 	"_template": {
-		"description": "アラートの自動投稿をカスタマイズできます。",
-		"description2": "ハッシュタグ #misshaialert は、テンプレートに関わらず自動付与されます。",
+		"description": "アラートは、自動的に投稿をカスタマイズする",
+		"description2": "テンプレートに関わらない、ハッシュタグは #misshaialert を自動的に付与します。",
 		"default": "昨日Misskeyは活動しました\n\nメモ: {notesCount}({notesDelta})\n追従します。 : {followingCount}({followingDelta})\nフォロワー :{followersCount}({followersDelta})\n\nそれはです\n{url}",
 		"insertVariables": "変数を挿入します。",
 		"insertVariablesHelp": "文字列は { } に囲まれたら、変数を呼びます、あなたは特別を持っています。これに含まれるのは、値は自動的に投稿の時間を埋め込す。",
