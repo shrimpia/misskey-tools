@@ -88,7 +88,7 @@ export const IndexWelcomePage: React.VFC = () => {
 		<>
 			<Hero className="fluid shadow-2" isMobile={isMobile}>
 				<div className="hero">
-					<h1 className="shadow-t">Misskey Tools</h1>
+					<h1 className="shadow-t">{t('title')}</h1>
 					<p className="shadow-t">{t('description1')}</p>
 					<p className="shadow-t">{t('description2')}</p>
 					<FormWrapper className="bg-panel pa-2 mt-4 rounded shadow-2">
