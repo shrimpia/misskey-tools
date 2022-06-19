@@ -1,0 +1,173 @@
+{
+	"title": "ミスキー道具",
+	"description1": "Misskeyはより効果的です、全てを一つにツール、それは様々な機能を持",
+	"description2": "貴様はインスタンスURLを輸入します、今Misskey道具を使いなさい",
+	"notes": "ノート",
+	"following": "フォーロ",
+	"followers": "フオーロワ",
+	"welcomeBack": "おかえリなちい、{{acct}}！",
+	"alertMode": "送信のアラートを方法します",
+	"visibility": "開示範囲",
+	"appearance": "外観",
+	"template": "チンプレト",
+	"sendAlert": "警報は試験を送りました",
+	"sendAlertDescription": "あなたは今の設定を使用し、試験をアラートで送り届けません",
+	"sendAlertDisabled": "アラート送信方法は通知してはいけません、あなたは試験を送らない。",
+	"logout": "ログアウト",
+	"logoutDescription": "ログアウトは、今もなおアラートを送ります。",
+	"deleteAccount": "アカウント接続を切除しま",
+	"deleteAccountDescription": "Misskey道具箱はアカウントを削除、貴様はMisskeyを抱きしめることが無いよ！",
+	"instanceUrl": "インスタソス?RL",
+	"login": "ログイ",
+	"localOnly": "地方限定",
+	"remoteFollowersOnly": "田舎者の遠距離恋愛",
+	"help": "助けます",
+	"save": "完成",
+	"theme": "テーマ",
+	"language": "言語",
+	"fetching": "取る……",
+	"failedToFetch": "取得できなせんでし",
+	"registeredUsersCount": "加入者をカウント",
+	"isCalculating": "現代ではあなたを計算していて、 後で確認しなさい。",
+	"ok": "OK",
+	"yes": "はい",
+	"no": "番号",
+	"termsOfService": "サービス条項",
+	"name": "名前",
+	"resetToDefault": "初期値に戻る",
+	"error": "エラー",
+	"retry": "やり直せ。",
+	"saved": "セーブされま",
+	"disclaimerForMisskeyHq": "Misskey道具は<b>ありません</b>、Misskeyの開発を割る公式。",
+	"translatedByTheCommunity": "ボランティアは、Misskey道具箱を翻訳することができ",
+	"helpTranslation": "翻訳は助けてください",
+	"announcements": "告知",
+	"upload": "アップロード",
+	"preview": "プレビュー",
+	"catAdjuster": "猫耳をおさめる",
+	"shouldUpdateToken": "貴様、トークンは更新を必要、さもなくば機能はいくつかを正常に動作ない！",
+	"update": "更新",
+	"shareMisskeyTools": "#MisskeyTools を分け与",
+	"shareMisskeyToolsNote": "貴様、#MisskeyTools を使ラ非常に素晴らします。\n\nhttps://misskey.tools",
+	"_welcomeMessage": {
+		"pattern1": "ついついノートしすぎていませんか？",
+		"pattern2": "Misskey, しすぎていませんか？",
+		"pattern3": "今日、何ノート書いた？",
+		"pattern4": "10000 ノートは初心者、そう思っていませんか？",
+		"pattern5": "息するように Misskey、そんなあなたへ。",
+		"pattern6": "あなたは真の Misskey 廃人ですか？"
+	},
+	"_welcome": {
+		"title": "プロフェッショナルな仕様の道具箱",
+		"description": "Misskeyは設計します、Misskey Toolsはあなたをよりエンジョイする品揃え",
+		"misshaiAlertTitle": "ミス廃アラート",
+		"misshaiAlertDescription": "あなたはMisskeyを飲み込みますか？ミス廃アラートを使ってください、毎日のMisskeyをアクティビティは投稿する",
+		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
+		"catAdjusterDescription": "CATモードの猫耳がアイコンに合わなくてお悩みのあなたへ。かわいいアイコンを猫耳に合わせてトリミングできます。",
+		"nextFeaturesTitle": "今後も追加予定。",
+		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
+	},
+	"_nav": {
+		"misshai": "ミス廃",
+		"accounts": "アカウント",
+		"settings": "設定",
+		"catAdjuster": "ねこみみ"
+	},
+	"_missHai": {
+		"ranking": "ミス廃ランキング",
+		"rankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
+		"showAll": "全員分見る",
+		"data": "ミス廃データ",
+		"dataBody": "内容",
+		"dataScore": "スコア",
+		"dataDelta": "前日比",
+		"rating": "レート",
+		"order": "順位",
+		"showRanking": "ランキングを見る",
+		"useRanking": "ランキングに参加する"
+	},
+	"_accounts": {
+		"currentAccount": "現在ログインしているアカウント",
+		"switchAccount": "アカウント切り替え",
+		"useAnother": "他のアカウントで登録する"
+	},
+	"_developerInfo": {
+		"title": "開発者",
+		"description": "何か困ったことがあったら、以下のアカウントにメッセージを送ってください。"
+	},
+	"_timeline": {
+		"title": "タイムライン",
+		"description": "{{hashtag}} タグを含む最新ノートを表示します。"
+	},
+	"_alertMode": {
+		"note": "自動的にノートを投稿",
+		"notification": "Misskeyに通知(標準)",
+		"both": "両方",
+		"nothing": "通知しない",
+		"notificationWarning": "「Misskey に通知」オプションは古いMisskeyでは動作しません。"
+	},
+	"_visibility": {
+		"public": "パブリック",
+		"home": "ホーム",
+		"followers": "フォロワー",
+		"users": "ログインユーザー"
+	},
+	"_themes": {
+		"light": "ライトテーマ",
+		"dark": "ダークテーマ",
+		"system": "システム設定に準じる"
+	},
+	"_template": {
+		"description": "アラートの自動投稿をカスタマイズできます。",
+		"description2": "ハッシュタグ #misshaialert は、テンプレートに関わらず自動付与されます。",
+		"default": "昨日Misskeyは活動しました\n\nメモ: {notesCount}({notesDelta})\n追従します。 : {followingCount}({followingDelta})\nフォロワー :{followersCount}({followersDelta})\n\nそれはです\n{url}",
+		"insertVariables": "変数を挿入します。",
+		"insertVariablesHelp": "文字列は { } に囲まれたら、変数を呼びます、あなたは特別を持っています。これに含まれるのは、値は自動的に投稿の時間を埋め込す。",
+		"_variables": {
+			"notesCount": "ノー数",
+			"followingCount": "フオーロ数",
+			"followersCount": "フローワ数",
+			"notesDelta": "前日の比率Note",
+			"followingDelta": "前は比率をフォローしてください",
+			"followersDelta": "フォロワーの比率",
+			"url": "URL",
+			"username": "アカウントを使用、名前",
+			"host": "ホストとして名前",
+			"rating": "レート",
+			"gacha": "ガチャ"
+		}
+	},
+	"_error": {
+		"sorry": "残念、問題は発生た。もう一度やり直しなさい",
+		"additionalInfo": "追加情報: ",
+		"hitorisskeyIsDenied": "貴様ばhitorisskeyを禁止しま",
+		"teapot": "I'm a teapot.",
+		"sessionRequired": "ミーティングを開きません。",
+		"tokenRequired": "トークンを持っていない",
+		"invalidParameter": "パラメーターが正しくない",
+		"notAuthorized": "許可は無い！",
+		"other": "他"
+	},
+	"_sendTest": {
+		"title": "あなたはアラートに試験を送りますか？",
+		"message": "あなたは今の設定にアラートを送信します。設定は保存済み、走者は必須、ご確認ください・",
+		"yes": "届く",
+		"no": "キャンセル",
+		"success": "送信た！",
+		"failure": "送信は失敗します"
+	},
+	"_logout": {
+		"title": "あなたをログアウトするますか？",
+		"message": "ログアウトはありまうが、送信をアラート、Misskeyアカウントはデータを収集し、機能は続いて動作する。もしあなたはMisskey Toolsを利用することを停止するなら、「アカウント連携を解除する」ボタンを押し込みます。",
+		"yes": "ログアウトする",
+		"no": "キャンセル"
+	},
+	"_deactivate": {
+		"title": "アカウントは剥がれますか？",
+		"message": "回収したデータやあなたを設定する、それは全てを削ります。あなたはこれを触れ、元に戻すことは不た",
+		"yes": "解除する",
+		"no": "キャンセ",
+		"success": "あなたはアカウントを解除しました。私はあなたをトップ画面します",
+		"failure": "アカウントは解除しませんでした。"
+	}
+}
