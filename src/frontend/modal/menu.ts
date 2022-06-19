@@ -5,7 +5,7 @@ export interface ModalTypeMenu {
 	items: MenuItem[];
 }
 
-export type MenuItemClassName = `bi bi-${string}`;
+export type MenuItemClassName = `fas fa-${string}`;
 
 export interface MenuItem {
 	icon?: MenuItemClassName;

@@ -1,77 +1,77 @@
-import React, { useEffect, useMemo, useState }  from 'react';
+import React, { useEffect }  from 'react';
 
-import { Header } from '../components/Header';
-import { MisshaiPage } from '../components/MisshaiPage';
-import { Tab, TabItem } from '../components/Tab';
-import { SettingPage } from '../components/SettingPage';
 import { useTranslation } from 'react-i18next';
-import { AccountsPage } from '../components/AccountsPage';
 import { useDispatch } from 'react-redux';
 import { LOCALSTORAGE_KEY_ACCOUNTS } from '../const';
 import { IUser } from '../../common/types/user';
 import { setAccounts } from '../store/slices/screen';
-import { useGetMetaQuery, useGetSessionQuery } from '../services/session';
-import { AdminPage } from '../components/AdminPage';
+import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
 import { $get } from '../misc/api';
-import { NekomimiPage } from '../components/NekomimiPage';
-import { Card } from '../components/Card';
-import { CurrentUser } from '../components/CurrentUser';
+import { AnnouncementList } from '../components/AnnouncementList';
+import { DeveloperInfo } from '../components/DeveloperInfo';
 
 export const IndexSessionPage: React.VFC = () => {
-	const [selectedTab, setSelectedTab] = useState<string>('misshai');
-	const {t, i18n} = useTranslation();
+	const {t} = useTranslation();
 	const dispatch = useDispatch();
 	const { data: session } = useGetSessionQuery(undefined);
-	const { data: meta } = useGetMetaQuery(undefined);
+	const score = useGetScoreQuery(undefined);
 
 	useEffect(() => {
 		const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
 		Promise.all(accounts.map(token => $get<IUser>('session', token))).then(a => dispatch(setAccounts(a as IUser[])));
 	}, [dispatch]);
 
-	const items = useMemo<TabItem[]>(() => {
-		const it: TabItem[] = [];
-		it.push({ label: t('_nav.misshai'), key: 'misshai' });
-		it.push({ label: t('_nav.accounts'), key: 'accounts' });
-		it.push({ label: t('_nav.catAdjuster'), key: 'nekomimi' });
-		if (session?.isAdmin) {
-			it.push({ label: 'Admin', key: 'admin' });
-		}
-		it.push({ label: t('_nav.settings'), key: 'settings' });
-		return it;
-	}, [i18n.language, session]);
-
-	const component = useMemo(() => {
-		switch (selectedTab) {
-			case 'misshai': return <MisshaiPage />;
-			case 'accounts': return <AccountsPage />;
-			case 'admin': return <AdminPage />;
-			case 'nekomimi': return <NekomimiPage />;
-			case 'settings': return <SettingPage/>;
-			default: return null;
-		}
-	}, [selectedTab]);
-
 	return (
-		<>
-			<div className="xarticle vgroup shadow-4" style={{position: 'sticky', top: 0, zIndex: 100}}>
-				<Header />
-				<div className="card">
-					<Tab items={items} selected={selectedTab} onSelect={setSelectedTab}/>
+		<div className="vstack fade">
+			<div className="card announcement">
+				<div className="body">
+					<AnnouncementList />
 				</div>
 			</div>
-			<div className="xarticle mt-2">
-				<Card className="mb-2">
-					<CurrentUser/>
-					{session && meta && meta.currentTokenVersion !== session.tokenVersion && (
-						<div className="text-danger mt-1">
-							{t('shouldUpdateToken')}
-							<a href={`/login?host=${encodeURIComponent(session.host)}`}>{t('update')}</a>
-						</div>
-					)}
-				</Card>
-				{component}
+			<div className="misshaiPageLayout">
+				<div className="card misshaiData">
+					<div className="body">
+						<h1><i className="fas fa-chart-line"></i> {t('_missHai.data')}</h1>
+						<table className="table fluid">
+							<thead>
+								<tr>
+									<th></th>
+									<th>{t('_missHai.dataScore')}</th>
+									<th>{t('_missHai.dataDelta')}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{t('notes')}</td>
+									<td>{score.data?.notesCount ?? '...'}</td>
+									<td>{score.data?.notesDelta ?? '...'}</td>
+								</tr>
+								<tr>
+									<td>{t('following')}</td>
+									<td>{score.data?.followingCount ?? '...'}</td>
+									<td>{score.data?.followingDelta ?? '...'}</td>
+								</tr>
+								<tr>
+									<td>{t('followers')}</td>
+									<td>{score.data?.followersCount ?? '...'}</td>
+									<td>{score.data?.followersDelta ?? '...'}</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>
+							<strong>
+								{t('_missHai.rating')}{': '}
+							</strong>
+							{session?.rating ?? '...'}
+						</p>
+					</div>
+				</div>
+				<div className="card developerInfo">
+					<div className="body">
+						<DeveloperInfo />
+					</div>
+				</div>
 			</div>
-		</>
+		</div>
 	);
 };

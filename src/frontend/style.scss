@@ -19,6 +19,15 @@ hr {
     max-width: var(--max-width);
 }
 
+._header {
+    position: sticky;
+    top: var(--container-padding);
+    @media (max-width: 600px) {
+        top: var(--container-padding-phone);
+        padding-right: 16px;
+    }
+}
+
 .fade {
     animation: 0.3s ease-out 0s fadeIn;
     &.down {
@@ -94,6 +103,10 @@ small {
     max-width: min(100vw, 600px);
 }
 
+.card > .body > h1 {
+    margin-bottom: var(--margin);
+}
+
 .modal-menu-wrapper {
     display: flex;
     position: fixed;
@@ -130,4 +143,10 @@ small {
             animation: earwiggleright 1s infinite;
         }
     }
+}
+
+.twemoji {
+    height: 1em;
+    width: 1em;
+    vertical-align: -0.1em;
 }

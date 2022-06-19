@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+
+const Input = styled.input`
+	width: auto;
+	flex: 1;
+`;
 
 export const LoginForm: React.VFC = () => {
 	const [host, setHost] = useState('');
@@ -11,7 +17,7 @@ export const LoginForm: React.VFC = () => {
 				<strong>{t('instanceUrl')}</strong>
 			</div>
 			<div className="hgroup login-form">
-				<input
+				<Input
 					className="input-field"
 					type="text"
 					value={host}

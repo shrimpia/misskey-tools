@@ -2,10 +2,12 @@ import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactCrop, { Crop } from 'react-image-crop';
 
-import 'react-image-crop/dist/ReactCrop.css';
 import { useDispatch } from 'react-redux';
-import { useGetSessionQuery } from '../services/session';
-import { showModal } from '../store/slices/screen';
+import { useGetSessionQuery } from '../../services/session';
+import { showModal } from '../../store/slices/screen';
+
+import 'react-image-crop/dist/ReactCrop.css';
+import { useTitle } from '../../hooks/useTitle';
 
 export const NekomimiPage: React.VFC = () => {
 	const {t} = useTranslation();
@@ -18,6 +20,8 @@ export const NekomimiPage: React.VFC = () => {
 	const [image, setImage] = useState<HTMLImageElement | null>(null);
 	const [crop, setCrop] = useState<Partial<Crop>>({unit: '%', width: 100, aspect: 1 / 1});
 	const [completedCrop, setCompletedCrop] = useState<Crop>();
+
+	useTitle('catAdjuster');
 
 	const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 

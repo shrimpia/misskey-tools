@@ -3,13 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { useGetSessionQuery } from '../services/session';
-import { Card } from './Card';
+import { Card } from '../components/Card';
 import { Theme, themes } from '../misc/theme';
 import { LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { changeLang, changeTheme, showModal } from '../store/slices/screen';
 import { useSelector } from '../store';
 import { languageName } from '../langs';
 import { $delete } from '../misc/api';
+import { useTitle } from '../hooks/useTitle';
 
 export const SettingPage: React.VFC = () => {
 	const session = useGetSessionQuery(undefined);
@@ -17,6 +18,8 @@ export const SettingPage: React.VFC = () => {
 
 	const data = session.data;
 	const {t} = useTranslation();
+
+	useTitle('_sidebar.settings');
 
 	const currentTheme = useSelector(state => state.screen.theme);
 	const currentLang = useSelector(state => state.screen.language);
@@ -39,7 +42,7 @@ export const SettingPage: React.VFC = () => {
 			onSelect(i) {
 				if (i === 0) {
 					localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
-					location.reload();
+					location.href = '/';
 				}
 			},
 		}));
@@ -69,7 +72,7 @@ export const SettingPage: React.VFC = () => {
 							message: t('_deactivate.success'),
 							icon: 'info',
 							onSelect() {
-								location.reload();
+								location.href = '/';
 							}
 						}));
 					}).catch((e) => {
@@ -91,7 +94,7 @@ export const SettingPage: React.VFC = () => {
 	) : (
 		<div className="vstack fade">
 			<Card bodyClassName="vstack">
-				<h1><i className="bi bi-palette"></i> {t('appearance')}</h1>
+				<h1><i className="fas fa-palette"></i> {t('appearance')}</h1>
 				<h2>{t('theme')}</h2>
 				<div className="vstack">
 					{
@@ -115,21 +118,23 @@ export const SettingPage: React.VFC = () => {
 					}
 				</select>
 				<div className="alert bg-info mt-2">
-					<i className="icon bi bi-translate" />
-					{t('translatedByTheCommunity')}&nbsp;
-					<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
+					<i className="icon fas fa-language" />
+					<div>
+						{t('translatedByTheCommunity')}&nbsp;
+						<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
+					</div>
 				</div>
 			</Card>
 			<div className="list-form">
 				<button className="item" onClick={onClickLogout}>
-					<i className="icon bi bi-box-arrow-right" />
+					<i className="icon fas fa-arrow-up-right-from-square" />
 					<div className="body">
 						<h1>{t('logout')}</h1>
 						<p className="desc">{t('logoutDescription')}</p>
 					</div>
 				</button>
 				<button className="item text-danger" onClick={onClickDeleteAccount}>
-					<i className="icon bi bi-trash" />
+					<i className="icon fas fa-trash-can" />
 					<div className="body">
 						<h1>{t('deleteAccount')}</h1>
 						<p className="desc">{t('deleteAccountDescription')}</p>

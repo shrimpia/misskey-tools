@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import i18n from 'i18next';
+import { WritableDraft } from 'immer/dist/internal';
 import { IUser } from '../../../common/types/user';
 
 import { LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_LANG, LOCALSTORAGE_KEY_THEME } from '../../const';
@@ -10,9 +11,12 @@ interface ScreenState {
 	modal: Modal | null;
 	modalShown: boolean;
 	theme: Theme;
+	title: string | null;
 	language: string;
 	accounts: IUser[];
 	accountTokens: string[];
+	isMobile: boolean;
+	isDrawerShown: boolean;
 }
 
 const initialState: ScreenState = {
@@ -20,8 +24,21 @@ const initialState: ScreenState = {
 	modalShown: false,
 	theme: localStorage[LOCALSTORAGE_KEY_THEME] ?? 'system',
 	language: localStorage[LOCALSTORAGE_KEY_LANG] ?? i18n.language ?? 'ja_JP',
+	title: null,
 	accounts: [],
 	accountTokens: JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[],
+	isMobile: false,
+	isDrawerShown: false,
+};
+
+/**
+ * 値を設定するReducerを生成します。
+ */
+const generateSetter = <T extends keyof WritableDraft<ScreenState>>(key: T, callback?: (state: WritableDraft<ScreenState>, action: PayloadAction<ScreenState[T]>) => void) => {
+	return (state: WritableDraft<ScreenState>, action: PayloadAction<ScreenState[T]>) => {
+		state[key] = action.payload;
+		if (callback) callback(state, action);
+	};
 };
 
 export const screenSlice = createSlice({
@@ -36,23 +53,23 @@ export const screenSlice = createSlice({
 			state.modal = null;
 			state.modalShown = false;
 		},
-		changeTheme: (state, action: PayloadAction<ScreenState['theme']>) => {
-			state.theme = action.payload;
+		changeTheme: generateSetter('theme', (_, action) => {
 			localStorage[LOCALSTORAGE_KEY_THEME] = action.payload;
-		},
-		changeLang: (state, action: PayloadAction<ScreenState['language']>) => {
-			state.language = action.payload;
+		}),
+		changeLang: generateSetter('language', (_, action) => {
 			localStorage[LOCALSTORAGE_KEY_LANG] = action.payload;
 			i18n.changeLanguage(action.payload);
-		},
-		setAccounts: (state, action: PayloadAction<ScreenState['accounts']>) => {
-			state.accounts = action.payload;
+		}),
+		setAccounts: generateSetter('accounts', (state, action) => {
 			state.accountTokens = action.payload.map(a => a.misshaiToken);
 			localStorage[LOCALSTORAGE_KEY_ACCOUNTS] = JSON.stringify(state.accountTokens);
-		},
+		}),
+		setMobile: generateSetter('isMobile'),
+		setTitle: generateSetter('title'),
+		setDrawerShown: generateSetter('isDrawerShown'),
 	},
 });
 
-export const { showModal, hideModal, changeTheme, changeLang, setAccounts } = screenSlice.actions;
+export const { showModal, hideModal, changeTheme, changeLang, setAccounts, setMobile, setTitle, setDrawerShown } = screenSlice.actions;
 
 export default screenSlice.reducer;

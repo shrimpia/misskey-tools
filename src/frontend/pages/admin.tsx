@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 
 import { LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { useGetSessionQuery } from '../services/session';
-import { Skeleton } from './Skeleton';
+import { Skeleton } from '../components/Skeleton';
 import { IAnnouncement } from '../../common/types/announcement';
 import { $delete, $get, $post, $put } from '../misc/api';
-import { Card } from './Card';
 import { showModal } from '../store/slices/screen';
 import { useDispatch } from 'react-redux';
+import { useTitle } from '../hooks/useTitle';
 
 
 export const AdminPage: React.VFC = () => {
 	const { data, error } = useGetSessionQuery(undefined);
 
 	const dispatch = useDispatch();
+
+	useTitle('_sidebar.admin');
 
 	const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
 	const [selectedAnnouncement, selectAnnouncement] = useState<IAnnouncement | null>(null);
@@ -132,64 +134,66 @@ export const AdminPage: React.VFC = () => {
 					<p>You are not an administrator and cannot open this page.</p>
 				) : (
 					<>
-						<h2>Announcements</h2>
-						{!isEditMode && (
-							<label className="input-switch mb-1">
-								<input type="checkbox" checked={isDeleteMode} onChange={e => setDeleteMode(e.target.checked)}/>
-								<div className="switch"></div>
-								<span>Delete Mode</span>
-							</label>
-						)}
-						<Card bodyClassName={isEditMode ? '' : 'px-0'}>
-							{ !isEditMode ? (
-								<>
-									{isDeleteMode && <div className="ml-2 text-danger">Click the item to delete.</div>}
-									<div className="large menu">
-										{announcements.map(a => (
-											<button className="item fluid" key={a.id} onClick={() => {
-												if (isDeleteMode) {
-													deleteAnnouncement(a);
-												} else {
-													selectAnnouncement(a);
-													setEditMode(true);
-												}
+						<div className="card shadow-2">
+							<div className="body">
+								<h1>Announcements</h1>
+								{!isEditMode && (
+									<label className="input-switch mb-2">
+										<input type="checkbox" checked={isDeleteMode} onChange={e => setDeleteMode(e.target.checked)}/>
+										<div className="switch"></div>
+										<span>Delete Mode</span>
+									</label>
+								)}
+								{ !isEditMode ? (
+									<>
+										{isDeleteMode && <div className="ml-2 text-danger">Click the item to delete.</div>}
+										<div className="large menu">
+											{announcements.map(a => (
+												<button className="item fluid" key={a.id} onClick={() => {
+													if (isDeleteMode) {
+														deleteAnnouncement(a);
+													} else {
+														selectAnnouncement(a);
+														setEditMode(true);
+													}
+												}}>
+													{isDeleteMode && <i className="icon bi fas fa-trash-can text-danger" />}
+													{a.title}
+												</button>
+											))}
+											{!isDeleteMode && (
+												<button className="item fluid" onClick={() => setEditMode(true)}>
+													<i className="icon fas fa-plus"/ >
+													Create New
+												</button>
+											)}
+										</div>
+									</>
+								) : (
+									<div className="vstack">
+										<label className="input-field">
+											Title
+											<input type="text" value={draftTitle} onChange={e => setDraftTitle(e.target.value)} />
+										</label>
+										<label className="input-field">
+											Body
+											<textarea className="input-field" value={draftBody} rows={10} onChange={e => setDraftBody(e.target.value)}/>
+										</label>
+										<div className="hstack" style={{justifyContent: 'flex-end'}}>
+											<button className="btn primary" onClick={submitAnnouncement} disabled={!draftTitle || !draftBody}>
+												Submit
+											</button>
+											<button className="btn" onClick={() => {
+												selectAnnouncement(null);
+												setEditMode(false);
 											}}>
-												{isDeleteMode && <i className="icon bi bi-trash text-danger" />}
-												{a.title}
+												Cancel
 											</button>
-										))}
-										{!isDeleteMode && (
-											<button className="item fluid" onClick={() => setEditMode(true)}>
-												<i className="icon bi bi-plus"/ >
-												Create New
-											</button>
-										)}
+										</div>
 									</div>
-								</>
-							) : (
-								<div className="vstack">
-									<label className="input-field">
-										Title
-										<input type="text" value={draftTitle} onChange={e => setDraftTitle(e.target.value)} />
-									</label>
-									<label className="input-field">
-										Body
-										<textarea className="input-field" value={draftBody} rows={10} onChange={e => setDraftBody(e.target.value)}/>
-									</label>
-									<div className="hstack" style={{justifyContent: 'flex-end'}}>
-										<button className="btn primary" onClick={submitAnnouncement} disabled={!draftTitle || !draftBody}>
-											Submit
-										</button>
-										<button className="btn" onClick={() => {
-											selectAnnouncement(null);
-											setEditMode(false);
-										}}>
-											Cancel
-										</button>
-									</div>
-								</div>
-							)}
-						</Card>
+								)}
+							</div>
+						</div>
 						<h2>Misshai</h2>
 						<div className="vstack">
 							<button className="btn danger" onClick={onClickStartMisshaiAlertWorkerButton}>
