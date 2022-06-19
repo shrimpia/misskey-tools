@@ -1,15 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { NavigationMenu } from './components/NavigationMenu';
+import { IsMobileProp } from './misc/is-mobile-prop';
 
 import { useGetMetaQuery, useGetSessionQuery } from './services/session';
 import { useSelector } from './store';
 import { setDrawerShown } from './store/slices/screen';
-
-type IsMobileProp = { isMobile: boolean };
 
 const Container = styled.div<IsMobileProp>`
 	padding: var(--margin);

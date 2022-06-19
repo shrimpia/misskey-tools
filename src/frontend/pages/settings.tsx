@@ -42,7 +42,7 @@ export const SettingPage: React.VFC = () => {
 			onSelect(i) {
 				if (i === 0) {
 					localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
-					location.reload();
+					location.href = '/';
 				}
 			},
 		}));
@@ -72,7 +72,7 @@ export const SettingPage: React.VFC = () => {
 							message: t('_deactivate.success'),
 							icon: 'info',
 							onSelect() {
-								location.reload();
+								location.href = '/';
 							}
 						}));
 					}).catch((e) => {

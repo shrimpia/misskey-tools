@@ -58,7 +58,8 @@
 		"accounts": "アカウント",
 		"settings": "設定",
 		"admin": "管理画面",
-		"about": "Misskey Toolsについて"
+		"about": "Misskey Toolsについて",
+		"return": "トップページに戻る"
 	},
 	"_welcomeMessage": {
 		"pattern1": "ついついノートしすぎていませんか？",

@@ -22,38 +22,42 @@ export const NavigationMenu: React.VFC = () => {
 			<div className="menu">
 				<section>
 					<NavLink className={navLinkClassName} to="/" exact onClick={onClickItem}>
-						<i className="icon fas fa-home"></i>
-						{t('_sidebar.dashboard')}
+						<i className={`icon fas fa-${session ? 'home' : 'arrow-left'}`}></i>
+						{t(session ? '_sidebar.dashboard' : '_sidebar.return')}
 					</NavLink>
 				</section>
-				<section>
-					<h1>{t('_sidebar.tools')}</h1>
-					<NavLink className={navLinkClassName} to="/apps/miss-hai" onClick={onClickItem}>
-						<i className="icon fas fa-tower-broadcast"></i>
-						{t('_sidebar.missHaiAlert')}
-					</NavLink>
-					<NavLink className={navLinkClassName} to="/apps/avatar-cropper" onClick={onClickItem}>
-						<i className="icon fas fa-crop-simple"></i>
-						{t('_sidebar.cropper')}
-					</NavLink>
-				</section>
-				<section>
-					{session && <h1>{session.username}@{session.host}</h1>}
-					{session && (
+				{session && (
+					<section>
+						<h1>{t('_sidebar.tools')}</h1>
+						<NavLink className={navLinkClassName} to="/apps/miss-hai" onClick={onClickItem}>
+							<i className="icon fas fa-tower-broadcast"></i>
+							{t('_sidebar.missHaiAlert')}
+						</NavLink>
+						<NavLink className={navLinkClassName} to="/apps/avatar-cropper" onClick={onClickItem}>
+							<i className="icon fas fa-crop-simple"></i>
+							{t('_sidebar.cropper')}
+						</NavLink>
+					</section>
+				)}
+				{session && (
+					<section>
+						<h1>{session.username}@{session.host}</h1>
 						<NavLink className={navLinkClassName} to="/account" onClick={onClickItem}>
 							<i className="icon fas fa-circle-user"></i>
 							{t('_sidebar.accounts')}
 						</NavLink>
-					)}
-					<NavLink className={navLinkClassName} to="/settings" onClick={onClickItem}>
-						<i className="icon fas fa-gear"></i>
-						{t('_sidebar.settings')}
-					</NavLink>
-					<NavLink className={navLinkClassName} to="/admin" onClick={onClickItem}>
-						<i className="icon fas fa-lock"></i>
-						{t('_sidebar.admin')}
-					</NavLink>
-				</section>
+						<NavLink className={navLinkClassName} to="/settings" onClick={onClickItem}>
+							<i className="icon fas fa-gear"></i>
+							{t('_sidebar.settings')}
+						</NavLink>
+						{session.isAdmin && (
+							<NavLink className={navLinkClassName} to="/admin" onClick={onClickItem}>
+								<i className="icon fas fa-lock"></i>
+								{t('_sidebar.admin')}
+							</NavLink>
+						)}
+					</section>
+				)}
 			</div>
 		</>
 	);
