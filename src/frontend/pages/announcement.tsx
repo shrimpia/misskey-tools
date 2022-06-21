@@ -22,7 +22,7 @@ export const AnnouncementPage: React.VFC = () => {
 		$get<IAnnouncement>('announcements/' + id).then(setAnnouncement);
 	}, [setAnnouncement]);
 	return (
-		<article className="xarticle">
+		<article>
 			{!announcement ? <Skeleton width="100%" height="10rem" /> : (
 				<>
 					<h2>
