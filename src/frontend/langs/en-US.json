@@ -49,7 +49,7 @@
 	"update": "Update",
 	"shareMisskeyTools": "Share #MisskeyTools",
 	"shareMisskeyToolsNote": "Try #MisskeyTools !\n\nhttps://misskey.tools",
-	"instanceUrlPlaceholder": "例：misskey.io",
+	"instanceUrlPlaceholder": "e.g. misskey.io",
 	"_sidebar": {
 		"dashboard": "Dashboard",
 		"tools": "Tools",
@@ -159,7 +159,7 @@
 		"tokenRequired": "Token is required.",
 		"invalidParameter": "Invalid parameter.",
 		"notAuthorized": "Not authorized.",
-		"hostNotFound": "インスタンスに接続できませんでした。ホスト名が正しく入力されているか、接続先のインスタンスが正常に動作しているかご確認ください。",
+		"hostNotFound": "Could not connect to the instance. Make sure that the host name is correct and the instance is live.",
 		"other": "None"
 	},
 	"_sendTest": {
