@@ -49,6 +49,19 @@
 	"update": "Update",
 	"shareMisskeyTools": "Share #MisskeyTools",
 	"shareMisskeyToolsNote": "Try #MisskeyTools !\n\nhttps://misskey.tools",
+	"instanceUrlPlaceholder": "e.g. misskey.io",
+	"_sidebar": {
+		"dashboard": "Dashboard",
+		"tools": "Tools",
+		"manageTools": "Manage tools",
+		"missHaiAlert": "Miss-hai Alert",
+		"cropper": "Cat Adjuster",
+		"accounts": "Accounts",
+		"settings": "Settings",
+		"admin": "Admin Panel",
+		"about": "About Misskey Tools",
+		"return": "Return back"
+	},
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
 		"pattern2": "Are you overusing Misskey?",
@@ -134,7 +147,7 @@
 			"username": "Your Username",
 			"host": "Your host",
 			"rating": "Your rating",
-			"gacha": "ガチャ"
+			"gacha": "Gacha"
 		}
 	},
 	"_error": {
@@ -146,6 +159,7 @@
 		"tokenRequired": "Token is required.",
 		"invalidParameter": "Invalid parameter.",
 		"notAuthorized": "Not authorized.",
+		"hostNotFound": "Could not connect to the instance. Make sure that the host name is correct and the instance is live.",
 		"other": "None"
 	},
 	"_sendTest": {

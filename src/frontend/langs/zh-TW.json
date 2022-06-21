@@ -49,6 +49,19 @@
 	"update": "更新する",
 	"shareMisskeyTools": "#MisskeyTools をシェアする",
 	"shareMisskeyToolsNote": "#MisskeyTools はいいぞ\n\nhttps://misskey.tools",
+	"instanceUrlPlaceholder": "例：misskey.io",
+	"_sidebar": {
+		"dashboard": "ダッシュボード",
+		"tools": "ツール",
+		"manageTools": "ツールを管理",
+		"missHaiAlert": "ミス廃アラート",
+		"cropper": "ねこみみアジャスター",
+		"accounts": "アカウント",
+		"settings": "設定",
+		"admin": "管理画面",
+		"about": "Misskey Toolsについて",
+		"return": "トップページに戻る"
+	},
 	"_welcomeMessage": {
 		"pattern1": "ついついノートしすぎていませんか？",
 		"pattern2": "Misskey, しすぎていませんか？",
@@ -146,7 +159,8 @@
 		"tokenRequired": "トークンがありません。",
 		"invalidParameter": "パラメータが不正です。",
 		"notAuthorized": "権限がありません。",
-		"other": "なし"
+		"hostNotFound": "インスタンスに接続できませんでした。ホスト名が正しく入力されているか、接続先のインスタンスが正常に動作しているかご確認ください。",
+		"other": "不明なエラーです。"
 	},
 	"_sendTest": {
 		"title": "アラートをテスト送信しますか？",
