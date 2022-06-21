@@ -49,6 +49,18 @@
 	"update": "업데이트하기",
 	"shareMisskeyTools": "#MisskeyTools 공유하기",
 	"shareMisskeyToolsNote": "여러분도 #MisskeyTools 하세요\n\nhttps://misskey.tools",
+	"_sidebar": {
+		"dashboard": "ダッシュボード",
+		"tools": "ツール",
+		"manageTools": "ツールを管理",
+		"missHaiAlert": "ミス廃アラート",
+		"cropper": "ねこみみアジャスター",
+		"accounts": "アカウント",
+		"settings": "設定",
+		"admin": "管理画面",
+		"about": "Misskey Toolsについて",
+		"return": "トップページに戻る"
+	},
 	"_welcomeMessage": {
 		"pattern1": "Misskey와 함께라면 시간 가는 줄도 모르고",
 		"pattern2": "Misskey, 너무 많이 하지 않으셨나요?",
