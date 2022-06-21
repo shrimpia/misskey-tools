@@ -49,18 +49,18 @@
 	"update": "업데이트하기",
 	"shareMisskeyTools": "#MisskeyTools 공유하기",
 	"shareMisskeyToolsNote": "여러분도 #MisskeyTools 하세요\n\nhttps://misskey.tools",
-	"instanceUrlPlaceholder": "例：misskey.io",
+	"instanceUrlPlaceholder": "예시: misskey.io",
 	"_sidebar": {
-		"dashboard": "ダッシュボード",
-		"tools": "ツール",
-		"manageTools": "ツールを管理",
-		"missHaiAlert": "ミス廃アラート",
-		"cropper": "ねこみみアジャスター",
-		"accounts": "アカウント",
-		"settings": "設定",
-		"admin": "管理画面",
-		"about": "Misskey Toolsについて",
-		"return": "トップページに戻る"
+		"dashboard": "대시보드",
+		"tools": "도구",
+		"manageTools": "도구를 관리",
+		"missHaiAlert": "노트왕 알림",
+		"cropper": "고양이귀 보정도구",
+		"accounts": "계정",
+		"settings": "설정",
+		"admin": "관리자 전용",
+		"about": "Misskey Tools에 대해",
+		"return": "메인 화면으로"
 	},
 	"_welcomeMessage": {
 		"pattern1": "Misskey와 함께라면 시간 가는 줄도 모르고",
@@ -159,7 +159,7 @@
 		"tokenRequired": "토큰이 누락되었습니다.",
 		"invalidParameter": "매개변수가 올바르지 않습니다.",
 		"notAuthorized": "권한이 없습니다.",
-		"hostNotFound": "インスタンスに接続できませんでした。ホスト名が正しく入力されているか、接続先のインスタンスが正常に動作しているかご確認ください。",
+		"hostNotFound": "인스턴스에 접속할 수 없습니다. 호스트명이 올바른지, 인스턴스가 정상적으로 동작하는 지 확인해 주세요.",
 		"other": "없음"
 	},
 	"_sendTest": {
