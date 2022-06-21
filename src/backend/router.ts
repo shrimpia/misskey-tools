@@ -29,7 +29,17 @@ router.get('/login', async ctx => {
 		return;
 	}
 
-	const meta = await api<{ name: string, uri: string, version: string, features: Record<string, boolean | undefined> }>(host, 'meta', {});
+	// http://, https://を潰す
+	host = host.trim().replace(/^https?:\/\//g, '').replace(/\/+/g, '');
+
+	const meta = await api<{ name: string, uri: string, version: string, features: Record<string, boolean | undefined> }>(host, 'meta', {}).catch(async e => {
+		if (!(e instanceof Error && e.name === 'Error')) throw e;
+		await die(ctx, 'hostNotFound');
+	});
+
+	// NOTE: catchが呼ばれた場合はvoidとなるためundefinedのはず
+	if (typeof meta === 'undefined') return;
+
 	if (typeof meta !== 'object') {
 		await die(ctx, 'other');
 		return;
@@ -39,9 +49,6 @@ router.get('/login', async ctx => {
 		await die(ctx, 'hitorisskeyIsDenied');
 		return;
 	}
-
-	// ホスト名の正規化
-	host = meta.uri.replace(/^https?:\/\//, '');
 
 	const { name, permission, description } = misskeyAppInfo;
 

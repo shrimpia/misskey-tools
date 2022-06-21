@@ -5,6 +5,8 @@ export const errorCodes = [
 	'tokenRequired',
 	'invalidParamater',
 	'notAuthorized',
+	'hostNotFound',
+	'invalidHostFormat',
 	'other',
 ] as const;
 

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Link, useLocation } from 'react-router-dom';
 import { Provider, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -22,7 +22,18 @@ const AppInner : React.VFC = () => {
 
 	const {t} = useTranslation();
 
-	const error = (window as any).__misshaialert?.error;
+	const [error, setError] = useState<any>((window as any).__misshaialert?.error);
+
+	// ページ遷移がまだされていないかどうか
+	const [isFirstView, setFirstView] = useState(true);
+
+	useEffect(() => {
+		if (isFirstView) {
+			setFirstView(false);
+		} else if (!isFirstView && error) {
+			setError(null);
+		}
+	}, [$location]);
 
 	useEffect(() => {
 		const qMobile = window.matchMedia(`(max-width: ${BREAKPOINT_SM})`);
@@ -47,6 +58,7 @@ const AppInner : React.VFC = () => {
 						{t('_error.additionalInfo')}
 						{t(`_error.${error}`)}
 					</p>
+					<Link to="/" className="btn primary">{t('retry')}</Link>
 				</div>
 			) : <Router />}
 			<footer className="text-center pa-5">

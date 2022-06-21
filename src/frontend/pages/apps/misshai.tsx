@@ -14,6 +14,7 @@ import { Skeleton } from '../../components/Skeleton';
 import './misshai.scss';
 import { Ranking } from '../../components/Ranking';
 import { useTitle } from '../../hooks/useTitle';
+import { Link } from 'react-router-dom';
 
 const variables = [
 	'notesCount',
@@ -236,8 +237,8 @@ export const MisshaiPage: React.VFC = () => {
 			<div className="card misshaiRanking">
 				<div className="body">
 					<h1><i className="bi bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
-					<Ranking limit={limit} />
-					{limit && <button className="btn primary" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</button>}
+					<Ranking limit={10} />
+					<Link to="/apps/miss-hai/ranking" className="btn primary" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</Link>
 					<label className="input-check mt-2">
 						<input type="checkbox" checked={draft.useRanking} onChange={(e) => {
 							updateSetting({ useRanking: e.target.checked });

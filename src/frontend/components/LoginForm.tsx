@@ -11,6 +11,10 @@ export const LoginForm: React.VFC = () => {
 	const [host, setHost] = useState('');
 	const {t} = useTranslation();
 
+	const login = () => {
+		location.href = `//${location.host}/login?host=${encodeURIComponent(host)}`;
+	};
+
 	return (
 		<nav>
 			<div>
@@ -21,14 +25,18 @@ export const LoginForm: React.VFC = () => {
 					className="input-field"
 					type="text"
 					value={host}
+					placeholder={t('instanceUrlPlaceholder')}
 					onChange={(e) => setHost(e.target.value)}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') login();
+					}}
 					required
 				/>
 				<button
 					className={!host ? 'btn' : 'btn primary'}
 					style={{ width: 128 }}
 					disabled={!host}
-					onClick={() => location.href = `//${location.host}/login?host=${encodeURIComponent(host)}`}
+					onClick={login}
 				>
 					{t('login')}
 				</button>
