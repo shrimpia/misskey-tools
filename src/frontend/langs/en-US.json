@@ -50,16 +50,16 @@
 	"shareMisskeyTools": "Share #MisskeyTools",
 	"shareMisskeyToolsNote": "Try #MisskeyTools !\n\nhttps://misskey.tools",
 	"_sidebar": {
-		"dashboard": "ダッシュボード",
-		"tools": "ツール",
-		"manageTools": "ツールを管理",
-		"missHaiAlert": "ミス廃アラート",
-		"cropper": "ねこみみアジャスター",
-		"accounts": "アカウント",
-		"settings": "設定",
-		"admin": "管理画面",
-		"about": "Misskey Toolsについて",
-		"return": "トップページに戻る"
+		"dashboard": "Dashboard",
+		"tools": "Tools",
+		"manageTools": "Manage tools",
+		"missHaiAlert": "Miss-hai Alert",
+		"cropper": "Cat Adjuster",
+		"accounts": "Accounts",
+		"settings": "Settings",
+		"admin": "Admin Panel",
+		"about": "About Misskey Tools",
+		"return": "Return back"
 	},
 	"_welcomeMessage": {
 		"pattern1": "Are you overnoting?",
@@ -146,7 +146,7 @@
 			"username": "Your Username",
 			"host": "Your host",
 			"rating": "Your rating",
-			"gacha": "ガチャ"
+			"gacha": "Gacha"
 		}
 	},
 	"_error": {
