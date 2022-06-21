@@ -49,6 +49,7 @@
 	"update": "업데이트하기",
 	"shareMisskeyTools": "#MisskeyTools 공유하기",
 	"shareMisskeyToolsNote": "여러분도 #MisskeyTools 하세요\n\nhttps://misskey.tools",
+	"instanceUrlPlaceholder": "例：misskey.io",
 	"_sidebar": {
 		"dashboard": "ダッシュボード",
 		"tools": "ツール",
@@ -158,6 +159,7 @@
 		"tokenRequired": "토큰이 누락되었습니다.",
 		"invalidParameter": "매개변수가 올바르지 않습니다.",
 		"notAuthorized": "권한이 없습니다.",
+		"hostNotFound": "インスタンスに接続できませんでした。ホスト名が正しく入力されているか、接続先のインスタンスが正常に動作しているかご確認ください。",
 		"other": "없음"
 	},
 	"_sendTest": {
