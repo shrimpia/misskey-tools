@@ -50,16 +50,16 @@
 	"shareMisskeyTools": "#MisskeyTools を分け与",
 	"shareMisskeyToolsNote": "貴様、#MisskeyTools を使ラ非常に素晴らします。\n\nhttps://misskey.tools",
 	"_sidebar": {
-		"dashboard": "ダッシュボード",
-		"tools": "ツール",
-		"manageTools": "ツールを管理",
-		"missHaiAlert": "ミス廃アラート",
-		"cropper": "ねこみみアジャスター",
-		"accounts": "アカウント",
+		"dashboard": "ダシユーボドー",
+		"tools": "お道具",
+		"manageTools": "管理用ツール",
+		"missHaiAlert": "ミス廃アラト",
+		"cropper": "猫耳を嵌め込みます",
+		"accounts": "口座",
 		"settings": "設定",
-		"admin": "管理画面",
-		"about": "Misskey Toolsについて",
-		"return": "トップページに戻る"
+		"admin": "画面の管理者",
+		"about": "だいたいMisskey Tools",
+		"return": "元に戻ります"
 	},
 	"_welcomeMessage": {
 		"pattern1": "ついついノートしすぎていませんか？",
