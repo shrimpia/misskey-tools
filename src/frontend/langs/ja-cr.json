@@ -49,7 +49,7 @@
 	"update": "更新",
 	"shareMisskeyTools": "#MisskeyTools を分け与",
 	"shareMisskeyToolsNote": "貴様、#MisskeyTools を使ラ非常に素晴らします。\n\nhttps://misskey.tools",
-	"instanceUrlPlaceholder": "例：misskey.io",
+	"instanceUrlPlaceholder": "例えば：misskey.io",
 	"_sidebar": {
 		"dashboard": "ダシユーボドー",
 		"tools": "お道具",
@@ -63,9 +63,9 @@
 		"return": "元に戻ります"
 	},
 	"_welcomeMessage": {
-		"pattern1": "ついついノートしすぎていませんか？",
-		"pattern2": "Misskey, しすぎていませんか？",
-		"pattern3": "今日、何ノート書いた？",
+		"pattern1": "おい、ノートを多くないか？",
+		"pattern2": "あなたのMisskeyは過剰ですか？",
+		"pattern3": "あなたは何枚ノートを書きます？",
 		"pattern4": "10000 音の初心者ならそう思いませんか？",
 		"pattern5": "ミスキーブレス、どうぞ。",
 		"pattern6": "あなたはしすぎいる？実際に Misskey。"
@@ -159,7 +159,7 @@
 		"tokenRequired": "トークンを持っていない",
 		"invalidParameter": "パラメーターが正しくない",
 		"notAuthorized": "許可は無い！",
-		"hostNotFound": "インスタンスに接続できませんでした。ホスト名が正しく入力されているか、接続先のインスタンスが正常に動作しているかご確認ください。",
+		"hostNotFound": "インスタンスは接続されない。ホストの名前は正しいく輸入している、それかインスタンスは接続を非常に正レか貴様確認（しなさい。）",
 		"other": "他"
 	},
 	"_sendTest": {
