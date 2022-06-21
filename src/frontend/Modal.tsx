@@ -98,7 +98,7 @@ export const ModalComponent: React.VFC = () => {
 	if (!shown || !modal) return null;
 
 	return (
-		<div className={`modal fade ${modal.type === 'menu' ? 'top-left' : ''}`} onClick={() => dispatch(hideModal())}>
+		<div className={`modal fade ${modal.type === 'menu' ? 'top-left' : 'darken'}`} onClick={() => dispatch(hideModal())}>
 			<div className="fade up" onClick={(e) => e.stopPropagation()}>
 				{ ModalInner(modal) }
 			</div>

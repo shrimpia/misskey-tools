@@ -87,7 +87,9 @@ small {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000000c0;
+    &.darken {
+        background: #000000c0;
+    }
     z-index: 40000;
     &.top-left {
         justify-content: flex-start;

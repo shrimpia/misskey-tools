@@ -35,6 +35,7 @@ const MobileHeader = styled.header`
 	right: 0;
 	height: 64px;
 	background: var(--panel);
+	z-index: 1000;
 	> h1 {
 		font-size: 1rem;
 		margin-bottom: 0;
@@ -53,7 +54,7 @@ export const GeneralLayout: React.FC = ({children}) => {
 		<Container isMobile={isMobile}>
 			{isMobile && (
 				<MobileHeader className="navbar hstack f-middle shadow-2 pl-2">
-					<button className="btn flat" onClick={() => dispatch(setDrawerShown(true))}>
+					<button className="btn flat" onClick={() => dispatch(setDrawerShown(!isDrawerShown))}>
 						<i className="fas fa-bars"></i>
 					</button>
 					<h1>{t(title ?? 'title')}</h1>
