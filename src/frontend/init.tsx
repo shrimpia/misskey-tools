@@ -15,15 +15,17 @@ import 'dayjs/locale/ja';
 
 dayjs.extend(relativeTime);
 
-if (!localStorage[LOCALSTORAGE_KEY_LANG]) {
-	localStorage[LOCALSTORAGE_KEY_LANG] = getBrowserLanguage();
+let lng = localStorage[LOCALSTORAGE_KEY_LANG];
+
+if (!lng) {
+	lng = localStorage[LOCALSTORAGE_KEY_LANG] = getBrowserLanguage();
 }
 
 i18n
 	.use(initReactI18next)
 	.init({
 		resources,
-		lng: localStorage[LOCALSTORAGE_KEY_LANG],
+		lng,
 		interpolation: {
 			escapeValue: false // Reactは常にXSS対策をしてくれるので、i18next側では対応不要
 		}

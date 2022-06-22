@@ -31,5 +31,5 @@ export type LanguageCode = keyof typeof resources;
 
 export const getBrowserLanguage = () => {
 	const lang = navigator.language.replace('-', '_').toLowerCase();
-	return (Object.keys(resources) as LanguageCode[]).map(l => l.toLowerCase()).find(k => k.startsWith(lang)) ?? 'en_US';
+	return (Object.keys(resources) as LanguageCode[]).find(k => k.toLowerCase().startsWith(lang)) ?? 'en_US';
 };
