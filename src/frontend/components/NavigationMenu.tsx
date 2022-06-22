@@ -2,13 +2,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { useGetSessionQuery } from '../services/session';
+import { CHANGELOG_URL } from '../const';
+import { useGetMetaQuery, useGetSessionQuery } from '../services/session';
 import { setDrawerShown } from '../store/slices/screen';
 
 const navLinkClassName = (isActive: boolean) => `item ${isActive ? 'active' : ''}`;
 
 export const NavigationMenu: React.VFC = () => {
 	const { data: session } = useGetSessionQuery(undefined);
+	const { data: meta } = useGetMetaQuery(undefined);
 	const {t} = useTranslation();
 	const dispatch = useDispatch();
 
@@ -56,6 +58,13 @@ export const NavigationMenu: React.VFC = () => {
 								{t('_sidebar.admin')}
 							</NavLink>
 						)}
+					</section>
+				)}
+				{meta && (
+					<section>
+						<a className="item" href={CHANGELOG_URL} onClick={onClickItem}>
+							v{meta.version} {t('changelog')}
+						</a>
 					</section>
 				)}
 			</div>
