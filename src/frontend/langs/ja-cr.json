@@ -52,6 +52,7 @@
 	"instanceUrlPlaceholder": "例えば：misskey.io",
 	"settings": "設定",
 	"accentColor": "色のアクセント",
+	"changelog": "変更するログ",
 	"_sidebar": {
 		"dashboard": "ダシユーボドー",
 		"tools": "お道具",

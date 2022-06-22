@@ -52,6 +52,7 @@
 	"instanceUrlPlaceholder": "e.g. misskey.io",
 	"settings": "Settings",
 	"accentColor": "Accent Color",
+	"changelog": "Changelog",
 	"_sidebar": {
 		"dashboard": "Dashboard",
 		"tools": "Tools",
