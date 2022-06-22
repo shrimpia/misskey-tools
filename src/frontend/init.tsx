@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import { getBrowserLanguage, resources } from './langs';
+import { getBrowserLanguage, languageName, resources } from './langs';
 import { App } from './App';
 import { LOCALSTORAGE_KEY_LANG } from './const';
 
@@ -17,7 +17,7 @@ dayjs.extend(relativeTime);
 
 let lng = localStorage[LOCALSTORAGE_KEY_LANG];
 
-if (!lng) {
+if (!lng || !Object.keys(languageName).includes(lng)) {
 	lng = localStorage[LOCALSTORAGE_KEY_LANG] = getBrowserLanguage();
 }
 
