@@ -50,6 +50,8 @@
 	"shareMisskeyTools": "Share #MisskeyTools",
 	"shareMisskeyToolsNote": "Try #MisskeyTools !\n\nhttps://misskey.tools",
 	"instanceUrlPlaceholder": "e.g. misskey.io",
+	"settings": "設定",
+	"accentColor": "アクセントカラー",
 	"_sidebar": {
 		"dashboard": "Dashboard",
 		"tools": "Tools",
@@ -100,7 +102,6 @@
 		"useRanking": "Join the Ranking"
 	},
 	"_accounts": {
-		"currentAccount": "Current Account",
 		"switchAccount": "Switch your account",
 		"useAnother": "Register with another account"
 	},
