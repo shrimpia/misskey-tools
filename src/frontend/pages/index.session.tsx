@@ -7,8 +7,8 @@ import { IUser } from '../../common/types/user';
 import { setAccounts } from '../store/slices/screen';
 import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
 import { $get } from '../misc/api';
-import { AnnouncementList } from '../components/AnnouncementList';
-import { DeveloperInfo } from '../components/DeveloperInfo';
+import { useAnnouncements } from '../hooks/useAnnouncements';
+import { Link } from 'react-router-dom';
 
 export const IndexSessionPage: React.VFC = () => {
 	const {t} = useTranslation();
@@ -16,62 +16,80 @@ export const IndexSessionPage: React.VFC = () => {
 	const { data: session } = useGetSessionQuery(undefined);
 	const score = useGetScoreQuery(undefined);
 
+	const announcements = useAnnouncements();
+
 	useEffect(() => {
 		const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
 		Promise.all(accounts.map(token => $get<IUser>('session', token))).then(a => dispatch(setAccounts(a as IUser[])));
 	}, [dispatch]);
 
 	return (
-		<div className="vstack fade">
-			<div className="card announcement">
-				<div className="body">
-					<AnnouncementList />
+		<article className="fade">
+			<section>
+				<h2><i className="fas fa-bell"></i> {t('announcements')}</h2>
+				<div className="large menu xmenu fade">
+					{announcements.map(a => (
+						<Link className="item fluid" key={a.id} to={`/announcements/${a.id}`}>
+							{a.title}
+						</Link>
+					))}
 				</div>
-			</div>
+			</section>
 			<div className="misshaiPageLayout">
-				<div className="card misshaiData">
-					<div className="body">
-						<h1><i className="fas fa-chart-line"></i> {t('_missHai.data')}</h1>
-						<table className="table fluid">
-							<thead>
-								<tr>
-									<th></th>
-									<th>{t('_missHai.dataScore')}</th>
-									<th>{t('_missHai.dataDelta')}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{t('notes')}</td>
-									<td>{score.data?.notesCount ?? '...'}</td>
-									<td>{score.data?.notesDelta ?? '...'}</td>
-								</tr>
-								<tr>
-									<td>{t('following')}</td>
-									<td>{score.data?.followingCount ?? '...'}</td>
-									<td>{score.data?.followingDelta ?? '...'}</td>
-								</tr>
-								<tr>
-									<td>{t('followers')}</td>
-									<td>{score.data?.followersCount ?? '...'}</td>
-									<td>{score.data?.followersDelta ?? '...'}</td>
-								</tr>
-							</tbody>
-						</table>
-						<p>
-							<strong>
-								{t('_missHai.rating')}{': '}
-							</strong>
-							{session?.rating ?? '...'}
-						</p>
+				<section className="misshaiData">
+					<h2><i className="fas fa-chart-line"></i> {t('_missHai.data')}</h2>
+					<table className="table fluid">
+						<thead>
+							<tr>
+								<th></th>
+								<th>{t('_missHai.dataScore')}</th>
+								<th>{t('_missHai.dataDelta')}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{t('notes')}</td>
+								<td>{score.data?.notesCount ?? '...'}</td>
+								<td>{score.data?.notesDelta ?? '...'}</td>
+							</tr>
+							<tr>
+								<td>{t('following')}</td>
+								<td>{score.data?.followingCount ?? '...'}</td>
+								<td>{score.data?.followingDelta ?? '...'}</td>
+							</tr>
+							<tr>
+								<td>{t('followers')}</td>
+								<td>{score.data?.followersCount ?? '...'}</td>
+								<td>{score.data?.followersDelta ?? '...'}</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>
+						<strong>
+							{t('_missHai.rating')}{': '}
+						</strong>
+						{session?.rating ?? '...'}
+					</p>
+				</section>
+				<section className="developerInfo">
+					<h2><i className="fas fa-circle-question"></i> {t('_developerInfo.title')}</h2>
+					<p>{t('_developerInfo.description')}</p>
+					<div className="menu large">
+						<a className="item" href="http://groundpolis.app/@Lutica" target="_blank" rel="noopener noreferrer">
+							<i className="icon fas fa-at"></i>
+					Lutica@groundpolis.app
+						</a>
+						<a className="item" href="http://misskey.io/@le" target="_blank" rel="noopener noreferrer">
+							<i className="icon fas fa-at"></i>
+					le@misskey.io
+						</a>
+						<a className="item" href="http://twitter.com/@EbiseLutica" target="_blank" rel="noopener noreferrer">
+							<i className="icon fas fa-at"></i>
+					EbiseLutica@twitter.com
+						</a>
 					</div>
-				</div>
-				<div className="card developerInfo">
-					<div className="body">
-						<DeveloperInfo />
-					</div>
-				</div>
+				</section>
 			</div>
-		</div>
+		</article>
 	);
 };

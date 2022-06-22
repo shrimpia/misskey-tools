@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -6,9 +6,8 @@ import { LoginForm } from '../components/LoginForm';
 import styled from 'styled-components';
 import { useSelector } from '../store';
 import { IsMobileProp } from '../misc/is-mobile-prop';
-import { IAnnouncement } from '../../common/types/announcement';
-import { $get } from '../misc/api';
 import Twemoji from 'react-twemoji';
+import { useAnnouncements } from '../hooks/useAnnouncements';
 
 const Hero = styled.div<IsMobileProp>`
 	display: flex;
@@ -68,21 +67,10 @@ const FormWrapper = styled.div`
 `;
 
 export const IndexWelcomePage: React.VFC = () => {
-	const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
-
 	const {isMobile} = useSelector(state => state.screen);
 	const {t} = useTranslation();
 
-	const fetchAllAnnouncements = () => {
-		setAnnouncements([]);
-		$get<IAnnouncement[]>('announcements').then(announcements => {
-			setAnnouncements(announcements ?? []);
-		});
-	};
-
-	useEffect(() => {
-		fetchAllAnnouncements();
-	}, []);
+	const announcements = useAnnouncements();
 
 	return (
 		<>
@@ -96,8 +84,8 @@ export const IndexWelcomePage: React.VFC = () => {
 					</FormWrapper>
 				</div>
 				<div className="announcements">
-					<h2>お知らせ</h2>
-					<div className="menu large">
+					<h2><i className="fas fa-bell"></i> {t('announcements')}</h2>
+					<div className="menu xmenu">
 						{announcements.map(a => (
 							<Link className="item fluid" key={a.id} to={`/announcements/${a.id}`}>
 								{a.title}

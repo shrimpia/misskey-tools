@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { useEffect, useState } from 'react';
 import { IAnnouncement } from '../../common/types/announcement';
 import { $get } from '../misc/api';
 
-export const AnnouncementList: React.VFC = () => {
+export const useAnnouncements = () => {
 	const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
 
 	const fetchAllAnnouncements = () => {
@@ -18,17 +16,5 @@ export const AnnouncementList: React.VFC = () => {
 		fetchAllAnnouncements();
 	}, []);
 
-	if (announcements.length === 0) return null;
-
-	return (
-		<>
-			<div className="large menu xmenu fade">
-				{announcements.map(a => (
-					<Link className="item fluid" key={a.id} to={`/announcements/${a.id}`}>
-						{a.title}
-					</Link>
-				))}
-			</div>
-		</>
-	);
+	return announcements;
 };

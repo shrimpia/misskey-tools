@@ -1,5 +1,5 @@
 import insertTextAtCursor from 'insert-text-at-cursor';
-import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { alertModes } from '../../../common/types/alert-mode';
@@ -44,7 +44,6 @@ type DraftReducer = React.Reducer<SettingDraftType, Partial<SettingDraftType>>;
 export const MisshaiPage: React.VFC = () => {
 	const dispatch = useDispatch();
 	const session = useGetSessionQuery(undefined);
-	const [limit, setLimit] = useState<number | undefined>(10);
 	const data = session.data;
 	const score = useGetScoreQuery(undefined);
 
@@ -196,129 +195,113 @@ export const MisshaiPage: React.VFC = () => {
 			<Skeleton width="100%" height="160px" />
 		</div>
 	) : (
-		<div className="vstack fade">
-			<div className="card misshaiData">
-				<div className="body">
-					<h1><i className="fas fa-chart-line"></i> {t('_missHai.data')}</h1>
-					<table className="table fluid">
-						<thead>
-							<tr>
-								<th></th>
-								<th>{t('_missHai.dataScore')}</th>
-								<th>{t('_missHai.dataDelta')}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{t('notes')}</td>
-								<td>{score.data.notesCount}</td>
-								<td>{score.data.notesDelta}</td>
-							</tr>
-							<tr>
-								<td>{t('following')}</td>
-								<td>{score.data.followingCount}</td>
-								<td>{score.data.followingDelta}</td>
-							</tr>
-							<tr>
-								<td>{t('followers')}</td>
-								<td>{score.data.followersCount}</td>
-								<td>{score.data.followersDelta}</td>
-							</tr>
-						</tbody>
-					</table>
-					<p>
-						<strong>
-							{t('_missHai.rating')}{': '}
-						</strong>
-						{session.data.rating}
-					</p>
+		<article className="fade">
+			<section className="misshaiData">
+				<h2><i className="fas fa-chart-line"></i> {t('_missHai.data')}</h2>
+				<table className="table fluid">
+					<thead>
+						<tr>
+							<th></th>
+							<th>{t('_missHai.dataScore')}</th>
+							<th>{t('_missHai.dataDelta')}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{t('notes')}</td>
+							<td>{score.data.notesCount}</td>
+							<td>{score.data.notesDelta}</td>
+						</tr>
+						<tr>
+							<td>{t('following')}</td>
+							<td>{score.data.followingCount}</td>
+							<td>{score.data.followingDelta}</td>
+						</tr>
+						<tr>
+							<td>{t('followers')}</td>
+							<td>{score.data.followersCount}</td>
+							<td>{score.data.followersDelta}</td>
+						</tr>
+					</tbody>
+				</table>
+				<p><strong>{t('_missHai.rating')}{': '}</strong>{session.data.rating}</p>
+			</section>
+			<section className="misshaiRanking">
+				<h2><i className="fas fa-ranking-star"/> {t('_missHai.ranking')}</h2>
+				<Ranking limit={10} />
+				<Link to="/apps/miss-hai/ranking" className="block mt-2">{t('_missHai.showAll')}</Link>
+			</section>
+			<section className="alertModeSetting">
+				<h2><i className="fas fa-gear"></i> {t('settings')}</h2>
+				<label className="input-check mt-2">
+					<input type="checkbox" checked={draft.useRanking} onChange={(e) => {
+						updateSetting({ useRanking: e.target.checked });
+					}}/>
+					<span>{t('_missHai.useRanking')}</span>
+				</label>
+				<h3>{t('alertMode')}</h3>
+				<div className="vstack slim">
+					{ alertModes.map((mode) => (
+						<label key={mode} className="input-check">
+							<input type="radio" checked={mode === draft.alertMode} onChange={() => {
+								updateSetting({ alertMode: mode });
+							}} />
+							<span>{t(`_alertMode.${mode}`)}</span>
+						</label>
+					))}
 				</div>
-			</div>
-			<div className="card misshaiRanking">
-				<div className="body">
-					<h1><i className="bi bi-bar-chart"></i> {t('_missHai.ranking')}</h1>
-					<Ranking limit={10} />
-					<Link to="/apps/miss-hai/ranking" className="btn primary" onClick={() => setLimit(undefined)}>{t('_missHai.showAll')}</Link>
-					<label className="input-check mt-2">
-						<input type="checkbox" checked={draft.useRanking} onChange={(e) => {
-							updateSetting({ useRanking: e.target.checked });
-						}}/>
-						<span>{t('_missHai.useRanking')}</span>
-					</label>
-				</div>
-			</div>
-			<div className="misshaiPageLayout">
-				<div className="card alertModeSetting">
-					<div className="body">
-						<h1><i className="fas fa-gear"></i> {t('alertMode')}</h1>
+				{ (draft.alertMode === 'notification' || draft.alertMode === 'both') && (
+					<div className="alert bg-danger mt-2">
+						<i className="icon fas fa-circle-exclamation"></i>
+						{t('_alertMode.notificationWarning')}
+					</div>
+				)}
+				{ (draft.alertMode === 'note' || draft.alertMode === 'both') && (
+					<>
+						<h3>{t('visibility')}</h3>
 						<div className="vstack slim">
-							{ alertModes.map((mode) => (
-								<label key={mode} className="input-check">
-									<input type="radio" checked={mode === draft.alertMode} onChange={() => {
-										updateSetting({ alertMode: mode });
-									}} />
-									<span>{t(`_alertMode.${mode}`)}</span>
-								</label>
-							))}
+							{
+								availableVisibilities.map((visibility) => (
+									<label key={visibility} className="input-check">
+										<input type="radio" checked={visibility === draft.visibility} onChange={() => {
+											updateSetting({ visibility });
+										}} />
+										<span>{t(`_visibility.${visibility}`)}</span>
+									</label>
+								))
+							}
 						</div>
-						{ (draft.alertMode === 'notification' || draft.alertMode === 'both') && (
-							<div className="alert bg-danger mt-2">
-								<i className="icon fas fa-circle-exclamation"></i>
-								{t('_alertMode.notificationWarning')}
-							</div>
-						)}
-						{ (draft.alertMode === 'note' || draft.alertMode === 'both') && (
-							<>
-								<h2 className="mt-2 mb-1">{t('visibility')}</h2>
-								<div className="vstack slim">
-									{
-										availableVisibilities.map((visibility) => (
-											<label key={visibility} className="input-check">
-												<input type="radio" checked={visibility === draft.visibility} onChange={() => {
-													updateSetting({ visibility });
-												}} />
-												<span>{t(`_visibility.${visibility}`)}</span>
-											</label>
-										))
-									}
-								</div>
-								<label className="input-check mt-2">
-									<input type="checkbox" checked={draft.localOnly} onChange={(e) => {
-										updateSetting({ localOnly: e.target.checked });
-									}} />
-									<span>{t('localOnly')}</span>
-								</label>
-							</>
-						)}
-					</div>
+						<label className="input-check mt-2">
+							<input type="checkbox" checked={draft.localOnly} onChange={(e) => {
+								updateSetting({ localOnly: e.target.checked });
+							}} />
+							<span>{t('localOnly')}</span>
+						</label>
+					</>
+				)}
+				<h3>{t('template')}</h3>
+				<p>{t('_template.description')}</p>
+				<div className="hstack dense mb-2">
+					<button className="btn" onClick={onClickInsertVariables}>
+						{'{ } '}
+						{t('_template.insertVariables')}
+					</button>
+					<button className="btn link text-info" onClick={onClickInsertVariablesHelp}>
+						<i className="fas fa-circle-question" />
+					</button>
 				</div>
-				<div className="card templateSetting">
-					<div className="body">
-						<h1><i className="fas fa-pen-to-square"></i> {t('template')}</h1>
-						<p>{t('_template.description')}</p>
-						<div className="hstack dense mb-2">
-							<button className="btn" onClick={onClickInsertVariables}>
-								{'{ } '}
-								{t('_template.insertVariables')}
-							</button>
-							<button className="btn link text-info" onClick={onClickInsertVariablesHelp}>
-								<i className="fas fa-circle-question" />
-							</button>
-						</div>
-						<textarea ref={templateTextarea} className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
-							dispatchDraft({ template: e.target.value });
-						}} />
-						<small className="text-dimmed">{t('_template.description2')}</small>
-						<div className="hstack mt-2" style={{justifyContent: 'flex-end'}}>
-							<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>{t('resetToDefault')}</button>
-							<button className="btn primary" onClick={() => {
-								updateSettingWithDialog({ template: draft.template === '' ? null : draft.template });
-							}}>{t('save')}</button>
-						</div>
-					</div>
+				<textarea ref={templateTextarea} className="input-field" value={draft.template ?? defaultTemplate} placeholder={defaultTemplate} style={{height: 228}} onChange={(e) => {
+					dispatchDraft({ template: e.target.value });
+				}} />
+				<small className="text-dimmed">{t('_template.description2')}</small>
+				<div className="hstack mt-2">
+					<button className="btn danger" onClick={() => dispatchDraft({ template: null })}>{t('resetToDefault')}</button>
+					<button className="btn primary" onClick={() => {
+						updateSettingWithDialog({ template: draft.template === '' ? null : draft.template });
+					}}>{t('save')}</button>
 				</div>
-			</div>
-			<div className="list-form mt-2">
+			</section>
+			<section className="list-form mt-2">
 				<button className="item" onClick={onClickSendAlert} disabled={draft.alertMode === 'nothing'}>
 					<i className="icon fas fa-paper-plane" />
 					<div className="body">
@@ -326,8 +309,8 @@ export const MisshaiPage: React.VFC = () => {
 						<p className="desc">{t(draft.alertMode === 'nothing' ? 'sendAlertDisabled' : 'sendAlertDescription')}</p>
 					</div>
 				</button>
-			</div>
-		</div>
+			</section>
+		</article>
 	);
 };
 

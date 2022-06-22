@@ -1,6 +1,4 @@
 body {
-    --primary: rgb(134, 179, 0);
-    --primary-d: rgb(52, 70, 0);
     --max-width: 1024px;
     font-family: "Koruri", sans-serif;
 }
@@ -17,6 +15,19 @@ hr {
 .xarticle {
     margin: auto;
     max-width: var(--max-width);
+}
+
+.xmenu {
+    .item {
+        background: #ffffff40;
+        + .item {
+            margin-top: var(--slim-margin);
+        }
+    }
+}
+
+.dark .xmenu .item {
+    background: #00000040;
 }
 
 ._header {

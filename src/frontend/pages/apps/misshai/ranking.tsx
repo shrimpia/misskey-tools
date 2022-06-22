@@ -9,7 +9,7 @@ export const RankingPage: React.VFC = () => {
 	useTitle('_missHai.ranking');
 
 	return (
-		<article className="xarticle">
+		<article>
 			<h2>{t('_missHai.ranking')}</h2>
 			<section>
 				<p>{t('_missHai.rankingDescription')}</p>

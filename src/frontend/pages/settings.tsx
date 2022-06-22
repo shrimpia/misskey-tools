@@ -6,11 +6,33 @@ import { useGetSessionQuery } from '../services/session';
 import { Card } from '../components/Card';
 import { Theme, themes } from '../misc/theme';
 import { LOCALSTORAGE_KEY_TOKEN } from '../const';
-import { changeLang, changeTheme, showModal } from '../store/slices/screen';
+import { changeAccentColor, changeLang, changeTheme, showModal } from '../store/slices/screen';
 import { useSelector } from '../store';
 import { languageName } from '../langs';
 import { $delete } from '../misc/api';
 import { useTitle } from '../hooks/useTitle';
+import { designSystemColors } from '../../common/types/design-system-color';
+import styled from 'styled-components';
+
+const ColorInput = styled.input<{color: string}>`
+	display: block;
+	appearance: none;
+	width: 32px;
+	height: 32px;
+	border-radius: 999px;
+	background-color: var(--panel);
+	border: 4px solid var(--${p => p.color});
+	cursor: pointer;
+	transition: all 0.2s ease;
+	&:checked {
+		background: var(--${p => p.color});
+		cursor: default;
+	}
+	&:hover, &:focus {
+		box-shadow: 0 0 16px var(--${p => p.color});
+		outline: none;
+	}
+`;
 
 export const SettingPage: React.VFC = () => {
 	const session = useGetSessionQuery(undefined);
@@ -23,6 +45,7 @@ export const SettingPage: React.VFC = () => {
 
 	const currentTheme = useSelector(state => state.screen.theme);
 	const currentLang = useSelector(state => state.screen.language);
+	const currentAccentColor = useSelector(state => state.screen.accentColor);
 
 	const onClickLogout = useCallback(() => {
 		dispatch(showModal({
@@ -92,10 +115,10 @@ export const SettingPage: React.VFC = () => {
 	return session.isLoading || !data ? (
 		<div className="skeleton" style={{width: '100%', height: '128px'}}></div>
 	) : (
-		<div className="vstack fade">
-			<Card bodyClassName="vstack">
-				<h1><i className="fas fa-palette"></i> {t('appearance')}</h1>
-				<h2>{t('theme')}</h2>
+		<article className="fade">
+			<h2><i className="fas fa-palette"></i> {t('appearance')}</h2>
+			<section>
+				<h3>{t('theme')}</h3>
 				<div className="vstack">
 					{
 						themes.map(theme => (
@@ -106,11 +129,19 @@ export const SettingPage: React.VFC = () => {
 						))
 					}
 				</div>
-
-				<h2>{t('language')}</h2>
-				<select name="currentLang" className="input-field" value={currentLang} onChange={(e) => {
-					dispatch(changeLang(e.target.value));
-				}}>
+			</section>
+			<section>
+				<h3>{t('accentColor')}</h3>
+				<div className="hstack slim wrap mb-2">
+					{designSystemColors.map(c => (
+						<ColorInput className="shadow-2" type="radio" color={c} value={c} checked={c === currentAccentColor} onChange={e => dispatch(changeAccentColor(e.target.value))} />
+					))}
+				</div>
+				<button className="btn primary">{t('resetToDefault')}</button>
+			</section>
+			<section>
+				<h3>{t('language')}</h3>
+				<select name="currentLang" className="input-field" value={currentLang} onChange={(e) => dispatch(changeLang(e.target.value))}>
 					{
 						(Object.keys(languageName) as Array<keyof typeof languageName>).map(n => (
 							<option value={n} key={n}>{languageName[n]}</option>
@@ -124,23 +155,26 @@ export const SettingPage: React.VFC = () => {
 						<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
 					</div>
 				</div>
-			</Card>
-			<div className="list-form">
-				<button className="item" onClick={onClickLogout}>
-					<i className="icon fas fa-arrow-up-right-from-square" />
-					<div className="body">
-						<h1>{t('logout')}</h1>
-						<p className="desc">{t('logoutDescription')}</p>
-					</div>
-				</button>
-				<button className="item text-danger" onClick={onClickDeleteAccount}>
-					<i className="icon fas fa-trash-can" />
-					<div className="body">
-						<h1>{t('deleteAccount')}</h1>
-						<p className="desc">{t('deleteAccountDescription')}</p>
-					</div>
-				</button>
-			</div>
-		</div>
+			</section>
+			<section>
+				<h2>その他の設定</h2>
+				<div className="list-form">
+					<button className="item" onClick={onClickLogout}>
+						<i className="icon fas fa-arrow-up-right-from-square" />
+						<div className="body">
+							<h1>{t('logout')}</h1>
+							<p className="desc">{t('logoutDescription')}</p>
+						</div>
+					</button>
+					<button className="item text-danger" onClick={onClickDeleteAccount}>
+						<i className="icon fas fa-trash-can" />
+						<div className="body">
+							<h1>{t('deleteAccount')}</h1>
+							<p className="desc">{t('deleteAccountDescription')}</p>
+						</div>
+					</button>
+				</div>
+			</section>
+		</article>
 	);
 };

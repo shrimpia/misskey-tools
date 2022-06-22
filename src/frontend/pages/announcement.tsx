@@ -21,22 +21,18 @@ export const AnnouncementPage: React.VFC = () => {
 	useEffect(() => {
 		$get<IAnnouncement>('announcements/' + id).then(setAnnouncement);
 	}, [setAnnouncement]);
-	return (
-		<article>
-			{!announcement ? <Skeleton width="100%" height="10rem" /> : (
-				<>
-					<h2>
-						{announcement.title}
-						<aside className="inline ml-1 text-dimmed text-100">
-							<i className="fas fa-clock" />&nbsp;
-							{dayjs(announcement.createdAt).locale(lang.split('_')[0]).fromNow()}
-						</aside>
-					</h2>
-					<section>
-						<ReactMarkdown>{announcement.body}</ReactMarkdown>
-					</section>
-				</>
-			)}
+	return !announcement ? <Skeleton width="100%" height="10rem" /> : (
+		<article className="fade">
+			<h2>
+				{announcement.title}
+				<aside className="inline ml-1 text-dimmed text-100">
+					<i className="fas fa-clock" />&nbsp;
+					{dayjs(announcement.createdAt).locale(lang.split('_')[0]).fromNow()}
+				</aside>
+			</h2>
+			<section>
+				<ReactMarkdown>{announcement.body}</ReactMarkdown>
+			</section>
 		</article>
 	);
 };

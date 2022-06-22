@@ -33,12 +33,11 @@ export const AccountsPage: React.VFC = () => {
 			<Skeleton />
 		</div>
 	) :  (
-		<article className="card fade">
-			<div className="body">
-				<div>
-					<strong>{t('_accounts.switchAccount')}</strong>
-				</div>
-				<div className="menu large fluid mb-2">
+		<article className="fade">
+			<section>
+				<h2>{t('_accounts.switchAccount')}</h2>
+
+				<div className="menu xmenu large fluid mb-2">
 					{
 						accounts.length === accountTokens.length ? (
 							accounts.map(account => (
@@ -59,8 +58,11 @@ export const AccountsPage: React.VFC = () => {
 						)
 					}
 				</div>
+			</section>
+			<section>
+				<h2>{t('_accounts.useAnother')}</h2>
 				<LoginForm />
-			</div>
+			</section>
 		</article>
 	);
 };
