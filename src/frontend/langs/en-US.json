@@ -50,8 +50,8 @@
 	"shareMisskeyTools": "Share #MisskeyTools",
 	"shareMisskeyToolsNote": "Try #MisskeyTools !\n\nhttps://misskey.tools",
 	"instanceUrlPlaceholder": "e.g. misskey.io",
-	"settings": "設定",
-	"accentColor": "アクセントカラー",
+	"settings": "Settings",
+	"accentColor": "Accent Color",
 	"_sidebar": {
 		"dashboard": "Dashboard",
 		"tools": "Tools",
