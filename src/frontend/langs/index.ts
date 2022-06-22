@@ -11,10 +11,12 @@ const merge = (baseData: Record<string, unknown>, newData: Record<string, unknow
 	});
 };
 
+const _enUS = merge(jaJP, enUS);
+
 export const resources = {
 	'ja_JP': { translation: jaJP },
-	'en_US': { translation: merge(jaJP, enUS) },
-	'ko_KR': { translation: merge(jaJP, koKR) },
+	'en_US': { translation: _enUS },
+	'ko_KR': { translation: merge(_enUS, koKR) },
 	'ja_CR': { translation: merge(jaJP, jaCR) },
 };
 
@@ -28,6 +30,6 @@ export const languageName = {
 export type LanguageCode = keyof typeof resources;
 
 export const getBrowserLanguage = () => {
-	const lang = navigator.language;
-	return (Object.keys(resources) as LanguageCode[]).find(k => k.startsWith(lang)) ?? 'en_US';
+	const lang = navigator.language.replace('-', '_').toLowerCase();
+	return (Object.keys(resources) as LanguageCode[]).map(l => l.toLowerCase()).find(k => k.startsWith(lang)) ?? 'en_US';
 };
