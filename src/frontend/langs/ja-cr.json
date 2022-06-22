@@ -50,6 +50,8 @@
 	"shareMisskeyTools": "#MisskeyTools を分け与",
 	"shareMisskeyToolsNote": "貴様、#MisskeyTools を使ラ非常に素晴らします。\n\nhttps://misskey.tools",
 	"instanceUrlPlaceholder": "例えば：misskey.io",
+	"settings": "設定",
+	"accentColor": "アクセントカラー",
 	"_sidebar": {
 		"dashboard": "ダシユーボドー",
 		"tools": "お道具",
@@ -100,7 +102,6 @@
 		"useRanking": "ランキングを参加ゑ"
 	},
 	"_accounts": {
-		"currentAccount": "アカウントは今にログインします",
 		"switchAccount": "アカウントをスイッチ",
 		"useAnother": "さらなるアカウントを登録すゑ"
 	},
