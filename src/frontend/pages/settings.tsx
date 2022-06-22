@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { useGetSessionQuery } from '../services/session';
-import { Card } from '../components/Card';
 import { Theme, themes } from '../misc/theme';
 import { LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { changeAccentColor, changeLang, changeTheme, showModal } from '../store/slices/screen';
