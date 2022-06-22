@@ -50,6 +50,8 @@
 	"shareMisskeyTools": "#MisskeyTools 공유하기",
 	"shareMisskeyToolsNote": "여러분도 #MisskeyTools 하세요\n\nhttps://misskey.tools",
 	"instanceUrlPlaceholder": "예시: misskey.io",
+	"settings": "設定",
+	"accentColor": "アクセントカラー",
 	"_sidebar": {
 		"dashboard": "대시보드",
 		"tools": "도구",
@@ -100,7 +102,6 @@
 		"useRanking": "랭킹에 참가하기"
 	},
 	"_accounts": {
-		"currentAccount": "현재 로그인한 계정",
 		"switchAccount": "계정 전환",
 		"useAnother": "다른 계정 등록하기"
 	},
