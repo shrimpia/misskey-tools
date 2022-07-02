@@ -50,9 +50,9 @@
 	"shareMisskeyTools": "#MisskeyTools 공유하기",
 	"shareMisskeyToolsNote": "여러분도 #MisskeyTools 하세요\n\nhttps://misskey.tools",
 	"instanceUrlPlaceholder": "예시: misskey.io",
-	"settings": "設定",
-	"accentColor": "アクセントカラー",
-	"changelog": "更新履歴",
+	"settings": "설정",
+	"accentColor": "강조 색상",
+	"changelog": "업데이트 내역",
 	"_sidebar": {
 		"dashboard": "대시보드",
 		"tools": "도구",
