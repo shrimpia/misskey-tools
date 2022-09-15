@@ -53,6 +53,7 @@
 	"settings": "Settings",
 	"accentColor": "Accent Color",
 	"changelog": "Changelog",
+	"otherSettings": "その他の設定",
 	"_sidebar": {
 		"dashboard": "Dashboard",
 		"tools": "Tools",
