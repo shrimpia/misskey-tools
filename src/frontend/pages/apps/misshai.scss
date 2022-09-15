@@ -15,3 +15,12 @@
         flex: 5 0 300px;
     }
 }
+
+.textarea-wrapper {
+    position: relative;
+    > .textarea-remaining {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+    }
+}

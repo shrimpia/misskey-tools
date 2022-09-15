@@ -76,7 +76,7 @@ export class User implements IUser {
 
 	@Column({
 		type: 'varchar',
-		length: 280,
+		length: 1024,
 		nullable: true,
 	})
 	public template: string | null;
