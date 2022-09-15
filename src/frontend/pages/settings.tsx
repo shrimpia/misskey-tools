@@ -110,53 +110,54 @@ export const SettingPage: React.VFC = () => {
 		}));
 	}, [dispatch, t]);
 
-
 	return session.isLoading || !data ? (
 		<div className="skeleton" style={{width: '100%', height: '128px'}}></div>
 	) : (
 		<article className="fade">
 			<h2><i className="fas fa-palette"></i> {t('appearance')}</h2>
-			<section>
-				<h3>{t('theme')}</h3>
-				<div className="vstack">
-					{
-						themes.map(theme => (
-							<label key={theme} className="input-check">
-								<input type="radio" value={theme} checked={theme === currentTheme} onChange={(e) => dispatch(changeTheme(e.target.value as Theme))} />
-								<span>{t(`_themes.${theme}`)}</span>
-							</label>
-						))
-					}
-				</div>
-			</section>
-			<section>
-				<h3>{t('accentColor')}</h3>
-				<div className="hstack slim wrap mb-2">
-					{designSystemColors.map(c => (
-						<ColorInput className="shadow-2" type="radio" color={c} value={c} checked={c === currentAccentColor} onChange={e => dispatch(changeAccentColor(e.target.value))} />
-					))}
-				</div>
-				<button className="btn primary">{t('resetToDefault')}</button>
-			</section>
-			<section>
-				<h3>{t('language')}</h3>
-				<select name="currentLang" className="input-field" value={currentLang} onChange={(e) => dispatch(changeLang(e.target.value))}>
-					{
-						(Object.keys(languageName) as Array<keyof typeof languageName>).map(n => (
-							<option value={n} key={n}>{languageName[n]}</option>
-						))
-					}
-				</select>
-				<div className="alert bg-info mt-2">
-					<i className="icon fas fa-language" />
-					<div>
-						{t('translatedByTheCommunity')}&nbsp;
-						<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
+			<div className="vstack">
+				<div className="card pa-2">
+					<h3>{t('theme')}</h3>
+					<div className="vstack">
+						{
+							themes.map(theme => (
+								<label key={theme} className="input-check">
+									<input type="radio" value={theme} checked={theme === currentTheme} onChange={(e) => dispatch(changeTheme(e.target.value as Theme))} />
+									<span>{t(`_themes.${theme}`)}</span>
+								</label>
+							))
+						}
 					</div>
 				</div>
-			</section>
+				<div className="card pa-2">
+					<h3>{t('accentColor')}</h3>
+					<div className="hstack slim wrap mb-2">
+						{designSystemColors.map(c => (
+							<ColorInput className="shadow-2" type="radio" color={c} value={c} checked={c === currentAccentColor} onChange={e => dispatch(changeAccentColor(e.target.value))} />
+						))}
+					</div>
+					<button className="btn primary" onClick={() => dispatch(changeAccentColor('green'))}>{t('resetToDefault')}</button>
+				</div>
+				<div className="card pa-2">
+					<h3>{t('language')}</h3>
+					<select name="currentLang" className="input-field" value={currentLang} onChange={(e) => dispatch(changeLang(e.target.value))}>
+						{
+							(Object.keys(languageName) as Array<keyof typeof languageName>).map(n => (
+								<option value={n} key={n}>{languageName[n]}</option>
+							))
+						}
+					</select>
+					<div className="alert bg-info mt-2">
+						<i className="icon fas fa-language" />
+						<div>
+							{t('translatedByTheCommunity')}&nbsp;
+							<a href="https://crowdin.com/project/misskey-tools" target="_blank" rel="noopener noreferrer">{t('helpTranslation')}</a>
+						</div>
+					</div>
+				</div>
+			</div>
 			<section>
-				<h2>その他の設定</h2>
+				<h2>{t('otherSettings')}</h2>
 				<div className="list-form">
 					<button className="item" onClick={onClickLogout}>
 						<i className="icon fas fa-arrow-up-right-from-square" />
