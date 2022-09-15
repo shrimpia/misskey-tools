@@ -1,0 +1,13 @@
+doctype html
+html
+	head
+		meta(charset="UTF-8")
+	body
+		p 問題を修正するため、端末に残ったデータを削除しました。
+		p 5秒後にトップページに移動します。
+		hr
+		p To solve the problem, deleted data remaining on the device.
+		p After 5 seconds, you will be redirected to the top page.
+		script.
+			localStorage.clear();
+			setTimeout(() => location.href = '/', 5000);

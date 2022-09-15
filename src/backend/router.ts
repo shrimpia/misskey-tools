@@ -156,6 +156,10 @@ router.get('/announcements/:id', async (ctx) => {
 	} : null);
 });
 
+router.get('/__rescue__', async(ctx) => {
+	await ctx.render('rescue');
+});
+
 router.get('(.*)', async (ctx) => {
 	await ctx.render('frontend');
 });
