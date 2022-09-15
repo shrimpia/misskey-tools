@@ -35,12 +35,12 @@ export const getUser = (username: string, host: string): Promise<IUser | undefin
  * @returns ミス廃トークン
  */
 export const updateUsersToolsToken = async (user: User | User['id']): Promise<string> => {
-	const u = typeof user === 'number'
+	const id = typeof user === 'number'
 		? user
 		: user.id;
 
 	const misshaiToken = await genToken();
-	Users.update(u, { misshaiToken });
+	Users.update(id, { misshaiToken });
 	return misshaiToken;
 };
 
@@ -64,7 +64,8 @@ export const upsertUser = async (username: string, host: string, token: string):
 	if (u) {
 		await Users.update(u.id, { token, tokenVersion: currentTokenVersion });
 	} else {
-		await Users.insert({ username, host, token, tokenVersion: currentTokenVersion });
+		const result = await Users.save({ username, host, token, tokenVersion: currentTokenVersion });
+		await updateUsersToolsToken(result.id);
 	}
 };
 
