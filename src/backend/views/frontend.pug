@@ -14,19 +14,12 @@ html
 		meta(name='twitter:card' content='summary')
 		meta(name='twitter:site' content='@Xeltica')
 		meta(name='twitter:creator' content='@Xeltica')
+		link(rel="preload" href="https://koruri.chillout.chat/koruri.css")
+		link(rel="preload", href="/assets/otadesign_rounded.woff")
+		link(rel="preload", href="/assets/otadesign_rounded.woff2")
 		link(rel="stylesheet" href="https://koruri.chillout.chat/koruri.css")
 		script(src='https://kit.fontawesome.com/c7ab6eba70.js' crossorigin='anonymous')
-		style.
-			.loading {
-				display: flex;
-				position: fixed;
-				inset: 0;
-				background: #222;
-				color: #fff;
-				font-size: 16px;
-				align-items: center;
-				justify-content: center;
-			}
+		link(rel="stylesheet", href="/assets/style.css")
 	body
 		#app: .loading Loading...
 

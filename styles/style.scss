@@ -1,58 +1,20 @@
-@import '_xeltica-design.scss';
-
-body {
-    background: var(--bg-pale-1);
+@font-face {
+  font-family: "OTADESIGN Rounded";
+  src: url("/assets/otadesign_rounded.woff2") format('woff2'),
+       url("/assets/otadesign_rounded.woff") format('woff');
 }
 
-h1> a {
-    border-bottom: none;
+.font-misskey {
+  font-family: "OTADESIGN Rounded";
 }
 
-.background {
+.loading {
+  display: flex;
   position: fixed;
-  z-index: -50;
   inset: 0;
-  
-  background: radial-gradient(
-    farthest-corner at 0 0,
-    #86b300 0%,
-    #86b300 40%,
-    #6900ba 90%,
-    #6900ba 100%
-  );
-}
-
-.background:before {
-  z-index: -200;
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    60vw at 150vh 50vh,
-    #ff9900 0%,
-    #ff9900 20%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  content: "";
-}
-
-.background:after {
-  z-index: -100;
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    50vw at 120vw 120vh,
-    rgba(0, 30, 190, 1) 0%,
-    rgba(0, 30, 190, 0) 100%
-  );
-  content: "";
-}
-
-details > summary {
-    margin-bottom: 8px;
-    cursor: pointer;
-}
-
-h1 > small {
-  margin-left: 1rem;
-  font-size: 1.2rem;
+  background: #222;
+  color: #fff;
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
 }

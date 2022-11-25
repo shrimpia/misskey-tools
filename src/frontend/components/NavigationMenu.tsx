@@ -20,7 +20,7 @@ export const NavigationMenu: React.VFC = () => {
 
 	return (
 		<>
-			<h1 className="text-175 text-dimmed mb-2">{t('title')}</h1>
+			<h1 className="text-175 text-dimmed mb-2 font-misskey">{t('title')}</h1>
 			<div className="menu">
 				<section>
 					<NavLink className={navLinkClassName} to="/" exact onClick={onClickItem}>
