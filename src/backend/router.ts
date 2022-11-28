@@ -183,7 +183,5 @@ async function login(ctx: Context, user: Record<string, unknown>, host: string, 
 		});
 	}
 
-	const toolsToken = await updateUsersToolsToken(u);
-
-	await ctx.render('frontend', { token: toolsToken });
+	await ctx.render('frontend', { token: u.misshaiToken });
 }
