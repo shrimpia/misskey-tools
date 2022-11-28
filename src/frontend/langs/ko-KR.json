@@ -38,7 +38,7 @@
 	"error": "오류",
 	"retry": "다시 시도",
 	"saved": "저장했습니다.",
-	"disclaimerForMisskeyHq": "Misskey Tools는, Misskey HQ의 공식 툴이 <b>아닙니다</b>.",
+	"disclaimerForMisskeyHq": "Misskey Tools는, Misskey 개발진에 의한 공식 툴이 <b>아닙니다</b>.",
 	"translatedByTheCommunity": "Misskey Tools는 자원봉사자들에 의해 번역되었습니다.",
 	"helpTranslation": "번역을 도와주세요",
 	"announcements": "공지사항",
@@ -50,9 +50,10 @@
 	"shareMisskeyTools": "#MisskeyTools 공유하기",
 	"shareMisskeyToolsNote": "여러분도 #MisskeyTools 하세요\n\nhttps://misskey.tools",
 	"instanceUrlPlaceholder": "예시: misskey.io",
-	"settings": "設定",
-	"accentColor": "アクセントカラー",
-	"changelog": "更新履歴",
+	"settings": "설정",
+	"accentColor": "강조 색상",
+	"changelog": "업데이트 내역",
+	"otherSettings": "その他の設定",
 	"_sidebar": {
 		"dashboard": "대시보드",
 		"tools": "도구",
@@ -162,7 +163,7 @@
 		"invalidParameter": "매개변수가 올바르지 않습니다.",
 		"notAuthorized": "권한이 없습니다.",
 		"hostNotFound": "인스턴스에 접속할 수 없습니다. 호스트명이 올바른지, 인스턴스가 정상적으로 동작하는 지 확인해 주세요.",
-		"other": "없음"
+		"other": "알 수 없는 오류입니다."
 	},
 	"_sendTest": {
 		"title": "테스트 알림을 보내시겠습니까?",
@@ -180,7 +181,7 @@
 	},
 	"_deactivate": {
 		"title": "계정 연동을 해제하시겠습니까?",
-		"message": "수집된 데이터나 개인 설정 등을 바롯한 모든 데이터가 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+		"message": "수집된 데이터나 개인 설정 등을 비롯한 모든 데이터가 삭제됩니다. 이 작업은 취소할 수 없습니다.",
 		"yes": "해제하기",
 		"no": "취소",
 		"success": "계정 연동을 해제했습니다. 메인 화면으로 돌아갑니다.",
