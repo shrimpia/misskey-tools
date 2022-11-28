@@ -94,6 +94,7 @@ export const SettingPage: React.VFC = () => {
 							message: t('_deactivate.success'),
 							icon: 'info',
 							onSelect() {
+								localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
 								location.href = '/';
 							}
 						}));
