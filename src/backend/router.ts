@@ -9,7 +9,7 @@ import striptags from 'striptags';
 import MarkdownIt from 'markdown-it';
 
 import { config } from '../config';
-import { upsertUser, getUser, updateUser, updateUsersToolsToken } from './functions/users';
+import { upsertUser, getUser, updateUser } from './functions/users';
 import { api } from './services/misskey';
 import { die } from './die';
 import { misskeyAppInfo } from './const';
@@ -49,6 +49,12 @@ router.get('/login', async ctx => {
 		await die(ctx, 'hitorisskeyIsDenied');
 		return;
 	}
+
+	// NOTE:
+	//   環境によってはアクセスしたドメインとMisskeyにおけるhostが異なるケースがある
+	//   そういったインスタンスにおいてアカウントの不整合が生じるため、
+	//   APIから戻ってきたホスト名を正しいものとして、改めて正規化する
+	host = meta.uri.replace(/^https?:\/\//g, '').replace(/\/+/g, '').trim();
 
 	const { name, permission, description } = misskeyAppInfo;
 
