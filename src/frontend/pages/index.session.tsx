@@ -77,11 +77,7 @@ export const IndexSessionPage: React.VFC = () => {
 					<div className="menu large">
 						<a className="item" href="//mk.shrimpia.network/@Lutica" target="_blank" rel="noopener noreferrer">
 							<i className="icon fas fa-at"></i>
-							Lutica@mk.shrimpia.network.app
-						</a>
-						<a className="item" href="//twitter.com/@lutica_f" target="_blank" rel="noopener noreferrer">
-							<i className="icon fas fa-at"></i>
-							lutica_f@twitter.com
+							Lutica@mk.shrimpia.network
 						</a>
 					</div>
 				</section>
