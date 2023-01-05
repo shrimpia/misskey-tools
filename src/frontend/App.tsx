@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { store } from './store';
 import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
-import { BREAKPOINT_SM, XELTICA_STUDIO_URL } from './const';
+import { BREAKPOINT_SM } from './const';
 import { useGetSessionQuery } from './services/session';
 import { Router } from './Router';
 import { setMobile } from './store/slices/screen';
@@ -62,7 +62,7 @@ const AppInner : React.VFC = () => {
 				</div>
 			) : <Router />}
 			<footer className="text-center pa-5">
-				<p>(C)2020-2022 <a href={XELTICA_STUDIO_URL} target="_blank" rel="noopener noreferrer">Xeltica Studio</a></p>
+				<p>(C)2020-2023 Shrimpia Network</p>
 				<p><span dangerouslySetInnerHTML={{__html: t('disclaimerForMisskeyHq')}} /></p>
 				<p>
 					<a href="https://xeltica.notion.site/Misskey-Tools-688187fc85de4b7e901055326c7ffe74" target="_blank" rel="noreferrer noopener">

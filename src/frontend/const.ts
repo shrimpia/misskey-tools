@@ -13,8 +13,6 @@ export const LOCALSTORAGE_KEY_ACCENT_COLOR = 'accent_color';
 export const API_ENDPOINT = `//${location.host}/api/v1/`;
 /** 更新履歴URL */
 export const CHANGELOG_URL = 'https://github.com/Xeltica/MisskeyTools/blob/master/CHANGELOG.md';
-/** Xeltica Studio 公式サイトURL */
-export const XELTICA_STUDIO_URL = 'https://xeltica.work';
 
 /** ブレークポイント モバイル */
 export const BREAKPOINT_SM = '800px';
