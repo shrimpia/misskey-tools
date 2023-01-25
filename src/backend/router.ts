@@ -100,6 +100,7 @@ router.get('/miauth', async ctx => {
 	delete sessionHostCache[session];
 	if (!host) {
 		await die(ctx);
+		console.error('host is null or undefined');
 		return;
 	}
 
@@ -108,6 +109,8 @@ router.get('/miauth', async ctx => {
 
 	if (!token || !user) {
 		await die(ctx);
+		if (!token) console.error('token is null or undefined');
+		if (!user) console.error('user is null or undefined');
 		return;
 	}
 
