@@ -105,7 +105,8 @@ router.get('/miauth', async ctx => {
 	}
 
 	const url = `https://${host}/api/miauth/${session}/check`;
-	const { token, user } = (await axios.post(url)).data;
+	const res = await axios.post(url, {});
+	const { token, user } = res.data;
 
 	if (!token || !user) {
 		await die(ctx);

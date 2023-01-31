@@ -2,9 +2,6 @@ import axios from 'axios';
 
 export const ua = `Mozilla/5.0 MisskeyTools +https://github.com/Xeltica/MisskeyTools Node/${process.version}`;
 
-axios.defaults.headers['User-Agent'] = ua;
-axios.defaults.validateStatus = (stat) => stat < 500;
-
 /**
  * Misskey APIを呼び出す
  */
