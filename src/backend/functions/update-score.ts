@@ -1,5 +1,6 @@
 import { User } from '../models/entities/user';
 import { updateUser } from './users';
+import {Count} from '../models/count';
 
 /**
  * Misskeyのユーザーモデル
@@ -14,12 +15,12 @@ export type MiUser = {
 /**
  * スコアを更新します
  * @param user ユーザー
- * @param miUser Misskeyのユーザー
+ * @param count 統計
  */
-export const updateScore = async (user: User, miUser: MiUser): Promise<void> => {
+export const updateScore = async (user: User, count: Count): Promise<void> => {
 	await updateUser(user.username, user.host, {
-		prevNotesCount: miUser.notesCount ?? 0,
-		prevFollowingCount: miUser.followingCount ?? 0,
-		prevFollowersCount: miUser.followersCount ?? 0,
+		prevNotesCount: count.notesCount ?? 0,
+		prevFollowingCount: count.followingCount ?? 0,
+		prevFollowersCount: count.followersCount ?? 0,
 	});
 };

@@ -17,7 +17,7 @@ let _state: Readonly<State> = defaultState;
  */
 export type State = {
 	nowCalculating: boolean,
-	misshaiWorkerLog: string[],
+	misshaiWorkerLog: Log[],
 };
 
 /**
@@ -35,4 +35,21 @@ export const dispatch = (mutation: Partial<State>) => {
 		..._state,
 		...mutation,
 	};
+};
+
+export type Log = {
+	text: string;
+	level: 'error' | 'warn' | 'info';
+	timestamp: Date;
+}
+
+export const clearLog = () => {
+	dispatch({ misshaiWorkerLog: [] });
+};
+
+export const printLog = (log: unknown, level: Log['level'] = 'info') => {
+	dispatch({ misshaiWorkerLog: [
+		...getState().misshaiWorkerLog,
+		{ text: String(log), level, timestamp: new Date() },
+	] });
 };

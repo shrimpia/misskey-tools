@@ -1,25 +1,17 @@
 import { User } from '../models/entities/user';
-import { Score } from '../../common/types/score';
-import { api } from '../services/misskey';
 import { toSignedString } from '../../common/functions/to-signed-string';
+import {Count} from '../models/count';
 
 /**
- * ユーザーのスコアを取得します。
+ * ユーザーのスコア差分を取得します。
  * @param user ユーザー
- * @returns ユーザーのスコア
+ * @param count 統計
+ * @returns ユーザーのスコア差分
  */
-export const getScores = async (user: User): Promise<Score> => {
-	// TODO 毎回取ってくるのも微妙なので、ある程度キャッシュしたいかも
-	const miUser = await api<Record<string, number>>(user.host, 'users/show', { username: user.username }, user.token);
-	if (miUser.error) {
-		throw miUser.error;
-	}
+export const getDelta = (user: User, count: Count) => {
 	return {
-		notesCount: miUser.notesCount,
-		followingCount: miUser.followingCount,
-		followersCount: miUser.followersCount,
-		notesDelta: toSignedString(miUser.notesCount - user.prevNotesCount),
-		followingDelta: toSignedString(miUser.followingCount - user.prevFollowingCount),
-		followersDelta: toSignedString(miUser.followersCount - user.prevFollowersCount),
+		notesDelta: toSignedString(count.notesCount - user.prevNotesCount),
+		followingDelta: toSignedString(count.followingCount - user.prevFollowingCount),
+		followersDelta: toSignedString(count.followersCount - user.prevFollowersCount),
 	};
 };

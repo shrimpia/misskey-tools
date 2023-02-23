@@ -3,6 +3,8 @@ import { Score } from '../types/score';
 import { defaultTemplate } from '../../backend/const';
 import { IUser } from '../types/user';
 import { createGacha } from './create-gacha';
+import {Count} from '../../backend/models/count';
+import {getDelta} from '../../backend/functions/get-scores';
 
 /**
  * 埋め込み変数の型
@@ -30,11 +32,15 @@ const variableRegex = /\{([a-zA-Z0-9_]+?)\}/g;
 
 /**
  * スコア情報とユーザー情報からテキストを生成する
- * @param score スコア情報
  * @param user ユーザー情報
+ * @param count カウント
  * @returns 生成したテキスト
  */
-export const format = (score: Score, user: IUser): string => {
+export const format = (user: IUser, count: Count): string => {
+	const score: Score = {
+		...count,
+		...getDelta(user, count),
+	};
 	const template = user.template || defaultTemplate;
 	return template.replace(variableRegex, (m, name) => {
 		const v = variables[name];
