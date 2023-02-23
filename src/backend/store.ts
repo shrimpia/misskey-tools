@@ -2,6 +2,8 @@
 // getStateを介してステートを取得し、dispatchによって更新する
 // stateを直接編集できないようになっている
 
+import {Log} from '../common/types/log';
+
 /**
  * 初期値
  */
@@ -36,12 +38,6 @@ export const dispatch = (mutation: Partial<State>) => {
 		...mutation,
 	};
 };
-
-export type Log = {
-	text: string;
-	level: 'error' | 'warn' | 'info';
-	timestamp: Date;
-}
 
 export const clearLog = () => {
 	dispatch({ misshaiWorkerLog: [] });
