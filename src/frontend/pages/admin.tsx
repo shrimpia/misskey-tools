@@ -8,6 +8,8 @@ import { $delete, $get, $post, $put } from '../misc/api';
 import { showModal } from '../store/slices/screen';
 import { useDispatch } from 'react-redux';
 import { useTitle } from '../hooks/useTitle';
+import {Log} from '../../common/types/log';
+import {LogView} from '../components/LogView';
 
 
 export const AdminPage: React.VFC = () => {
@@ -25,7 +27,7 @@ export const AdminPage: React.VFC = () => {
 	const [draftTitle, setDraftTitle] = useState('');
 	const [draftBody, setDraftBody] = useState('');
 
-	const [misshaiLog, setMisshaiLog] = useState<string[] | null>(null);
+	const [misshaiLog, setMisshaiLog] = useState<Log[] | null>(null);
 
 	const submitAnnouncement = async () => {
 		if (selectedAnnouncement) {
@@ -64,7 +66,7 @@ export const AdminPage: React.VFC = () => {
 	};
 
 	const fetchLog = () => {
-		$get<string[]>('admin/misshai/log').then(setMisshaiLog);
+		$get<Log[]>('admin/misshai/log').then(setMisshaiLog);
 	};
 
 	const onClickStartMisshaiAlertWorkerButton = () => {
@@ -163,7 +165,7 @@ export const AdminPage: React.VFC = () => {
 											))}
 											{!isDeleteMode && (
 												<button className="item fluid" onClick={() => setEditMode(true)}>
-													<i className="icon fas fa-plus"/ >
+													<i className="icon fas fa-plus" />
 													Create New
 												</button>
 											)}
@@ -200,7 +202,7 @@ export const AdminPage: React.VFC = () => {
 								ミス廃アラートワーカーを強制起動する
 							</button>
 							<h3>直近のワーカーエラー</h3>
-							<pre><code>{misshaiLog?.join('\n') ?? 'なし'}</code></pre>
+							{misshaiLog && <LogView log={misshaiLog} />}
 						</div>
 					</>
 				)

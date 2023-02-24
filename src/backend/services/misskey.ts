@@ -9,7 +9,7 @@ const RETRY_COUNT = 5;
 /**
  * Misskey APIを呼び出す
  */
-export const api = async <T = Record<string, unknown>>(host: string, endpoint: string, arg: Record<string, unknown>, token?: string): Promise<T> => {
+export const api = async <T extends Record<string, unknown> = Record<string, unknown>>(host: string, endpoint: string, arg: Record<string, unknown>, token?: string): Promise<T> => {
 	const a = { ...arg };
 	if (token) {
 		a.i = token;

@@ -1,5 +1,30 @@
 import { User } from '../models/entities/user';
 import { api } from './misskey';
+import {format} from '../../common/functions/format';
+import {getScores} from '../functions/get-scores';
+
+
+/**
+ * アラートを送信する
+ * @param user ユーザー
+ */
+export const sendAlert = async (user: User) => {
+	const text = format(user, await getScores(user));
+	switch (user.alertMode) {
+		case 'note':
+			await sendNoteAlert(text, user);
+			break;
+		case 'notification':
+			await sendNotificationAlert(text, user);
+			break;
+		case 'both':
+			await Promise.all([
+				sendNotificationAlert(text, user),
+				sendNoteAlert(text, user),
+			]);
+			break;
+	}
+};
 
 /**
  * ノートアラートを送信する

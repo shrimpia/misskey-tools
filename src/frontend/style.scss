@@ -167,3 +167,19 @@ small {
     width: 1em;
     vertical-align: -0.1em;
 }
+
+.log-view {
+    background-color: var(--black);
+}
+
+.log {
+    &.info {
+        color: var(--skyblue);
+    }
+    &.error {
+        color: var(--red);
+    }
+    &.warn {
+        color: var(--yellow);
+    }
+}

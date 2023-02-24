@@ -1,27 +1,16 @@
-import React, { useEffect }  from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { LOCALSTORAGE_KEY_ACCOUNTS } from '../const';
-import { IUser } from '../../common/types/user';
-import { setAccounts } from '../store/slices/screen';
 import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
-import { $get } from '../misc/api';
 import { useAnnouncements } from '../hooks/useAnnouncements';
 import { Link } from 'react-router-dom';
 
 export const IndexSessionPage: React.VFC = () => {
 	const {t} = useTranslation();
-	const dispatch = useDispatch();
 	const { data: session } = useGetSessionQuery(undefined);
 	const score = useGetScoreQuery(undefined);
 
 	const announcements = useAnnouncements();
-
-	useEffect(() => {
-		const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
-		Promise.all(accounts.map(token => $get<IUser>('session', token))).then(a => dispatch(setAccounts(a as IUser[])));
-	}, [dispatch]);
 
 	return (
 		<article className="fade">

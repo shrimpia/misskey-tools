@@ -1,6 +1,26 @@
 import { User } from '../models/entities/user';
 import { toSignedString } from '../../common/functions/to-signed-string';
 import {Count} from '../models/count';
+import {api} from '../services/misskey';
+import {Score} from '../../common/types/score';
+import {MiUser} from './update-score';
+
+/**
+ * ユーザーのスコアを取得します。
+ * @param user ユーザー
+ * @returns ユーザーのスコア
+ */
+export const getScores = async (user: User): Promise<Score> => {
+	// TODO 毎回取ってくるのも微妙なので、ある程度キャッシュしたいかも
+	const miUser = await api<MiUser>(user.host, 'users/show', { username: user.username }, user.token);
+
+	return {
+		notesCount: miUser.notesCount,
+		followingCount: miUser.followingCount,
+		followersCount: miUser.followersCount,
+		...getDelta(user, miUser),
+	};
+};
 
 /**
  * ユーザーのスコア差分を取得します。

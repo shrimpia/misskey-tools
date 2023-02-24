@@ -6,11 +6,13 @@ import { useTranslation } from 'react-i18next';
 import { store } from './store';
 import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
-import { BREAKPOINT_SM } from './const';
+import {BREAKPOINT_SM, LOCALSTORAGE_KEY_ACCOUNTS} from './const';
 import { useGetSessionQuery } from './services/session';
 import { Router } from './Router';
-import { setMobile } from './store/slices/screen';
+import {setAccounts, setMobile} from './store/slices/screen';
 import { GeneralLayout } from './GeneralLayout';
+import {$get} from './misc/api';
+import {IUser} from '../common/types/user';
 
 const AppInner : React.VFC = () => {
 	const { data: session } = useGetSessionQuery(undefined);
@@ -34,6 +36,11 @@ const AppInner : React.VFC = () => {
 			setError(null);
 		}
 	}, [$location]);
+
+	useEffect(() => {
+		const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
+		Promise.all(accounts.map(token => $get<IUser>('session', token))).then(a => dispatch(setAccounts(a as IUser[])));
+	}, [dispatch]);
 
 	useEffect(() => {
 		const qMobile = window.matchMedia(`(max-width: ${BREAKPOINT_SM})`);
