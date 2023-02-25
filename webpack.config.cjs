@@ -2,18 +2,7 @@
  * webpack configuration
  */
 
-const fs = require('fs');
 const webpack = require('webpack');
-
-//  class WebpackOnBuildPlugin {
-//	constructor(readonly callback: (stats: any) => void) {
-//	}
-
-//	public apply(compiler: any) {
-//		compiler.hooks.done.tap('WebpackOnBuildPlugin', this.callback);
-//	}
-//  }
-
 const isProduction = process.env.NODE_ENV === 'production';
 
 const meta = require('./package.json');

@@ -3,18 +3,18 @@ import { IAnnouncement } from '../../common/types/announcement';
 import { $get } from '../misc/api';
 
 export const useAnnouncements = () => {
-	const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
+  const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
 
-	const fetchAllAnnouncements = () => {
-		setAnnouncements([]);
-		$get<IAnnouncement[]>('announcements').then(announcements => {
-			setAnnouncements(announcements ?? []);
-		});
-	};
+  const fetchAllAnnouncements = () => {
+    setAnnouncements([]);
+    $get<IAnnouncement[]>('announcements').then(announcements => {
+      setAnnouncements(announcements ?? []);
+    });
+  };
 
-	useEffect(() => {
-		fetchAllAnnouncements();
-	}, []);
+  useEffect(() => {
+    fetchAllAnnouncements();
+  }, []);
 
-	return announcements;
+  return announcements;
 };

@@ -5,18 +5,18 @@ import { useTitle } from '../../../hooks/useTitle';
 
 
 export const RankingPage: React.VFC = () => {
-	const {t} = useTranslation();
-	useTitle('_missHai.ranking');
+  const {t} = useTranslation();
+  useTitle('_missHai.ranking');
 
-	return (
-		<article>
-			<h2>{t('_missHai.ranking')}</h2>
-			<section>
-				<p>{t('_missHai.rankingDescription')}</p>
-			</section>
-			<section className="pt-2">
-				<Ranking />
-			</section>
-		</article>
-	);
+  return (
+    <article>
+      <h2>{t('_missHai.ranking')}</h2>
+      <section>
+        <p>{t('_missHai.rankingDescription')}</p>
+      </section>
+      <section className="pt-2">
+        <Ranking />
+      </section>
+    </article>
+  );
 };

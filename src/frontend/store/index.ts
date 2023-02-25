@@ -5,13 +5,13 @@ import { sessionApi } from '../services/session';
 import ScreenReducer from './slices/screen';
 
 export const store = configureStore({
-	reducer: {
-		[sessionApi.reducerPath]: sessionApi.reducer,
-		screen: ScreenReducer,
-	},
+  reducer: {
+    [sessionApi.reducerPath]: sessionApi.reducer,
+    screen: ScreenReducer,
+  },
 
-	middleware: (defaultMiddleware) => defaultMiddleware()
-		.concat(sessionApi.middleware),
+  middleware: (defaultMiddleware) => defaultMiddleware()
+    .concat(sessionApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

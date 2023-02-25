@@ -1,3 +1,3 @@
 export class IdProp {
-	id: number;
+  id: number;
 }

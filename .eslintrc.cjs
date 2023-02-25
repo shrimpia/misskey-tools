@@ -16,13 +16,7 @@ module.exports = {
 		'@typescript-eslint'
 	],
 	'rules': {
-		'indent': [
-			'error',
-			'tab',
-			{
-				'SwitchCase': 1,
-			}
-		],
+		'indent': ['error', 2, { 'SwitchCase': 1 } ],
 		'quotes': [
 			'error',
 			'single'
@@ -31,6 +25,7 @@ module.exports = {
 			'error',
 			'always'
 		],
-		'@typescript-eslint/explicit-module-boundary-types': 'off'
+		'@typescript-eslint/explicit-module-boundary-types': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
 	}
 };

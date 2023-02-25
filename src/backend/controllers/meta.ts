@@ -3,19 +3,17 @@
  * @author Xeltica
  */
 
-import { readFile } from 'fs';
 import { Get, JsonController } from 'routing-controllers';
-import { promisify } from 'util';
-import { Meta } from '../../common/types/meta';
-import { currentTokenVersion } from '../const';
+import { Meta } from '../../common/types/meta.js';
+import { currentTokenVersion } from '../const.js';
+import { meta } from '../../config.js';
 
 @JsonController('/meta')
 export class MetaController {
-	@Get() async get(): Promise<Meta> {
-		const {version} = JSON.parse(await promisify(readFile)(__dirname + '/../../meta.json', { encoding: 'utf-8'}));
-		return {
-			version,
-			currentTokenVersion,
-		};
-	}
+  @Get() async get(): Promise<Meta> {
+    return {
+      version: meta.version,
+      currentTokenVersion,
+    };
+  }
 }

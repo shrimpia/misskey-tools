@@ -6,7 +6,7 @@ export type SkeletonProps = {
 };
 
 export const Skeleton: React.VFC<SkeletonProps> = (p) => {
-	return (
-		<div className="skeleton" style={{width: p.width, height: p.height}}></div>
-	);
+  return (
+    <div className="skeleton" style={{width: p.width, height: p.height}}></div>
+  );
 };

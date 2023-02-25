@@ -6,11 +6,11 @@ export type CardProps = {
 };
 
 export const Card: React.FC<CardProps> = ({children, className, bodyClassName}) => {
-	return (
-		<div className={`card ${className}`}>
-			<div className={`body ${bodyClassName}`}>
-				{children}
-			</div>
-		</div>
-	);
+  return (
+    <div className={`card ${className}`}>
+      <div className={`body ${bodyClassName}`}>
+        {children}
+      </div>
+    </div>
+  );
 };

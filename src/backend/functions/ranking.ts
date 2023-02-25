@@ -1,5 +1,5 @@
-import { Users } from '../models';
-import { User } from '../models/entities/user';
+import { Users } from '../models/index.js';
+import { User } from '../models/entities/user.js';
 
 /**
  * ミス廃ランキングを取得する
@@ -7,15 +7,15 @@ import { User } from '../models/entities/user';
  * @returns ミス廃ランキング
  */
 export const getRanking = async (limit?: number | null): Promise<User[]> => {
-	const query = Users.createQueryBuilder('user')
-		.where('"user"."useRanking" IS TRUE')
-		.andWhere('"user"."bannedFromRanking" IS NOT TRUE')
-		.andWhere('"user"."rating" <> \'NaN\'')
-		.orderBy('"user".rating', 'DESC');
+  const query = Users.createQueryBuilder('user')
+    .where('"user"."useRanking" IS TRUE')
+    .andWhere('"user"."bannedFromRanking" IS NOT TRUE')
+    .andWhere('"user"."rating" <> \'NaN\'')
+    .orderBy('"user".rating', 'DESC');
 
-	if (limit) {
-		query.limit(limit);
-	}
+  if (limit) {
+    query.limit(limit);
+  }
 
-	return await query.getMany();
+  return await query.getMany();
 };

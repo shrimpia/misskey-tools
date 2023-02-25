@@ -1,14 +1,19 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
+    <option name="AUTODETECT_INDENTS" value="false" />
     <JSCodeStyleSettings version="0">
       <option name="FORCE_SEMICOLON_STYLE" value="true" />
       <option name="USE_DOUBLE_QUOTES" value="false" />
       <option name="FORCE_QUOTE_STYlE" value="true" />
+      <option name="USE_EXPLICIT_JS_EXTENSION" value="TRUE" />
+      <option name="IMPORT_USE_NODE_RESOLUTION" value="FALSE" />
     </JSCodeStyleSettings>
     <TypeScriptCodeStyleSettings version="0">
       <option name="FORCE_SEMICOLON_STYLE" value="true" />
       <option name="USE_DOUBLE_QUOTES" value="false" />
       <option name="FORCE_QUOTE_STYlE" value="true" />
+      <option name="USE_EXPLICIT_JS_EXTENSION" value="TRUE" />
+      <option name="IMPORT_USE_NODE_RESOLUTION" value="GLOBAL" />
     </TypeScriptCodeStyleSettings>
     <codeStyleSettings language="JavaScript">
       <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
@@ -21,7 +26,9 @@
       <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
       <option name="ALIGN_MULTILINE_FOR" value="false" />
       <indentOptions>
-        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="INDENT_SIZE" value="2" />
+        <option name="CONTINUATION_INDENT_SIZE" value="2" />
+        <option name="TAB_SIZE" value="2" />
       </indentOptions>
     </codeStyleSettings>
   </code_scheme>

@@ -1,7 +1,12 @@
 import views from 'koa-views';
-import { version } from '../meta.json';
+import path from 'path';
+import url from 'url';
+
+import { meta } from '../config.js';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export const render = views(__dirname + '/views', {
-	extension: 'pug',
-	options: { version },
+  extension: 'pug',
+  options: { version: meta.version },
 });

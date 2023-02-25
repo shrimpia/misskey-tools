@@ -1,6 +1,6 @@
 export interface Count
 {
-	notesCount: number;
-	followingCount: number;
-	followersCount: number;
+  notesCount: number;
+  followingCount: number;
+  followersCount: number;
 }

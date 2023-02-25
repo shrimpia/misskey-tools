@@ -9,30 +9,30 @@ import { useSelector } from '../store';
 import { useTitle } from '../hooks/useTitle';
 
 export const AnnouncementPage: React.VFC = () => {
-	const { id } = useParams<{id: string}>();
-	if (!id) return null;
+  const { id } = useParams<{id: string}>();
+  if (!id) return null;
 
-	const [announcement, setAnnouncement] = useState<IAnnouncement | null>();
+  const [announcement, setAnnouncement] = useState<IAnnouncement | null>();
 
-	const lang = useSelector(state => state.screen.language);
+  const lang = useSelector(state => state.screen.language);
 
-	useTitle('announcements');
+  useTitle('announcements');
 
-	useEffect(() => {
-		$get<IAnnouncement>('announcements/' + id).then(setAnnouncement);
-	}, [setAnnouncement]);
-	return !announcement ? <Skeleton width="100%" height="10rem" /> : (
-		<article className="fade">
-			<h2>
-				{announcement.title}
-				<aside className="inline ml-1 text-dimmed text-100">
-					<i className="fas fa-clock" />&nbsp;
-					{dayjs(announcement.createdAt).locale(lang.split('_')[0]).fromNow()}
-				</aside>
-			</h2>
-			<section>
-				<ReactMarkdown>{announcement.body}</ReactMarkdown>
-			</section>
-		</article>
-	);
+  useEffect(() => {
+    $get<IAnnouncement>('announcements/' + id).then(setAnnouncement);
+  }, [setAnnouncement]);
+  return !announcement ? <Skeleton width="100%" height="10rem" /> : (
+    <article className="fade">
+      <h2>
+        {announcement.title}
+        <aside className="inline ml-1 text-dimmed text-100">
+          <i className="fas fa-clock" />&nbsp;
+          {dayjs(announcement.createdAt).locale(lang.split('_')[0]).fromNow()}
+        </aside>
+      </h2>
+      <section>
+        <ReactMarkdown>{announcement.body}</ReactMarkdown>
+      </section>
+    </article>
+  );
 };
