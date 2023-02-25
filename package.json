@@ -1,6 +1,6 @@
 {
 	"name": "misskey-tools",
-	"version": "3.0.0-indev.1",
+	"version": "3.0.0",
 	"description": "",
 	"main": "built/app.js",
 	"author": "Shrimpia Network",
