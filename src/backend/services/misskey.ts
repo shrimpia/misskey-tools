@@ -2,8 +2,6 @@ import axios from 'axios';
 import {printLog} from '../store.js';
 import {delay} from '../utils/delay.js';
 
-export const ua = `Mozilla/5.0 MisskeyTools +https://github.com/shrimpia/misskey-tools Node/${process.version}`;
-
 const RETRY_COUNT = 5;
 
 /**
