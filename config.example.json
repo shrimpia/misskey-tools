@@ -1,12 +1,13 @@
 {
 	"port": 4000,
 	"url": "https://misskey.tools",
+	"uaExtra": "",
 	"db": {
 		"host": "localhost",
 		"port": 5432,
 		"user": "user",
 		"pass": "pass",
-		"db": "misshaialert",
+		"db": "tools",
 		"extra": {}
 	},
 	"admin": {
