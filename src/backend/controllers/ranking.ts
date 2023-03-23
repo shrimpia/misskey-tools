@@ -23,9 +23,8 @@ export class RankingController {
    */
   private async getResponse(isCalculating: boolean, limit?: number) {
     const ranking = isCalculating ? [] : (await getRanking(limit)).map((u) => ({
-      id: u.id,
-      username: u.username,
-      host: u.host,
+      username: u.useRanking ? u.username : undefined,
+      host: u.useRanking ? u.host : undefined,
       rating: u.rating,
     }));
     return {

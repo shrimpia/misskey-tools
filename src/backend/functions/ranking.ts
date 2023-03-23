@@ -8,8 +8,7 @@ import { User } from '../models/entities/user.js';
  */
 export const getRanking = async (limit?: number | null): Promise<User[]> => {
   const query = Users.createQueryBuilder('user')
-    .where('"user"."useRanking" IS TRUE')
-    .andWhere('"user"."bannedFromRanking" IS NOT TRUE')
+    .where('"user"."bannedFromRanking" IS NOT TRUE')
     .andWhere('"user"."rating" <> \'NaN\'')
     .orderBy('"user".rating', 'DESC');
 

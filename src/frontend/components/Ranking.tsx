@@ -9,9 +9,8 @@ interface RankingResponse {
 }
 
 interface Ranking {
-	id: number;
-	username: string;
-	host: string;
+	username?: string;
+	host?: string;
 	rating: number;
 }
 
@@ -49,7 +48,7 @@ export const Ranking: React.VFC<RankingProps> = ({limit}) => {
         <p>{t('isCalculating')}</p>
       ) : (
         <div className="menu large">
-          {response.ranking.map((r, i) => (
+          {response.ranking.map((r, i) => r.username && r.host ? (
             <a href={`https://${r.host}/@${r.username}`} target="_blank" rel="noopener noreferrer nofollow" className="item flex" key={i}>
               <div className="text-bold pr-2">{i + 1}</div>
               <div>
@@ -57,6 +56,14 @@ export const Ranking: React.VFC<RankingProps> = ({limit}) => {
                 <span className="text-dimmed text-75">{t('_missHai.rating')}: {r.rating}</span>
               </div>
             </a>
+          ): (
+            <div className="item flex" key={i}>
+              <div className="text-bold pr-2">{i + 1}</div>
+              <div>
+							████@████.██<br/>
+                <span className="text-dimmed text-75">{t('_missHai.rating')}: {r.rating}</span>
+              </div>
+            </div>
           ))}
         </div>
       )
