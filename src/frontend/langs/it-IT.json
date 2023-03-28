@@ -1,7 +1,7 @@
 {
 	"title": "Misskey Tools",
-	"description1": "Misskeyは楽しいものです。気がついたら1日中入り浸っていることも多いでしょう。",
-	"description2": "さあ、今すぐMisskey Toolsをインストールして、あなたの活動を把握しよう。",
+	"description1": "Migliora l'efficacia di Misskey! Uno strumento completo con varie funzionalità.",
+	"description2": "Inserisci l'URL della tua istanza per iniziare subito a utilizzare Misskey Tools!",
 	"notes": "Note",
 	"following": "Following",
 	"followers": "Followers",
@@ -38,7 +38,7 @@
 	"error": "Errore",
 	"retry": "Riprova",
 	"saved": "Salvato",
-	"disclaimerForMisskeyHq": "Misskey Toolsは、Misskey HQの公式ツールでは<b>ありません</b>。",
+	"disclaimerForMisskeyHq": "Misskey Tools <b>non</b> è uno strumento ufficiale del team di sviluppo Misskey.",
 	"translatedByTheCommunity": "Misskey Tools è stato tradotto da volontari.",
 	"helpTranslation": "Contribuisci alla traduzione",
 	"announcements": "Annunci",
@@ -163,7 +163,7 @@
 		"invalidParameter": "Parametro non valido",
 		"notAuthorized": "Mancata autorizzazione",
 		"hostNotFound": "Impossibile contattare l'istanza, verifica che l'URL sia giusto e che l'istanza sia attiva.",
-		"other": "なし"
+		"other": "Errore misterioso."
 	},
 	"_sendTest": {
 		"title": "Vuoi davvero spedire l'avviso di prova?",
