@@ -3,7 +3,7 @@
  * @author Xeltica
  */
 
-import { Body, CurrentUser, Delete, Get, JsonController, OnUndefined, Post, Put } from 'routing-controllers';
+import { BadRequestError, Body, CurrentUser, Delete, Get, JsonController, OnUndefined, Post, Put } from 'routing-controllers';
 import { DeepPartial } from 'typeorm';
 import { getScores } from '../functions/get-scores.js';
 import { deleteUser, updateUser } from '../functions/users.js';
@@ -26,7 +26,13 @@ export class SessionController {
   @Put() async updateSetting(@CurrentUser({ required: true }) user: User, @Body() setting: UserSetting) {
     const s: DeepPartial<User> = {};
     if (setting.alertMode != null) s.alertMode = setting.alertMode;
-    if (setting.visibility != null) s.visibility = setting.visibility;
+    if (setting.visibility != null) {
+      console.log(setting.visibility);
+      if (setting.visibility === 'public' || setting.visibility === 'users') {
+        throw new BadRequestError('Unsupported visibility');
+      }
+      s.visibility = setting.visibility;
+    }
     if (setting.localOnly != null) s.localOnly = setting.localOnly;
     if (setting.remoteFollowersOnly != null) s.remoteFollowersOnly = setting.remoteFollowersOnly;
     if (setting.template !== undefined) s.template = setting.template;
