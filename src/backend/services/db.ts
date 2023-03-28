@@ -23,7 +23,6 @@ export const initDb = async (force = false): Promise<Connection> => {
       return Promise.resolve(conn);
     } catch (e) {
       // noop
-      console.warn('connection is not found, so create');
     }
   }
 

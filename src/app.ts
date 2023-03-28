@@ -11,8 +11,6 @@ axios.defaults.headers['User-Agent'] = ua;
 axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.validateStatus = (stat) => stat < 500;
 
-console.log(`Initiailizing axios with UA ${ua}...`);
-
 (async () => {
   await initDb();
   (await import('./backend/services/worker.js')).default();

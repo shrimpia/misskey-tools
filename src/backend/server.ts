@@ -13,9 +13,8 @@ import 'reflect-metadata';
 export default (): void => {
   const app = new Koa();
 
-  console.log('Misskey Tools v' + meta.version);
-
-  console.log('Initializing DB connection...');
+  console.log(`** Misskey Tools ${meta.version} **`);
+  console.log('(C) Shrimpia Network');
 
   app.use(render);
   app.use(bodyParser());
@@ -37,8 +36,8 @@ export default (): void => {
   app.use(router.routes());
   app.use(router.allowedMethods());
 
-  console.log(`listening port ${config.port}...`);
-  console.log('App launched!');
+  console.log('GET READY!');
+  console.log(`Server URL >> ${config.url}`);
 
   app.listen(config.port || 3000);
 };
