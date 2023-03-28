@@ -60,7 +60,7 @@ export const Ranking: React.VFC<RankingProps> = ({limit}) => {
             <div className="item flex" key={i}>
               <div className="text-bold pr-2">{i + 1}</div>
               <div>
-							████@████.██<br/>
+							-------------<br/>
                 <span className="text-dimmed text-75">{t('_missHai.rating')}: {r.rating}</span>
               </div>
             </div>
