@@ -4,12 +4,12 @@
  */
 
 import { BadRequestError, Body, CurrentUser, Delete, Get, JsonController, OnUndefined, Post, Put } from 'routing-controllers';
-import { DeepPartial } from 'typeorm';
-import { getScores } from '../functions/get-scores.js';
-import { deleteUser, updateUser } from '../functions/users.js';
+import { getScores } from '../repositories/get-scores.js';
+import { deleteUser, updateUser } from '../repositories/get-user.js';
 import { sendAlert } from '../services/send-alert.js';
 import { UserSetting } from './body/user-setting.js';
 import {User} from '@prisma/client';
+import {DeepPartial} from '../types/deep-partial.js';
 
 @JsonController('/session')
 export class SessionController {

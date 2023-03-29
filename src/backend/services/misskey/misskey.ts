@@ -1,6 +1,8 @@
 import axios from 'axios';
-import {printLog} from '../store.js';
-import {delay} from '../utils/delay.js';
+import {printLog} from '../../store.js';
+import {delay} from '../../utils/delay.js';
+import {MisskeyError} from './misskey-error.js';
+import {TimedOutError} from './timed-out-error.js';
 
 const RETRY_COUNT = 5;
 
@@ -30,32 +32,3 @@ export const api = async <T extends Record<string, unknown> = Record<string, unk
   throw new TimedOutError();
 };
 
-/**
- * トークンが有効かどうかを確認する
- * @param host 対象のホスト名
- * @param i トークン
- * @returns トークンが有効ならtrue、無効ならfalse
- */
-export const apiAvailable = async (host: string, i: string): Promise<boolean> => {
-  try {
-    const res = await api(host, 'i', {}, i);
-    return !res.error;
-  } catch {
-    return false;
-  }
-};
-
-export class TimedOutError extends Error {}
-
-export class MisskeyError extends Error {
-  constructor(public error: MisskeyErrorObject) {
-    super();
-  }
-}
-
-export interface MisskeyErrorObject {
-  message: string;
-  code: string;
-  id: string;
-  kind: string;
-}

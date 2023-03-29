@@ -3,8 +3,9 @@ import { Score } from '../types/score.js';
 import { defaultTemplate } from '../../backend/const.js';
 import { IUser } from '../types/user.js';
 import { createGacha } from './create-gacha.js';
-import {Count} from '../../backend/models/count.js';
-import {getDelta} from '../../backend/functions/get-scores.js';
+import {Count} from '../../backend/types/count.js';
+
+import {getDelta} from '../../backend/repositories/get-delta.js';
 
 /**
  * 埋め込み変数の型

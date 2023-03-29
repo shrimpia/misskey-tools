@@ -5,10 +5,10 @@ import {Action, useKoaServer} from 'routing-controllers';
 import {config, meta} from '../config.js';
 import {render} from './render.js';
 import {router} from './router.js';
-import {getUserByToolsToken} from './functions/users.js';
 import controllers from './controllers/index.js';
 
 import 'reflect-metadata';
+import {getUserByToolsToken} from './repositories/get-user-by-tools-token.js';
 
 export default (): void => {
   const app = new Koa();

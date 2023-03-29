@@ -5,7 +5,7 @@ import {prisma} from '../../libs/prisma.js';
 /**
  * トークンを生成します
  */
-export const genToken = async (): Promise<string> => {
+export const generateToken = async (): Promise<string> => {
   let used: UsedToken | null = null;
   let token: string;
   do {

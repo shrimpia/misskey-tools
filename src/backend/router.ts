@@ -9,13 +9,14 @@ import striptags from 'striptags';
 import MarkdownIt from 'markdown-it';
 
 import { config } from '../config.js';
-import { upsertUser, getUser, updateUser } from './functions/users.js';
-import { api } from './services/misskey.js';
+import { getUser, updateUser } from './repositories/get-user.js';
+import { api } from './services/misskey/misskey.js';
 import { die } from './die.js';
 import { misskeyAppInfo } from './const.js';
 import path from 'path';
 import url from 'url';
 import {prisma} from '../libs/prisma.js';
+import {upsertUser} from './repositories/upsert-user.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 

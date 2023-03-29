@@ -4,8 +4,8 @@
  */
 
 import { Get, JsonController, QueryParam } from 'routing-controllers';
-import { getRanking } from '../functions/ranking.js';
-import { getUserCount } from '../functions/users.js';
+import { getRanking } from '../repositories/get-ranking.js';
+import { getUserCount } from '../repositories/get-user.js';
 import { getState } from '../store.js';
 
 @JsonController('/ranking')

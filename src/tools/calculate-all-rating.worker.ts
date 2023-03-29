@@ -1,7 +1,7 @@
-import { updateRating } from '../backend/functions/update-rating.js';
-import { api } from '../backend/services/misskey.js';
-import { MiUser } from '../backend/functions/update-score.js';
+import { api } from '../backend/services/misskey/misskey.js';
 import { prisma } from '../libs/prisma.js';
+import {MiUser} from '../backend/types/mi-user.js';
+import {updateRating} from '../backend/repositories/get-user.js';
 
 export default async () => {
   const users = await prisma.user.findMany();

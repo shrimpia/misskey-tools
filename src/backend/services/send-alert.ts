@@ -1,6 +1,6 @@
-import { api } from './misskey.js';
+import { api } from './misskey/misskey.js';
 import {format} from '../../common/functions/format.js';
-import {getScores} from '../functions/get-scores.js';
+import {getScores} from '../repositories/get-scores.js';
 import {User} from '@prisma/client';
 
 

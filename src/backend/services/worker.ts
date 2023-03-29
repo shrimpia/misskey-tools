@@ -1,19 +1,21 @@
 import cron from 'node-cron';
-import { deleteUser } from '../functions/users.js';
-import { MiUser, updateScore } from '../functions/update-score.js';
-import { updateRating } from '../functions/update-rating.js';
+import {deleteUser, updateRating, updateScore} from '../repositories/get-user.js';
 import {sendNoteAlert, sendNotificationAlert} from './send-alert.js';
-import {api, MisskeyError, TimedOutError} from './misskey.js';
+import {api} from './misskey/misskey.js';
 import * as Store from '../store.js';
 import {groupBy} from '../utils/group-by.js';
 import {clearLog, printLog} from '../store.js';
-import {errorToString} from '../functions/error-to-string.js';
-import {Acct, toAcct} from '../models/acct.js';
-import {Count} from '../models/count.js';
+import {errorToString} from '../utils/error-to-string.js';
+import {Acct} from '../types/acct.js';
+import {Count} from '../types/count.js';
 import {format} from '../../common/functions/format.js';
 import {delay} from '../utils/delay.js';
 import {prisma} from '../../libs/prisma.js';
 import {User} from '@prisma/client';
+import {MiUser} from '../types/mi-user.js';
+import {MisskeyError} from './misskey/misskey-error.js';
+import {TimedOutError} from './misskey/timed-out-error.js';
+import {toAcct} from '../types/to-acct.js';
 
 const ERROR_CODES_USER_REMOVED = ['NO_SUCH_USER', 'AUTHENTICATION_FAILED', 'YOUR_ACCOUNT_SUSPENDED'];
 
