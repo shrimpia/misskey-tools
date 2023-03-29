@@ -2,11 +2,9 @@ import cron from 'node-cron';
 import { deleteUser } from '../functions/users.js';
 import { MiUser, updateScore } from '../functions/update-score.js';
 import { updateRating } from '../functions/update-rating.js';
-import { Users } from '../models/index.js';
 import {sendNoteAlert, sendNotificationAlert} from './send-alert.js';
 import {api, MisskeyError, TimedOutError} from './misskey.js';
 import * as Store from '../store.js';
-import { User } from '../models/entities/user.js';
 import {groupBy} from '../utils/group-by.js';
 import {clearLog, printLog} from '../store.js';
 import {errorToString} from '../functions/error-to-string.js';
@@ -14,6 +12,8 @@ import {Acct, toAcct} from '../models/acct.js';
 import {Count} from '../models/count.js';
 import {format} from '../../common/functions/format.js';
 import {delay} from '../utils/delay.js';
+import {prisma} from '../../libs/prisma.js';
+import {User} from '@prisma/client';
 
 const ERROR_CODES_USER_REMOVED = ['NO_SUCH_USER', 'AUTHENTICATION_FAILED', 'YOUR_ACCOUNT_SUSPENDED'];
 
@@ -31,7 +31,7 @@ export const work = async () => {
   printLog('Started.');
 
   try {
-    const users = await Users.find();
+    const users = await prisma.user.findMany();
     const groupedUsers = groupBy(users, u => u.host);
 
     printLog(`${users.length} アカウントのレート計算を開始します。`);

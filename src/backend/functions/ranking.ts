@@ -1,5 +1,6 @@
-import { Users } from '../models/index.js';
-import { User } from '../models/entities/user.js';
+import {User} from '@prisma/client';
+import {prisma} from '../../libs/prisma.js';
+import {Not} from 'typeorm';
 
 /**
  * ミス廃ランキングを取得する
@@ -7,14 +8,13 @@ import { User } from '../models/entities/user.js';
  * @returns ミス廃ランキング
  */
 export const getRanking = async (limit?: number | null): Promise<User[]> => {
-  const query = Users.createQueryBuilder('user')
-    .where('"user"."bannedFromRanking" IS NOT TRUE')
-    .andWhere('"user"."rating" <> \'NaN\'')
-    .orderBy('"user".rating', 'DESC');
-
-  if (limit) {
-    query.limit(limit);
-  }
-
-  return await query.getMany();
+  return await prisma.user.findMany({
+    where: {
+      bannedFromRanking: false,
+    },
+    orderBy: {
+      rating: 'desc'
+    },
+    take: limit ?? undefined,
+  });
 };

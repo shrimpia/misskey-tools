@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Announcement {
+  id        Int      @id(map: "PK_e0ef0550174fd1099a308fd18a0") @default(autoincrement())
+  createdAt DateTime @db.Timestamp(6)
+  title     String   @db.VarChar(128)
+  body      String   @db.VarChar(8192)
+  like      Int      @default(0)
+
+  @@map("announcement")
+}
+
+model UsedToken {
+  token String @id(map: "PK_7f2db4c33c33cd6b38e63393fe5") @unique(map: "IDX_7f2db4c33c33cd6b38e63393fe") @db.VarChar
+
+  @@map("used_token")
+}
+
+model User {
+  id                  Int                  @id(map: "PK_cace4a159ff9f2512dd42373760") @default(autoincrement())
+  username            String               @db.VarChar
+  host                String               @db.VarChar
+  token               String               @db.VarChar
+  prevNotesCount      Int                  @default(0)
+  prevFollowingCount  Int                  @default(0)
+  prevFollowersCount  Int                  @default(0)
+  misshaiToken        String               @default("") @db.VarChar
+  alertMode           AlertMode            @default(notification)
+  visibility          Visibility           @default(home)
+  localOnly           Boolean              @default(false)
+  remoteFollowersOnly Boolean              @default(false)
+  template            String?              @db.VarChar(1024)
+  prevRating          Float                @default(0) @db.Real
+  rating              Float                @default(0) @db.Real
+  bannedFromRanking   Boolean              @default(false)
+  tokenVersion        Int                  @default(1)
+  useRanking          Boolean              @default(false)
+
+  @@unique([username, host], map: "IDX_6269eebacdb25de8569298a52a")
+  @@map("user")
+}
+
+enum AlertMode {
+  note
+  notification
+  both
+  nothing
+
+  @@map("user_alertmode_enum")
+}
+
+enum Visibility {
+  public
+  home
+  followers
+  users
+
+  @@map("user_visibility_enum")
+}

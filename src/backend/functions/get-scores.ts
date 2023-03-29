@@ -1,9 +1,9 @@
-import { User } from '../models/entities/user.js';
 import { toSignedString } from '../../common/functions/to-signed-string.js';
 import {Count} from '../models/count.js';
 import {api} from '../services/misskey.js';
 import {Score} from '../../common/types/score.js';
 import {MiUser} from './update-score.js';
+import { User } from '@prisma/client';
 
 /**
  * ユーザーのスコアを取得します。
