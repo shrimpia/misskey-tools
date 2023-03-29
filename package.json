@@ -23,8 +23,8 @@
 		"tsc": "tsc",
 		"lint": "eslint --ext .ts,.tsx src",
 		"lint:fix": "eslint --fix --ext .ts,.tsx src",
-		"migrate": "ts-node --project ./tsconfig.migration.json ./node_modules/typeorm/cli.js migration:run",
-		"migrate:revert": "ts-node --project ./tsconfig.migration.json ./node_modules/typeorm/cli.js migration:revert"
+		"migrate": "npx prisma migrate dev",
+		"migrate:gen": "prisma migrate dev --create-only --name"
 	},
 	"dependencies": {
 		"@babel/preset-react": "^7.14.5",
