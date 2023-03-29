@@ -5,18 +5,19 @@
 
 import { BadRequestError, Body, CurrentUser, Delete, Get, JsonController, NotFoundError, OnUndefined, Param, Post, Put } from 'routing-controllers';
 import { IUser } from '../../common/types/user.js';
-import { Announcements } from '../models/index.js';
 import { AnnounceCreate } from './body/announce-create.js';
 import { AnnounceUpdate } from './body/announce-update.js';
 import { IdProp } from './body/id-prop.js';
+import {prisma} from '../../libs/prisma.js';
 
 @JsonController('/announcements')
 export class AnnouncementController {
   @Get() get() {
-    const query = Announcements.createQueryBuilder('announcement')
-      .orderBy('"announcement"."createdAt"', 'DESC');
-
-    return query.getMany();
+    return prisma.announcement.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
   }
 
   @OnUndefined(204)
@@ -27,10 +28,12 @@ export class AnnouncementController {
     if (!title || !body) {
       throw new BadRequestError();
     }
-    await Announcements.insert({
-      createdAt: new Date(),
-      title,
-      body,
+    await prisma.announcement.create({
+      data: {
+        createdAt: new Date(),
+        title,
+        body,
+      }
     });
   }
 
@@ -42,13 +45,17 @@ export class AnnouncementController {
     if (!id || !title || !body) {
       throw new BadRequestError();
     }
-    if (!(await Announcements.findOne(id))) {
+    const announcement = await prisma.announcement.findUnique({ where: {id} });
+    if (announcement == null) {
       throw new NotFoundError();
     }
 
-    await Announcements.update(id, {
-      title,
-      body,
+    await prisma.announcement.update({
+      where: {id},
+      data: {
+        title,
+        body,
+      }
     });
   }
 
@@ -65,14 +72,17 @@ export class AnnouncementController {
       throw new BadRequestError();
     }
 
-    const announcement = await Announcements.findOne(Number(idNumber));
+    const announcement = await prisma.announcement.findUnique({ where: {id: Number(idNumber)}});
 
     if (!announcement) {
       throw new NotFoundError();
     }
 
-    await Announcements.update(id, {
-      like: announcement.like + 1,
+    await prisma.announcement.update({
+      where: {id: Number(idNumber)},
+      data: {
+        like: announcement.like + 1,
+      }
     });
 
     return announcement.like + 1;
@@ -87,7 +97,7 @@ export class AnnouncementController {
       throw new BadRequestError();
     }
 
-    await Announcements.delete(id);
+    await prisma.announcement.delete({where: {id}});
   }
 
   @Get('/:id') async getDetail(@Param('id') id: string) {
@@ -95,7 +105,7 @@ export class AnnouncementController {
     if (isNaN(idNumber)) {
       throw new NotFoundError();
     }
-    const announcement = await Announcements.findOne(idNumber);
+    const announcement = await prisma.announcement.findUnique({where: {id: idNumber}});
     if (!announcement) {
       throw new NotFoundError();
     }

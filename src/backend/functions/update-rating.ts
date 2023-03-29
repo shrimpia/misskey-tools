@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 
-import { User } from '../models/entities/user.js';
 import { updateUser } from './users.js';
 import { MiUser } from './update-score.js';
+import {User} from '@prisma/client';
 
 /**
  * ユーザーのレーティングを更新します

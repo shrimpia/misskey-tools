@@ -1,16 +1,16 @@
-import { User } from '../models/entities/user.js';
-import { Users } from '../models/index.js';
 import { DeepPartial } from 'typeorm';
 import { genToken } from './gen-token.js';
 import { IUser } from '../../common/types/user.js';
 import { config } from '../../config.js';
 import { currentTokenVersion } from '../const.js';
+import {User} from '@prisma/client';
+import {prisma} from '../../libs/prisma.js';
 
 /**
  * IUser インターフェイスに変換します。
  */
-const packUser = (user: User | undefined): IUser | undefined => {
-  if (!user) return undefined;
+const packUser = (user: User | null): IUser | null => {
+  if (!user) return null;
   const { username: adminName, host: adminHost } = config.admin;
 
   return {
@@ -25,8 +25,8 @@ const packUser = (user: User | undefined): IUser | undefined => {
  * @param host ホスト名
  * @returns ユーザー
  */
-export const getUser = (username: string, host: string): Promise<IUser | undefined> => {
-  return Users.findOne({ username, host }).then(packUser);
+export const getUser = (username: string, host: string): Promise<IUser | null> => {
+  return prisma.user.findUnique({ where: { username_host: { username, host } } }).then(packUser);
 };
 
 /**
@@ -40,7 +40,10 @@ export const updateUsersToolsToken = async (user: User | User['id']): Promise<st
     : user.id;
 
   const misshaiToken = await genToken();
-  Users.update(id, { misshaiToken });
+  prisma.user.update({
+    where: {id},
+    data: {misshaiToken},
+  });
   return misshaiToken;
 };
 
@@ -49,8 +52,8 @@ export const updateUsersToolsToken = async (user: User | User['id']): Promise<st
  * @param token ミス廃トークン
  * @returns ユーザー
  */
-export const getUserByToolsToken = (token: string): Promise<IUser | undefined> => {
-  return Users.findOne({ misshaiToken: token }).then(packUser);
+export const getUserByToolsToken = (token: string): Promise<IUser | null> => {
+  return prisma.user.findFirst({where: {misshaiToken: token}}).then(packUser);
 };
 
 /**
@@ -62,9 +65,22 @@ export const getUserByToolsToken = (token: string): Promise<IUser | undefined> =
 export const upsertUser = async (username: string, host: string, token: string): Promise<void> => {
   const u = await getUser(username, host);
   if (u) {
-    await Users.update(u.id, { token, tokenVersion: currentTokenVersion });
+    await prisma.user.update({
+      where: {id: u.id},
+      data: {
+        token,
+        tokenVersion: currentTokenVersion,
+      },
+    });
   } else {
-    const result = await Users.save({ username, host, token, tokenVersion: currentTokenVersion });
+    const result = await prisma.user.create({
+      data: {
+        username,
+        host,
+        token,
+        tokenVersion: currentTokenVersion,
+      },
+    });
     await updateUsersToolsToken(result.id);
   }
 };
@@ -76,7 +92,10 @@ export const upsertUser = async (username: string, host: string, token: string):
  * @param record 既存のユーザー情報
  */
 export const updateUser = async (username: string, host: string, record: DeepPartial<User>): Promise<void> => {
-  await Users.update({ username, host }, record);
+  await prisma.user.update({
+    where: {username_host: { username, host }},
+    data: record,
+  });
 };
 
 /**
@@ -85,7 +104,9 @@ export const updateUser = async (username: string, host: string, record: DeepPar
  * @param host ホスト名
  */
 export const deleteUser = async (username: string, host: string): Promise<void> => {
-  await Users.delete({ username, host });
+  await prisma.user.delete({
+    where: {username_host: { username, host }}
+  });
 };
 
 /**
@@ -93,5 +114,5 @@ export const deleteUser = async (username: string, host: string): Promise<void> 
  * @returns ユーザー数
  */
 export const getUserCount = (): Promise<number> => {
-  return Users.count();
+  return prisma.user.count();
 };

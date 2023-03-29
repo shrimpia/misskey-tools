@@ -13,9 +13,9 @@ import { upsertUser, getUser, updateUser } from './functions/users.js';
 import { api } from './services/misskey.js';
 import { die } from './die.js';
 import { misskeyAppInfo } from './const.js';
-import { Announcements } from './models/index.js';
 import path from 'path';
 import url from 'url';
+import {prisma} from '../libs/prisma.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
@@ -162,7 +162,7 @@ router.get('/api(.*)', async (ctx, next) => {
 });
 
 router.get('/announcements/:id', async (ctx) => {
-  const a = await Announcements.findOne(ctx.params.id);
+  const a = await prisma.announcement.findUnique({ where: {id: Number(ctx.params.id)} });
   const stripped = striptags(md.render(a?.body ?? '').replace(/\n/g, ' '));
   await ctx.render('frontend', a ? {
     t: a.title,

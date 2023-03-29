@@ -1,7 +1,7 @@
-import { User } from '../models/entities/user.js';
 import { api } from './misskey.js';
 import {format} from '../../common/functions/format.js';
 import {getScores} from '../functions/get-scores.js';
+import {User} from '@prisma/client';
 
 
 /**

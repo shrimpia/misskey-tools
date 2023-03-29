@@ -3,3 +3,4 @@ built
 yarn-error.log
 config.json
 .yarn
+.env

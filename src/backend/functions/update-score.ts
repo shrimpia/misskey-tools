@@ -1,6 +1,6 @@
-import { User } from '../models/entities/user.js';
 import { updateUser } from './users.js';
 import {Count} from '../models/count.js';
+import {User} from '@prisma/client';
 
 /**
  * Misskeyのユーザーモデル

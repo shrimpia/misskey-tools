@@ -7,9 +7,9 @@ import { BadRequestError, Body, CurrentUser, Delete, Get, JsonController, OnUnde
 import { DeepPartial } from 'typeorm';
 import { getScores } from '../functions/get-scores.js';
 import { deleteUser, updateUser } from '../functions/users.js';
-import { User } from '../models/entities/user.js';
 import { sendAlert } from '../services/send-alert.js';
 import { UserSetting } from './body/user-setting.js';
+import {User} from '@prisma/client';
 
 @JsonController('/session')
 export class SessionController {
