@@ -1,5 +1,5 @@
 import {IUser} from '../../common/types/user.js';
-import {prisma} from '../../libs/prisma.js';
+import {prisma} from '../libs/prisma.js';
 import {packUser} from './pack-user.js';
 
 /**

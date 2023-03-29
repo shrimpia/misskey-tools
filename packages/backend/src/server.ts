@@ -2,7 +2,7 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import {Action, useKoaServer} from 'routing-controllers';
 
-import {config, meta} from '../config.js';
+import {config, meta} from './config.js';
 import {render} from './render.js';
 import {router} from './router.js';
 import controllers from './controllers/index.js';

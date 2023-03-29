@@ -9,6 +9,6 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.validateStatus = (stat) => stat < 500;
 
 (async () => {
-  (await import('./backend/services/worker.js')).default();
-  (await import('./backend/server.js')).default();
+  (await import('./services/worker.js')).default();
+  (await import('./server.js')).default();
 })();

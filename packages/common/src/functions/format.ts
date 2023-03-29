@@ -1,4 +1,4 @@
-import { config } from '../../config.js';
+import { config } from '../../backend/config.js';
 import { Score } from '../types/score.js';
 import { defaultTemplate } from '../../backend/const.js';
 import { IUser } from '../types/user.js';

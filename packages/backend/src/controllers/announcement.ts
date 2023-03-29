@@ -8,7 +8,7 @@ import { IUser } from '../../common/types/user.js';
 import { AnnounceCreate } from './body/announce-create.js';
 import { AnnounceUpdate } from './body/announce-update.js';
 import { IdProp } from './body/id-prop.js';
-import {prisma} from '../../libs/prisma.js';
+import {prisma} from '../libs/prisma.js';
 
 @JsonController('/announcements')
 export class AnnouncementController {

@@ -1,4 +1,4 @@
-import {prisma} from '../../libs/prisma.js';
+import {prisma} from '../libs/prisma.js';
 import {currentTokenVersion} from '../const.js';
 import {updateUsersToolsToken} from './update-users-tools-token.js';
 import {getUser} from './get-user.js';

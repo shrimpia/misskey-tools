@@ -5,7 +5,7 @@
 
 import { BadRequestError, CurrentUser, Get, JsonController, OnUndefined, Post } from 'routing-controllers';
 import { IUser } from '../../common/types/user.js';
-import { config } from '../../config.js';
+import { config } from '../config.js';
 import { work } from '../services/worker.js';
 import * as Store from '../store.js';
 

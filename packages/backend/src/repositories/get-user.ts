@@ -1,6 +1,6 @@
 import {IUser} from '../../common/types/user.js';
 import {User} from '@prisma/client';
-import {prisma} from '../../libs/prisma.js';
+import {prisma} from '../libs/prisma.js';
 import {DeepPartial} from '../types/deep-partial.js';
 import {Count} from '../types/count.js';
 import {MiUser} from '../types/mi-user.js';

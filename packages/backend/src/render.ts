@@ -2,7 +2,7 @@ import views from 'koa-views';
 import path from 'path';
 import url from 'url';
 
-import { meta } from '../config.js';
+import { meta } from './config.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 

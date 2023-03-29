@@ -1,6 +1,6 @@
 import {User} from '@prisma/client';
 import {IUser} from '../../common/types/user.js';
-import {config} from '../../config.js';
+import {config} from '../config.js';
 
 /**
  * IUser インターフェイスに変換します。

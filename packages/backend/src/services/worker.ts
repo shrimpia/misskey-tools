@@ -10,7 +10,7 @@ import {Acct} from '../types/acct.js';
 import {Count} from '../types/count.js';
 import {format} from '../../common/functions/format.js';
 import {delay} from '../utils/delay.js';
-import {prisma} from '../../libs/prisma.js';
+import {prisma} from '../libs/prisma.js';
 import {User} from '@prisma/client';
 import {MiUser} from '../types/mi-user.js';
 import {MisskeyError} from './misskey/misskey-error.js';
