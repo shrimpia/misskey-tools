@@ -2,11 +2,10 @@
 	"$languageName": "日本語",
 	"title": "Misskey Tools",
 	"description1": "Misskeyをもっと効果的に。様々な機能を持ったオールインワンツール。",
-	"description2": "お使いのインスタンスURLを入力して、今すぐMisskey Toolsを使おう！",
+	"description2": "お使いのサーバーURLを入力して、今すぐMisskey Toolsを使おう！",
 	"notes": "ノート",
 	"following": "フォロー",
 	"followers": "フォロワー",
-	"welcomeBack": "おかえりなさい、{{acct}}さん。",
 	"alertMode": "アラート送信方法",
 	"visibility": "公開範囲",
 	"appearance": "表示設定",
@@ -18,17 +17,15 @@
 	"logoutDescription": "ログアウトしても、アラートは送信されます。",
 	"deleteAccount": "アカウント連携を解除する",
 	"deleteAccountDescription": "Misskey Toolsのアカウントを削除します。これにより、Misskeyとの連携設定も解除されます。",
-	"instanceUrl": "インスタンスURL",
+	"instanceUrl": "サーバーURL",
 	"login": "ログイン",
-	"localOnly": "ローカルのみ",
-	"remoteFollowersOnly": "リモートフォロワーとローカル",
+	"localOnly": "連合なし",
 	"help": "ヘルプ",
 	"save": "保存",
 	"theme": "テーマ",
 	"language": "言語",
 	"fetching": "取得中……",
 	"failedToFetch": "取得に失敗しました",
-	"registeredUsersCount": "登録者数",
 	"isCalculating": "現在算出中です。後ほどご確認ください！",
 	"ok": "OK",
 	"yes": "はい",
@@ -64,16 +61,7 @@
 		"accounts": "アカウント",
 		"settings": "設定",
 		"admin": "管理画面",
-		"about": "Misskey Toolsについて",
 		"return": "トップページに戻る"
-	},
-	"_welcomeMessage": {
-		"pattern1": "ついついノートしすぎていませんか？",
-		"pattern2": "Misskey, しすぎていませんか？",
-		"pattern3": "今日、何ノート書いた？",
-		"pattern4": "10000 ノートは初心者、そう思っていませんか？",
-		"pattern5": "息するように Misskey、そんなあなたへ。",
-		"pattern6": "あなたは真の Misskey 廃人ですか？"
 	},
 	"_welcome": {
 		"title": "プロ仕様のツールキット",
@@ -84,12 +72,6 @@
 		"catAdjusterDescription": "CATモードの猫耳がアイコンに合わなくてお悩みのあなたへ。かわいいアイコンを猫耳に合わせてトリミングできます。",
 		"nextFeaturesTitle": "今後も追加予定。",
 		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
-	},
-	"_nav": {
-		"misshai": "ミス廃",
-		"accounts": "アカウント",
-		"settings": "設定",
-		"catAdjuster": "ねこみみ"
 	},
 	"_missHai": {
 		"ranking": "ミス廃ランキング",
@@ -124,10 +106,8 @@
 		"notificationWarning": "「Misskey に通知」オプションは古いMisskeyでは動作しません。"
 	},
 	"_visibility": {
-		"public": "パブリック",
 		"home": "ホーム",
-		"followers": "フォロワー",
-		"users": "ログインユーザー"
+		"followers": "フォロワー"
 	},
 	"_themes": {
 		"light": "ライトテーマ",
@@ -163,7 +143,7 @@
 		"tokenRequired": "トークンがありません。",
 		"invalidParameter": "パラメータが不正です。",
 		"notAuthorized": "権限がありません。",
-		"hostNotFound": "インスタンスに接続できませんでした。ホスト名が正しく入力されているか、接続先のインスタンスが正常に動作しているかご確認ください。",
+		"hostNotFound": "サーバーに接続できませんでした。ホスト名が正しく入力されているか、接続先のサーバーが正常に動作しているかご確認ください。",
 		"other": "不明なエラーです。"
 	},
 	"_sendTest": {
