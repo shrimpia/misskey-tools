@@ -5,8 +5,8 @@ import { WritableDraft } from 'immer/dist/internal';
 import { LOCALSTORAGE_KEY_ACCENT_COLOR, LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_LANG, LOCALSTORAGE_KEY_THEME } from '../../const';
 import { Theme } from '../../misc/theme';
 import { Modal } from '../../modal/modal';
-import { IUser } from '../tools-shared/dist/types/user';
-import { DesignSystemColor } from '../tools-shared/dist/types/design-system-color';
+import { IUser } from 'tools-shared/dist/types/user';
+import { DesignSystemColor } from 'tools-shared/dist/types/design-system-color';
 
 interface ScreenState {
   modal: Modal | null;

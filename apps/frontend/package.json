@@ -5,11 +5,12 @@
   "scripts": {
     "build": "vite build",
     "clean": "rimraf dist",
-    "dev": "vite --host 0.0.0.0 --port 3001 --clearScreen false",
-    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\""
+    "dev": "vite --host 0.0.0.0 --clearScreen false",
+    "lint": "tsc --noEmit && eslint --fix \"src/**/*.ts*\""
   },
   "dependencies": {
     "tools-ui": "workspace:*",
+    "tools-shared": "workspace:*",
     "@babel/preset-react": "^7.14.5",
     "@reduxjs/toolkit": "^1.6.1",
     "css-loader": "^6.2.0",

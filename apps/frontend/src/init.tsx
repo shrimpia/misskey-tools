@@ -1,3 +1,5 @@
+import 'vite/modulepreload-polyfill';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import relativeTime from 'dayjs/plugin/relativeTime';

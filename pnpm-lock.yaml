@@ -136,6 +136,7 @@ importers:
       striptags: ^3.2.0
       styled-components: ^5.3.1
       tools-eslint-config: workspace:*
+      tools-shared: workspace:*
       tools-tsconfig: workspace:*
       tools-ui: workspace:*
       typescript: ^4.9.5
@@ -164,6 +165,7 @@ importers:
       sass: 1.60.0
       striptags: 3.2.0
       styled-components: 5.3.9_v5ja746gkdtknuc6tj46sve3be
+      tools-shared: link:../../packages/shared
       tools-ui: link:../../packages/ui
       typescript: 4.9.5
       xeltica-ui: github.com/xeltica-studio/design-system/83b7faede9b0a42a9a3bd8d462d95484cfa67294

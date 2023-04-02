@@ -1,7 +1,7 @@
 import React, { useEffect, useState }  from 'react';
 import ReactMarkdown from 'react-markdown';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import { IAnnouncement } from 'tools-shared/dist/types/announcement';
 import { Skeleton } from '../components/Skeleton';
 import { $get } from '../misc/api';
