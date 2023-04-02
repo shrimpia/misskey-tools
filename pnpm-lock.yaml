@@ -110,6 +110,7 @@ importers:
       '@types/markdown-it': ^12.2.3
       '@types/react': ^17.0.19
       '@types/react-dom': ^17.0.9
+      '@types/react-redux': ^7.1.25
       '@types/react-router-dom': ^5.1.8
       '@types/react-twemoji': ^0.4.0
       '@types/styled-components': ^5.1.13
@@ -173,6 +174,7 @@ importers:
       '@types/markdown-it': 12.2.3
       '@types/react': 17.0.55
       '@types/react-dom': 17.0.19
+      '@types/react-redux': 7.1.25
       '@types/react-router-dom': 5.3.3
       '@types/react-twemoji': 0.4.0
       '@types/styled-components': 5.1.26
@@ -635,7 +637,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
-    dev: false
 
   /@babel/template/7.20.7:
     resolution: {integrity: sha512-8SegXApWe6VoNw0r9JHpSteLKTpTiLZ4rMlGIm9JQ18KiCtyQiAMEazujAHrUS5flrcqYZa75ukev3P6QmUwUw==}
@@ -1700,7 +1701,6 @@ packages:
       '@types/react': 18.0.31
       hoist-non-react-statics: 3.3.2
       redux: 4.2.1
-    dev: false
 
   /@types/react-router-dom/5.3.3:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
@@ -7474,7 +7474,6 @@ packages:
     resolution: {integrity: sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==}
     dependencies:
       '@babel/runtime': 7.21.0
-    dev: false
 
   /reflect-metadata/0.1.13:
     resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
@@ -7482,7 +7481,6 @@ packages:
 
   /regenerator-runtime/0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
-    dev: false
 
   /regex-not/1.0.2:
     resolution: {integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==}

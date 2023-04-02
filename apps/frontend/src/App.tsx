@@ -12,7 +12,7 @@ import { Router } from './Router';
 import {setAccounts, setMobile} from './store/slices/screen';
 import { GeneralLayout } from './GeneralLayout';
 import {$get} from './misc/api';
-import {IUser} from '../common/types/user';
+import {IUser} from 'tools-shared/dist/types/user';
 
 const AppInner : React.VFC = () => {
   const { data: session } = useGetSessionQuery(undefined);
