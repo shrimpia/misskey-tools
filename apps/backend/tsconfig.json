@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"target": "es2021",
+		"module": "esnext",
+		"outDir": "./dist/",
+		"rootDir": "./src/",
+	},
+	"extends": "tools-tsconfig/base.json",
+ }

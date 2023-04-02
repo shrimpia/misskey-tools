@@ -1,0 +1,29 @@
+{
+  "name": "tools-shared",
+  "version": "0.0.0",
+  "private": true,
+	"type": "module",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "dev": "tsc -w",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "tools-jest-presets/jest/node"
+  },
+	"devDependencies": {
+    "tools-eslint-config": "workspace:*",
+    "tools-jest-presets": "workspace:*",
+    "tools-tsconfig": "workspace:*",
+    "@types/jest": "^26.0.22",
+    "@types/node": "^18.11.9",
+    "eslint": "^7.32.0",
+    "jest": "^26.6.3",
+    "typescript": "^5.0.2"
+	}
+}

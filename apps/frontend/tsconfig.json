@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"lib": [ "dom" ],
+		"module": "ESNext",
+		"target": "es5",
+		"jsx": "react",
+		"outDir": "./dist/",
+		"moduleResolution": "node",
+	},
+	"extends": "tools-tsconfig/base.json",
+}
