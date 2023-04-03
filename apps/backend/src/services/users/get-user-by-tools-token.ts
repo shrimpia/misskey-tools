@@ -1,6 +1,7 @@
 import {IUser} from 'tools-shared/dist/types/user.js';
-import {prisma} from '../libs/prisma.js';
-import {packUser} from './pack-user.js';
+
+import {prisma} from '@/libs/prisma.js';
+import {packUser} from '@/services/users/pack-user.js';
 
 /**
  * ミス廃トークンからユーザーを取得します。

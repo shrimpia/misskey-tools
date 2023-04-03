@@ -1,6 +1,7 @@
 import {User} from '@prisma/client';
-import {generateToken} from './generate-token.js';
-import {prisma} from '../libs/prisma.js';
+
+import {prisma} from '@/libs/prisma.js';
+import {generateToken} from '@/services/users/generate-token.js';
 
 /**
  * ユーザーのミス廃トークンを更新します。

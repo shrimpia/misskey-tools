@@ -1,6 +1,6 @@
 import rndstr from 'rndstr';
 import { UsedToken } from '@prisma/client';
-import {prisma} from '../libs/prisma.js';
+import {prisma} from '@/libs/prisma.js'
 
 /**
  * トークンを生成します

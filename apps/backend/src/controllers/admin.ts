@@ -5,9 +5,9 @@
 
 import { BadRequestError, CurrentUser, Get, JsonController, OnUndefined, Post } from 'routing-controllers';
 import { IUser } from 'tools-shared/dist/types/user.js';
-import { config } from '../config.js';
-import { work } from '../services/worker.js';
-import * as Store from '../store.js';
+import { config } from '@/config.js';
+import * as Store from '../libs/store.js';
+import { work } from '@/services/misshai/work.js';
 
 @JsonController('/admin')
 export class AdminController {

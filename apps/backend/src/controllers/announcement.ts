@@ -5,10 +5,11 @@
 
 import { BadRequestError, Body, CurrentUser, Delete, Get, JsonController, NotFoundError, OnUndefined, Param, Post, Put } from 'routing-controllers';
 import { IUser } from 'tools-shared/dist/types/user.js';
-import { AnnounceCreate } from './body/announce-create.js';
-import { AnnounceUpdate } from './body/announce-update.js';
-import { IdProp } from './body/id-prop.js';
-import {prisma} from '../libs/prisma.js';
+
+import { AnnounceCreate } from '@/controllers/body/announce-create.js';
+import { AnnounceUpdate } from '@/controllers/body/announce-update.js';
+import { IdProp } from '@/controllers/body/id-prop.js';
+import {prisma} from '@/libs/prisma.js';
 
 @JsonController('/announcements')
 export class AnnouncementController {

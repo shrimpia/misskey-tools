@@ -1,11 +1,12 @@
-import {IUser} from 'tools-shared/dist/types/user.js';
 import {User} from '@prisma/client';
-import {prisma} from '../libs/prisma.js';
-import {DeepPartial} from '../types/deep-partial.js';
-import {Count} from '../types/count.js';
-import {MiUser} from '../types/mi-user.js';
 import dayjs from 'dayjs';
-import {packUser} from './pack-user.js';
+import {IUser} from 'tools-shared/dist/types/user.js';
+
+import {prisma} from '@/libs/prisma.js';
+import {packUser} from '@/services/users/pack-user.js';
+import {updateUser} from '@/services/users/update-user.js';
+import {Count} from '@/types/count.js';
+import {MiUser} from '@/types/mi-user.js';
 
 /**
  * ユーザーを取得します
@@ -15,19 +16,6 @@ import {packUser} from './pack-user.js';
  */
 export const getUser = (username: string, host: string): Promise<IUser | null> => {
   return prisma.user.findUnique({ where: { username_host: { username, host } } }).then(packUser);
-};
-
-/**
- * ユーザー情報を更新します。
- * @param username ユーザー名
- * @param host ホスト名
- * @param record 既存のユーザー情報
- */
-export const updateUser = async (username: string, host: string, record: DeepPartial<User>): Promise<void> => {
-  await prisma.user.update({
-    where: {username_host: { username, host }},
-    data: record,
-  });
 };
 
 /**

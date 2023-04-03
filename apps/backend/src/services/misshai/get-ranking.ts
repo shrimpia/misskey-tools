@@ -1,5 +1,6 @@
 import {User} from '@prisma/client';
-import {prisma} from '../libs/prisma.js';
+
+import {prisma} from '@/libs/prisma.js';
 
 /**
  * ミス廃ランキングを取得する

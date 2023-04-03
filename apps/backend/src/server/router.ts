@@ -7,16 +7,17 @@ import { v4 as uuid } from 'uuid';
 import ms from 'ms';
 import striptags from 'striptags';
 import MarkdownIt from 'markdown-it';
-
-import { config } from './config.js';
-import { getUser, updateUser } from './repositories/get-user.js';
-import { api } from './services/misskey/misskey.js';
-import { die } from './die.js';
-import { misskeyAppInfo } from 'tools-shared/dist/const.js';
 import path from 'path';
 import url from 'url';
-import {prisma} from './libs/prisma.js';
-import {upsertUser} from './repositories/upsert-user.js';
+import { misskeyAppInfo } from 'tools-shared/dist/const.js';
+
+import { config } from '@/config.js';
+import { die } from '@/die.js';
+import { api } from '@/libs/misskey.js';
+import {prisma} from '@/libs/prisma.js';
+import { getUser } from '@/services/users/get-user.js';
+import {upsertUser} from '@/services/users/upsert-user.js';
+import {updateUser} from '@/services/users/update-user.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 

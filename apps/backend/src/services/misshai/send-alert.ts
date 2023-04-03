@@ -1,8 +1,8 @@
-import { api } from './misskey/misskey.js';
-import {format} from '../utils/format.js';
-import {getScores} from '../repositories/get-scores.js';
 import {User} from '@prisma/client';
 
+import { api } from '@/libs/misskey.js';
+import {format} from '@/services/misshai/format.js';
+import {getScores} from '@/services/misshai/get-scores.js';
 
 /**
  * アラートを送信する

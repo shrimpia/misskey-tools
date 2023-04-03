@@ -1,14 +1,14 @@
+import 'reflect-metadata';
+
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import {Action, useKoaServer} from 'routing-controllers';
 
-import {config, meta} from './config.js';
-import {render} from './render.js';
-import {router} from './router.js';
-import controllers from './controllers/index.js';
-
-import 'reflect-metadata';
-import {getUserByToolsToken} from './repositories/get-user-by-tools-token.js';
+import {config, meta} from '@/config.js';
+import controllers from '@/controllers/index.js';
+import {render} from '@/server/render.js';
+import {router} from '@/server/router.js';
+import {getUserByToolsToken} from '@/services/users/get-user-by-tools-token.js';
 
 export default (): void => {
   const app = new Koa();

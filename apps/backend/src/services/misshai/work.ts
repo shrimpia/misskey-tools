@@ -1,33 +1,28 @@
-import cron from 'node-cron';
-import {deleteUser, updateRating, updateScore} from '../repositories/get-user.js';
-import {sendNoteAlert, sendNotificationAlert} from './send-alert.js';
-import {api} from './misskey/misskey.js';
-import * as Store from '../store.js';
-import {groupBy} from '../utils/group-by.js';
-import {clearLog, printLog} from '../store.js';
-import {errorToString} from '../utils/error-to-string.js';
-import {Acct} from '../types/acct.js';
-import {Count} from '../types/count.js';
-import {format} from '../utils/format.js';
-import {delay} from '../utils/delay.js';
-import {prisma} from '../libs/prisma.js';
-import {User} from '@prisma/client';
-import {MiUser} from '../types/mi-user.js';
-import {MisskeyError} from './misskey/misskey-error.js';
-import {TimedOutError} from './misskey/timed-out-error.js';
-import {toAcct} from '../types/to-acct.js';
+import { User } from "@prisma/client";
+
+import { prisma } from "@/libs/prisma.js";
+import { clearLog, dispatch, printLog } from "@/libs/store.js";
+import { deleteUser, updateRating, updateScore } from "@/services/users/get-user.js";
+import { sendNoteAlert, sendNotificationAlert } from "@/services/misshai/send-alert.js";
+import { Acct } from "@/types/acct.js";
+import { Count } from "@/types/count.js";
+import { MiUser } from "@/types/mi-user.js";
+import { MisskeyError } from "@/types/misskey-error.js";
+import { TimedOutError } from "@/types/timed-out-error.js";
+import { toAcct } from "@/utils/to-acct.js";
+import { delay } from "@/utils/delay.js";
+import { errorToString } from "@/utils/error-to-string.js";
+import { groupBy } from "@/utils/group-by.js";
+import { format } from "@/services/misshai/format.js";
+import { api } from "@/libs/misskey.js";
 
 const ERROR_CODES_USER_REMOVED = ['NO_SUCH_USER', 'AUTHENTICATION_FAILED', 'YOUR_ACCOUNT_SUSPENDED'];
 
 // TODO: Redisで持つようにしたい
 const userScoreCache = new Map<Acct, Count>();
 
-export default (): void => {
-  cron.schedule('0 0 0 * * *', work);
-};
-
 export const work = async () => {
-  Store.dispatch({ nowCalculating: true });
+  dispatch({ nowCalculating: true });
 
   clearLog();
   printLog('Started.');
@@ -38,7 +33,7 @@ export const work = async () => {
 
     printLog(`${users.length} アカウントのレート計算を開始します。`);
     await calculateAllRating(groupedUsers);
-    Store.dispatch({ nowCalculating: false });
+    dispatch({ nowCalculating: false });
 
     printLog(`${users.length} アカウントのアラート送信を開始します。`);
     await sendAllAlerts(groupedUsers);
@@ -48,7 +43,7 @@ export const work = async () => {
     printLog('ミス廃アラートワーカーが異常終了しました。', 'error');
     printLog(e instanceof Error ? errorToString(e) : JSON.stringify(e, null, '  '), 'error');
   } finally {
-    Store.dispatch({ nowCalculating: false });
+    dispatch({ nowCalculating: false });
   }
 };
 

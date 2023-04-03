@@ -4,9 +4,10 @@
  */
 
 import { Get, JsonController, QueryParam } from 'routing-controllers';
-import { getRanking } from '../repositories/get-ranking.js';
-import { getUserCount } from '../repositories/get-user.js';
-import { getState } from '../store.js';
+
+import { getRanking } from '@/services/misshai/get-ranking.js';
+import { getUserCount } from '@/services/users/get-user.js';
+import { getState } from '@/libs/store.js';
 
 @JsonController('/ranking')
 export class RankingController {

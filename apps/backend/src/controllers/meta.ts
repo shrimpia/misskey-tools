@@ -6,7 +6,8 @@
 import { Get, JsonController } from 'routing-controllers';
 import { Meta } from 'tools-shared/dist/types/meta.js';
 import { currentTokenVersion } from 'tools-shared/dist/const.js';
-import { meta } from '../config.js';
+
+import { meta } from '@/config.js';
 
 @JsonController('/meta')
 export class MetaController {

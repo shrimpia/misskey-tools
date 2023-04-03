@@ -1,8 +1,8 @@
-import {MetaController} from './meta.js';
-import {AdminController} from './admin.js';
-import {AnnouncementController} from './announcement.js';
-import {RankingController} from './ranking.js';
-import {SessionController} from './session.js';
+import {MetaController} from '@/controllers/meta.js';
+import {AdminController} from '@/controllers/admin.js';
+import {AnnouncementController} from '@/controllers/announcement.js';
+import {RankingController} from '@/controllers/ranking.js';
+import {SessionController} from '@/controllers/session.js';
 
 export default [
   MetaController,

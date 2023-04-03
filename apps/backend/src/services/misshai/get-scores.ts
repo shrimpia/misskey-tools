@@ -1,8 +1,9 @@
-import {api} from '../services/misskey/misskey.js';
-import {Score} from 'tools-shared/dist/types/score.js';
 import {User} from '@prisma/client';
-import {MiUser} from '../types/mi-user.js';
-import {getDelta} from './get-delta.js';
+import {Score} from 'tools-shared/dist/types/score.js';
+
+import {api} from '@/libs/misskey.js';
+import {MiUser} from '@/types/mi-user.js';
+import {getDelta} from '@/services/misshai/get-delta.js';
 
 /**
  * ユーザーのスコアを取得します。

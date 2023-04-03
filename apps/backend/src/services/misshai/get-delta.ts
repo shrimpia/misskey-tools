@@ -1,6 +1,7 @@
 import {User} from '@prisma/client';
-import {Count} from '../types/count.js';
 import {toSignedString} from 'tools-shared/dist/functions/to-signed-string.js';
+
+import {Count} from '@/types/count.js';
 
 /**
  * ユーザーのスコア差分を取得します。

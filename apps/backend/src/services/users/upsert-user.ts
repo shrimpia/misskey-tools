@@ -1,7 +1,8 @@
-import {prisma} from '../libs/prisma.js';
 import {currentTokenVersion} from 'tools-shared/dist/const.js';
-import {updateUsersToolsToken} from './update-users-tools-token.js';
-import {getUser} from './get-user.js';
+
+import {prisma} from '@/libs/prisma.js';
+import {updateUsersToolsToken} from '@/services/users/update-users-tools-token.js';
+import {getUser} from '@/services/users/get-user.js';
 
 /**
  * ユーザー情報を更新するか新規作成します。

@@ -1,10 +1,11 @@
-import { config } from '../config.js';
 import { defaultTemplate } from 'tools-shared/dist/const.js';
 import { Score } from 'tools-shared/dist/types/score.js';
 import { IUser } from 'tools-shared/dist/types/user.js';
 import { createGacha } from 'tools-shared/dist/functions/create-gacha.js';
-import { Count } from '../types/count.js';
-import { getDelta } from '../repositories/get-delta.js';
+
+import { config } from '@/config.js';
+import { getDelta } from '@/services/misshai/get-delta.js';
+import { Count } from '@/types/count.js';
 
 /**
  * 埋め込み変数の型

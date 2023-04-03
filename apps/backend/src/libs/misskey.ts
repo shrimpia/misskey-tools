@@ -1,8 +1,9 @@
 import axios from 'axios';
-import {printLog} from '../../store.js';
-import {delay} from '../../utils/delay.js';
-import {MisskeyError} from './misskey-error.js';
-import {TimedOutError} from './timed-out-error.js';
+
+import {printLog} from '@/libs/store.js';
+import {delay} from '@/utils/delay.js';
+import {MisskeyError} from '@/types/misskey-error.js';
+import {TimedOutError} from '@/types/timed-out-error.js';
 
 const RETRY_COUNT = 5;
 
