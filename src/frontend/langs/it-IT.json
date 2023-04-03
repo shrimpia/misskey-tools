@@ -1,4 +1,5 @@
 {
+	"$languageName": "日本語",
 	"title": "Misskey Tools",
 	"description1": "Migliora l'efficacia di Misskey! Uno strumento completo con varie funzionalità.",
 	"description2": "Inserisci l'URL della tua istanza per iniziare subito a utilizzare Misskey Tools!",
@@ -94,7 +95,7 @@
 		"ranking": "Rango Misshai",
 		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
 		"showAll": "Di più",
-		"data": "みす廃データ",
+		"data": "Dati Misshai",
 		"dataBody": "Contenuto",
 		"dataScore": "Punteggio",
 		"dataDelta": "Differenza",

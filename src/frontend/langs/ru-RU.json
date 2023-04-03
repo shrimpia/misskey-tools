@@ -1,7 +1,8 @@
 {
+	"$languageName": "日本語",
 	"title": "Misskey Tools",
-	"description1": "Misskeyは楽しいものです。気がついたら1日中入り浸っていることも多いでしょう。",
-	"description2": "さあ、今すぐMisskey Toolsをインストールして、あなたの活動を把握しよう。",
+	"description1": "Misskeyをもっと効果的に。様々な機能を持ったオールインワンツール。",
+	"description2": "お使いのインスタンスURLを入力して、今すぐMisskey Toolsを使おう！",
 	"notes": "ノート",
 	"following": "フォロー",
 	"followers": "フォロワー",
@@ -38,10 +39,34 @@
 	"error": "エラー",
 	"retry": "やり直す",
 	"saved": "保存しました。",
-	"disclaimerForMisskeyHq": "Misskey Toolsは、Misskey HQの公式ツールでは<b>ありません</b>。",
+	"disclaimerForMisskeyHq": "Misskey Toolsは、Misskey Development Divisionの公式ツールでは<b>ありません</b>。",
 	"translatedByTheCommunity": "Misskey Toolsはボランティアによって翻訳されています。",
 	"helpTranslation": "翻訳に協力する",
 	"announcements": "お知らせ",
+	"upload": "アップロード",
+	"preview": "プレビュー",
+	"catAdjuster": "ねこみみアジャスター",
+	"shouldUpdateToken": "認証トークンの更新が必要です。更新しないと一部機能が正常に動作しません。",
+	"update": "更新する",
+	"shareMisskeyTools": "#MisskeyTools をシェアする",
+	"shareMisskeyToolsNote": "#MisskeyTools はいいぞ\n\nhttps://misskey.tools",
+	"instanceUrlPlaceholder": "例：misskey.io",
+	"settings": "設定",
+	"accentColor": "アクセントカラー",
+	"changelog": "更新履歴",
+	"otherSettings": "その他の設定",
+	"_sidebar": {
+		"dashboard": "ダッシュボード",
+		"tools": "ツール",
+		"manageTools": "ツールを管理",
+		"missHaiAlert": "ミス廃アラート",
+		"cropper": "ねこみみアジャスター",
+		"accounts": "アカウント",
+		"settings": "設定",
+		"admin": "管理画面",
+		"about": "Misskey Toolsについて",
+		"return": "トップページに戻る"
+	},
 	"_welcomeMessage": {
 		"pattern1": "ついついノートしすぎていませんか？",
 		"pattern2": "Misskey, しすぎていませんか？",
@@ -54,30 +79,32 @@
 		"title": "プロ仕様のツールキット",
 		"description": "Misskey Toolsでは、Misskeyのために設計された、Misskeyをより楽しめるツールを取り揃えています。",
 		"misshaiAlertTitle": "ミス廃アラート",
-		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
+		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
 		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
+		"catAdjusterDescription": "CATモードの猫耳がアイコンに合わなくてお悩みのあなたへ。かわいいアイコンを猫耳に合わせてトリミングできます。",
 		"nextFeaturesTitle": "今後も追加予定。",
 		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！"
 	},
 	"_nav": {
 		"misshai": "ミス廃",
 		"accounts": "アカウント",
-		"settings": "設定"
+		"settings": "設定",
+		"catAdjuster": "ねこみみ"
 	},
 	"_missHai": {
 		"ranking": "ミス廃ランキング",
-		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
+		"rankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
 		"showAll": "全員分見る",
-		"data": "みす廃データ",
+		"data": "ミス廃データ",
 		"dataBody": "内容",
 		"dataScore": "スコア",
 		"dataDelta": "前日比",
 		"rating": "レート",
 		"order": "順位",
-		"showRanking": "ランキングを見る"
+		"showRanking": "ランキングを見る",
+		"useRanking": "ランキングに参加する"
 	},
 	"_accounts": {
-		"currentAccount": "現在ログインしているアカウント",
 		"switchAccount": "アカウント切り替え",
 		"useAnother": "他のアカウントで登録する"
 	},
@@ -92,6 +119,7 @@
 	"_alertMode": {
 		"note": "自動的にノートを投稿",
 		"notification": "Misskeyに通知(標準)",
+		"both": "両方",
 		"nothing": "通知しない",
 		"notificationWarning": "「Misskey に通知」オプションは古いMisskeyでは動作しません。"
 	},
@@ -122,7 +150,8 @@
 			"url": "本サイトのURL",
 			"username": "アカウントのユーザー名",
 			"host": "アカウントの所属ホスト名",
-			"rating": "レート"
+			"rating": "レート",
+			"gacha": "ガチャ"
 		}
 	},
 	"_error": {
@@ -134,7 +163,8 @@
 		"tokenRequired": "トークンがありません。",
 		"invalidParameter": "パラメータが不正です。",
 		"notAuthorized": "権限がありません。",
-		"other": "なし"
+		"hostNotFound": "インスタンスに接続できませんでした。ホスト名が正しく入力されているか、接続先のインスタンスが正常に動作しているかご確認ください。",
+		"other": "不明なエラーです。"
 	},
 	"_sendTest": {
 		"title": "アラートをテスト送信しますか？",
