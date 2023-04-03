@@ -12,7 +12,7 @@ import url from 'url';
 import { misskeyAppInfo } from 'tools-shared/dist/const.js';
 
 import { config } from '@/config.js';
-import { die } from '@/die.js';
+import { die } from '@/server/die.js';
 import { api } from '@/libs/misskey.js';
 import {prisma} from '@/libs/prisma.js';
 import { getUser } from '@/services/users/get-user.js';
