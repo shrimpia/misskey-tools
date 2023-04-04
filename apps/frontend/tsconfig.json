@@ -6,6 +6,10 @@
 		"jsx": "react",
 		"outDir": "./dist/",
 		"moduleResolution": "node",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		}
 	},
 	"extends": "tools-tsconfig/base.json",
 }
