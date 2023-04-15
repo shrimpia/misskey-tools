@@ -40,7 +40,8 @@
 		"tools-jest-presets": "workspace:*",
 		"tools-shared": "workspace:*",
 		"typescript": "^5.0.2",
-		"uuid": "^8.3.0"
+		"uuid": "^8.3.0",
+		"zod": "^3.21.4"
 	},
 	"devDependencies": {
 		"@types/koa": "^2.11.3",
