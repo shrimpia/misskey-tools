@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from '../store';
+import { useSelector } from '../store/slices/auth';
 
 export const actualThemes = [
   'light',

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { IAnnouncement } from 'tools-shared/dist/types/announcement';
-import { $get } from '../misc/api';
+
+import { $get } from '@/misc/api';
 
 export const AnnouncementList: React.VFC = () => {
   const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);

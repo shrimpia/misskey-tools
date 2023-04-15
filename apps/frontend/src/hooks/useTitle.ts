@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setTitle } from '../store/slices/screen';
+import { useAtom } from 'jotai';
+import * as atoms from '@/store/slices/auth'
 
 export const useTitle = (title: string) => {
-  const dispatch = useDispatch();
+	const [_, setTitle] = useAtom(atoms.title)
   useEffect(() => {
-    dispatch(setTitle(title));
+		setTitle(title);
     return () => {
-      dispatch(setTitle(null));
+			setTitle(null);
     };
   }, [title]);
 };

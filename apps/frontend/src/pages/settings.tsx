@@ -6,7 +6,7 @@ import { useGetSessionQuery } from '../services/session';
 import { Theme, themes } from '../misc/theme';
 import { LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { changeAccentColor, changeLang, changeTheme, showModal } from '../store/slices/screen';
-import { useSelector } from '../store';
+import { useSelector } from '../store/slices/auth';
 import { languageName } from '../langs';
 import { $delete } from '../misc/api';
 import { useTitle } from '../hooks/useTitle';

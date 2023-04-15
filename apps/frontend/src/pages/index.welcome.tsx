@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { LoginForm } from '../components/LoginForm';
 import styled from 'styled-components';
-import { useSelector } from '../store';
+import { useSelector } from '../store/slices/auth';
 import { IsMobileProp } from '../misc/is-mobile-prop';
 import Twemoji from 'react-twemoji';
 import { useAnnouncements } from '../hooks/useAnnouncements';
