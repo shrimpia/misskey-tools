@@ -6,7 +6,7 @@ import { NavigationMenu } from './components/NavigationMenu';
 import { IsMobileProp } from './misc/is-mobile-prop';
 
 import { useGetMetaQuery, useGetSessionQuery } from './services/session';
-import { useSelector } from './store';
+import { useSelector } from './store/slices/auth';
 import { setDrawerShown } from './store/slices/screen';
 
 const Container = styled.div<IsMobileProp>`

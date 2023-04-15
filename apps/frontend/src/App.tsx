@@ -3,7 +3,7 @@ import { BrowserRouter, Link, useLocation } from 'react-router-dom';
 import { Provider, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { store } from './store';
+import { store } from './store/slices/auth';
 import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
 import {BREAKPOINT_SM, LOCALSTORAGE_KEY_ACCOUNTS} from './const';

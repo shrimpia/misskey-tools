@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useSelector } from './store';
+import { useSelector } from './store/slices/auth';
 import {
   builtinDialogButtonNo,
   builtinDialogButtonOk,

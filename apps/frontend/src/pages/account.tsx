@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { useGetSessionQuery } from '../services/session';
-import { useSelector } from '../store';
+import { useSelector } from '../store/slices/auth';
 import { setAccounts } from '../store/slices/screen';
 import { LoginForm } from '../components/LoginForm';
 import { Skeleton } from '../components/Skeleton';

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import { useGetSessionQuery } from './services/session';
-import { useSelector } from './store';
+import { useSelector } from './store/slices/auth';
 
 export type HeaderProps = {
 	title?: string;

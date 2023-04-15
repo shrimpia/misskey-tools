@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { IAnnouncement } from 'tools-shared/dist/types/announcement';
 import { Skeleton } from '../components/Skeleton';
 import { $get } from '../misc/api';
-import { useSelector } from '../store';
+import { useSelector } from '../store/slices/auth';
 import { useTitle } from '../hooks/useTitle';
 
 export const AnnouncementPage: React.VFC = () => {
