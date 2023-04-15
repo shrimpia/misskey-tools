@@ -1,40 +1,27 @@
 import 'reflect-metadata';
 
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-import {Action, useKoaServer} from 'routing-controllers';
+import fastify from 'fastify';
+import fastifyView from '@fastify/view';
+import pug from 'pug';
+import path from 'path';
+import url from 'url';
 
 import {config, meta} from '@/config.js';
-import controllers from '@/controllers/index.js';
-import {render} from '@/server/render.js';
 import {router} from '@/server/router.js';
-import {getUserByToolsToken} from '@/services/users/get-user-by-tools-token.js';
 
 export default (): void => {
-  const app = new Koa();
+  const app = fastify();
 
   console.log(`** Misskey Tools ${meta.version} **`);
   console.log('(C) Shrimpia Network');
 
-  app.use(render);
-  app.use(bodyParser());
-
-  useKoaServer(app, {
-    controllers,
-    routePrefix: '/api/v1',
-    classTransformer: true,
-    validation: true,
-    currentUserChecker: async ({ request }: Action) => {
-      const { authorization } = request.header;
-      if (!authorization || !authorization.startsWith('Bearer ')) return null;
-
-      const token = authorization.split(' ')[1].trim();
-      return await getUserByToolsToken(token);
-    },
-  });
-
-  app.use(router.routes());
-  app.use(router.allowedMethods());
+	const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+	app.register(fastifyView, {
+		root: __dirname + '/../public/views',
+		engine: { pug },
+		defaultContext: { version: meta.version },
+	})
+	app.register(router);
 
   console.log('GET READY!');
   console.log(`Server URL >> ${config.url}`);

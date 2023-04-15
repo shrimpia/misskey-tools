@@ -1,14 +1,9 @@
-import { Context, DefaultState } from 'koa';
-import Router from 'koa-router';
+import { FastifyPluginCallback, FastifyReply } from 'fastify';
 import axios from 'axios';
 import crypto from 'crypto';
-import koaSend from 'koa-send';
 import { v4 as uuid } from 'uuid';
-import ms from 'ms';
 import striptags from 'striptags';
 import MarkdownIt from 'markdown-it';
-import path from 'path';
-import url from 'url';
 import { misskeyAppInfo } from 'tools-shared/dist/const.js';
 
 import { config } from '@/config.js';
@@ -19,185 +14,177 @@ import { getUser } from '@/services/users/get-user.js';
 import {upsertUser} from '@/services/users/upsert-user.js';
 import {updateUser} from '@/services/users/update-user.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+export const router: FastifyPluginCallback = (fastify, opts, done) => {
+	const md = new MarkdownIt();
+	const sessionHostCache: Record<string, string> = {};
+	const tokenSecretCache: Record<string, string> = {};
 
-export const router = new Router<DefaultState, Context>();
+	fastify.get<{Querystring: {host: string}}>('/login', async (req, reply) => {
+		let host = req.query.host;
+		if (!host) {
+			await die(reply, 'invalidParamater');
+			return;
+		}
 
-const sessionHostCache: Record<string, string> = {};
-const tokenSecretCache: Record<string, string> = {};
+		// http://, https://を潰す
+		host = host.trim().replace(/^https?:\/\//g, '').replace(/\/+/g, '');
 
-const md = new MarkdownIt();
+		const meta = await api<{ name: string, uri: string, version: string, features: Record<string, boolean | undefined> }>(host, 'meta', {}).catch(async e => {
+			if (!(e instanceof Error && e.name === 'Error')) throw e;
+			await die(reply, 'hostNotFound');
+		});
 
-router.get('/login', async ctx => {
-  let host = ctx.query.host as string | undefined;
-  if (!host) {
-    await die(ctx, 'invalidParamater');
-    return;
-  }
+		// NOTE: catchが呼ばれた場合はvoidとなるためundefinedのはず
+		if (typeof meta === 'undefined') return;
 
-  // http://, https://を潰す
-  host = host.trim().replace(/^https?:\/\//g, '').replace(/\/+/g, '');
+		if (typeof meta !== 'object') {
+			await die(reply, 'other');
+			return;
+		}
 
-  const meta = await api<{ name: string, uri: string, version: string, features: Record<string, boolean | undefined> }>(host, 'meta', {}).catch(async e => {
-    if (!(e instanceof Error && e.name === 'Error')) throw e;
-    await die(ctx, 'hostNotFound');
-  });
+		if (meta.version.includes('hitori')) {
+			await die(reply, 'hitorisskeyIsDenied');
+			return;
+		}
 
-  // NOTE: catchが呼ばれた場合はvoidとなるためundefinedのはず
-  if (typeof meta === 'undefined') return;
+		// NOTE:
+		//   環境によってはアクセスしたドメインとMisskeyにおけるhostが異なるケースがある
+		//   そういったインスタンスにおいてアカウントの不整合が生じるため、
+		//   APIから戻ってきたホスト名を正しいものとして、改めて正規化する
+		host = meta.uri.replace(/^https?:\/\//g, '').replace(/\/+/g, '').trim();
 
-  if (typeof meta !== 'object') {
-    await die(ctx, 'other');
-    return;
-  }
+		const { name, permission, description } = misskeyAppInfo;
 
-  if (meta.version.includes('hitori')) {
-    await die(ctx, 'hitorisskeyIsDenied');
-    return;
-  }
+		if (meta.features.miauth) {
+			// MiAuthを使用する
+			const callback = encodeURI(`${config.url}/miauth`);
 
-  // NOTE:
-  //   環境によってはアクセスしたドメインとMisskeyにおけるhostが異なるケースがある
-  //   そういったインスタンスにおいてアカウントの不整合が生じるため、
-  //   APIから戻ってきたホスト名を正しいものとして、改めて正規化する
-  host = meta.uri.replace(/^https?:\/\//g, '').replace(/\/+/g, '').trim();
+			const session = uuid();
+			const url = `https://${host}/miauth/${session}?name=${encodeURI(name)}&callback=${encodeURI(callback)}&permission=${encodeURI(permission.join(','))}`;
+			sessionHostCache[session] = host;
 
-  const { name, permission, description } = misskeyAppInfo;
+			reply.redirect(url);
+		} else {
+			// 旧型認証を使用する
+			const callbackUrl = encodeURI(`${config.url}/legacy-auth`);
 
-  if (meta.features.miauth) {
-    // MiAuthを使用する
-    const callback = encodeURI(`${config.url}/miauth`);
+			const { secret } = await api<{ secret: string }>(host, 'app/create', {
+				name, description, permission, callbackUrl,
+			});
 
-    const session = uuid();
-    const url = `https://${host}/miauth/${session}?name=${encodeURI(name)}&callback=${encodeURI(callback)}&permission=${encodeURI(permission.join(','))}`;
-    sessionHostCache[session] = host;
+			const { token, url } = await api<{ token: string, url: string }>(host, 'auth/session/generate', {
+				appSecret: secret
+			});
 
-    ctx.redirect(url);
-  } else {
-    // 旧型認証を使用する
-    const callbackUrl = encodeURI(`${config.url}/legacy-auth`);
+			sessionHostCache[token] = host;
+			tokenSecretCache[token] = secret;
 
-    const { secret } = await api<{ secret: string }>(host, 'app/create', {
-      name, description, permission, callbackUrl,
-    });
+			reply.redirect(url);
+		}
+	});
 
-    const { token, url } = await api<{ token: string, url: string }>(host, 'auth/session/generate', {
-      appSecret: secret
-    });
+	fastify.get('/teapot', async (_, reply) => {
+		await die(reply, 'teapot', 418);
+	});
 
-    sessionHostCache[token] = host;
-    tokenSecretCache[token] = secret;
+	fastify.get<{Querystring: {session: string}}>('/miauth', async (req, reply) => {
+		const session = req.query.session as string | undefined;
+		if (!session) {
+			await die(reply, 'sessionRequired');
+			return;
+		}
+		const host = sessionHostCache[session];
+		delete sessionHostCache[session];
+		if (!host) {
+			await die(reply);
+			console.error('host is null or undefined');
+			return;
+		}
 
-    ctx.redirect(url);
-  }
-});
+		const url = `https://${host}/api/miauth/${session}/check`;
+		const res = await axios.post(url, {});
+		const { token, user } = res.data;
 
-router.get('/teapot', async ctx => {
-  await die(ctx, 'teapot', 418);
-});
+		if (!token || !user) {
+			await die(reply);
+			if (!token) console.error('token is null or undefined');
+			if (!user) console.error('user is null or undefined');
+			return;
+		}
 
-router.get('/miauth', async ctx => {
-  const session = ctx.query.session as string | undefined;
-  if (!session) {
-    await die(ctx, 'sessionRequired');
-    return;
-  }
-  const host = sessionHostCache[session];
-  delete sessionHostCache[session];
-  if (!host) {
-    await die(ctx);
-    console.error('host is null or undefined');
-    return;
-  }
+		await login(reply, user, host, token);
 
-  const url = `https://${host}/api/miauth/${session}/check`;
-  const res = await axios.post(url, {});
-  const { token, user } = res.data;
+	});
 
-  if (!token || !user) {
-    await die(ctx);
-    if (!token) console.error('token is null or undefined');
-    if (!user) console.error('user is null or undefined');
-    return;
-  }
+	fastify.get<{Querystring: {token: string}}>('/legacy-auth', async (req, reply) => {
+		const token = req.query.token as string | undefined;
+		if (!token) {
+			await die(reply, 'tokenRequired');
+			return;
+		}
+		const host = sessionHostCache[token];
+		delete sessionHostCache[token];
+		if (!host) {
+			await die(reply);
+			return;
+		}
+		const appSecret = tokenSecretCache[token];
+		delete tokenSecretCache[token];
+		if (!appSecret) {
+			await die(reply);
+			return;
+		}
 
-  await login(ctx, user, host, token);
+		const { accessToken, user } = await api<{ accessToken: string, user: Record<string, unknown> }>(host, 'auth/session/userkey', {
+			appSecret, token,
+		});
+		const i = crypto.createHash('sha256').update(accessToken + appSecret, 'utf8').digest('hex');
 
-});
+		await login(reply, user, host, i);
+	});
 
-router.get('/legacy-auth', async ctx => {
-  const token = ctx.query.token as string | undefined;
-  if (!token) {
-    await die(ctx, 'tokenRequired');
-    return;
-  }
-  const host = sessionHostCache[token];
-  delete sessionHostCache[token];
-  if (!host) {
-    await die(ctx);
-    return;
-  }
-  const appSecret = tokenSecretCache[token];
-  delete tokenSecretCache[token];
-  if (!appSecret) {
-    await die(ctx);
-    return;
-  }
+	// fastify.get('/api(.*)', async (req, reply) => {
 
-  const { accessToken, user } = await api<{ accessToken: string, user: Record<string, unknown> }>(host, 'auth/session/userkey', {
-    appSecret, token,
-  });
-  const i = crypto.createHash('sha256').update(accessToken + appSecret, 'utf8').digest('hex');
+	// });
 
-  await login(ctx, user, host, i);
-});
+	fastify.get<{Params: {id: string}}>('/announcements/:id', async (req, reply) => {
+		const a = await prisma.announcement.findUnique({ where: {id: Number(req.params.id)} });
+		const stripped = striptags(md.render(a?.body ?? '').replace(/\n/g, ' '));
+		await reply.view('frontend', a ? {
+			t: a.title,
+			d: stripped.length > 80 ? stripped.substring(0, 80) + '…' : stripped,
+		} : {});
+	});
 
-router.get('/assets/(.*)', async ctx => {
-  await koaSend(ctx as any, ctx.path.replace('/assets/', ''), {
-    root: `${__dirname}/../assets/`,
-    maxage: process.env.NODE_ENV !== 'production' ? 0 : ms('7 days'),
-  });
-});
+	fastify.get('/__rescue__', async (_, reply) => {
+		await reply.view('rescue');
+	});
 
-router.get('/api(.*)', async (ctx, next) => {
-  next();
-});
+	fastify.get('/*', async (_, reply) => {
+		await reply.view('frontend');
+	});
 
-router.get('/announcements/:id', async (ctx) => {
-  const a = await prisma.announcement.findUnique({ where: {id: Number(ctx.params.id)} });
-  const stripped = striptags(md.render(a?.body ?? '').replace(/\n/g, ' '));
-  await ctx.render('frontend', a ? {
-    t: a.title,
-    d: stripped.length > 80 ? stripped.substring(0, 80) + '…' : stripped,
-  } : null);
-});
+	async function login(reply: FastifyReply, user: Record<string, unknown>, host: string, token: string) {
+		const isNewcomer = !(await getUser(user.username as string, host));
+		await upsertUser(user.username as string, host, token);
 
-router.get('/__rescue__', async(ctx) => {
-  await ctx.render('rescue');
-});
+		const u = await getUser(user.username as string, host);
 
-router.get('(.*)', async (ctx) => {
-  await ctx.render('frontend');
-});
+		if (!u) {
+			await die(reply);
+			return;
+		}
 
-async function login(ctx: Context, user: Record<string, unknown>, host: string, token: string) {
-  const isNewcomer = !(await getUser(user.username as string, host));
-  await upsertUser(user.username as string, host, token);
+		if (isNewcomer) {
+			await updateUser(u.username, u.host, {
+				prevNotesCount: user.notesCount as number ?? 0,
+				prevFollowingCount: user.followingCount as number ?? 0,
+				prevFollowersCount: user.followersCount as number ?? 0,
+			});
+		}
 
-  const u = await getUser(user.username as string, host);
+		await reply.view('frontend', { token: u.misshaiToken });
+	}
 
-  if (!u) {
-    await die(ctx);
-    return;
-  }
-
-  if (isNewcomer) {
-    await updateUser(u.username, u.host, {
-      prevNotesCount: user.notesCount as number ?? 0,
-      prevFollowingCount: user.followingCount as number ?? 0,
-      prevFollowersCount: user.followersCount as number ?? 0,
-    });
-  }
-
-  await ctx.render('frontend', { token: u.misshaiToken });
-}
+	done();
+};
