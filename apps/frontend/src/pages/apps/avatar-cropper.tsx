@@ -1,17 +1,16 @@
+import { modalAtom } from '@/store/client-state';
+import { useSetAtom } from 'jotai';
 import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactCrop, { Crop } from 'react-image-crop';
-
-import { useDispatch } from 'react-redux';
-import { useGetSessionQuery } from '../../services/session';
-import { showModal } from '../../store/slices/screen';
 
 import 'react-image-crop/dist/ReactCrop.css';
 import { useTitle } from '../../hooks/useTitle';
 
 export const NekomimiPage: React.VFC = () => {
+	const setModal = useSetAtom(modalAtom);
+
   const {t} = useTranslation();
-  const dispatch = useDispatch();
 
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -25,32 +24,32 @@ export const NekomimiPage: React.VFC = () => {
 
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 
-  const {data} = useGetSessionQuery(undefined);
+  const session = null as any;
 
   const beginUpload = async () => {
 
     if (!previewCanvasRef.current) return;
-    if (!data) return;
+    if (!session) return;
 
     const canvas = previewCanvasRef.current;
     const blob = await new Promise<Blob | null>(res => canvas.toBlob(res));
     if (!blob) return;
 
     const formData = new FormData();
-    formData.append('i', data.token);
+    formData.append('i', session.token);
     formData.append('force', 'true');
     formData.append('file', blob);
     formData.append('name', `(Cropped) ${fileName ?? 'File'}`);
 
     await new Promise<void>((res, rej) => {
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', `https://${data.host}/api/drive/files/create`, true);
+      xhr.open('POST', `https://${session.host}/api/drive/files/create`, true);
       xhr.onload = () => {
         setPercentage(100);
         const {id: avatarId} = JSON.parse(xhr.responseText);
-        fetch(`https://${data.host}/api/i/update`, {
+        fetch(`https://${session.host}/api/i/update`, {
           method: 'POST',
-          body: JSON.stringify({ i: data.token, avatarId }),
+          body: JSON.stringify({ i: session.token, avatarId }),
         }).then(() => res()).catch(rej);
       };
       xhr.onerror = rej;
@@ -60,11 +59,11 @@ export const NekomimiPage: React.VFC = () => {
       xhr.send(formData);
     });
 
-    dispatch(showModal({
+    setModal({
       type: 'dialog',
       icon: 'info',
       message: t('saved'),
-    }));
+    });
   };
 
   const onChangeFile: ChangeEventHandler<HTMLInputElement> = (e) => {

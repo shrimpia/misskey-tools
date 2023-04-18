@@ -1,20 +1,19 @@
 import insertTextAtCursor from 'insert-text-at-cursor';
 import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { alertModes } from 'tools-shared/dist/types/alert-mode';
 import { IUser } from 'tools-shared/dist/types/user';
 import { Visibility } from 'tools-shared/dist/types/visibility';
 import { LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_TOKEN } from '../../const';
 import { $post, $put } from '../../misc/api';
-import { useGetScoreQuery, useGetSessionQuery } from '../../services/session';
-import { showModal } from '../../store/slices/screen';
 import { Skeleton } from '../../components/Skeleton';
+import { useSetAtom } from 'jotai';
 
 import './misshai.scss';
 import { Ranking } from '../../components/Ranking';
 import { useTitle } from '../../hooks/useTitle';
 import { Link } from 'react-router-dom';
+import { modalAtom } from '@/store/client-state';
 
 const variables = [
   'notesCount',
@@ -42,10 +41,11 @@ type SettingDraftType = Partial<Pick<IUser,
 type DraftReducer = React.Reducer<SettingDraftType, Partial<SettingDraftType>>;
 
 export const MisshaiPage: React.VFC = () => {
-  const dispatch = useDispatch();
-  const session = useGetSessionQuery(undefined);
+  const session = null as any;
   const data = session.data;
-  const score = useGetScoreQuery(undefined);
+  const score = null as any;
+
+	const setModal = useSetAtom(modalAtom);
 
   const {t} = useTranslation();
 
@@ -74,22 +74,22 @@ export const MisshaiPage: React.VFC = () => {
     dispatchDraft(obj);
     return $put('session', obj)
       .catch(() => {
-        dispatch(showModal({
+        setModal({
           type: 'dialog',
           icon: 'error',
           message: t('error'),
-        }));
+        });
         dispatchDraft(previousDraft);
       });
   }, [draft]);
 
   const updateSettingWithDialog = useCallback((obj: SettingDraftType) => {
     updateSetting(obj)
-      .then(() => dispatch(showModal({
+      .then(() => setModal({
         type: 'dialog',
         icon: 'info',
         message: t('saved'),
-      })));
+      }));
   }, [updateSetting]);
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export const MisshaiPage: React.VFC = () => {
   }, [data]);
 
   const onClickInsertVariables = useCallback<React.MouseEventHandler>((e) => {
-    dispatch(showModal({
+    setModal({
       type: 'menu',
       screenX: e.clientX,
       screenY: e.clientY,
@@ -118,19 +118,19 @@ export const MisshaiPage: React.VFC = () => {
           }
         },
       })),
-    }));
-  }, [dispatch, t, variables, templateTextarea.current]);
+    });
+  }, [t, variables, templateTextarea.current]);
 
   const onClickInsertVariablesHelp = useCallback(() => {
-    dispatch(showModal({
+    setModal({
       type: 'dialog',
       icon: 'info',
       message: t('_template.insertVariablesHelp'),
-    }));
-  }, [dispatch, t]);
+    });
+  }, [t]);
 
   const onClickSendAlert = useCallback(() => {
-    dispatch(showModal({
+    setModal({
       type: 'dialog',
       title: t('_sendTest.title'),
       message: t('_sendTest.message'),
@@ -147,23 +147,23 @@ export const MisshaiPage: React.VFC = () => {
       onSelect(i) {
         if (i === 0) {
           $post('session/alert').then(() => {
-            dispatch(showModal({
+            setModal({
               type: 'dialog',
               message: t('_sendTest.success'),
               icon: 'info',
-            }));
+            });
           }).catch((e) => {
             console.error(e);
-            dispatch(showModal({
+            setModal({
               type: 'dialog',
               message: t('_sendTest.failure'),
               icon: 'error',
-            }));
+            });
           });
         }
       },
-    }));
-  }, [dispatch, t]);
+    });
+  }, [t]);
 
   /**
 	 * Session APIのエラーハンドリング

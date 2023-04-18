@@ -1,21 +1,21 @@
 import React from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { CHANGELOG_URL } from '../const';
-import { useGetMetaQuery, useGetSessionQuery } from '../services/session';
-import { setDrawerShown } from '../store/slices/screen';
+import { metaAtom } from '@/store/api/meta';
+import { isDrawerShownAtom } from '@/store/client-state';
 
 const navLinkClassName = (isActive: boolean) => `item ${isActive ? 'active' : ''}`;
 
 export const NavigationMenu: React.VFC = () => {
-  const { data: session } = useGetSessionQuery(undefined);
-  const { data: meta } = useGetMetaQuery(undefined);
+	const meta = useAtomValue(metaAtom);
+	const setDrawerShown = useSetAtom(isDrawerShownAtom);
+	const session = null as any;
   const {t} = useTranslation();
-  const dispatch = useDispatch();
 
   const onClickItem = () => {
-    dispatch(setDrawerShown(false));
+    setDrawerShown(false);
   };
 
   return (

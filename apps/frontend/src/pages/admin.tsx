@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useSetAtom } from 'jotai';
 
 import { LOCALSTORAGE_KEY_TOKEN } from '../const';
-import { useGetSessionQuery } from '../services/session';
 import { Skeleton } from '../components/Skeleton';
 import { IAnnouncement } from 'tools-shared/dist/types/announcement';
 import { $delete, $get, $post, $put } from '../misc/api';
-import { showModal } from '../store/slices/screen';
-import { useDispatch } from 'react-redux';
 import { useTitle } from '../hooks/useTitle';
 import {Log} from 'tools-shared/dist/types/log';
 import {LogView} from '../components/LogView';
+import { modalAtom } from '@/store/client-state';
 
 
 export const AdminPage: React.VFC = () => {
-  const { data, error } = useGetSessionQuery(undefined);
-
-  const dispatch = useDispatch();
+  const session = null as any;
+	const setModal = useSetAtom(modalAtom);
 
   useTitle('_sidebar.admin');
 
@@ -71,16 +69,16 @@ export const AdminPage: React.VFC = () => {
 
   const onClickStartMisshaiAlertWorkerButton = () => {
     $post('admin/misshai/start').then(() => {
-      dispatch(showModal({
+      setModal({
         type: 'dialog',
         message: '開始',
-      }));
+      });
     }).catch((e) => {
-      dispatch(showModal({
+      setModal({
         type: 'dialog',
         icon: 'error',
         message: e.message,
-      }));
+      });
     });
   };
 
@@ -88,13 +86,13 @@ export const AdminPage: React.VFC = () => {
 	 * Session APIのエラーハンドリング
 	 * このAPIがエラーを返した = トークンが無効 なのでトークンを削除してログアウトする
 	 */
-  useEffect(() => {
-    if (error) {
-      console.error(error);
-      localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
-      location.reload();
-    }
-  }, [error]);
+  // useEffect(() => {
+  //   if (error) {
+  //     console.error(error);
+  //     localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
+  //     location.reload();
+  //   }
+  // }, [error]);
 
   /**
 	 * Edit Modeがオンのとき、Delete Modeを無効化する（誤操作防止）
@@ -122,7 +120,7 @@ export const AdminPage: React.VFC = () => {
     }
   }, [selectedAnnouncement]);
 
-  return !data || !isAnnouncementsLoaded ? (
+  return !session || !isAnnouncementsLoaded ? (
     <div className="vstack">
       <Skeleton width="100%" height="1rem" />
       <Skeleton width="100%" height="1rem" />
@@ -132,7 +130,7 @@ export const AdminPage: React.VFC = () => {
   ) : (
     <div className="fade vstack">
       {
-        !data.isAdmin ? (
+        !session.isAdmin ? (
           <p>You are not an administrator and cannot open this page.</p>
         ) : (
           <>

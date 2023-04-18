@@ -6,7 +6,6 @@ import { useSetAtom } from 'jotai';
 import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
 import {BREAKPOINT_SM, LOCALSTORAGE_KEY_ACCOUNTS} from './const';
-import { useGetSessionQuery } from './services/session';
 import { Router } from './Router';
 import { GeneralLayout } from './GeneralLayout';
 import {$get} from './misc/api';

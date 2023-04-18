@@ -1,13 +1,14 @@
 import React from 'react';
+import { useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { LoginForm } from '../components/LoginForm';
 import styled from 'styled-components';
-import { useSelector } from '../store/slices/auth';
 import { IsMobileProp } from '../misc/is-mobile-prop';
 import Twemoji from 'react-twemoji';
 import { useAnnouncements } from '../hooks/useAnnouncements';
+import { isMobileAtom } from '@/store/client-state';
 
 const Hero = styled.div<IsMobileProp>`
 	display: flex;
@@ -67,7 +68,7 @@ const FormWrapper = styled.div`
 `;
 
 export const IndexWelcomePage: React.VFC = () => {
-  const {isMobile} = useSelector(state => state.screen);
+	const isMobile = useAtomValue(isMobileAtom);
   const {t} = useTranslation();
 
   const announcements = useAnnouncements();

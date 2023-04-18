@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useAtom } from 'jotai';
-import * as atoms from '@/store/slices/auth'
+import { useAtom, useSetAtom } from 'jotai';
+import { titleAtom } from '@/store/client-state';
 
 export const useTitle = (title: string) => {
-	const [_, setTitle] = useAtom(atoms.title)
+	const setTitle = useSetAtom(titleAtom);
   useEffect(() => {
 		setTitle(title);
     return () => {

@@ -1,5 +1,5 @@
 import { accentColorAtom, themeAtom } from '@/store/client-settings';
-import { useAtom } from 'jotai/esm/react';
+import { useAtom } from 'jotai';
 import { useCallback, useEffect, useState } from 'react';
 
 export const actualThemes = [

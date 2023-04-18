@@ -1,22 +1,19 @@
 import React from 'react';
+import { useAtom, useAtomValue } from 'jotai';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_TOKEN } from '../const';
-import { useGetSessionQuery } from '../services/session';
-import { useSelector } from '../store/slices/auth';
-import { setAccounts } from '../store/slices/screen';
 import { LoginForm } from '../components/LoginForm';
 import { Skeleton } from '../components/Skeleton';
 import { useTitle } from '../hooks/useTitle';
+import { accountsAtom, accountTokensAtom } from '@/store/auth';
 
 export const AccountsPage: React.VFC = () => {
-  const {data} = useGetSessionQuery(undefined);
+	const [accounts, setAccounts] = useAtom(accountsAtom);
+	const accountTokens = useAtomValue(accountTokensAtom);
+  const session = null as any;
   const {t} = useTranslation();
-  const dispatch = useDispatch();
 
   useTitle('_sidebar.accounts');
-
-  const {accounts, accountTokens} = useSelector(state => state.screen);
 
   const switchAccount = (token: string) => {
     const newAccounts = accountTokens.filter(a => a !== token);
@@ -26,7 +23,7 @@ export const AccountsPage: React.VFC = () => {
     location.reload();
   };
 
-  return !data ? (
+  return !session ? (
     <div className="vstack">
       <Skeleton />
       <Skeleton />
@@ -46,7 +43,7 @@ export const AccountsPage: React.VFC = () => {
 										@{account.username}@{account.host}
                   <button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {
                     const filteredAccounts = accounts.filter(ac => ac.id !== account.id);
-                    dispatch(setAccounts(filteredAccounts));
+                    setAccounts(filteredAccounts);
                     e.stopPropagation();
                   }}>
                     <i className="fas fa-trash-can"/>

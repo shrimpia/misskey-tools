@@ -5,16 +5,17 @@ import { useParams } from 'react-router-dom';
 import { IAnnouncement } from 'tools-shared/dist/types/announcement';
 import { Skeleton } from '../components/Skeleton';
 import { $get } from '../misc/api';
-import { useSelector } from '../store/slices/auth';
 import { useTitle } from '../hooks/useTitle';
+import { useAtomValue } from 'jotai';
+import { languageAtom } from '@/store/client-settings';
 
 export const AnnouncementPage: React.VFC = () => {
-  const { id } = useParams<{id: string}>();
+  const language = useAtomValue(languageAtom);
+
+	const { id } = useParams<{id: string}>();
   if (!id) return null;
 
   const [announcement, setAnnouncement] = useState<IAnnouncement | null>();
-
-  const lang = useSelector(state => state.screen.language);
 
   useTitle('announcements');
 
@@ -27,7 +28,7 @@ export const AnnouncementPage: React.VFC = () => {
         {announcement.title}
         <aside className="inline ml-1 text-dimmed text-100">
           <i className="fas fa-clock" />&nbsp;
-          {dayjs(announcement.createdAt).locale(lang.split('_')[0]).fromNow()}
+          {dayjs(announcement.createdAt).locale(language.split('_')[0]).fromNow()}
         </aside>
       </h2>
       <section>

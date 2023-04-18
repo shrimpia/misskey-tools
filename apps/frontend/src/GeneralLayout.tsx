@@ -1,13 +1,12 @@
+import { useAtom, useAtomValue } from 'jotai';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { NavigationMenu } from './components/NavigationMenu';
 import { IsMobileProp } from './misc/is-mobile-prop';
 
-import { useGetMetaQuery, useGetSessionQuery } from './services/session';
-import { useSelector } from './store/slices/auth';
-import { setDrawerShown } from './store/slices/screen';
+import { metaAtom } from './store/api/meta';
+import { isDrawerShownAtom, isMobileAtom, titleAtom } from './store/client-state';
 
 const Container = styled.div<IsMobileProp>`
 	padding: var(--margin);
@@ -43,18 +42,20 @@ const MobileHeader = styled.header`
 `;
 
 export const GeneralLayout: React.FC = ({children}) => {
-  const { data: session } = useGetSessionQuery(undefined);
-  const { data: meta } = useGetMetaQuery(undefined);
-  const { isMobile, title, isDrawerShown } = useSelector(state => state.screen);
+  const meta = useAtomValue(metaAtom);
+	const isMobile = useAtomValue(isMobileAtom);
+	const title = useAtomValue(titleAtom);
+	const [isDrawerShown, setDrawerShown] = useAtom(isDrawerShownAtom);
   const {t} = useTranslation();
 
-  const dispatch = useDispatch();
+	const session: any = null;
+
 
   return (
     <Container isMobile={isMobile}>
       {isMobile && (
         <MobileHeader className="navbar hstack f-middle shadow-2 pl-2">
-          <button className="btn flat" onClick={() => dispatch(setDrawerShown(!isDrawerShown))}>
+          <button className="btn flat" onClick={() => setDrawerShown(!isDrawerShown)}>
             <i className="fas fa-bars"></i>
           </button>
           <h1>{t(title ?? 'title')}</h1>
@@ -80,7 +81,7 @@ export const GeneralLayout: React.FC = ({children}) => {
         </Main>
       </div>
       <div className={`drawer-container ${isDrawerShown ? 'active' : ''}`}>
-        <div className="backdrop" onClick={() => dispatch(setDrawerShown(false))}></div>
+        <div className="backdrop" onClick={() => setDrawerShown(false)}></div>
         <div className="drawer pa-2" onClick={e => e.stopPropagation()}>
           <NavigationMenu />
         </div>

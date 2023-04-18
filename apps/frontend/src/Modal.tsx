@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
-import { useSelector } from './store/slices/auth';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+
 import {
   builtinDialogButtonNo,
   builtinDialogButtonOk,
@@ -10,9 +11,8 @@ import {
   ModalTypeDialog
 } from './modal/dialog';
 import { Modal } from './modal/modal';
-import { useDispatch } from 'react-redux';
-import { hideModal } from './store/slices/screen';
 import { ModalTypeMenu } from './modal/menu';
+import { modalAtom } from './store/client-state';
 
 const getButtons = (button: DialogButtonType): DialogButton[] => {
   if (typeof button === 'object') return button;
@@ -31,14 +31,14 @@ const dialogIconPattern: Record<DialogIcon, string> = {
 
 const Dialog: React.VFC<{modal: ModalTypeDialog}> = ({modal}) => {
   const buttons = getButtons(modal.buttons ?? 'ok');
-  const dispatch = useDispatch();
+	const setModal = useSetAtom(modalAtom);
 
   const onClickButton = useCallback((i: number) => {
-    dispatch(hideModal());
+    setModal(null)
     if (modal.onSelect) {
       modal.onSelect(i);
     }
-  }, [dispatch, modal]);
+  }, [modal]);
 
   return (
     <div className="card dialog text-center">
@@ -61,7 +61,7 @@ const Dialog: React.VFC<{modal: ModalTypeDialog}> = ({modal}) => {
 };
 
 const Menu: React.VFC<{modal: ModalTypeMenu}> = ({modal}) => {
-  const dispatch = useDispatch();
+	const setModal = useSetAtom(modalAtom);
 
   return (
     <div className="modal-menu-wrapper menu shadow-2" style={{
@@ -70,7 +70,7 @@ const Menu: React.VFC<{modal: ModalTypeMenu}> = ({modal}) => {
       {
         modal.items.map((item, i) => (
           <button className={`item ${item.disabled ? 'disabled' : ''} ${item.danger ? 'text-danger' : ''}`} onClick={() => {
-            dispatch(hideModal());
+            setModal(null);
             if (item.onClick) {
               item.onClick();
             }
@@ -92,13 +92,11 @@ const ModalInner = (modal: Modal) => {
 };
 
 export const ModalComponent: React.VFC = () => {
-  const shown = useSelector(state => state.screen.modalShown);
-  const modal = useSelector(state => state.screen.modal);
-  const dispatch = useDispatch();
-  if (!shown || !modal) return null;
+	const [modal, setModal] = useAtom(modalAtom);
+  if (!modal) return null;
 
   return (
-    <div className={`modal fade ${modal.type === 'menu' ? 'top-left' : 'darken'}`} onClick={() => dispatch(hideModal())}>
+    <div className={`modal fade ${modal.type === 'menu' ? 'top-left' : 'darken'}`} onClick={() => setModal(null)}>
       <div className="fade up" onClick={(e) => e.stopPropagation()}>
         { ModalInner(modal) }
       </div>

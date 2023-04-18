@@ -1,14 +1,13 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useGetScoreQuery, useGetSessionQuery } from '../services/session';
 import { useAnnouncements } from '../hooks/useAnnouncements';
 import { Link } from 'react-router-dom';
 
 export const IndexSessionPage: React.VFC = () => {
   const {t} = useTranslation();
-  const { data: session } = useGetSessionQuery(undefined);
-  const score = useGetScoreQuery(undefined);
+  const session = null as any;
+  const score = null as any;
 
   const announcements = useAnnouncements();
 

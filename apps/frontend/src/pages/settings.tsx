@@ -1,17 +1,16 @@
 import React, { useCallback } from 'react';
+import { useAtom, useSetAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 
-import { useGetSessionQuery } from '../services/session';
 import { Theme, themes } from '../misc/theme';
 import { LOCALSTORAGE_KEY_TOKEN } from '../const';
-import { changeAccentColor, changeLang, changeTheme, showModal } from '../store/slices/screen';
-import { useSelector } from '../store/slices/auth';
 import { languageName } from '../langs';
 import { $delete } from '../misc/api';
 import { useTitle } from '../hooks/useTitle';
 import { designSystemColors } from 'tools-shared/dist/types/design-system-color';
 import styled from 'styled-components';
+import { accentColorAtom, languageAtom, themeAtom } from '@/store/client-settings';
+import { modalAtom } from '@/store/client-state';
 
 const ColorInput = styled.input<{color: string}>`
 	display: block;
@@ -34,20 +33,19 @@ const ColorInput = styled.input<{color: string}>`
 `;
 
 export const SettingPage: React.VFC = () => {
-  const session = useGetSessionQuery(undefined);
-  const dispatch = useDispatch();
+  const session = null as any;
+	const [currentTheme, setTheme] = useAtom(themeAtom);
+	const [currentLanguage, setLanguage] = useAtom(languageAtom);
+	const [currentAccentColor, setAccentColor] = useAtom(accentColorAtom);
+	const setModal = useSetAtom(modalAtom);
 
   const data = session.data;
   const {t} = useTranslation();
 
   useTitle('_sidebar.settings');
 
-  const currentTheme = useSelector(state => state.screen.theme);
-  const currentLang = useSelector(state => state.screen.language);
-  const currentAccentColor = useSelector(state => state.screen.accentColor);
-
   const onClickLogout = useCallback(() => {
-    dispatch(showModal({
+   setModal({
       type: 'dialog',
       title: t('_logout.title'),
       message: t('_logout.message'),
@@ -67,11 +65,11 @@ export const SettingPage: React.VFC = () => {
           location.href = '/';
         }
       },
-    }));
-  }, [dispatch, t]);
+    });
+  }, [t]);
 
   const onClickDeleteAccount = useCallback(() => {
-    dispatch(showModal({
+    setModal({
       type: 'dialog',
       title: t('_deactivate.title'),
       message: t('_deactivate.message'),
@@ -89,7 +87,7 @@ export const SettingPage: React.VFC = () => {
       onSelect(i) {
         if (i === 0) {
           $delete('session').then(() => {
-            dispatch(showModal({
+            setModal({
               type: 'dialog',
               message: t('_deactivate.success'),
               icon: 'info',
@@ -97,19 +95,19 @@ export const SettingPage: React.VFC = () => {
                 localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
                 location.href = '/';
               }
-            }));
+            });
           }).catch((e) => {
             console.error(e);
-            dispatch(showModal({
+            setModal({
               type: 'dialog',
               message: t('_deactivate.failure'),
               icon: 'error',
-            }));
+            });
           });
         }
       },
-    }));
-  }, [dispatch, t]);
+    });
+  }, [t]);
 
   return session.isLoading || !data ? (
     <div className="skeleton" style={{width: '100%', height: '128px'}}></div>
@@ -123,7 +121,7 @@ export const SettingPage: React.VFC = () => {
             {
               themes.map(theme => (
                 <label key={theme} className="input-check">
-                  <input type="radio" value={theme} checked={theme === currentTheme} onChange={(e) => dispatch(changeTheme(e.target.value as Theme))} />
+                  <input type="radio" value={theme} checked={theme === currentTheme} onChange={(e) => setTheme(e.target.value as Theme)} />
                   <span>{t(`_themes.${theme}`)}</span>
                 </label>
               ))
@@ -134,14 +132,14 @@ export const SettingPage: React.VFC = () => {
           <h3>{t('accentColor')}</h3>
           <div className="hstack slim wrap mb-2">
             {designSystemColors.map(c => (
-              <ColorInput className="shadow-2" type="radio" color={c} value={c} checked={c === currentAccentColor} onChange={e => dispatch(changeAccentColor(e.target.value))} />
+              <ColorInput className="shadow-2" type="radio" color={c} value={c} checked={c === currentAccentColor} onChange={e => setAccentColor(e.target.value)} />
             ))}
           </div>
-          <button className="btn primary" onClick={() => dispatch(changeAccentColor('green'))}>{t('resetToDefault')}</button>
+          <button className="btn primary" onClick={() => setAccentColor('green')}>{t('resetToDefault')}</button>
         </div>
         <div className="card pa-2">
           <h3>{t('language')}</h3>
-          <select name="currentLang" className="input-field" value={currentLang} onChange={(e) => dispatch(changeLang(e.target.value))}>
+          <select name="currentLang" className="input-field" value={currentLanguage} onChange={(e) => setLanguage(e.target.value)}>
             {
               (Object.keys(languageName) as Array<keyof typeof languageName>).map(n => (
                 <option value={n} key={n}>{languageName[n]}</option>
