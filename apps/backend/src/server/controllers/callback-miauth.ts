@@ -33,5 +33,6 @@ export const callbackMiauthController: RouteHandler<{Querystring: {session: stri
 		return;
 	}
 
-	await login(reply, user, host, token);
+	const toolsToken = await login(user, host, token);
+	await reply.view('frontend', { token: toolsToken });
 };

@@ -1,19 +1,14 @@
-import { FastifyReply } from "fastify";
-
-import { die } from "@/server/utils/die.js";
 import { getUser } from "@/services/users/get-user.js";
 import { updateUser } from "@/services/users/update-user.js";
 import { upsertUser } from "@/services/users/upsert-user.js";
 
-export const login = async (reply: FastifyReply, user: Record<string, unknown>, host: string, token: string) => {
+export const login = async (user: Record<string, unknown>, host: string, token: string): Promise<string> => {
 	const isNewcomer = !(await getUser(user.username as string, host));
 	await upsertUser(user.username as string, host, token);
 
 	const u = await getUser(user.username as string, host);
-
 	if (!u) {
-		await die(reply);
-		return;
+		throw new Error('No such user.');
 	}
 
 	if (isNewcomer) {
@@ -24,5 +19,5 @@ export const login = async (reply: FastifyReply, user: Record<string, unknown>, 
 		});
 	}
 
-	await reply.view('frontend', { token: u.misshaiToken });
+	return u.misshaiToken;
 }

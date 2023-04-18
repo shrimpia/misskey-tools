@@ -33,5 +33,6 @@ export const callbackLegacyAuthController: RouteHandler<{Querystring: {token: st
 	});
 	const i = crypto.createHash('sha256').update(accessToken + appSecret, 'utf8').digest('hex');
 
-	await login(reply, user, host, i);
+	const toolsToken = await login(user, host, i);
+	await reply.view('frontend', { token: toolsToken });
 };
