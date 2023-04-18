@@ -5,6 +5,9 @@ import { login } from "@/services/session/login.js";
 import { sessionHostCache } from "@/server/cache.js";
 import { die } from "@/server/utils/die.js";
 
+/**
+ * MisskeyにMiAuth認証を飛ばしたときに返ってくるコールバックのハンドラーです。
+ */
 export const callbackMiauthController: RouteHandler<{Querystring: {session: string}}> = async (req, reply) => {
 	const session = req.query.session as string | undefined;
 	if (!session) {

@@ -7,6 +7,9 @@ import { api } from "@/libs/misskey.js";
 import { config } from "@/config.js";
 import { misskeyAppInfo } from "tools-shared/dist/const.js";
 
+/**
+ * Misskeyサーバーに接続するコントローラーです。
+ */
 export const authMisskeyController: RouteHandler<{Querystring: {host: string}}> = async (req, reply) => {
 	let host = req.query.host;
 	if (!host) {
