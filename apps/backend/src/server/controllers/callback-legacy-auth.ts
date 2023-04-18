@@ -6,7 +6,10 @@ import { tokenSecretCache, sessionHostCache } from "@/server/cache.js";
 import { die } from "@/server/utils/die.js";
 import { api } from "@/libs/misskey";
 
-export const legacyAuthController: RouteHandler<{Querystring: {token: string}}> = async (req, reply) => {
+/**
+ * Misskeyに旧型認証を飛ばしたときに返ってくるコールバックのハンドラーです。
+ */
+export const callbackLegacyAuthController: RouteHandler<{Querystring: {token: string}}> = async (req, reply) => {
 	const token = req.query.token as string | undefined;
 	if (!token) {
 		await die(reply, 'tokenRequired');

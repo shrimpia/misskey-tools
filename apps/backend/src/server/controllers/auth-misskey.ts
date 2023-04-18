@@ -7,7 +7,7 @@ import { api } from "@/libs/misskey.js";
 import { config } from "@/config.js";
 import { misskeyAppInfo } from "tools-shared/dist/const.js";
 
-export const loginController: RouteHandler<{Querystring: {host: string}}> = async (req, reply) => {
+export const authMisskeyController: RouteHandler<{Querystring: {host: string}}> = async (req, reply) => {
 	let host = req.query.host;
 	if (!host) {
 		await die(reply, 'invalidParamater');
