@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Link, useLocation } from 'react-router-dom';
-import { Provider, useDispatch } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSetAtom } from 'jotai';
 
-import { store } from './store/slices/auth';
 import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
 import {BREAKPOINT_SM, LOCALSTORAGE_KEY_ACCOUNTS} from './const';
 import { useGetSessionQuery } from './services/session';
 import { Router } from './Router';
-import {setAccounts, setMobile} from './store/slices/screen';
 import { GeneralLayout } from './GeneralLayout';
 import {$get} from './misc/api';
 import {IUser} from 'tools-shared/dist/types/user';
+import { isMobileAtom } from './store/client-state';
+import { accountsAtom } from './store/auth';
 
-const AppInner : React.VFC = () => {
-  const { data: session } = useGetSessionQuery(undefined);
-  const $location = useLocation();
-
-  const dispatch = useDispatch();
-
-  useTheme();
-
-  const {t} = useTranslation();
+export const App : React.VFC = () => {
+	const setMobile = useSetAtom(isMobileAtom);
+	const setAccounts = useSetAtom(accountsAtom);
 
   const [error, setError] = useState<any>((window as any).__misshaialert?.error);
+
+	const $location = useLocation();
+  const {t} = useTranslation();
+
+	useTheme();
 
   // ページ遷移がまだされていないかどうか
   const [isFirstView, setFirstView] = useState(true);
@@ -39,13 +38,13 @@ const AppInner : React.VFC = () => {
 
   useEffect(() => {
     const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
-    Promise.all(accounts.map(token => $get<IUser>('session', token))).then(a => dispatch(setAccounts(a as IUser[])));
-  }, [dispatch]);
+    Promise.all(accounts.map(token => $get<IUser>('session', token))).then(a => setAccounts(a as IUser[]));
+  }, []);
 
   useEffect(() => {
     const qMobile = window.matchMedia(`(max-width: ${BREAKPOINT_SM})`);
-    const syncMobile = (ev: MediaQueryListEvent) => dispatch(setMobile(ev.matches));
-    dispatch(setMobile(qMobile.matches));
+    const syncMobile = (ev: MediaQueryListEvent) => setMobile(ev.matches);
+    setMobile(qMobile.matches);
     qMobile.addEventListener('change', syncMobile);
 
     return () => {
@@ -53,7 +52,8 @@ const AppInner : React.VFC = () => {
     };
   }, []);
 
-  const TheLayout = session || $location.pathname !== '/' ? GeneralLayout : 'div';
+  // const TheLayout = session || $location.pathname !== '/' ? GeneralLayout : 'div';
+	const TheLayout = 'div';
 
   return (
     <TheLayout>
@@ -81,11 +81,3 @@ const AppInner : React.VFC = () => {
     </TheLayout>
   );
 };
-
-export const App: React.VFC = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <AppInner />
-    </BrowserRouter>
-  </Provider>
-);

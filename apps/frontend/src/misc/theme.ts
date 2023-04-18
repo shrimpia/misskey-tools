@@ -1,5 +1,6 @@
+import { accentColorAtom, themeAtom } from '@/store/client-settings';
+import { useAtom } from 'jotai/esm/react';
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from '../store/slices/auth';
 
 export const actualThemes = [
   'light',
@@ -16,9 +17,10 @@ export type Theme = typeof themes[number];
 export type ActualTheme = typeof actualThemes[number];
 
 export const useTheme = () => {
-  const {theme, accentColor} = useSelector(state => state.screen);
-
   const [ osTheme, setOsTheme ] = useState<ActualTheme>('dark');
+
+	const [theme, setTheme] = useAtom(themeAtom);
+	const [accentColor, setAccentColor] = useAtom(accentColorAtom);
 
   const applyTheme = useCallback(() => {
     const actualTheme = theme === 'system' ? osTheme : theme;

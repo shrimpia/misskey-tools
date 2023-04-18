@@ -2,6 +2,7 @@ import 'vite/modulepreload-polyfill';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import i18n from 'i18next';
@@ -33,4 +34,8 @@ i18n
     }
   });
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+ReactDOM.render((
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>
+), document.getElementById('app'));
