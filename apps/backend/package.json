@@ -3,12 +3,14 @@
 	"version": "4.0.0-dev",
 	"author": "Shrimpia Network",
 	"type": "module",
+	"types": "./dist/app.d.ts",
 	"scripts": {
-		"build": "tsup src/app.ts --format esm",
+		"build": "tsc --noEmit && tsup",
 		"clean": "rimraf dist",
-		"dev": "tsup src/app.ts --format esm --watch --onSuccess \"node dist/app.js\"",
+		"dev": "tsc --noEmit && tsup --watch --onSuccess \"node --enable-source-maps dist/app.js\"",
 		"lint": "eslint --fix \"src/**/*.ts*\"",
 		"start": "node dist/app.js",
+		"start-dev": "node --enable-source-maps dist/app.js",
 		"migrate": "prisma migrate dev",
 		"test": "jest --detectOpenHandles",
 		"migrate:gen": "prisma migrate dev --create-only --name"
@@ -16,7 +18,7 @@
 	"dependencies": {
 		"@fastify/view": "^7.4.1",
 		"@prisma/client": "^4.12.0",
-		"@trpc/server": "^10.19.1",
+		"@trpc/server": "10.20.0",
 		"axios": "^0.21.2",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.0",
@@ -35,7 +37,7 @@
 		"striptags": "^3.2.0",
 		"tools-jest-presets": "workspace:*",
 		"tools-shared": "workspace:*",
-		"typescript": "^5.0.2",
+		"typescript": "4.9.3",
 		"uuid": "^8.3.0",
 		"zod": "^3.21.4"
 	},
@@ -47,13 +49,25 @@
 		"@types/pug": "^2.0.6",
 		"@types/uuid": "^8.0.0",
 		"copyfiles": "^2.3.0",
-		"nodemon": "^2.0.4",
 		"npm-run-all": "^4.1.5",
 		"prisma": "^4.12.0",
 		"rimraf": "^4.1.2",
 		"tools-eslint-config": "workspace:*",
 		"tools-tsconfig": "workspace:*",
-		"ts-node": "10.9.1",
 		"tsup": "^6.2.3"
+	},
+	"tsup": {
+		"entry": [
+			"src/app.ts"
+		],
+		"format": [
+			"esm"
+		],
+		"dts": {
+			"resolve": true
+		},
+		"splitting": false,
+		"clean": true,
+		"sourcemap": true
 	}
 }

@@ -2,6 +2,8 @@ import 'reflect-metadata';
 import axios from 'axios';
 import {config} from './config.js';
 
+export type { AppRouter } from '@/server/api/index.js';
+
 export const ua = `Mozilla/5.0 MisskeyTools +https://github.com/shrimpia/misskey-tools Node/${process.version} ${config.uaExtra ?? ''}`;
 
 axios.defaults.headers['User-Agent'] = ua;

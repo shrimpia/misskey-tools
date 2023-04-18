@@ -143,10 +143,6 @@ export const router: FastifyPluginCallback = (fastify, opts, done) => {
 		await login(reply, user, host, i);
 	});
 
-	// fastify.get('/api(.*)', async (req, reply) => {
-
-	// });
-
 	fastify.get<{Params: {id: string}}>('/announcements/:id', async (req, reply) => {
 		const a = await prisma.announcement.findUnique({ where: {id: Number(req.params.id)} });
 		const stripped = striptags(md.render(a?.body ?? '').replace(/\n/g, ' '));
