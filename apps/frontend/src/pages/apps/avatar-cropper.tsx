@@ -1,9 +1,9 @@
 import { sessionAtom } from '@/store/api/session';
 import { modalAtom } from '@/store/client-state';
 import { useAtomValue, useSetAtom } from 'jotai';
-import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react';
+import React, { ChangeEventHandler, ReactEventHandler, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ReactCrop, { Crop } from 'react-image-crop';
+import ReactCrop, { centerCrop, Crop, makeAspectCrop } from 'react-image-crop';
 
 import 'react-image-crop/dist/ReactCrop.css';
 import { useTitle } from '../../hooks/useTitle';
@@ -12,22 +12,33 @@ export const NekomimiPage: React.FC = () => {
 	const setModal = useSetAtom(modalAtom);
   const session = useAtomValue(sessionAtom);
 
-  const {t} = useTranslation();
-
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [percentage, setPercentage] = useState(0);
   const [isUploading, setUploading] = useState(false);
-  const [image, setImage] = useState<HTMLImageElement | null>(null);
-  const [crop, setCrop] = useState<Partial<Crop>>({unit: '%', width: 100, aspect: 1 / 1});
-  const [completedCrop, setCompletedCrop] = useState<Crop>();
+  const [crop, setCrop] = useState<Crop>();
 
+  const {t} = useTranslation();
   useTitle('catAdjuster');
 
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+	const onImageLoad: ReactEventHandler<HTMLImageElement> = (e) => {
+		const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
+
+		const crop = centerCrop(
+			makeAspectCrop({
+				unit: '%',
+				width: 90,
+			}, 1 / 1, width, height),
+			width,
+			height
+		);
+		setCrop(crop);
+	}
 
   const beginUpload = async () => {
-
     if (!previewCanvasRef.current) return;
     if (!session) return;
 
@@ -49,6 +60,9 @@ export const NekomimiPage: React.FC = () => {
         const {id: avatarId} = JSON.parse(xhr.responseText);
         fetch(`https://${session.host}/api/i/update`, {
           method: 'POST',
+					'headers': {
+				   'Content-Type': 'application/json',
+					},
           body: JSON.stringify({ i: session.token, avatarId }),
         }).then(() => res()).catch(rej);
       };
@@ -73,16 +87,15 @@ export const NekomimiPage: React.FC = () => {
     setFileName(file.name);
     reader.addEventListener('load', () => setBlobUrl(reader.result as string));
     reader.readAsDataURL(file);
-    setCrop({unit: '%', width: 100, aspect: 1 / 1});
   };
 
   useEffect(() => {
-    if (!completedCrop || !previewCanvasRef.current || !image) {
+		const image = imageRef.current;
+    if (!crop || !previewCanvasRef.current || !image) {
       return;
     }
 
     const canvas = previewCanvasRef.current;
-    const crop = completedCrop;
 
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
@@ -107,7 +120,7 @@ export const NekomimiPage: React.FC = () => {
       crop.width * scaleX,
       crop.height * scaleY
     );
-  }, [completedCrop]);
+  }, [crop]);
 
   const onClickUpload = async () => {
     setUploading(true);
@@ -126,11 +139,9 @@ export const NekomimiPage: React.FC = () => {
       {blobUrl && (
         <div className="row mt-2">
           <div className="col-8 col-12-sm">
-            <ReactCrop src={blobUrl} crop={crop}
-              onImageLoaded={(i) => setImage(i)}
-              onChange={(c) => setCrop(c)}
-              onComplete={(c) => setCompletedCrop(c)}
-            />
+            <ReactCrop crop={crop} aspect={1 / 1} onChange={(c) => setCrop(c)}>
+							<img ref={imageRef} src={blobUrl} onLoad={onImageLoad} />
+						</ReactCrop>
           </div>
           <div className="col-4 col-12-sm">
             <h3 className="text-100 text-bold">{t('preview')}</h3>
