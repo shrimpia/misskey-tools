@@ -11,6 +11,7 @@ import { initReactI18next } from 'react-i18next';
 import { getBrowserLanguage, languageName, resources } from './langs';
 import { App } from './App';
 import { LOCALSTORAGE_KEY_LANG } from './const';
+import { Loading } from './Loading';
 
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
@@ -36,6 +37,8 @@ i18n
 
 ReactDOM.render((
 	<BrowserRouter>
-		<App />
+		<React.Suspense fallback={<Loading />}>
+			<App />
+		</React.Suspense>
 	</BrowserRouter>
 ), document.getElementById('app'));

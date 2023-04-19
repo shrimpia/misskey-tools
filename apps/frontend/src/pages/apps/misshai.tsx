@@ -7,13 +7,14 @@ import { Visibility } from 'tools-shared/dist/types/visibility';
 import { LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_TOKEN } from '../../const';
 import { $post, $put } from '../../misc/api';
 import { Skeleton } from '../../components/Skeleton';
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import './misshai.scss';
 import { Ranking } from '../../components/Ranking';
 import { useTitle } from '../../hooks/useTitle';
 import { Link } from 'react-router-dom';
 import { modalAtom } from '@/store/client-state';
+import { sessionAtom } from '@/store/api/session';
 
 const variables = [
   'notesCount',
@@ -41,8 +42,7 @@ type SettingDraftType = Partial<Pick<IUser,
 type DraftReducer = React.Reducer<SettingDraftType, Partial<SettingDraftType>>;
 
 export const MisshaiPage: React.VFC = () => {
-  const session = null as any;
-  const data = session.data;
+  const session = useAtomValue(sessionAtom);
   const score = null as any;
 
 	const setModal = useSetAtom(modalAtom);
@@ -54,12 +54,12 @@ export const MisshaiPage: React.VFC = () => {
   const [draft, dispatchDraft] = useReducer<DraftReducer>((state, action) => {
     return { ...state, ...action };
   }, {
-    alertMode: data?.alertMode ?? 'note',
-    visibility: data?.visibility ?? 'public',
-    localOnly: data?.localOnly ?? false,
-    remoteFollowersOnly: data?.remoteFollowersOnly ?? false,
-    template: data?.template ?? null,
-    useRanking: data?.useRanking ?? false,
+    alertMode: session.alertMode ?? 'note',
+    visibility: session.visibility ?? 'public',
+    localOnly: session.localOnly ?? false,
+    remoteFollowersOnly: session.remoteFollowersOnly ?? false,
+    template: session.template ?? null,
+    useRanking: session.useRanking ?? false,
   });
 
   const templateTextarea = useRef<HTMLTextAreaElement>(null);
@@ -93,17 +93,17 @@ export const MisshaiPage: React.VFC = () => {
   }, [updateSetting]);
 
   useEffect(() => {
-    if (data) {
+    if (session) {
       dispatchDraft({
-        alertMode: data.alertMode,
-        visibility: data.visibility,
-        localOnly: data.localOnly,
-        remoteFollowersOnly: data.remoteFollowersOnly,
-        template: data.template,
-        useRanking: data.useRanking
+        alertMode: session.alertMode,
+        visibility: session.visibility,
+        localOnly: session.localOnly,
+        remoteFollowersOnly: session.remoteFollowersOnly,
+        template: session.template,
+        useRanking: session.useRanking
       });
     }
-  }, [data]);
+  }, [session]);
 
   const onClickInsertVariables = useCallback<React.MouseEventHandler>((e) => {
     setModal({
@@ -169,26 +169,26 @@ export const MisshaiPage: React.VFC = () => {
 	 * Session APIのエラーハンドリング
 	 * このAPIがエラーを返した = トークンが無効 なのでトークンを削除してログアウトする
 	 */
-  useEffect(() => {
-    if (session.error) {
-      console.error(session.error);
-      localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
-      const a = localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS);
-      if (a) {
-        const accounts = JSON.parse(a) as string[];
-        if (accounts.length > 0) {
-          localStorage.setItem(LOCALSTORAGE_KEY_TOKEN, accounts[0]);
-        }
-      }
-      location.reload();
-    }
-  }, [session.error]);
+  // useEffect(() => {
+  //   if (session.error) {
+  //     console.error(session.error);
+  //     localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
+  //     const a = localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS);
+  //     if (a) {
+  //       const accounts = JSON.parse(a) as string[];
+  //       if (accounts.length > 0) {
+  //         localStorage.setItem(LOCALSTORAGE_KEY_TOKEN, accounts[0]);
+  //       }
+  //     }
+  //     location.reload();
+  //   }
+  // }, [session.error]);
 
   const defaultTemplate = t('_template.default');
 
   const remaining = 1024 - (draft.template ?? defaultTemplate).length;
 
-  return session.isLoading || score.isLoading || !session.data || !score.data ? (
+  return !session || !score?.data ? (
     <div className="vstack">
       <Skeleton width="100%" height="1rem" />
       <Skeleton width="100%" height="1rem" />

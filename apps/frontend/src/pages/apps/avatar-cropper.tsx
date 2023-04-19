@@ -1,5 +1,6 @@
+import { sessionAtom } from '@/store/api/session';
 import { modalAtom } from '@/store/client-state';
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactCrop, { Crop } from 'react-image-crop';
@@ -9,6 +10,7 @@ import { useTitle } from '../../hooks/useTitle';
 
 export const NekomimiPage: React.VFC = () => {
 	const setModal = useSetAtom(modalAtom);
+  const session = useAtomValue(sessionAtom);
 
   const {t} = useTranslation();
 
@@ -24,7 +26,6 @@ export const NekomimiPage: React.VFC = () => {
 
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 
-  const session = null as any;
 
   const beginUpload = async () => {
 

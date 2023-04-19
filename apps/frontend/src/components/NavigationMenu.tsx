@@ -5,13 +5,14 @@ import { NavLink } from 'react-router-dom';
 import { CHANGELOG_URL } from '../const';
 import { metaAtom } from '@/store/api/meta';
 import { isDrawerShownAtom } from '@/store/client-state';
+import { sessionAtom } from '@/store/api/session';
 
 const navLinkClassName = (isActive: boolean) => `item ${isActive ? 'active' : ''}`;
 
 export const NavigationMenu: React.VFC = () => {
+	const session = useAtomValue(sessionAtom);
 	const meta = useAtomValue(metaAtom);
 	const setDrawerShown = useSetAtom(isDrawerShownAtom);
-	const session = null as any;
   const {t} = useTranslation();
 
   const onClickItem = () => {

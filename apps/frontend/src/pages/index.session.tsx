@@ -1,13 +1,22 @@
 import React from 'react';
+import { useAtomValue } from 'jotai';
 
 import { useTranslation } from 'react-i18next';
 import { useAnnouncements } from '../hooks/useAnnouncements';
 import { Link } from 'react-router-dom';
+import { sessionAtom } from '@/store/api/session';
 
 export const IndexSessionPage: React.VFC = () => {
   const {t} = useTranslation();
-  const session = null as any;
-  const score = null as any;
+  const session = useAtomValue(sessionAtom);
+  const score = {
+		notesCount: 0,
+		notesDelta: 0,
+		followingCount: 0,
+		followingDelta: 0,
+		followersCount: 0,
+		followersDelta: 0,
+	};
 
   const announcements = useAnnouncements();
 
@@ -37,18 +46,18 @@ export const IndexSessionPage: React.VFC = () => {
             <tbody>
               <tr>
                 <td>{t('notes')}</td>
-                <td>{score.data?.notesCount ?? '...'}</td>
-                <td>{score.data?.notesDelta ?? '...'}</td>
+                <td>{score.notesCount ?? '...'}</td>
+                <td>{score.notesDelta ?? '...'}</td>
               </tr>
               <tr>
                 <td>{t('following')}</td>
-                <td>{score.data?.followingCount ?? '...'}</td>
-                <td>{score.data?.followingDelta ?? '...'}</td>
+                <td>{score.followingCount ?? '...'}</td>
+                <td>{score.followingDelta ?? '...'}</td>
               </tr>
               <tr>
                 <td>{t('followers')}</td>
-                <td>{score.data?.followersCount ?? '...'}</td>
-                <td>{score.data?.followersDelta ?? '...'}</td>
+                <td>{score.followersCount ?? '...'}</td>
+                <td>{score.followersDelta ?? '...'}</td>
               </tr>
             </tbody>
           </table>
@@ -56,7 +65,7 @@ export const IndexSessionPage: React.VFC = () => {
             <strong>
               {t('_missHai.rating')}{': '}
             </strong>
-            {session?.rating ?? '...'}
+            {session.rating ?? '...'}
           </p>
         </section>
         <section className="developerInfo">

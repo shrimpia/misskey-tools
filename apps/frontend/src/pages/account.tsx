@@ -6,11 +6,12 @@ import { LoginForm } from '../components/LoginForm';
 import { Skeleton } from '../components/Skeleton';
 import { useTitle } from '../hooks/useTitle';
 import { accountsAtom, accountTokensAtom } from '@/store/auth';
+import { sessionAtom } from '@/store/api/session';
 
 export const AccountsPage: React.VFC = () => {
 	const [accounts, setAccounts] = useAtom(accountsAtom);
 	const accountTokens = useAtomValue(accountTokensAtom);
-  const session = null as any;
+  const session = useAtomValue(sessionAtom);
   const {t} = useTranslation();
 
   useTitle('_sidebar.accounts');

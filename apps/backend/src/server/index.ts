@@ -13,6 +13,7 @@ import { callbackLegacyAuthController } from '@/server/controllers/callback-lega
 import { announcementsController } from '@/server/controllers/announcements.js';
 import { rescueController } from '@/server/controllers/rescue.js';
 import { frontendController } from '@/server/controllers/frontend.js';
+import { createContext } from '@/server/api/trpc.js';
 
 export const startServer = async () => {
 	const app = fastify();
@@ -26,7 +27,10 @@ export const startServer = async () => {
 
 	await app.register(fastifyTRPCPlugin, {
 		prefix: '/api',
-		trpcOptions: { router: appRouter },
+		trpcOptions: {
+			router: appRouter,
+			createContext,
+		},
 	});
 
 	app.get('/login', authMisskeyController);

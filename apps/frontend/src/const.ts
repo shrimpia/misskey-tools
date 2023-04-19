@@ -12,7 +12,7 @@ export const LOCALSTORAGE_KEY_ACCENT_COLOR = 'accent_color';
 /** Misskey Tools API エンドポイント */
 export const API_ENDPOINT = `//${location.host}/api/v1/`;
 /** 更新履歴URL */
-export const CHANGELOG_URL = 'https://github.com/Xeltica/MisskeyTools/blob/master/CHANGELOG.md';
+export const CHANGELOG_URL = 'https://github.com/shrimpia/misskey-tools/blob/master/CHANGELOG.md';
 
 /** ブレークポイント モバイル */
 export const BREAKPOINT_SM = '800px';

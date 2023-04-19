@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
 import {BREAKPOINT_SM, LOCALSTORAGE_KEY_ACCOUNTS} from './const';
 import { Router } from './Router';
-import { GeneralLayout } from './GeneralLayout';
-import {$get} from './misc/api';
 import {IUser} from 'tools-shared/dist/types/user';
 import { isMobileAtom } from './store/client-state';
 import { accountsAtom } from './store/auth';
+import { trpcClient } from './store/api';
+import { sessionAtom } from './store/api/session';
+import { GeneralLayout } from './GeneralLayout';
+import { languageAtom } from './store/client-settings';
 
 export const App : React.VFC = () => {
 	const setMobile = useSetAtom(isMobileAtom);
 	const setAccounts = useSetAtom(accountsAtom);
+	const session = useAtomValue(sessionAtom);
+	const language = useAtomValue(languageAtom);
 
   const [error, setError] = useState<any>((window as any).__misshaialert?.error);
-
-	const $location = useLocation();
-  const {t} = useTranslation();
-
-	useTheme();
-
   // ページ遷移がまだされていないかどうか
   const [isFirstView, setFirstView] = useState(true);
 
+	const $location = useLocation();
+  const {t, i18n} = useTranslation();
+	useTheme();
+
+	// エラーハンドリング
   useEffect(() => {
     if (isFirstView) {
       setFirstView(false);
@@ -35,11 +38,13 @@ export const App : React.VFC = () => {
     }
   }, [$location]);
 
+	// 各トークンからアカウント情報を取得して格納
   useEffect(() => {
     const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
-    Promise.all(accounts.map(token => $get<IUser>('session', token))).then(a => setAccounts(a as IUser[]));
+    Promise.all(accounts.map(token => trpcClient.session.getByToken.query(token))).then(a => setAccounts(a as IUser[]));
   }, []);
 
+	// 画面幅の変化を監視し、isMobile フラグを算出する
   useEffect(() => {
     const qMobile = window.matchMedia(`(max-width: ${BREAKPOINT_SM})`);
     const syncMobile = (ev: MediaQueryListEvent) => setMobile(ev.matches);
@@ -51,8 +56,11 @@ export const App : React.VFC = () => {
     };
   }, []);
 
-  // const TheLayout = session || $location.pathname !== '/' ? GeneralLayout : 'div';
-	const TheLayout = 'div';
+	useEffect(() => {
+		i18n.changeLanguage(language);
+	}, [language]);
+
+  const TheLayout = session || $location.pathname !== '/' ? GeneralLayout : 'div';
 
   return (
     <TheLayout>

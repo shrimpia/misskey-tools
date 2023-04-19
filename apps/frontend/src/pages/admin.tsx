@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
-import { LOCALSTORAGE_KEY_TOKEN } from '../const';
 import { Skeleton } from '../components/Skeleton';
 import { IAnnouncement } from 'tools-shared/dist/types/announcement';
 import { $delete, $get, $post, $put } from '../misc/api';
@@ -9,10 +8,11 @@ import { useTitle } from '../hooks/useTitle';
 import {Log} from 'tools-shared/dist/types/log';
 import {LogView} from '../components/LogView';
 import { modalAtom } from '@/store/client-state';
+import { sessionAtom } from '@/store/api/session';
 
 
 export const AdminPage: React.VFC = () => {
-  const session = null as any;
+  const session = useAtomValue(sessionAtom);
 	const setModal = useSetAtom(modalAtom);
 
   useTitle('_sidebar.admin');

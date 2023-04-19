@@ -1,5 +1,5 @@
 import { meta } from "@/config";
-import { procedure, router } from "@/libs/trpc";
+import { procedure, router } from "@/server/api/trpc";
 
 import { currentTokenVersion } from "tools-shared/dist/const.js";
 

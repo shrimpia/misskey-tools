@@ -6,6 +6,7 @@ import { NavigationMenu } from './components/NavigationMenu';
 import { IsMobileProp } from './misc/is-mobile-prop';
 
 import { metaAtom } from './store/api/meta';
+import { sessionAtom } from './store/api/session';
 import { isDrawerShownAtom, isMobileAtom, titleAtom } from './store/client-state';
 
 const Container = styled.div<IsMobileProp>`
@@ -42,13 +43,13 @@ const MobileHeader = styled.header`
 `;
 
 export const GeneralLayout: React.FC = ({children}) => {
-  const meta = useAtomValue(metaAtom);
+	const meta = useAtomValue(metaAtom);
+	const session = useAtomValue(sessionAtom);
 	const isMobile = useAtomValue(isMobileAtom);
 	const title = useAtomValue(titleAtom);
 	const [isDrawerShown, setDrawerShown] = useAtom(isDrawerShownAtom);
   const {t} = useTranslation();
 
-	const session: any = null;
 
 
   return (

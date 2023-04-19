@@ -4,6 +4,7 @@ import { useAtomValue } from 'jotai';
 
 import { useTranslation } from 'react-i18next';
 import { isMobileAtom } from './store/client-state';
+import { sessionAtom } from './store/api/session';
 
 export type HeaderProps = {
 	title?: string;
@@ -11,7 +12,7 @@ export type HeaderProps = {
 
 export const Header: React.FC<HeaderProps> = ({title}) => {
   const { t } = useTranslation();
-  const session = null as any;
+  const session = useAtomValue(sessionAtom);
   const isMobile = useAtomValue(isMobileAtom);
 
   return (

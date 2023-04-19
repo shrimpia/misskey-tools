@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 
 import { Theme, themes } from '../misc/theme';
@@ -11,6 +11,7 @@ import { designSystemColors } from 'tools-shared/dist/types/design-system-color'
 import styled from 'styled-components';
 import { accentColorAtom, languageAtom, themeAtom } from '@/store/client-settings';
 import { modalAtom } from '@/store/client-state';
+import { sessionAtom } from '@/store/api/session';
 
 const ColorInput = styled.input<{color: string}>`
 	display: block;
@@ -33,13 +34,12 @@ const ColorInput = styled.input<{color: string}>`
 `;
 
 export const SettingPage: React.VFC = () => {
-  const session = null as any;
+  const session = useAtomValue(sessionAtom);
 	const [currentTheme, setTheme] = useAtom(themeAtom);
 	const [currentLanguage, setLanguage] = useAtom(languageAtom);
 	const [currentAccentColor, setAccentColor] = useAtom(accentColorAtom);
 	const setModal = useSetAtom(modalAtom);
 
-  const data = session.data;
   const {t} = useTranslation();
 
   useTitle('_sidebar.settings');
@@ -109,7 +109,7 @@ export const SettingPage: React.VFC = () => {
     });
   }, [t]);
 
-  return session.isLoading || !data ? (
+  return !session ? (
     <div className="skeleton" style={{width: '100%', height: '128px'}}></div>
   ) : (
     <article className="fade">

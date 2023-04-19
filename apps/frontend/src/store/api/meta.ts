@@ -1,3 +1,3 @@
-import { trpc } from ".";
+import { trpcJotai } from ".";
 
-export const metaAtom = trpc.meta.get.atomWithQuery(null);
+export const metaAtom = trpcJotai.meta.get.atomWithQuery(null);
