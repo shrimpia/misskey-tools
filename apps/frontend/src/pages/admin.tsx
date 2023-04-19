@@ -11,7 +11,7 @@ import { modalAtom } from '@/store/client-state';
 import { sessionAtom } from '@/store/api/session';
 
 
-export const AdminPage: React.VFC = () => {
+export const AdminPage: React.FC = () => {
   const session = useAtomValue(sessionAtom);
 	const setModal = useSetAtom(modalAtom);
 

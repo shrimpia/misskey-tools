@@ -33,7 +33,7 @@ const ColorInput = styled.input<{color: string}>`
 	}
 `;
 
-export const SettingPage: React.VFC = () => {
+export const SettingPage: React.FC = () => {
   const session = useAtomValue(sessionAtom);
 	const [currentTheme, setTheme] = useAtom(themeAtom);
 	const [currentLanguage, setLanguage] = useAtom(languageAtom);

@@ -18,7 +18,7 @@ export type RankingProps = {
 	limit?: number;
 };
 
-export const Ranking: React.VFC<RankingProps> = ({limit}) => {
+export const Ranking: React.FC<RankingProps> = ({limit}) => {
   const [response, setResponse] = useState<RankingResponse | null>(null);
   const [isFetching, setIsFetching] = useState(true);
   const [isError, setIsError] = useState(false);

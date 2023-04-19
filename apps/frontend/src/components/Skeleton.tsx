@@ -5,7 +5,7 @@ export type SkeletonProps = {
 	height?: string | number;
 };
 
-export const Skeleton: React.VFC<SkeletonProps> = (p) => {
+export const Skeleton: React.FC<SkeletonProps> = (p) => {
   return (
     <div className="skeleton" style={{width: p.width, height: p.height}}></div>
   );

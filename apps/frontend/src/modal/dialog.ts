@@ -1,6 +1,6 @@
 export interface ModalTypeDialog {
   type: 'dialog';
-  title?: string;
+  title?: string | null;
   message: string;
   icon?: DialogIcon;
   buttons?: DialogButtonType;

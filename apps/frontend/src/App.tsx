@@ -5,38 +5,27 @@ import { useAtomValue, useSetAtom } from 'jotai';
 
 import { ModalComponent } from './Modal';
 import { useTheme } from './misc/theme';
-import {BREAKPOINT_SM, LOCALSTORAGE_KEY_ACCOUNTS} from './const';
+import {BREAKPOINT_SM, LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_TOKEN} from './const';
 import { Router } from './Router';
 import {IUser} from 'tools-shared/dist/types/user';
 import { isMobileAtom } from './store/client-state';
 import { accountsAtom } from './store/auth';
 import { trpcClient } from './store/api';
 import { sessionAtom } from './store/api/session';
-import { GeneralLayout } from './GeneralLayout';
+import { GeneralLayout } from './layouts/general';
 import { languageAtom } from './store/client-settings';
+import { ErrorView } from './components/ErrorView';
 
-export const App : React.VFC = () => {
+export const App : React.FC = () => {
 	const setMobile = useSetAtom(isMobileAtom);
 	const setAccounts = useSetAtom(accountsAtom);
-	const session = useAtomValue(sessionAtom);
 	const language = useAtomValue(languageAtom);
 
-  const [error, setError] = useState<any>((window as any).__misshaialert?.error);
-  // ページ遷移がまだされていないかどうか
-  const [isFirstView, setFirstView] = useState(true);
-
+  const error = (window as any).__misshaialert?.error;
 	const $location = useLocation();
   const {t, i18n} = useTranslation();
-	useTheme();
 
-	// エラーハンドリング
-  useEffect(() => {
-    if (isFirstView) {
-      setFirstView(false);
-    } else if (!isFirstView && error) {
-      setError(null);
-    }
-  }, [$location]);
+	useTheme();
 
 	// 各トークンからアカウント情報を取得して格納
   useEffect(() => {
@@ -60,20 +49,14 @@ export const App : React.VFC = () => {
 		i18n.changeLanguage(language);
 	}, [language]);
 
-  const TheLayout = session || $location.pathname !== '/' ? GeneralLayout : 'div';
+  const TheLayout = localStorage.getItem(LOCALSTORAGE_KEY_TOKEN) != null || $location.pathname !== '/' ? GeneralLayout : 'div';
 
   return (
     <TheLayout>
       {error ? (
-        <div>
-          <h1>{t('error')}</h1>
-          <p>{t('_error.sorry')}</p>
-          <p>
-            {t('_error.additionalInfo')}
-            {t(`_error.${error}`)}
-          </p>
-          <Link to="/" className="btn primary">{t('retry')}</Link>
-        </div>
+				<ErrorView additionalInfo={t(`_error.${error}`)}>
+					<a href="/" className="btn primary">{t('retry')}</a>
+				</ErrorView>
       ) : <Router />}
       <footer className="text-center pa-5">
         <p>(C)2020-2023 Shrimpia Network</p>

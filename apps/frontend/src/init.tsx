@@ -2,6 +2,7 @@ import 'vite/modulepreload-polyfill';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
@@ -16,6 +17,8 @@ import { Loading } from './Loading';
 import 'xeltica-ui/dist/css/xeltica-ui.min.css';
 import './style.scss';
 import 'dayjs/locale/ja';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ErrorPage } from './layouts/error';
 
 dayjs.extend(relativeTime);
 
@@ -35,10 +38,12 @@ i18n
     }
   });
 
-ReactDOM.render((
+createRoot(document.getElementById('app')!).render(
 	<BrowserRouter>
-		<React.Suspense fallback={<Loading />}>
-			<App />
-		</React.Suspense>
+		<ErrorBoundary fallback={e => <ErrorPage error={e} />}>
+			<React.Suspense fallback={<Loading />}>
+				<App />
+			</React.Suspense>
+		</ErrorBoundary>
 	</BrowserRouter>
-), document.getElementById('app'));
+);

@@ -6,7 +6,7 @@ import { useAnnouncements } from '../hooks/useAnnouncements';
 import { Link } from 'react-router-dom';
 import { sessionAtom } from '@/store/api/session';
 
-export const IndexSessionPage: React.VFC = () => {
+export const IndexSessionPage: React.FC = () => {
   const {t} = useTranslation();
   const session = useAtomValue(sessionAtom);
   const score = {

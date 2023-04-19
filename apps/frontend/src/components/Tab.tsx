@@ -13,7 +13,7 @@ export type TabProps = {
 };
 
 // タブコンポーネント
-export const Tab: React.VFC<TabProps> = (props) => {
+export const Tab: React.FC<TabProps> = (props) => {
   return (
     <div className="tab">
       {props.items.map((item) => {

@@ -8,7 +8,7 @@ import { useTitle } from '../hooks/useTitle';
 import { accountsAtom, accountTokensAtom } from '@/store/auth';
 import { sessionAtom } from '@/store/api/session';
 
-export const AccountsPage: React.VFC = () => {
+export const AccountsPage: React.FC = () => {
 	const [accounts, setAccounts] = useAtom(accountsAtom);
 	const accountTokens = useAtomValue(accountTokensAtom);
   const session = useAtomValue(sessionAtom);

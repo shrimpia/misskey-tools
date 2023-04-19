@@ -8,7 +8,7 @@ import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { useTitle } from '../../hooks/useTitle';
 
-export const NekomimiPage: React.VFC = () => {
+export const NekomimiPage: React.FC = () => {
 	const setModal = useSetAtom(modalAtom);
   const session = useAtomValue(sessionAtom);
 
@@ -25,7 +25,6 @@ export const NekomimiPage: React.VFC = () => {
   useTitle('catAdjuster');
 
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
-
 
   const beginUpload = async () => {
 

@@ -67,7 +67,7 @@ const FormWrapper = styled.div`
 	color: var(--fg);
 `;
 
-export const IndexWelcomePage: React.VFC = () => {
+export const IndexWelcomePage: React.FC = () => {
 	const isMobile = useAtomValue(isMobileAtom);
   const {t} = useTranslation();
 

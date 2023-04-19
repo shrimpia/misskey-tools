@@ -9,7 +9,7 @@ import { useTitle } from '../hooks/useTitle';
 import { useAtomValue } from 'jotai';
 import { languageAtom } from '@/store/client-settings';
 
-export const AnnouncementPage: React.VFC = () => {
+export const AnnouncementPage: React.FC = () => {
   const language = useAtomValue(languageAtom);
 
 	const { id } = useParams<{id: string}>();

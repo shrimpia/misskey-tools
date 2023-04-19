@@ -41,7 +41,7 @@ type SettingDraftType = Partial<Pick<IUser,
 
 type DraftReducer = React.Reducer<SettingDraftType, Partial<SettingDraftType>>;
 
-export const MisshaiPage: React.VFC = () => {
+export const MisshaiPage: React.FC = () => {
   const session = useAtomValue(sessionAtom);
   const score = null as any;
 
@@ -188,7 +188,7 @@ export const MisshaiPage: React.VFC = () => {
 
   const remaining = 1024 - (draft.template ?? defaultTemplate).length;
 
-  return !session || !score?.data ? (
+  return !session ? (
     <div className="vstack">
       <Skeleton width="100%" height="1rem" />
       <Skeleton width="100%" height="1rem" />

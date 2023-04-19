@@ -5,7 +5,7 @@ export type HashtagTimelineProps = {
 	hashtag: string;
 };
 
-export const HashtagTimeline: React.VFC<HashtagTimelineProps> = ({hashtag}) => {
+export const HashtagTimeline: React.FC<HashtagTimelineProps> = ({hashtag}) => {
   const {t} = useTranslation();
   return (
     <>

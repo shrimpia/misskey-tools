@@ -4,7 +4,7 @@ import { Ranking } from '../../../components/Ranking';
 import { useTitle } from '../../../hooks/useTitle';
 
 
-export const RankingPage: React.VFC = () => {
+export const RankingPage: React.FC = () => {
   const {t} = useTranslation();
   useTitle('_missHai.ranking');
 

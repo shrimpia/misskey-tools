@@ -1,15 +1,15 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, NavLinkProps } from 'react-router-dom';
 import { CHANGELOG_URL } from '../const';
 import { metaAtom } from '@/store/api/meta';
 import { isDrawerShownAtom } from '@/store/client-state';
 import { sessionAtom } from '@/store/api/session';
 
-const navLinkClassName = (isActive: boolean) => `item ${isActive ? 'active' : ''}`;
+const navLinkClassName: NavLinkProps['className'] = ({isActive}) => `item ${isActive ? 'active' : ''}`;
 
-export const NavigationMenu: React.VFC = () => {
+export const NavigationMenu: React.FC = () => {
 	const session = useAtomValue(sessionAtom);
 	const meta = useAtomValue(metaAtom);
 	const setDrawerShown = useSetAtom(isDrawerShownAtom);
@@ -24,7 +24,7 @@ export const NavigationMenu: React.VFC = () => {
       <h1 className="text-175 text-dimmed mb-2 font-misskey">{t('title')}</h1>
       <div className="menu">
         <section>
-          <NavLink className={navLinkClassName} to="/" exact onClick={onClickItem}>
+          <NavLink className={navLinkClassName} to="/" end onClick={onClickItem}>
             <i className={`icon fas fa-${session ? 'home' : 'arrow-left'}`}></i>
             {t(session ? '_sidebar.dashboard' : '_sidebar.return')}
           </NavLink>

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import {
   builtinDialogButtonNo,
@@ -29,7 +29,7 @@ const dialogIconPattern: Record<DialogIcon, string> = {
   warning: 'fas fa-circle-exclamation text-warning',
 };
 
-const Dialog: React.VFC<{modal: ModalTypeDialog}> = ({modal}) => {
+const Dialog: React.FC<{modal: ModalTypeDialog}> = ({modal}) => {
   const buttons = getButtons(modal.buttons ?? 'ok');
 	const setModal = useSetAtom(modalAtom);
 
@@ -60,7 +60,7 @@ const Dialog: React.VFC<{modal: ModalTypeDialog}> = ({modal}) => {
   );
 };
 
-const Menu: React.VFC<{modal: ModalTypeMenu}> = ({modal}) => {
+const Menu: React.FC<{modal: ModalTypeMenu}> = ({modal}) => {
 	const setModal = useSetAtom(modalAtom);
 
   return (
@@ -91,7 +91,7 @@ const ModalInner = (modal: Modal) => {
   }
 };
 
-export const ModalComponent: React.VFC = () => {
+export const ModalComponent: React.FC = () => {
 	const [modal, setModal] = useAtom(modalAtom);
   if (!modal) return null;
 

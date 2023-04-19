@@ -7,7 +7,7 @@ const Input = styled.input`
 	flex: 1;
 `;
 
-export const LoginForm: React.VFC = () => {
+export const LoginForm: React.FC = () => {
   const [host, setHost] = useState('');
   const {t} = useTranslation();
 

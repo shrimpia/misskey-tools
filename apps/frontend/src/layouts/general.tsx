@@ -1,13 +1,16 @@
 import { useAtom, useAtomValue } from 'jotai';
-import React from 'react';
+import React, { PropsWithChildren, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { NavigationMenu } from './components/NavigationMenu';
-import { IsMobileProp } from './misc/is-mobile-prop';
+import { NavigationMenu } from '../components/NavigationMenu';
+import { SuspenseView } from '../components/SuspenseView';
+import { ErrorBoundary } from '../components/ErrorBoundary';
+import { Loading } from '../Loading';
+import { IsMobileProp } from '../misc/is-mobile-prop';
 
-import { metaAtom } from './store/api/meta';
-import { sessionAtom } from './store/api/session';
-import { isDrawerShownAtom, isMobileAtom, titleAtom } from './store/client-state';
+import { metaAtom } from '../store/api/meta';
+import { sessionAtom } from '../store/api/session';
+import { isDrawerShownAtom, isMobileAtom, titleAtom } from '../store/client-state';
 
 const Container = styled.div<IsMobileProp>`
 	padding: var(--margin);
@@ -42,15 +45,13 @@ const MobileHeader = styled.header`
 	}
 `;
 
-export const GeneralLayout: React.FC = ({children}) => {
+export const GeneralLayout: React.FC<PropsWithChildren> = ({children}) => {
 	const meta = useAtomValue(metaAtom);
 	const session = useAtomValue(sessionAtom);
 	const isMobile = useAtomValue(isMobileAtom);
 	const title = useAtomValue(titleAtom);
 	const [isDrawerShown, setDrawerShown] = useAtom(isDrawerShownAtom);
   const {t} = useTranslation();
-
-
 
   return (
     <Container isMobile={isMobile}>
@@ -78,7 +79,7 @@ export const GeneralLayout: React.FC = ({children}) => {
               </a>
             </div>
           )}
-          {children}
+					<SuspenseView>{children}</SuspenseView>
         </Main>
       </div>
       <div className={`drawer-container ${isDrawerShown ? 'active' : ''}`}>
