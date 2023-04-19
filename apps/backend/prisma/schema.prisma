@@ -7,46 +7,153 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// お知らせ
 model Announcement {
+  /// ID
   id        Int      @id(map: "PK_e0ef0550174fd1099a308fd18a0") @default(autoincrement())
+  /// 作成日時
   createdAt DateTime @db.Timestamp(6)
+  /// タイトル
   title     String   @db.VarChar(128)
+  /// 本文
   body      String   @db.VarChar(8192)
+  /// いいね数
   like      Int      @default(0)
 
   @@map("announcement")
 }
 
+/// 使用済みトークンを管理するテーブル。
+/// 廃止予定
 model UsedToken {
   token String @id(map: "PK_7f2db4c33c33cd6b38e63393fe5") @unique(map: "IDX_7f2db4c33c33cd6b38e63393fe") @db.VarChar
 
   @@map("used_token")
 }
 
+/// Misskey Tools アカウント
+model Account {
+  /// ID
+  id          String  @id @default(uuid())
+  /// このアカウントの名前。デフォルトでは @Lutica@mk.shrimpia.network みたいな感じになる
+  name        String  @db.VarChar
+  /// Misskey Tools API アクセストークン
+  accessToken String  @unique @map("access_token") @db.VarChar
+  /// ログイン用Eメールアドレス
+  /// 今後メールによる緊急ログインを実装するとき用
+  email       String? @db.VarChar
+  /// ログイン用の一時的なパスワード
+  password    String? @db.VarChar
+
+  /// このアカウントに紐付いたMisskeyセッションの一覧
+  misskeySessions MisskeySession[]
+
+  @@map("account")
+}
+
+/// Tools アカウントに紐づくMisskeyとの連携情報。
+model MisskeySession {
+  /// ID
+  id           String @id @default(uuid())
+  /// ユーザー名
+  username     String @db.VarChar
+  /// ホスト名
+  host         String @db.VarChar
+  /// Misskey APIトークン
+  token        String @db.VarChar
+  /// Misskey APIトークンのバージョン。
+  tokenVersion Int
+
+  /// Tools アカウントID
+  accountId String  @db.VarChar()
+  /// Tools アカウント
+  account   Account @relation(fields: [accountId], references: [id])
+
+  /// ミス廃アラート機能のアカウント
+  misshaiAccount MisshaiAccount?
+
+  @@map("misskey_session")
+}
+
+/// ミス廃アラート アカウント
+model MisshaiAccount {
+  /// このアカウントに紐づくMisskeyセッションのID
+  misskeySessionId String         @id @map("misskey_session_id")
+  /// このアカウントに紐づくMisskeyセッション
+  misskeySession   MisskeySession @relation(fields: [misskeySessionId], references: [id])
+
+  /// アラートをノートとして発行するかどうか
+  alertAsNote         Boolean @default(false) @map("alert_as_note")
+  /// アラートを通知欄に表示するかどうか
+  alertAsNotification Boolean @default(true) @map("alert_as_notificaton")
+  /// アラートを投稿する場合のノートの公開範囲
+  noteVisibility            String  @default("home") @map("note_visibility")
+  /// アラートを投稿する場合にノートを連合なしとするかどうか
+  noteLocalOnly             Boolean @default(false) @map("note_local_only")
+  /// アラートのテンプレート文字列
+  template              String? @db.VarChar(1024)
+  /// ランキングからBANされているかどうか
+  bannedFromRanking     Boolean @default(false) @map("banned_from_ranking")
+  /// 自分の名前をランキングに表示するかどうか
+  rankingVisible        Boolean @default(false) @map("ranking_visible")
+
+  /// ミス廃ログ
+  records MisshaiRecord[]
+
+  @@map("misshai_account")
+}
+
+/// ミス廃アラートのログ
+model MisshaiRecord {
+  /// ID
+  id             String   @id @default(uuid())
+  /// このログの日付
+  date           DateTime @db.Date
+  /// ノート数
+  notesCount     Int      @map("notes_count")
+  /// フォロー数
+  followingCount Int      @map("following_count")
+  /// フォロワー数
+  followersCount Int      @map("followers_count")
+  /// レート値
+  rating         Float    @default(0) @db.Real
+
+  /// このログの所有者であるアカウントのID
+  accountId String         @map("account_id")
+  /// このログの所有者であるアカウント
+  account   MisshaiAccount @relation(fields: [accountId], references: [misskeySessionId])
+
+  @@map("misshai_record")
+}
+
+/// Misskey Tools v3以前で使用されていたユーザーモデル。
+/// 廃止予定。
 model User {
-  id                  Int                  @id(map: "PK_cace4a159ff9f2512dd42373760") @default(autoincrement())
-  username            String               @db.VarChar
-  host                String               @db.VarChar
-  token               String               @db.VarChar
-  prevNotesCount      Int                  @default(0)
-  prevFollowingCount  Int                  @default(0)
-  prevFollowersCount  Int                  @default(0)
-  misshaiToken        String               @default("") @db.VarChar
-  alertMode           AlertMode            @default(notification)
-  visibility          Visibility           @default(home)
-  localOnly           Boolean              @default(false)
-  remoteFollowersOnly Boolean              @default(false)
-  template            String?              @db.VarChar(1024)
-  prevRating          Float                @default(0) @db.Real
-  rating              Float                @default(0) @db.Real
-  bannedFromRanking   Boolean              @default(false)
-  tokenVersion        Int                  @default(1)
-  useRanking          Boolean              @default(false)
+  id                  Int        @id(map: "PK_cace4a159ff9f2512dd42373760") @default(autoincrement())
+  username            String     @db.VarChar
+  host                String     @db.VarChar
+  token               String     @db.VarChar
+  prevNotesCount      Int        @default(0)
+  prevFollowingCount  Int        @default(0)
+  prevFollowersCount  Int        @default(0)
+  misshaiToken        String     @default("") @db.VarChar
+  alertMode           AlertMode  @default(notification)
+  visibility          Visibility @default(home)
+  localOnly           Boolean    @default(false)
+  remoteFollowersOnly Boolean    @default(false)
+  template            String?    @db.VarChar(1024)
+  prevRating          Float      @default(0) @db.Real
+  rating              Float      @default(0) @db.Real
+  bannedFromRanking   Boolean    @default(false)
+  tokenVersion        Int        @default(1)
+  useRanking          Boolean    @default(false)
 
   @@unique([username, host], map: "IDX_6269eebacdb25de8569298a52a")
   @@map("user")
 }
 
+/// Misskey Tools v3以前で使用していた、アラート送信モードフラグ。
+/// 廃止予定。
 enum AlertMode {
   note
   notification
@@ -56,6 +163,8 @@ enum AlertMode {
   @@map("user_alertmode_enum")
 }
 
+/// Misskey Tools v3以前で使用していた、アラートのノート公開範囲。
+/// 廃止予定。
 enum Visibility {
   public
   home
