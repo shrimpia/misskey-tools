@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { alertModes } from 'tools-shared/dist/types/alert-mode';
 import { IUser } from 'tools-shared/dist/types/user';
 import { Visibility } from 'tools-shared/dist/types/visibility';
-import { LOCALSTORAGE_KEY_ACCOUNTS, LOCALSTORAGE_KEY_TOKEN } from '../../const';
 import { $post, $put } from '../../misc/api';
 import { Skeleton } from '../../components/Skeleton';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -43,7 +42,7 @@ type DraftReducer = React.Reducer<SettingDraftType, Partial<SettingDraftType>>;
 
 export const MisshaiPage: React.FC = () => {
   const session = useAtomValue(sessionAtom);
-  const score = null as any;
+  const score = {} as any;
 
 	const setModal = useSetAtom(modalAtom);
 
@@ -210,22 +209,22 @@ export const MisshaiPage: React.FC = () => {
           <tbody>
             <tr>
               <td>{t('notes')}</td>
-              <td>{score.data.notesCount}</td>
-              <td>{score.data.notesDelta}</td>
+              <td>{score.notesCount}</td>
+              <td>{score.notesDelta}</td>
             </tr>
             <tr>
               <td>{t('following')}</td>
-              <td>{score.data.followingCount}</td>
-              <td>{score.data.followingDelta}</td>
+              <td>{score.followingCount}</td>
+              <td>{score.followingDelta}</td>
             </tr>
             <tr>
               <td>{t('followers')}</td>
-              <td>{score.data.followersCount}</td>
-              <td>{score.data.followersDelta}</td>
+              <td>{score.followersCount}</td>
+              <td>{score.followersDelta}</td>
             </tr>
           </tbody>
         </table>
-        <p><strong>{t('_missHai.rating')}{': '}</strong>{session.data.rating}</p>
+        <p><strong>{t('_missHai.rating')}{': '}</strong>{session.rating}</p>
       </section>
       <section className="misshaiRanking">
         <h2><i className="fas fa-ranking-star"/> {t('_missHai.ranking')}</h2>
