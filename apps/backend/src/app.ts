@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import axios from 'axios';
 import {config} from './config.js';
+import { prisma } from './libs/prisma.js';
 
 export type { AppRouter } from '@/server/api/index.js';
 
@@ -11,6 +12,6 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.validateStatus = (stat) => stat < 500;
 
 (async () => {
-  (await import('./boot/server.js')).default();
-  (await import('./boot/worker.js')).default();
-})();
+	await (await import('./boot/server.js')).default();
+	(await import('./boot/worker.js')).default();
+})()

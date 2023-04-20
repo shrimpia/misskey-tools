@@ -2,12 +2,13 @@ import 'reflect-metadata';
 
 import { config, meta } from '@/config.js';
 import { startServer } from '@/server/index.js';
+import { migrateLegacyUser } from '@/services/migration/legacy-user.js';
 
-export default (): void => {
+export default async () => {
 	console.log(`** Misskey Tools ${meta.version} **`);
 	console.log('(C) Shrimpia Network');
-	startServer().then(() => {
-		console.log('GET READY!');
-		console.log(`Server URL >> ${config.url}`);
-	});
+	await migrateLegacyUser();
+	await startServer();
+	console.log('GET READY!');
+	console.log(`Server URL >> ${config.url}`);
 };
