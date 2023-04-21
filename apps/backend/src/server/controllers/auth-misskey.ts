@@ -52,7 +52,7 @@ export const authMisskeyController: RouteHandler<{Querystring: {host: string}}> 
       name, description, permission, callbackUrl,
     });
     const { token, url } = await api<{ token: string, url: string }>(host, 'auth/session/generate', {
-      appSecret: secret
+      appSecret: secret,
     });
     sessionHostCache[token] = host;
     tokenSecretCache[token] = secret;

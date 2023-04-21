@@ -25,7 +25,7 @@ export const getUser = (username: string, host: string): Promise<IUser | null> =
  */
 export const deleteUser = async (username: string, host: string): Promise<void> => {
   await prisma.user.delete({
-    where: {username_host: { username, host }}
+    where: {username_host: { username, host }},
   });
 };
 

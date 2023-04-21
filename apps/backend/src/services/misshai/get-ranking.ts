@@ -13,7 +13,7 @@ export const getRanking = async (limit?: number | null): Promise<User[]> => {
       bannedFromRanking: false,
     },
     orderBy: {
-      rating: 'desc'
+      rating: 'desc',
     },
     take: limit ?? undefined,
   });

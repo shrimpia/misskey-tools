@@ -13,6 +13,6 @@ export const groupBy = <K extends PropertyKey, V>(array: readonly V[], getKey: G
       if (list) list.push(cur);
       else map.set(key, [cur]);
       return map;
-    }, new Map<K, V[]>())
+    }, new Map<K, V[]>()),
   );
 };

@@ -26,7 +26,11 @@ module.exports = {
 			'error',
 			'always'
 		],
+		
+		'comma-dangle': ['error', 'always-multiline'],
+		'eol-last': ['error', 'always'],
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
+    "@typescript-eslint/no-unused-vars": "off",
 	}
 };

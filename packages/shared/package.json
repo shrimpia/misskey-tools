@@ -10,7 +10,7 @@
     "build": "tsc",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "dev": "tsc -w",
-    "lint": "eslint \"src/**/*.ts*\"",
+    "lint": "eslint --fix \"src/**/*.ts*\"",
     "test": "jest"
   },
   "jest": {

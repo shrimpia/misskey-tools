@@ -13,5 +13,5 @@ export const sessionRouter = router({
       throw new TRPCError({ code: 'NOT_FOUND' });
     }
     return user;
-  })
+  }),
 });

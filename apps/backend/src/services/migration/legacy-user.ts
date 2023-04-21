@@ -13,7 +13,7 @@ export const migrateLegacyUser = async () => {
       data: {
         name: `@${user.username}@${user.host}`,
         accessToken: user.misshaiToken,
-      }
+      },
     });
     const session = await prisma.misskeySession.create({
       data: {
@@ -34,12 +34,12 @@ export const migrateLegacyUser = async () => {
         template: user.template,
         bannedFromRanking: user.bannedFromRanking,
         rankingVisible: user.useRanking,
-      }
+      },
     });
     await prisma.user.delete({
       where: {
         id: user.id,
-      }
+      },
     });
     console.log(`Processed for ${user.username}@${user.host}`);
   }

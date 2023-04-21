@@ -2,7 +2,7 @@ export const alertModes = [
   'note',
   'notification',
   'both',
-  'nothing'
+  'nothing',
 ] as const;
 
 export type AlertMode = typeof alertModes[number];

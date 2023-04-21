@@ -6,7 +6,7 @@ const allKatakana = [
   'シャ', 'シュ', 'ショ',
   'チャ', 'チュ', 'チョ',
   'ヒャ',	'ヒュ',	'ヒョ',
-  'ミャ',	'ミュ',	'ミョ'
+  'ミャ',	'ミュ',	'ミョ',
 ];
 
 const allInfix = [ '', 'ー', 'ッ' ];
@@ -20,6 +20,6 @@ export const createGacha = () => {
     getRandomInfix(),
     getRandomKatakana(),
     getRandomInfix(),
-    ...(new Array(Math.floor(Math.random() * 2 + 1)).fill('').map(() => getRandomKatakana()))
+    ...(new Array(Math.floor(Math.random() * 2 + 1)).fill('').map(() => getRandomKatakana())),
   ].join('');
 };

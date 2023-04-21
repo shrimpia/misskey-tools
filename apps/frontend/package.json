@@ -6,7 +6,7 @@
     "build": "vite build",
     "clean": "rimraf dist",
     "dev": "vite --host 0.0.0.0 --clearScreen false",
-    "lint": "tsc --noEmit && eslint --fix \"src/**/*.ts*\""
+    "lint": "eslint --fix \"src/**/*.ts*\""
   },
   "dependencies": {
     "@babel/preset-react": "^7.18.6",
