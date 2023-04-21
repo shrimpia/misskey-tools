@@ -8,7 +8,7 @@ import {
   DialogButton,
   DialogButtonType,
   DialogIcon,
-  ModalTypeDialog
+  ModalTypeDialog,
 } from './modal/dialog';
 import { Modal } from './modal/modal';
 import { ModalTypeMenu } from './modal/menu';
@@ -31,10 +31,10 @@ const dialogIconPattern: Record<DialogIcon, string> = {
 
 const Dialog: React.FC<{modal: ModalTypeDialog}> = ({modal}) => {
   const buttons = getButtons(modal.buttons ?? 'ok');
-	const setModal = useSetAtom(modalAtom);
+  const setModal = useSetAtom(modalAtom);
 
   const onClickButton = useCallback((i: number) => {
-    setModal(null)
+    setModal(null);
     if (modal.onSelect) {
       modal.onSelect(i);
     }
@@ -61,11 +61,11 @@ const Dialog: React.FC<{modal: ModalTypeDialog}> = ({modal}) => {
 };
 
 const Menu: React.FC<{modal: ModalTypeMenu}> = ({modal}) => {
-	const setModal = useSetAtom(modalAtom);
+  const setModal = useSetAtom(modalAtom);
 
   return (
     <div className="modal-menu-wrapper menu shadow-2" style={{
-      transform: `translate(${modal.screenX}px, ${modal.screenY}px)`
+      transform: `translate(${modal.screenX}px, ${modal.screenY}px)`,
     }}>
       {
         modal.items.map((item, i) => (
@@ -92,7 +92,7 @@ const ModalInner = (modal: Modal) => {
 };
 
 export const ModalComponent: React.FC = () => {
-	const [modal, setModal] = useAtom(modalAtom);
+  const [modal, setModal] = useAtom(modalAtom);
   if (!modal) return null;
 
   return (

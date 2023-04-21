@@ -10,13 +10,13 @@ export const IndexSessionPage: React.FC = () => {
   const {t} = useTranslation();
   const session = useAtomValue(sessionAtom);
   const score = {
-		notesCount: 0,
-		notesDelta: 0,
-		followingCount: 0,
-		followingDelta: 0,
-		followersCount: 0,
-		followersDelta: 0,
-	};
+    notesCount: 0,
+    notesDelta: 0,
+    followingCount: 0,
+    followingDelta: 0,
+    followersCount: 0,
+    followersDelta: 0,
+  };
 
   const announcements = useAnnouncements();
 

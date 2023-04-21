@@ -10,9 +10,9 @@ import { sessionAtom } from '@/store/api/session';
 const navLinkClassName: NavLinkProps['className'] = ({isActive}) => `item ${isActive ? 'active' : ''}`;
 
 export const NavigationMenu: React.FC = () => {
-	const session = useAtomValue(sessionAtom);
-	const meta = useAtomValue(metaAtom);
-	const setDrawerShown = useSetAtom(isDrawerShownAtom);
+  const session = useAtomValue(sessionAtom);
+  const meta = useAtomValue(metaAtom);
+  const setDrawerShown = useSetAtom(isDrawerShownAtom);
   const {t} = useTranslation();
 
   const onClickItem = () => {

@@ -19,8 +19,8 @@ export type ActualTheme = typeof actualThemes[number];
 export const useTheme = () => {
   const [ osTheme, setOsTheme ] = useState<ActualTheme>('dark');
 
-	const [theme, setTheme] = useAtom(themeAtom);
-	const [accentColor, setAccentColor] = useAtom(accentColorAtom);
+  const [theme, setTheme] = useAtom(themeAtom);
+  const [accentColor, setAccentColor] = useAtom(accentColorAtom);
 
   const applyTheme = useCallback(() => {
     const actualTheme = theme === 'system' ? osTheme : theme;

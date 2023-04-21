@@ -9,8 +9,8 @@ import { accountsAtom, accountTokensAtom } from '@/store/auth';
 import { sessionAtom } from '@/store/api/session';
 
 export const AccountsPage: React.FC = () => {
-	const [accounts, setAccounts] = useAtom(accountsAtom);
-	const accountTokens = useAtomValue(accountTokensAtom);
+  const [accounts, setAccounts] = useAtom(accountsAtom);
+  const accountTokens = useAtomValue(accountTokensAtom);
   const session = useAtomValue(sessionAtom);
   const {t} = useTranslation();
 
@@ -39,7 +39,7 @@ export const AccountsPage: React.FC = () => {
           {
             accounts.length === accountTokens.length ? (
               accounts.map(account => (
-                <button className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
+                <button key={account.id} className="item fluid" style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => switchAccount(account.misshaiToken)}>
                   <i className="icon fas fa-chevron-right" />
 										@{account.username}@{account.host}
                   <button className="btn flat text-danger" style={{marginLeft: 'auto'}} onClick={e => {

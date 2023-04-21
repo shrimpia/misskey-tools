@@ -68,7 +68,7 @@ const FormWrapper = styled.div`
 `;
 
 export const IndexWelcomePage: React.FC = () => {
-	const isMobile = useAtomValue(isMobileAtom);
+  const isMobile = useAtomValue(isMobileAtom);
   const {t} = useTranslation();
 
   const announcements = useAnnouncements();

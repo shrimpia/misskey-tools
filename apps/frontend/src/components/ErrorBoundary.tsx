@@ -12,16 +12,16 @@ export const ErrorBoundary: React.FC<ErrorBoundaryProp> = (p) => {
   const [hasError, setHasError] = useState(false);
   const location = useLocation();
 
-	useEffect(() => {
+  useEffect(() => {
     if (hasError) {
       setHasError(false);
     }
   }, [location.key]);
 
-	return (
+  return (
     <Inner {...p} hasError={hasError} setHasError={setHasError}/>
   );
-}
+};
 
 type InnerProp = ErrorBoundaryProp & { hasError: boolean, setHasError: (v: boolean) => void };
 type InnerState = { error: Error | null };
@@ -47,9 +47,9 @@ class Inner extends React.Component<InnerProp, InnerState> {
   }
 
   render() {
-		if (this.state.error) {
-			return this.props.fallback(this.state.error);
-		}
+    if (this.state.error) {
+      return this.props.fallback(this.state.error);
+    }
     return this.props.children;
   }
 }

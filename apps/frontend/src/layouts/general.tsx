@@ -46,11 +46,11 @@ const MobileHeader = styled.header`
 `;
 
 export const GeneralLayout: React.FC<PropsWithChildren> = ({children}) => {
-	const meta = useAtomValue(metaAtom);
-	const session = useAtomValue(sessionAtom);
-	const isMobile = useAtomValue(isMobileAtom);
-	const title = useAtomValue(titleAtom);
-	const [isDrawerShown, setDrawerShown] = useAtom(isDrawerShownAtom);
+  const meta = useAtomValue(metaAtom);
+  const session = useAtomValue(sessionAtom);
+  const isMobile = useAtomValue(isMobileAtom);
+  const title = useAtomValue(titleAtom);
+  const [isDrawerShown, setDrawerShown] = useAtom(isDrawerShownAtom);
   const {t} = useTranslation();
 
   return (
@@ -79,7 +79,7 @@ export const GeneralLayout: React.FC<PropsWithChildren> = ({children}) => {
               </a>
             </div>
           )}
-					<SuspenseView>{children}</SuspenseView>
+          <SuspenseView>{children}</SuspenseView>
         </Main>
       </div>
       <div className={`drawer-container ${isDrawerShown ? 'active' : ''}`}>

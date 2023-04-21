@@ -4,14 +4,14 @@ import { createTRPCJotai } from 'jotai-trpc';
 import type { AppRouter } from 'tools-backend';
 
 const link = httpLink({
-	url: `${location.origin}/api`,
-	headers() {
-		const token = localStorage[LOCALSTORAGE_KEY_TOKEN];
-		if (!token) return {};
-		return {
-			Authorization: `Bearer ${token}`,
-		};
-	},
+  url: `${location.origin}/api`,
+  headers() {
+    const token = localStorage[LOCALSTORAGE_KEY_TOKEN];
+    if (!token) return {};
+    return {
+      Authorization: `Bearer ${token}`,
+    };
+  },
 });
 
 export const trpcJotai = createTRPCJotai<AppRouter>({
@@ -19,5 +19,5 @@ export const trpcJotai = createTRPCJotai<AppRouter>({
 });
 
 export const trpcClient = createTRPCProxyClient<AppRouter>({
-	links: [ link ],
+  links: [ link ],
 });

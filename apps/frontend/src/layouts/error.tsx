@@ -1,6 +1,6 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Container = styled.div`
 	display: flex;
@@ -37,9 +37,9 @@ const PlainPre = styled.pre`
 `;
 
 export const ErrorPage: React.FC<{error: Error}> = ({error}) => {
-	const location = useLocation()
+  const location = useLocation();
 
-	const errorInfo = `
+  const errorInfo = `
 === Misskey Tools Internal Error ===
 name: ${error.name}
 message: ${error.message}
@@ -48,16 +48,16 @@ location: ${location.pathname}
 ua: ${navigator.userAgent}
 luckyItem: Shrimp
 	`.trim();
-	return (
-		<Container>
-			<div style={{minWidth: 0}}>
-				<h2><i className="fas fa-skull" /> 内部エラー</h2>
-				<p>Misskey Tools にて予期しないエラーが発生しました。開発者へ不具合報告をお願いします。</p>
-				<p>報告の際は以下の情報を伝えてください。</p>
-				<PlainPre>
-					{errorInfo}
-				</PlainPre>
-			</div>
-		</Container>
-	);
+  return (
+    <Container>
+      <div style={{minWidth: 0}}>
+        <h2><i className="fas fa-skull" /> 内部エラー</h2>
+        <p>Misskey Tools にて予期しないエラーが発生しました。開発者へ不具合報告をお願いします。</p>
+        <p>報告の際は以下の情報を伝えてください。</p>
+        <PlainPre>
+          {errorInfo}
+        </PlainPre>
+      </div>
+    </Container>
+  );
 };

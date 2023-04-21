@@ -17,23 +17,23 @@ import { languageAtom } from './store/client-settings';
 import { ErrorView } from './components/ErrorView';
 
 export const App : React.FC = () => {
-	const setMobile = useSetAtom(isMobileAtom);
-	const setAccounts = useSetAtom(accountsAtom);
-	const language = useAtomValue(languageAtom);
+  const setMobile = useSetAtom(isMobileAtom);
+  const setAccounts = useSetAtom(accountsAtom);
+  const language = useAtomValue(languageAtom);
 
   const error = (window as any).__misshaialert?.error;
-	const $location = useLocation();
+  const $location = useLocation();
   const {t, i18n} = useTranslation();
 
-	useTheme();
+  useTheme();
 
-	// 各トークンからアカウント情報を取得して格納
+  // 各トークンからアカウント情報を取得して格納
   useEffect(() => {
     const accounts = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY_ACCOUNTS) || '[]') as string[];
     Promise.all(accounts.map(token => trpcClient.session.getByToken.query(token))).then(a => setAccounts(a as IUser[]));
   }, []);
 
-	// 画面幅の変化を監視し、isMobile フラグを算出する
+  // 画面幅の変化を監視し、isMobile フラグを算出する
   useEffect(() => {
     const qMobile = window.matchMedia(`(max-width: ${BREAKPOINT_SM})`);
     const syncMobile = (ev: MediaQueryListEvent) => setMobile(ev.matches);
@@ -45,18 +45,18 @@ export const App : React.FC = () => {
     };
   }, []);
 
-	useEffect(() => {
-		i18n.changeLanguage(language);
-	}, [language]);
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const TheLayout = localStorage.getItem(LOCALSTORAGE_KEY_TOKEN) != null || $location.pathname !== '/' ? GeneralLayout : 'div';
 
   return (
     <TheLayout>
       {error ? (
-				<ErrorView additionalInfo={t(`_error.${error}`)}>
-					<a href="/" className="btn primary">{t('retry')}</a>
-				</ErrorView>
+        <ErrorView additionalInfo={t(`_error.${error}`)}>
+          <a href="/" className="btn primary">{t('retry')}</a>
+        </ErrorView>
       ) : <Router />}
       <footer className="text-center pa-5">
         <p>(C)2020-2023 Shrimpia Network</p>

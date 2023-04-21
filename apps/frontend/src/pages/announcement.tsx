@@ -12,7 +12,7 @@ import { languageAtom } from '@/store/client-settings';
 export const AnnouncementPage: React.FC = () => {
   const language = useAtomValue(languageAtom);
 
-	const { id } = useParams<{id: string}>();
+  const { id } = useParams<{id: string}>();
   if (!id) return null;
 
   const [announcement, setAnnouncement] = useState<IAnnouncement | null>();

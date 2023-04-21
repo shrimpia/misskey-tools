@@ -44,7 +44,7 @@ export const MisshaiPage: React.FC = () => {
   const session = useAtomValue(sessionAtom);
   const score = {} as any;
 
-	const setModal = useSetAtom(modalAtom);
+  const setModal = useSetAtom(modalAtom);
 
   const {t} = useTranslation();
 
@@ -65,7 +65,7 @@ export const MisshaiPage: React.FC = () => {
 
   const availableVisibilities: Visibility[] = [
     'home',
-    'followers'
+    'followers',
   ];
 
   const updateSetting = useCallback((obj: SettingDraftType) => {
@@ -99,7 +99,7 @@ export const MisshaiPage: React.FC = () => {
         localOnly: session.localOnly,
         remoteFollowersOnly: session.remoteFollowersOnly,
         template: session.template,
-        useRanking: session.useRanking
+        useRanking: session.useRanking,
       });
     }
   }, [session]);

@@ -33,16 +33,20 @@ i18n
     resources,
     lng,
     interpolation: {
-      escapeValue: false // Reactは常にXSS対策をしてくれるので、i18next側では対応不要
-    }
+      escapeValue: false, // Reactは常にXSS対策をしてくれるので、i18next側では対応不要
+    },
   });
 
-createRoot(document.getElementById('app')!).render(
-	<BrowserRouter>
-		<ErrorBoundary fallback={e => <ErrorPage error={e} />}>
-			<React.Suspense fallback={<Loading />}>
-				<App />
-			</React.Suspense>
-		</ErrorBoundary>
-	</BrowserRouter>
-);
+const el = document.getElementById('app');
+
+if (el != null) {
+  createRoot(el).render(
+    <BrowserRouter>
+      <ErrorBoundary fallback={e => <ErrorPage error={e} />}>
+        <React.Suspense fallback={<Loading />}>
+          <App />
+        </React.Suspense>
+      </ErrorBoundary>
+    </BrowserRouter>,
+  );
+}

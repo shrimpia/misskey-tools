@@ -10,7 +10,7 @@ import deepmerge from 'deepmerge';
 
 const merge = (baseData: Record<string, unknown>, newData: Record<string, unknown>) => {
   return deepmerge(baseData, newData, {
-    isMergeableObject: obj => typeof obj === 'object'
+    isMergeableObject: obj => typeof obj === 'object',
   });
 };
 

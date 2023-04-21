@@ -9,7 +9,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 import { useTitle } from '../../hooks/useTitle';
 
 export const NekomimiPage: React.FC = () => {
-	const setModal = useSetAtom(modalAtom);
+  const setModal = useSetAtom(modalAtom);
   const session = useAtomValue(sessionAtom);
 
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
@@ -24,19 +24,19 @@ export const NekomimiPage: React.FC = () => {
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
-	const onImageLoad: ReactEventHandler<HTMLImageElement> = (e) => {
-		const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
+  const onImageLoad: ReactEventHandler<HTMLImageElement> = (e) => {
+    const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
 
-		const crop = centerCrop(
-			makeAspectCrop({
-				unit: '%',
-				width: 90,
-			}, 1 / 1, width, height),
-			width,
-			height
-		);
-		setCrop(crop);
-	}
+    const crop = centerCrop(
+      makeAspectCrop({
+        unit: '%',
+        width: 90,
+      }, 1 / 1, width, height),
+      width,
+      height,
+    );
+    setCrop(crop);
+  };
 
   const beginUpload = async () => {
     if (!previewCanvasRef.current) return;
@@ -60,9 +60,9 @@ export const NekomimiPage: React.FC = () => {
         const {id: avatarId} = JSON.parse(xhr.responseText);
         fetch(`https://${session.host}/api/i/update`, {
           method: 'POST',
-					'headers': {
-				   'Content-Type': 'application/json',
-					},
+          'headers': {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({ i: session.token, avatarId }),
         }).then(() => res()).catch(rej);
       };
@@ -90,7 +90,7 @@ export const NekomimiPage: React.FC = () => {
   };
 
   useEffect(() => {
-		const image = imageRef.current;
+    const image = imageRef.current;
     if (!crop || !previewCanvasRef.current || !image) {
       return;
     }
@@ -118,7 +118,7 @@ export const NekomimiPage: React.FC = () => {
       0,
       0,
       crop.width * scaleX,
-      crop.height * scaleY
+      crop.height * scaleY,
     );
   }, [crop]);
 
@@ -140,8 +140,8 @@ export const NekomimiPage: React.FC = () => {
         <div className="row mt-2">
           <div className="col-8 col-12-sm">
             <ReactCrop crop={crop} aspect={1 / 1} onChange={(c) => setCrop(c)}>
-							<img ref={imageRef} src={blobUrl} onLoad={onImageLoad} />
-						</ReactCrop>
+              <img ref={imageRef} src={blobUrl} onLoad={onImageLoad} />
+            </ReactCrop>
           </div>
           <div className="col-4 col-12-sm">
             <h3 className="text-100 text-bold">{t('preview')}</h3>

@@ -35,17 +35,17 @@ const ColorInput = styled.input<{color: string}>`
 
 export const SettingPage: React.FC = () => {
   const session = useAtomValue(sessionAtom);
-	const [currentTheme, setTheme] = useAtom(themeAtom);
-	const [currentLanguage, setLanguage] = useAtom(languageAtom);
-	const [currentAccentColor, setAccentColor] = useAtom(accentColorAtom);
-	const setModal = useSetAtom(modalAtom);
+  const [currentTheme, setTheme] = useAtom(themeAtom);
+  const [currentLanguage, setLanguage] = useAtom(languageAtom);
+  const [currentAccentColor, setAccentColor] = useAtom(accentColorAtom);
+  const setModal = useSetAtom(modalAtom);
 
   const {t} = useTranslation();
 
   useTitle('_sidebar.settings');
 
   const onClickLogout = useCallback(() => {
-   setModal({
+    setModal({
       type: 'dialog',
       title: t('_logout.title'),
       message: t('_logout.message'),
@@ -94,7 +94,7 @@ export const SettingPage: React.FC = () => {
               onSelect() {
                 localStorage.removeItem(LOCALSTORAGE_KEY_TOKEN);
                 location.href = '/';
-              }
+              },
             });
           }).catch((e) => {
             console.error(e);
@@ -132,7 +132,7 @@ export const SettingPage: React.FC = () => {
           <h3>{t('accentColor')}</h3>
           <div className="hstack slim wrap mb-2">
             {designSystemColors.map(c => (
-              <ColorInput className="shadow-2" type="radio" color={c} value={c} checked={c === currentAccentColor} onChange={e => setAccentColor(e.target.value)} />
+              <ColorInput className="shadow-2" key={c} type="radio" color={c} value={c} checked={c === currentAccentColor} onChange={e => setAccentColor(e.target.value)} />
             ))}
           </div>
           <button className="btn primary" onClick={() => setAccentColor('green')}>{t('resetToDefault')}</button>
