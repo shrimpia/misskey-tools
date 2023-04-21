@@ -10,8 +10,8 @@ import {DeepPartial} from '@/types/deep-partial.js';
  * @param record 既存のユーザー情報
  */
 export const updateUser = async (username: string, host: string, record: DeepPartial<User>): Promise<void> => {
-	await prisma.user.update({
-		where: {username_host: {username, host}},
-		data: record,
-	});
+  await prisma.user.update({
+    where: {username_host: {username, host}},
+    data: record,
+  });
 };

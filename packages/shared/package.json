@@ -17,7 +17,7 @@
     "preset": "tools-jest-presets/jest/node"
   },
 	"devDependencies": {
-    "tools-eslint-config": "workspace:*",
+    "eslint-config-tools": "workspace:*",
     "tools-jest-presets": "workspace:*",
     "tools-tsconfig": "workspace:*",
     "@types/jest": "^26.0.22",

@@ -1,6 +1,6 @@
-import { TRPCError } from "@trpc/server";
+import { TRPCError } from '@trpc/server';
 
-import { middleware, procedure } from "@/server/api/trpc.js";
+import { middleware, procedure } from '@/server/api/trpc.js';
 
 const isAdmin = middleware(({ next, ctx }) => {
   if (!ctx.user?.isAdmin) {
@@ -8,7 +8,7 @@ const isAdmin = middleware(({ next, ctx }) => {
   }
   return next({
     ctx: {
-			token: ctx.token,
+      token: ctx.token,
       user: ctx.user,
     },
   });

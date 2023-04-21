@@ -1,20 +1,20 @@
-import { User } from "@prisma/client";
+import { User } from '@prisma/client';
 
-import { prisma } from "@/libs/prisma.js";
-import { clearLog, dispatch, printLog } from "@/libs/store.js";
-import { deleteUser, updateRating, updateScore } from "@/services/users/get-user.js";
-import { sendNoteAlert, sendNotificationAlert } from "@/services/misshai/send-alert.js";
-import { Acct } from "@/types/acct.js";
-import { Count } from "@/types/count.js";
-import { MiUser } from "@/types/mi-user.js";
-import { MisskeyError } from "@/types/misskey-error.js";
-import { TimedOutError } from "@/types/timed-out-error.js";
-import { toAcct } from "@/utils/to-acct.js";
-import { delay } from "@/utils/delay.js";
-import { errorToString } from "@/utils/error-to-string.js";
-import { groupBy } from "@/utils/group-by.js";
-import { format } from "@/services/misshai/format.js";
-import { api } from "@/libs/misskey.js";
+import { prisma } from '@/libs/prisma.js';
+import { clearLog, dispatch, printLog } from '@/libs/store.js';
+import { deleteUser, updateRating, updateScore } from '@/services/users/get-user.js';
+import { sendNoteAlert, sendNotificationAlert } from '@/services/misshai/send-alert.js';
+import { Acct } from '@/types/acct.js';
+import { Count } from '@/types/count.js';
+import { MiUser } from '@/types/mi-user.js';
+import { MisskeyError } from '@/types/misskey-error.js';
+import { TimedOutError } from '@/types/timed-out-error.js';
+import { toAcct } from '@/utils/to-acct.js';
+import { delay } from '@/utils/delay.js';
+import { errorToString } from '@/utils/error-to-string.js';
+import { groupBy } from '@/utils/group-by.js';
+import { format } from '@/services/misshai/format.js';
+import { api } from '@/libs/misskey.js';
 
 const ERROR_CODES_USER_REMOVED = ['NO_SUCH_USER', 'AUTHENTICATION_FAILED', 'YOUR_ACCOUNT_SUSPENDED'];
 

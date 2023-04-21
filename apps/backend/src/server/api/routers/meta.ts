@@ -1,11 +1,11 @@
-import { meta } from "@/config";
-import { procedure, router } from "@/server/api/trpc";
+import { meta } from '@/config';
+import { procedure, router } from '@/server/api/trpc';
 
-import { currentTokenVersion } from "tools-shared/dist/const.js";
+import { currentTokenVersion } from 'tools-shared/dist/const.js';
 
 export const metaRouter = router({
-	get: procedure.query(() => ({
-		version: meta.version,
-		currentTokenVersion,
-	})),
+  get: procedure.query(() => ({
+    version: meta.version,
+    currentTokenVersion,
+  })),
 });

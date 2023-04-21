@@ -16,30 +16,30 @@ import { frontendController } from '@/server/controllers/frontend.js';
 import { createContext } from '@/server/api/trpc.js';
 
 export const startServer = async () => {
-	const app = fastify();
-	const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+  const app = fastify();
+  const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
-	await app.register(fastifyView, {
-		root: __dirname + '/../public/views',
-		engine: { pug },
-		defaultContext: { version: meta.version },
-	});
+  await app.register(fastifyView, {
+    root: __dirname + '/../public/views',
+    engine: { pug },
+    defaultContext: { version: meta.version },
+  });
 
-	await app.register(fastifyTRPCPlugin, {
-		prefix: '/api',
-		trpcOptions: {
-			router: appRouter,
-			createContext,
-		},
-	});
+  await app.register(fastifyTRPCPlugin, {
+    prefix: '/api',
+    trpcOptions: {
+      router: appRouter,
+      createContext,
+    },
+  });
 
-	app.get('/login', authMisskeyController);
-	app.get('/miauth', callbackMiauthController);
-	app.get('/legacy-auth', callbackLegacyAuthController);
-	app.get('/announcements/:id', announcementsController);
-	app.get('/__rescue__', rescueController);
-	app.get('/*', frontendController);
+  app.get('/login', authMisskeyController);
+  app.get('/miauth', callbackMiauthController);
+  app.get('/legacy-auth', callbackLegacyAuthController);
+  app.get('/announcements/:id', announcementsController);
+  app.get('/__rescue__', rescueController);
+  app.get('/*', frontendController);
 
-	await app.listen(config.port || 3000);
+  await app.listen(config.port || 3000);
 };
 

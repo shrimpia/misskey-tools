@@ -7,7 +7,7 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 export const config = Object.freeze(JSON.parse(fs.readFileSync(__dirname + '/../../../config.json', 'utf-8')));
 
 export const meta: MetaJson = {
-	version: process.env.npm_package_version as string,
+  version: process.env.npm_package_version as string,
 };
 
 export type MetaJson = {

@@ -1,6 +1,6 @@
-import { TRPCError } from "@trpc/server";
+import { TRPCError } from '@trpc/server';
 
-import { middleware, procedure } from "@/server/api/trpc.js";
+import { middleware, procedure } from '@/server/api/trpc.js';
 
 const hasSession = middleware(({ next, ctx }) => {
   if (!ctx.user) {
@@ -8,7 +8,7 @@ const hasSession = middleware(({ next, ctx }) => {
   }
   return next({
     ctx: {
-			token: ctx.token,
+      token: ctx.token,
       user: ctx.user,
     },
   });
