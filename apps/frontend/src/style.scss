@@ -1,158 +1,40 @@
 @font-face {
   font-family: "OTADESIGN Rounded";
-  src: url("/otadesign_rounded.woff2") format('woff2'),
-       url("/otadesign_rounded.woff") format('woff');
+  src: url("/fonts/otadesign_rounded.woff2") format('woff2'),
+       url("/fonts/otadesign_rounded.woff") format('woff');
 }
 
-.font-misskey {
-  font-family: "OTADESIGN Rounded";
+@font-face {
+  font-family: "Koruri";
+  src: url("./fonts/koruri-regular.eot");
+  src: url("./fonts/koruri-regular.eot?#iefix") format("embedded-opentype"),
+  url("./fonts/koruri-regular.woff") format("woff"),
+  url("./fonts/koruri-regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
-.loading {
-  display: flex;
-  position: fixed;
-  inset: 0;
-  background: #222;
-  color: #fff;
-  font-size: 16px;
-  align-items: center;
-  justify-content: center;
+@font-face {
+  font-family: "Koruri";
+  src: url("./fonts/koruri-semibold.eot");
+  src: url("./fonts/koruri-semibold.eot?#iefix") format("embedded-opentype"),
+  url("./fonts/koruri-semibold.woff") format("woff"),
+  url("./fonts/koruri-semibold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
 }
 
-html {
-	font-size: 16px;
-}
-
-body {
-    --max-width: 1024px;
-    font-family: "Koruri", sans-serif;
-}
-
-hr {
-    height: 4px;
-    background: var(--dimmed);
-    border: none;
-    margin: 64px auto;
-    width: 50%;
-    max-width: 400px;
-}
-
-.xarticle {
-    margin: auto;
-    max-width: var(--max-width);
-}
-
-.xmenu {
-    .item {
-        background: #ffffff40;
-        + .item {
-            margin-top: var(--slim-margin);
-        }
-    }
-}
-
-.dark .xmenu .item {
-    background: #00000040;
-}
-
-._header {
-    position: sticky;
-    top: var(--container-padding);
-    @media (max-width: 600px) {
-        top: var(--container-padding-phone);
-        padding-right: 16px;
-    }
-}
-
-.fade {
-    animation: 0.3s ease-out 0s fadeIn;
-    &.down {
-        animation-name: fadeInUp;
-    }
-    &.up {
-        animation-name: fadeInUp;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-.block {
-    display: block !important;
-}
-
-.inline {
-    display: inline !important;
-}
-
-small {
-    font-size: 0.8rem;
-}
-
-.modal {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &.darken {
-        background: #000000c0;
-    }
-    z-index: 40000;
-    &.top-left {
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-}
-
-.card.dialog {
-    .dark & {
-        background: var(--tone-2);
-    }
-    min-width: min(100vw, 320px);
-    max-width: min(100vw, 600px);
-}
-
-.card > .body > h1 {
-    margin-bottom: var(--margin);
-}
-
-.modal-menu-wrapper {
-    display: flex;
-    position: fixed;
-    flex-direction: column;
-    min-width: min(100vw, 240px);
-    border-radius: var(--radius);
-    padding: var(--slim-margin);
-    background: var(--panel);
+@font-face {
+  font-family: "Koruri";
+  src: url("./fonts/koruri-bold.eot");
+  src: url("./fonts/koruri-bold.eot?#iefix") format("embedded-opentype"),
+  url("./fonts/koruri-bold.woff") format("woff"),
+  url("./fonts/koruri-bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
 }
 
 .cat {
@@ -187,20 +69,4 @@ small {
     height: 1em;
     width: 1em;
     vertical-align: -0.1em;
-}
-
-.log-view {
-    background-color: var(--black);
-}
-
-.log {
-    &.info {
-        color: var(--skyblue);
-    }
-    &.error {
-        color: var(--red);
-    }
-    &.warn {
-        color: var(--yellow);
-    }
 }

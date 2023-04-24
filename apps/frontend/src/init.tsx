@@ -1,52 +1,29 @@
-import 'vite/modulepreload-polyfill';
 
+import { ChakraProvider } from '@chakra-ui/react';
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import dayjs from 'dayjs';
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
 
-import { getBrowserLanguage, languageName, resources } from './langs';
-import { App } from './App';
-import { LOCALSTORAGE_KEY_LANG } from './const';
-import { Loading } from './Loading';
+import { App } from '@/App';
+import {theme} from '@/theme';
 
-import 'xeltica-ui/dist/css/xeltica-ui.min.css';
-import './style.scss';
-import 'dayjs/locale/ja';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import { ErrorPage } from './layouts/error';
-
-dayjs.extend(relativeTime);
-
-let lng = localStorage[LOCALSTORAGE_KEY_LANG];
-
-if (!lng || !Object.keys(languageName).includes(lng)) {
-  lng = localStorage[LOCALSTORAGE_KEY_LANG] = getBrowserLanguage();
-}
-
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng,
-    interpolation: {
-      escapeValue: false, // Reactは常にXSS対策をしてくれるので、i18next側では対応不要
-    },
-  });
+import 'vite/modulepreload-polyfill';
+import '@/libs/i18n';
+import '@/libs/dayjs';
+import '@/style.scss';
 
 const el = document.getElementById('app');
+
+// TODO: エラーオブジェクトが存在する場合はレンダリングを分ける
+const error = (window as any).__misshaialert?.error;
+console.log(error);
 
 if (el != null) {
   createRoot(el).render(
     <BrowserRouter>
-      <ErrorBoundary fallback={e => <ErrorPage error={e} />}>
-        <React.Suspense fallback={<Loading />}>
-          <App />
-        </React.Suspense>
-      </ErrorBoundary>
+      <ChakraProvider theme={theme} >
+        <App />
+      </ChakraProvider>
     </BrowserRouter>,
   );
 }
