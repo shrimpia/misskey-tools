@@ -9,7 +9,8 @@
     "clean": "turbo run clean",
     "dev": "turbo run dev --no-cache  --continue",
     "lint": "turbo run lint",
-    "test": "turbo run test"
+    "test": "turbo run test",
+		"storybook": "pnpm recursive --filter tools-frontend run storybook"
   },
   "devDependencies": {
     "turbo": "latest"
