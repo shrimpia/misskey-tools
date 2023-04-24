@@ -38,6 +38,7 @@ export const startServer = async () => {
   app.get('/legacy-auth', callbackLegacyAuthController);
   app.get('/announcements/:id', announcementsController);
   app.get('/__rescue__', rescueController);
+  app.get('/vite/*', viteController);
   app.get('/*', frontendController);
 
   await app.listen(config.port || 3000);
