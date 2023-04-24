@@ -1,5 +1,6 @@
 import { inferAsyncReturnType, initTRPC } from '@trpc/server';
 import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify';
+
 import { getUserByToolsToken } from '@/services/users/get-user-by-tools-token.js';
 
 export async function createContext({ req }: CreateFastifyContextOptions) {

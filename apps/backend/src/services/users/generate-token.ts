@@ -1,5 +1,6 @@
-import rndstr from 'rndstr';
 import { UsedToken } from '@prisma/client';
+import rndstr from 'rndstr';
+
 import {prisma} from '@/libs/prisma.js';
 
 /**

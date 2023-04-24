@@ -1,7 +1,9 @@
-import { LOCALSTORAGE_KEY_TOKEN } from '@/const';
-import { createTRPCProxyClient, httpLink } from '@trpc/client';
+import { httpLink } from '@trpc/client';
 import { createTRPCJotai } from 'jotai-trpc';
+
 import type { AppRouter } from 'tools-backend';
+
+import { LOCALSTORAGE_KEY_TOKEN } from '@/const';
 
 const link = httpLink({
   url: `${location.origin}/api`,
@@ -15,9 +17,5 @@ const link = httpLink({
 });
 
 export const trpcJotai = createTRPCJotai<AppRouter>({
-  links: [ link ],
-});
-
-export const trpcClient = createTRPCProxyClient<AppRouter>({
   links: [ link ],
 });

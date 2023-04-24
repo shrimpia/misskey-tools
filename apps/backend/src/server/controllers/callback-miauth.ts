@@ -1,9 +1,9 @@
-import { RouteHandler } from 'fastify';
 import axios from 'axios';
+import { RouteHandler } from 'fastify';
 
-import { login } from '@/services/session/login.js';
 import { sessionHostCache } from '@/server/cache.js';
 import { die } from '@/server/utils/die.js';
+import { login } from '@/services/session/login.js';
 
 /**
  * MisskeyにMiAuth認証を飛ばしたときに返ってくるコールバックのハンドラーです。

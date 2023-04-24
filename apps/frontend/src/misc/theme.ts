@@ -1,6 +1,7 @@
-import { accentColorAtom, themeAtom } from '@/store/client-settings';
 import { useAtom } from 'jotai';
 import { useCallback, useEffect, useState } from 'react';
+
+import { accentColorAtom, themeAtom } from '@/store/client-settings';
 
 export const actualThemes = [
   'light',

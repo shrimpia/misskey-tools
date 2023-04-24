@@ -1,6 +1,6 @@
+import dayjs from 'dayjs';
 import React, {useMemo, useState} from 'react';
 import {Log} from 'tools-shared/dist/types/log.js';
-import dayjs from 'dayjs';
 
 const LogItem: React.FC<{log: Log}> = ({log}) => {
   const time = dayjs(log.timestamp).format('hh:mm:ss');

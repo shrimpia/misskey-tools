@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import axios from 'axios';
+
 import {config} from './config.js';
-import { prisma } from './libs/prisma.js';
 
 export type { AppRouter } from '@/server/api/index.js';
 

@@ -1,19 +1,21 @@
-import { fastify, FastifyPluginCallback } from 'fastify';
-import fastifyView from '@fastify/view';
-import pug from 'pug';
 import path from 'path';
 import url from 'url';
+
+import fastifyView from '@fastify/view';
 import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
+import { fastify } from 'fastify';
+import pug from 'pug';
 
 import { config, meta } from '@/config.js';
 import { appRouter } from '@/server/api/index.js';
-import { authMisskeyController } from '@/server/controllers/auth-misskey.js';
-import { callbackMiauthController } from '@/server/controllers/callback-miauth.js';
-import { callbackLegacyAuthController } from '@/server/controllers/callback-legacy-auth.js';
-import { announcementsController } from '@/server/controllers/announcements.js';
-import { rescueController } from '@/server/controllers/rescue.js';
-import { frontendController } from '@/server/controllers/frontend.js';
 import { createContext } from '@/server/api/trpc.js';
+import { announcementsController } from '@/server/controllers/announcements.js';
+import { authMisskeyController } from '@/server/controllers/auth-misskey.js';
+import { callbackLegacyAuthController } from '@/server/controllers/callback-legacy-auth.js';
+import { callbackMiauthController } from '@/server/controllers/callback-miauth.js';
+import { frontendController } from '@/server/controllers/frontend.js';
+import { rescueController } from '@/server/controllers/rescue.js';
+import {viteController} from '@/server/controllers/vite.js';
 
 export const startServer = async () => {
   const app = fastify();

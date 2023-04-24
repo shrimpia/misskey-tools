@@ -1,10 +1,11 @@
-import { RouteHandler } from 'fastify';
 import crypto from 'crypto';
 
-import { login } from '@/services/session/login.js';
+import { RouteHandler } from 'fastify';
+
+import { api } from '@/libs/misskey';
 import { tokenSecretCache, sessionHostCache } from '@/server/cache.js';
 import { die } from '@/server/utils/die.js';
-import { api } from '@/libs/misskey';
+import { login } from '@/services/session/login.js';
 
 /**
  * Misskeyに旧型認証を飛ばしたときに返ってくるコールバックのハンドラーです。

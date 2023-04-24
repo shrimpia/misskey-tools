@@ -1,11 +1,13 @@
-import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, NavLinkProps } from 'react-router-dom';
+
 import { CHANGELOG_URL } from '../const';
+
 import { metaAtom } from '@/store/api/meta';
-import { isDrawerShownAtom } from '@/store/client-state';
 import { sessionAtom } from '@/store/api/session';
+import { isDrawerShownAtom } from '@/store/client-state';
 
 const navLinkClassName: NavLinkProps['className'] = ({isActive}) => `item ${isActive ? 'active' : ''}`;
 
