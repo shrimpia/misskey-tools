@@ -1,9 +1,4 @@
-import {extendTheme, ThemeConfig} from '@chakra-ui/react';
-
-export const theme = extendTheme({
-  config: {
-    initialColorMode: 'dark',
-  } as ThemeConfig,
+export const theme = {
   fonts: {
     body: '"Koruri", sans-serif',
     heading: '"Koruri", sans-serif',
@@ -15,4 +10,4 @@ export const theme = extendTheme({
       darken: 'rgb(96,128,0)',
     },
   },
-});
+} as const;
