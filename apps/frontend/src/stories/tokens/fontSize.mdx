@@ -1,0 +1,23 @@
+import {theme} from '../../libs/stitches';
+import {Text} from '../../components/primitives/Text';
+
+# フォントサイズ
+
+<Text fontSize="xl">HELLO</Text>
+
+<table>
+	<thead>
+		<tr>
+			<th>キー</th>
+			<th>色</th>
+		</tr>
+	</thead>
+	<tbody>
+		{Object.keys(theme.fontSizes).map(key => (
+			<tr key={key}>
+				<td><code>{key}</code></td>
+				<td><Text fontSize={key}>HELLO</Text></td>
+			</tr>
+		))}
+	</tbody>
+</table>

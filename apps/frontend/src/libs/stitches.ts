@@ -1,4 +1,4 @@
-import { olive } from '@radix-ui/colors';
+import {blackA, olive, oliveDark, tomato, tomatoDark, whiteA} from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 
 export const {
@@ -14,11 +14,26 @@ export const {
   theme: {
     colors: {
       bg: olive.olive4,
+      fg: olive.olive12,
+      white: olive.olive1,
+      black: olive.olive12,
+      muted: olive.olive11,
       card: olive.olive1,
       cardPale: olive.olive3,
       primary: 'rgb(134,179,0)',
       primaryLighten: 'rgb(172,230,0)',
       primaryDarken: 'rgb(96,128,0)',
+      primaryFg: '$white',
+      danger: tomato.tomato10,
+      dangerLighten: tomato.tomato8,
+      buttonBg: olive.olive1,
+      buttonBgActive: olive.olive6,
+      buttonBgPrimary: '$primary',
+      buttonBgPrimaryActive: '$primaryDarken',
+      buttonBgPrimaryGradientA: 'rgb(134,179,0)',
+      buttonBgPrimaryGradientB: 'rgb(74,179,0)',
+      flatHover: blackA.blackA3,
+      flatActive: blackA.blackA5,
     },
     space: {
       xxs: '4px',
@@ -31,16 +46,16 @@ export const {
       xxxl: '96px',
     },
     fontSizes: {
-      1: '10px',
-      2: '12px',
-      3: '14px',
-      4: '16px',
-      5: '18px',
-      6: '20px',
-      7: '24px',
-      8: '32px',
-      9: '48px',
-      10: '96px',
+      xxs: '10px',
+      xs: '12px',
+      s: '14px',
+      m: '16px',
+      l: '18px',
+      xl: '20px',
+      xxl: '24px',
+      xxxl: '32px',
+      xxxxl: '48px',
+      xxxxxl: '96px',
     },
     radii: {
       1: '3px',
@@ -60,5 +75,30 @@ export const {
     phone: '(min-width: 640px)',
     pad: '(min-width: 768px)',
     pc: '(min-width: 1024px)',
+  },
+});
+
+export const darkTheme = createTheme({
+  colors: {
+    bg: oliveDark.olive4,
+    fg: oliveDark.olive12,
+    white: oliveDark.olive1,
+    black: oliveDark.olive12,
+    muted: oliveDark.olive11,
+    card: oliveDark.olive1,
+    cardPale: oliveDark.olive3,
+    danger: tomatoDark.tomato10,
+    dangerLighten: tomatoDark.tomato8,
+    buttonBg: oliveDark.olive1,
+    buttonBgActive: oliveDark.olive2,
+    flatHover: whiteA.whiteA6,
+    flatActive: whiteA.whiteA9,
+  },
+});
+
+export const globalStyles = globalCss({
+  body: {
+    background: '$bg',
+    color: '$fg',
   },
 });

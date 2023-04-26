@@ -2,7 +2,7 @@
   "name": "tools-shared",
   "version": "0.0.0",
   "private": true,
-	"type": "module",
+  "type": "module",
   "files": [
     "dist/**"
   ],
@@ -16,14 +16,14 @@
   "jest": {
     "preset": "tools-jest-presets/jest/node"
   },
-	"devDependencies": {
-    "eslint-config-tools": "workspace:*",
-    "tools-jest-presets": "workspace:*",
-    "tools-tsconfig": "workspace:*",
+  "devDependencies": {
     "@types/jest": "^26.0.22",
     "@types/node": "^18.11.9",
     "eslint": "^7.32.0",
+    "eslint-config-tools": "workspace:*",
     "jest": "^26.6.3",
-    "typescript": "^5.0.2"
-	}
+    "tools-jest-presets": "workspace:*",
+    "tools-tsconfig": "workspace:*",
+    "typescript": "^5.0.4"
+  }
 }

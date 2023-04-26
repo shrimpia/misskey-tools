@@ -1,13 +1,12 @@
 
-import { ChakraProvider } from '@chakra-ui/react';
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from '@/App';
-import {theme} from '@/theme';
 
 import 'vite/modulepreload-polyfill';
+import 'ress';
 import '@/libs/i18n';
 import '@/libs/dayjs';
 import '@/style.scss';
@@ -21,9 +20,7 @@ console.log(error);
 if (el != null) {
   createRoot(el).render(
     <BrowserRouter>
-      <ChakraProvider theme={theme} >
-        <App />
-      </ChakraProvider>
+      <App />
     </BrowserRouter>,
   );
 }

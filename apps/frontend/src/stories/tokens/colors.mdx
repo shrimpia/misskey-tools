@@ -1,0 +1,21 @@
+import {theme} from '../../libs/stitches';
+import {Text} from '../../components/primitives/Text';
+
+# 色
+
+<table>
+	<thead>
+		<tr>
+			<th>キー</th>
+			<th>色</th>
+		</tr>
+	</thead>
+	<tbody>
+		{Object.keys(theme.colors).map(key => (
+			<tr key={key}>
+				<td>`{key}`</td>
+				<td><Text css={{color: `$${key}`}}>HELLO</Text></td>
+			</tr>
+		))}
+	</tbody>
+</table>
