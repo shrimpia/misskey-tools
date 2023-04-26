@@ -9,7 +9,7 @@ export const Button = styled('button', {
   borderRadius: '$m',
   fontWeight: 'bold',
   background: '$buttonBg',
-  color: '$fg',
+  color: 'inherit',
   alignItems: 'center',
   justifyContent: 'center',
   appearance: 'none',

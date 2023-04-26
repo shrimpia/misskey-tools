@@ -4,7 +4,6 @@ import { ErrorCode } from 'tools-shared/dist/types/error-code.js';
 
 import { Centered } from '@/components/layouts/Centered.js';
 import { VStack } from '@/components/layouts/VStack.js';
-import { Button } from '@/components/primitives/Button.js';
 import { useToolsGlobalEffects } from '@/global-effects.js';
 
 export type BackendErrorProp = {
@@ -27,7 +26,7 @@ export const BackendError: React.FC<BackendErrorProp> = (p) => {
           {t('_error.additionalInfo')}
           {t(`_error.${p.error}`)}
         </p>
-        <Button as="a" href="/" primary>{t('retry')}</Button>
+        <a href="/">{t('retry')}</a>
       </VStack>
     </Centered>
   );

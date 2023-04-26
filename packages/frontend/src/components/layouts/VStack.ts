@@ -1,5 +1,6 @@
 import { Flex } from '@/components/layouts/Flex.js';
-import { styled } from '@/libs/stitches.js';
+import { styled, theme } from '@/libs/stitches.js';
+import { toVariants } from '@/misc/to-variants.js';
 
 /**
  * 子要素を縦に並べて表示するレイアウトコンポーネント。
@@ -12,16 +13,7 @@ export const VStack = styled(Flex, {
   },
 
   variants: {
-    gap: {
-      xxs: { gap: '$xxs' },
-      xs: { gap: '$xs' },
-      s: { gap: '$s' },
-      m: { gap: '$m' },
-      l: { gap: '$l' },
-      xl: { gap: '$xl' },
-      xxl: { gap: '$xxl' },
-      xxxl: { gap: '$xxxl' },
-    },
+    gap: toVariants(theme.space, s => ({ gap: '$' + s })),
   },
 });
 

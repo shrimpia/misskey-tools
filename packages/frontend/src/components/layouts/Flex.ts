@@ -6,6 +6,14 @@ import { styled } from '@/libs/stitches.js';
 export const Flex = styled('div', {
   display: 'flex',
   variants: {
+    direction: {
+      horizontal: {
+        flexDirection: 'row',
+      },
+      vertical: {
+        flexDirection: 'column',
+      },
+    },
     alignItems: {
       left: { alignItems: 'flex-start' },
       center: { alignItems: 'center' },

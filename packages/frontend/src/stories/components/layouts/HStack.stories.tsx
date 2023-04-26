@@ -27,7 +27,7 @@ const meta = {
     ),
   },
   argTypes: {
-    gap: { control: 'select', options: [undefined, 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl'] },
+    gap: { control: 'select', options: [undefined, '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'] },
     alignItems: { control: 'select', options: [undefined, 'left', 'right', 'center', 'stretch'] },
     justifyContent: { control: 'select', options: [undefined, 'left', 'right', 'center', 'stretch'] },
   },

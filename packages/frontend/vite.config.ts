@@ -18,7 +18,7 @@ export default defineConfig({
     pages(),
   ],
   server: {
-    origin: 'http://127.0.0.1:4000/vite',
+    origin: 'http://localhost:4000/vite',
     watch: {
       usePolling: true,
     },

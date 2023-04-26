@@ -1,16 +1,16 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { LoginButton } from '@/components/domains/welcome/LoginButton.js';
+import { LoginForm } from '@/components/domains/welcome/LoginForm.js';
 
 const meta = {
-  component: LoginButton,
+  component: LoginForm,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof LoginButton>;
+} satisfies Meta<typeof LoginForm>;
 
 export default meta;
-type Story = StoryObj<typeof LoginButton>;
+type Story = StoryObj<typeof LoginForm>;
 
 export const Default: Story = { };
