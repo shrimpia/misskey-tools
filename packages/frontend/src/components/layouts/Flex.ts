@@ -1,5 +1,8 @@
 import { styled } from '@/libs/stitches.js';
 
+/**
+ * Flex Box コンポーネント
+ */
 export const Flex = styled('div', {
   display: 'flex',
   variants: {

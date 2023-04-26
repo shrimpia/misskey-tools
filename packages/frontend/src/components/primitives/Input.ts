@@ -1,5 +1,8 @@
 import { styled } from '@/libs/stitches.js';
 
+/**
+ * ユーザーからの値入力を受け付ける。
+ */
 export const Input = styled('input', {
   padding: '$xs $m',
   borderRadius: '$2',

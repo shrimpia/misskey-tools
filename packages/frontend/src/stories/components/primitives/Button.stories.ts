@@ -12,6 +12,8 @@ const meta = {
     flat: false,
     disabled: false,
     danger: false,
+    size: 'medium',
+    radius: 'medium',
   },
   argTypes: {
     size: {
@@ -19,7 +21,7 @@ const meta = {
       control: { type: 'radio' },
     },
     radius: {
-      options: [1, 2, 3, 4, 5],
+      options: ['small', 'medium', 'large', 'pill'],
       control: { type: 'radio' },
     },
   },
@@ -28,6 +30,8 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};
 
 export const Small: Story = {
   args: {
@@ -77,32 +81,26 @@ export const Flat: Story = {
   },
 };
 
-export const Radius1: Story = {
+export const RadiusSmall: Story = {
   args: {
-    radius: 1,
+    radius: 'small',
   },
 };
 
-export const Radius2: Story = {
+export const RadiusMedium: Story = {
   args: {
-    radius: 2,
+    radius: 'medium',
   },
 };
 
-export const Radius3: Story = {
+export const RadiusLarge: Story = {
   args: {
-    radius: 3,
+    radius: 'large',
   },
 };
 
-export const Radius4: Story = {
+export const RadiusPill: Story = {
   args: {
-    radius: 4,
-  },
-};
-
-export const Radius5: Story = {
-  args: {
-    radius: 5,
+    radius: 'pill',
   },
 };

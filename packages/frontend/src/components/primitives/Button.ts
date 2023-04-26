@@ -1,5 +1,8 @@
 import { styled } from '@/libs/stitches.js';
 
+/**
+ * ユーザーからの入力を受け付けるボタン。
+ */
 export const Button = styled('button', {
   display: 'flex',
   border: '1px solid $buttonBg',
@@ -25,7 +28,7 @@ export const Button = styled('button', {
 
   defaultVariants: {
     size: 'medium',
-    radius: 1,
+    radius: 'medium',
   },
 
   variants: {
@@ -96,11 +99,10 @@ export const Button = styled('button', {
       },
     },
     radius: {
-      1: { borderRadius: '$1' },
-      2: { borderRadius: '$2' },
-      3: { borderRadius: '$3' },
-      4: { borderRadius: '$4' },
-      5: { borderRadius: '$5' },
+      small: { borderRadius: '$1' },
+      medium: { borderRadius: '$2' },
+      large: { borderRadius: '$3' },
+      pill: { borderRadius: '$5' },
     },
   },
 });

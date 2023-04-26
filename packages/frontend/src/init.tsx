@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from '@/App';
+import { BackendError } from '@/components/domains/backend-error/BackendError.js';
 
 import 'vite/modulepreload-polyfill';
 import 'ress';
@@ -16,12 +17,11 @@ const el = document.getElementById('app');
 
 // TODO: エラーオブジェクトが存在する場合はレンダリングを分ける
 const error = (window as any).__misshaialert?.error;
-console.log(error);
 
 if (el != null) {
-  createRoot(el).render(
+  createRoot(el).render(error ? (<BackendError error={error} />) : (
     <BrowserRouter>
       <App />
-    </BrowserRouter>,
-  );
+    </BrowserRouter>
+  ));
 }

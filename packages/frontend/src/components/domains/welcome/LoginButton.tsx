@@ -21,15 +21,13 @@ export type LoginBonusProp = {
 
 /**
  * Misskey でログインするためのボタンです。押下すると、サーバーURLの入力フォームに切り替わります。
- * @constructor
  */
 export const LoginButton: React.FC<LoginBonusProp> = (p) => {
   const [isOpened, setOpened] = useState(false);
   const [value, setValue] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const inputRef = useRef<HTMLInputElement>();
-
+  const inputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation();
 
   const validate = () => {
@@ -76,14 +74,14 @@ export const LoginButton: React.FC<LoginBonusProp> = (p) => {
                 onChange={e => setValue(e.target.value)}
               />
             </InputLabel>
-            <Button type="submit" radius="2" primaryGradient disabled={hasError || !value}>
+            <Button type="submit" primaryGradient disabled={hasError || !value}>
               {t('login')}
             </Button>
           </HStack>
           {hasError && <Text color="danger" fontSize="xs"><i className="ti ti-alert-circle-filled"/> {error}</Text>}
         </VStack>
       ) : (
-        <Button radius="5" primaryGradient onClick={onClickOpenButton}>
+        <Button primaryGradient onClick={onClickOpenButton}>
 					Misskeyでログイン
         </Button>
       )}

@@ -1,8 +1,16 @@
 import { Flex } from '@/components/layouts/Flex.js';
 import { styled } from '@/libs/stitches.js';
 
+/**
+ * 子要素を縦に並べて表示するレイアウトコンポーネント。
+ */
 export const VStack = styled(Flex, {
   flexDirection: 'column',
+
+  defaultVariants: {
+    gap: 'm',
+  },
+
   variants: {
     gap: {
       xxs: { gap: '$xxs' },
