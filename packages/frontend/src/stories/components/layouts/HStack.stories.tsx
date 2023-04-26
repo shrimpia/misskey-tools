@@ -12,7 +12,6 @@ const Box = styled('div', {
 });
 
 const meta = {
-  title: 'Components/Layouts/HStack',
   component: HStack,
   tags: ['autodocs'],
   args: {

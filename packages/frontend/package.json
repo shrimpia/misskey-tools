@@ -7,13 +7,16 @@
     "clean": "rimraf dist",
     "dev": "vite --host 0.0.0.0 --clearScreen false",
     "lint": "eslint --fix \"src/**/*.ts*\"",
+    "test": "vitest run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
     "@babel/preset-react": "^7.18.6",
     "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/react-label": "^2.0.1",
     "@stitches/react": "^1.2.8",
+    "@tabler/icons-webfont": "^2.17.0",
     "@trpc/client": "10.20.0",
     "@trpc/server": "10.20.0",
     "dayjs": "^1.11.7",
@@ -25,6 +28,7 @@
     "jotai-trpc": "^0.5.0",
     "json5-loader": "^4.0.1",
     "markdown-it": "^13.0.1",
+    "multiple-themes-stitches": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
@@ -36,13 +40,13 @@
     "ress": "^5.0.2",
     "sass": "^1.62.0",
     "striptags": "^3.2.0",
-    "tools-shared": "workspace:*",
-    "typescript": "5.0.4"
+    "tools-shared": "workspace:*"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.7",
     "@storybook/addon-interactions": "^7.0.7",
     "@storybook/addon-links": "^7.0.7",
+    "@storybook/addon-viewport": "^7.0.7",
     "@storybook/blocks": "^7.0.7",
     "@storybook/builder-vite": "^7.0.7",
     "@storybook/react": "^7.0.7",
@@ -61,9 +65,10 @@
     "storybook": "^7.0.7",
     "tools-backend": "workspace:*",
     "tools-tsconfig": "workspace:*",
-    "typescript": "^4.8.3",
+    "typescript": "5.0.4",
     "vite": "^4.2.2",
     "vite-plugin-pages": "^0.29.0",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.30.1"
   }
 }

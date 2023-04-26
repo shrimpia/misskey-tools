@@ -13,7 +13,7 @@ import {Text} from '../../components/primitives/Text';
 	<tbody>
 		{Object.keys(theme.colors).map(key => (
 			<tr key={key}>
-				<td>`{key}`</td>
+				<td><code>{key}</code></td>
 				<td><Text css={{color: `$${key}`}}>HELLO</Text></td>
 			</tr>
 		))}

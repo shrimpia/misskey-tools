@@ -4,5 +4,6 @@ import { toVariants } from '@/misc/to-variants.js';
 export const Text = styled('span', {
   variants: {
     fontSize: toVariants(theme.fontSizes, k => ({ fontSize: `$${k} !important` })),
+    color: toVariants(theme.colors, k => ({ color: `$${k} !important` })),
   },
 });

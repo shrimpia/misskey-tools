@@ -3,7 +3,6 @@ import { StoryObj, Meta } from '@storybook/react';
 import { Text } from '@/components/primitives/Text.js';
 
 const meta = {
-  title: 'Components/Primitives/Text',
   component: Text,
   tags: ['autodocs'],
   argTypes: {

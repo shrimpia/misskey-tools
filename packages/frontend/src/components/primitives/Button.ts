@@ -2,17 +2,25 @@ import { styled } from '@/libs/stitches.js';
 
 export const Button = styled('button', {
   display: 'flex',
-  border: 'none',
+  border: '1px solid $buttonBg',
   borderRadius: '$m',
   fontWeight: 'bold',
-  backgroundColor: '$buttonBg',
+  background: '$buttonBg',
+  color: '$fg',
   alignItems: 'center',
   justifyContent: 'center',
   appearance: 'none',
   cursor: 'pointer',
 
-  '&:active': {
-    backgroundColor: '$buttonBgActive',
+  '&:disabled': {
+    cursor: 'not-allowed',
+    background: '$buttonBgDisabled',
+    color: '$buttonFgDisabled',
+    borderColor: '$buttonBgDisabled',
+  },
+
+  '&:not(:disabled):active': {
+    background: '$buttonBgActive',
   },
 
   defaultVariants: {
@@ -23,32 +31,54 @@ export const Button = styled('button', {
   variants: {
     primary: {
       true: {
-        backgroundColor: '$buttonBgPrimary',
+        background: '$buttonBgPrimary',
         color: '$primaryFg',
+        borderColor: '$buttonBgPrimary',
 
-        '&:active': {
-          backgroundColor: '$buttonBgPrimaryActive',
+        '&:not(:disabled):active': {
+          background: '$buttonBgPrimaryActive',
+          borderColor: '$buttonBgPrimaryActive',
+        },
+      },
+    },
+    danger: {
+      true: {
+        background: '$buttonBgDanger',
+        color: '$primaryFg',
+        borderColor: '$buttonBgDanger',
+
+        '&:not(:disabled):active': {
+          background: '$buttonBgDangerActive',
+          borderColor: '$buttonBgDangerActive',
         },
       },
     },
     primaryGradient: {
       true: {
         background: 'linear-gradient(to right, $buttonBgPrimaryGradientA, $buttonBgPrimaryGradientB)',
+        borderColor: '$buttonBgPrimary',
         color: '$primaryFg',
 
-        '&:active': {
+        '&:not(:disabled):active': {
           background: '$buttonBgPrimaryActive',
+          borderColor: '$buttonBgPrimaryActive',
         },
       },
     },
     flat: {
       true: {
-        backgroundColor: 'transparent',
-        '&:hover': {
-          backgroundColor: '$flatHover',
+        background: 'transparent',
+        borderColor: 'transparent',
+        '&:disabled': {
+          background: 'transparent',
+          color: '$buttonFgDisabled',
+          borderColor: 'transparent',
         },
-        '&:active': {
-          backgroundColor: '$flatActive',
+        '&:not(:disabled):hover': {
+          background: '$flatHover',
+        },
+        '&:not(:disabled):active': {
+          background: '$flatActive',
         },
       },
     },

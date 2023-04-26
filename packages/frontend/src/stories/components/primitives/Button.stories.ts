@@ -3,14 +3,15 @@ import { StoryObj, Meta } from '@storybook/react';
 import { Button } from '@/components/primitives/Button.js';
 
 const meta = {
-  title: 'Components/Primitives/Button',
   component: Button,
   tags: ['autodocs'],
   args: {
-    children: 'ボタンだよ',
+    children: 'Button',
     primary: false,
     primaryGradient: false,
     flat: false,
+    disabled: false,
+    danger: false,
   },
   argTypes: {
     size: {
@@ -46,6 +47,12 @@ export const Large: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
+
 export const Primary: Story = {
   args: {
     primary: true,
@@ -55,6 +62,12 @@ export const Primary: Story = {
 export const PrimaryGradient: Story = {
   args: {
     primaryGradient: true,
+  },
+};
+
+export const Danger: Story = {
+  args: {
+    danger: true,
   },
 };
 

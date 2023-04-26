@@ -20,6 +20,7 @@ export const {
       muted: olive.olive11,
       card: olive.olive1,
       cardPale: olive.olive3,
+      divider: olive.olive8,
       primary: 'rgb(134,179,0)',
       primaryLighten: 'rgb(172,230,0)',
       primaryDarken: 'rgb(96,128,0)',
@@ -27,13 +28,17 @@ export const {
       danger: tomato.tomato10,
       dangerLighten: tomato.tomato8,
       buttonBg: olive.olive1,
+      buttonBgDisabled: olive.olive8,
+      buttonFgDisabled: olive.olive10,
       buttonBgActive: olive.olive6,
       buttonBgPrimary: '$primary',
       buttonBgPrimaryActive: '$primaryDarken',
       buttonBgPrimaryGradientA: 'rgb(134,179,0)',
       buttonBgPrimaryGradientB: 'rgb(74,179,0)',
+      buttonBgDanger: '$danger',
+      buttonBgDangerActive: tomato.tomato11,
       flatHover: blackA.blackA3,
-      flatActive: blackA.blackA5,
+      flatActive: blackA.blackA4,
     },
     space: {
       xxs: '4px',
@@ -78,21 +83,25 @@ export const {
   },
 });
 
-export const darkTheme = createTheme({
+export const darkTheme = createTheme('dark', {
   colors: {
     bg: oliveDark.olive4,
     fg: oliveDark.olive12,
     white: oliveDark.olive1,
     black: oliveDark.olive12,
     muted: oliveDark.olive11,
+    divider: oliveDark.olive8,
     card: oliveDark.olive1,
     cardPale: oliveDark.olive3,
     danger: tomatoDark.tomato10,
     dangerLighten: tomatoDark.tomato8,
     buttonBg: oliveDark.olive1,
+    buttonBgDisabled: oliveDark.olive8,
+    buttonFgDisabled: oliveDark.olive10,
+    buttonDisabledFg: oliveDark.olive8,
     buttonBgActive: oliveDark.olive2,
     flatHover: whiteA.whiteA6,
-    flatActive: whiteA.whiteA9,
+    flatActive: whiteA.whiteA5,
   },
 });
 
@@ -100,5 +109,6 @@ export const globalStyles = globalCss({
   body: {
     background: '$bg',
     color: '$fg',
+    fontFamily: '"Koruri", sans-serif',
   },
 });

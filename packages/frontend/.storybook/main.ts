@@ -5,6 +5,8 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
+		'@storybook/addon-viewport',
+		'multiple-themes-stitches',
   ],
   framework: {
     name: "@storybook/react-vite",

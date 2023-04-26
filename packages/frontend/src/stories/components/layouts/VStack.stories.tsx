@@ -12,7 +12,6 @@ const Box = styled('div', {
 });
 
 const meta = {
-  title: 'Components/Layouts/VStack',
   component: VStack,
   tags: ['autodocs'],
   args: {

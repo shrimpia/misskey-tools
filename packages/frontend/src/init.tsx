@@ -7,6 +7,7 @@ import { App } from '@/App';
 
 import 'vite/modulepreload-polyfill';
 import 'ress';
+import '@tabler/icons-webfont/tabler-icons.min.css';
 import '@/libs/i18n';
 import '@/libs/dayjs';
 import '@/style.scss';
