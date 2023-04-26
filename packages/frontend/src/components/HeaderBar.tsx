@@ -16,6 +16,7 @@ const Container = styled('header', {
   background: '$headerBarBg',
   alignItems: 'center',
   zIndex: '$floating',
+  backdropFilter: 'blur(32px)',
 });
 
 const AppMenuButton = styled(Button, {

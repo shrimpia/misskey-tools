@@ -21,7 +21,7 @@ const Title = styled('div', {
   backgroundClip: 'text',
 
   '@phone': {
-    fontSize: '$5xl',
+    fontSize: '$4xl',
   },
 });
 
