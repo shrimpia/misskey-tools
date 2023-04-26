@@ -32,8 +32,8 @@ module.exports = {
 		'eol-last': ['error', 'always'],
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
-    "@typescript-eslint/no-unused-vars": 'error',
-    "unused-imports/no-unused-imports": 'error',
+		'@typescript-eslint/no-unused-vars': 'error',
+		'unused-imports/no-unused-imports': 'error',
 		'import/order': [
 			'error',
 			{
@@ -43,5 +43,6 @@ module.exports = {
 				'alphabetize': { 'order': 'asc', 'caseInsensitive': true }, // 大文字小文字関係なくアルファベット順にしたい
 			}
 		],
+		'object-curly-spacing': ['error', 'always'],
 	}
 };
