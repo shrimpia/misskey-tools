@@ -23,6 +23,7 @@
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.0",
 		"dayjs": "^1.10.7",
+		"dotenv": "^16.0.3",
 		"fastify": "^4.15.0",
 		"jest": "^26.6.3",
 		"markdown-it": "^12.3.2",
@@ -42,6 +43,7 @@
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
+		"@types/dotenv": "^8.2.0",
 		"@types/markdown-it": "^12.2.3",
 		"@types/ms": "^0.7.31",
 		"@types/node": "^18.14.1",

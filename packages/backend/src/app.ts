@@ -1,10 +1,11 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
 
 import { config } from './config.js';
 
 export type { AppRouter } from '@/server/api/index.js';
 
-
+dotenv.config();
 
 export const ua = `Mozilla/5.0 MisskeyTools +https://github.com/shrimpia/misskey-tools Node/${process.version} ${config.uaExtra ?? ''}`;
 
