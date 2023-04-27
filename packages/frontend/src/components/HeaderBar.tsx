@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import { PopupMenu } from './primitives/PopupMenu';
 
@@ -27,6 +28,7 @@ const Container = styled('header', {
 const AppMenuButton = styled(Button, {
   width: 32,
   height: 32,
+  zIndex: '$floating',
   i: {
     fontSize: '$2xl',
   },
@@ -35,6 +37,7 @@ const AppMenuButton = styled(Button, {
 const AccountButton = styled(Button, {
   height: 32,
   fontWeight: 'normal',
+  zIndex: '$floating',
 });
 
 const Title = styled(Centered, {
@@ -43,7 +46,11 @@ const Title = styled(Centered, {
   fontSize: '$xl',
   color: '$headerBarTitleFg',
   fontFamily: 'OTADESIGN Rounded',
-  pointerEvents: 'none',
+
+  '> a': {
+    color: 'inherit',
+    textDecoration: 'none',
+  },
 });
 
 const Spacer = styled('div', {
@@ -72,7 +79,9 @@ export const HeaderBar: React.FC = () => {
 
   return (
     <Container>
-      <Title>Misskey Tools</Title>
+      <Title>
+        <Link to="/">Misskey Tools</Link>
+      </Title>
       <AppMenuButton flat>
         <i className="ti ti-grid-dots"/>
       </AppMenuButton>

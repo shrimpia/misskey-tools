@@ -15,7 +15,6 @@ export const useToolsGlobalEffects = () => {
   const { i18n } = useTranslation();
 
   globalStyles();
-
   useTheme();
 
   useEffect(() => {

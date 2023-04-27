@@ -103,7 +103,7 @@ export const darkTheme = createTheme('dark', {
     muted: oliveDark.olive11,
     divider: oliveDark.olive8,
     card: oliveDark.olive5,
-    cardPale: oliveDark.olive1,
+    cardPale: oliveDark.olive3,
     danger: tomatoDark.tomato10,
     dangerLighten: tomatoDark.tomato8,
     buttonBg: oliveDark.olive1,

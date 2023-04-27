@@ -47,7 +47,7 @@ const DashboardPage: React.FC = () => {
   }, []);
 
   return (
-    <PageRoot>
+    <PageRoot title={t('dashboard') ?? ''}>
       <Greeting as="h1">{greetingMessage}</Greeting>
       <WidgetContainer>
         {widgets.map(w => <w.render key={w.name} />)}
