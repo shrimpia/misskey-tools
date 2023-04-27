@@ -3,7 +3,7 @@ import { RouteHandler } from 'fastify';
 
 import { sessionHostCache } from '@/server/cache.js';
 import { die } from '@/server/utils/die.js';
-import { login } from '@/services/session/login.js';
+import { processLogin } from '@/services/sessions/process-login.js';
 
 /**
  * MisskeyにMiAuth認証を飛ばしたときに返ってくるコールバックのハンドラーです。
@@ -33,6 +33,6 @@ export const callbackMiauthController: RouteHandler<{Querystring: {session: stri
     return;
   }
 
-  const toolsToken = await login(user, host, token);
-  await reply.view('frontend', { token: toolsToken });
+  const accessToken = await processLogin(user, host, token);
+  await reply.view('frontend', { token: accessToken });
 };

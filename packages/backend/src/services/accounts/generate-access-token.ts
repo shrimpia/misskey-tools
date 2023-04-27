@@ -4,9 +4,9 @@ import rndstr from 'rndstr';
 import { prisma } from '@/libs/prisma.js';
 
 /**
- * トークンを生成します
+ * Misskey Tools API アクセストークンを生成します
  */
-export const generateToken = async (): Promise<string> => {
+export const generateAccessToken = async (): Promise<string> => {
   let used: UsedToken | null = null;
   let token: string;
   do {

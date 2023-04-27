@@ -1,11 +1,11 @@
+import { accountRouter } from './routers/account.js';
 import { metaRouter } from './routers/meta.js';
-import { sessionRouter } from './routers/session.js';
 
 import { router } from '@/server/api/trpc.js';
 
 export const appRouter = router({
   meta: metaRouter,
-  session: sessionRouter,
+  account: accountRouter,
 });
 
 export type AppRouter = typeof appRouter;

@@ -2,10 +2,12 @@ import crypto from 'crypto';
 
 import { RouteHandler } from 'fastify';
 
+import type { UserDetailed } from 'misskey-js/built/entities.js';
+
 import { api } from '@/libs/misskey';
 import { tokenSecretCache, sessionHostCache } from '@/server/cache.js';
 import { die } from '@/server/utils/die.js';
-import { login } from '@/services/session/login.js';
+import { processLogin } from '@/services/sessions/process-login.js';
 
 /**
  * Misskeyに旧型認証を飛ばしたときに返ってくるコールバックのハンドラーです。
@@ -29,11 +31,11 @@ export const callbackLegacyAuthController: RouteHandler<{Querystring: {token: st
     return;
   }
 
-  const { accessToken, user } = await api<{ accessToken: string, user: Record<string, unknown> }>(host, 'auth/session/userkey', {
+  const { accessToken: misskeyToken, user } = await api<{ accessToken: string, user: UserDetailed }>(host, 'auth/session/userkey', {
     appSecret, token,
   });
-  const i = crypto.createHash('sha256').update(accessToken + appSecret, 'utf8').digest('hex');
+  const i = crypto.createHash('sha256').update(misskeyToken + appSecret, 'utf8').digest('hex');
 
-  const toolsToken = await login(user, host, i);
-  await reply.view('frontend', { token: toolsToken });
+  const accessToken = await processLogin(user, host, i);
+  await reply.view('frontend', { token: accessToken });
 };

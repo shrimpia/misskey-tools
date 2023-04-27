@@ -17,7 +17,7 @@
 	},
 	"dependencies": {
 		"@fastify/view": "^7.4.1",
-		"@prisma/client": "^4.12.0",
+		"@prisma/client": "4.13.0",
 		"@trpc/server": "10.20.0",
 		"axios": "^0.21.2",
 		"class-transformer": "^0.5.1",
@@ -27,6 +27,7 @@
 		"fastify": "^4.15.0",
 		"jest": "^26.6.3",
 		"markdown-it": "^12.3.2",
+		"misskey-js": "^0.0.15",
 		"ms": "^2.1.3",
 		"node-cron": "^2.0.3",
 		"pg": "^8.3.0",
@@ -53,7 +54,7 @@
 		"copyfiles": "^2.3.0",
 		"eslint-config-tools": "workspace:*",
 		"npm-run-all": "^4.1.5",
-		"prisma": "^4.12.0",
+		"prisma": "4.13.0",
 		"rimraf": "^4.1.2",
 		"tools-tsconfig": "workspace:*",
 		"tsup": "^6.2.3"

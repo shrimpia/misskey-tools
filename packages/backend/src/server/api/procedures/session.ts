@@ -3,13 +3,13 @@ import { TRPCError } from '@trpc/server';
 import { middleware, procedure } from '@/server/api/trpc.js';
 
 const hasSession = middleware(({ next, ctx }) => {
-  if (!ctx.user) {
+  if (!ctx.account) {
     throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
   return next({
     ctx: {
       token: ctx.token,
-      user: ctx.user,
+      user: ctx.account,
     },
   });
 });

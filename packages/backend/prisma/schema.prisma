@@ -44,6 +44,8 @@ model Account {
   email       String? @db.VarChar
   /// ログイン用の一時的なパスワード
   password    String? @db.VarChar
+  /// 管理者かどうか
+  isAdmin     Boolean @default(false) @map("is_admin")
 
   /// このアカウントに紐付いたMisskeyセッションの一覧
   misskeySessions MisskeySession[]
@@ -67,11 +69,12 @@ model MisskeySession {
   /// Tools アカウントID
   accountId String  @db.VarChar()
   /// Tools アカウント
-  account   Account @relation(fields: [accountId], references: [id])
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
 
   /// ミス廃アラート機能のアカウント
   misshaiAccount MisshaiAccount?
 
+  @@unique([username, host])
   @@map("misskey_session")
 }
 
@@ -80,22 +83,22 @@ model MisshaiAccount {
   /// このアカウントに紐づくMisskeyセッションのID
   misskeySessionId String         @id @map("misskey_session_id")
   /// このアカウントに紐づくMisskeyセッション
-  misskeySession   MisskeySession @relation(fields: [misskeySessionId], references: [id])
+  misskeySession   MisskeySession @relation(fields: [misskeySessionId], references: [id], onDelete: Cascade)
 
   /// アラートをノートとして発行するかどうか
   alertAsNote         Boolean @default(false) @map("alert_as_note")
   /// アラートを通知欄に表示するかどうか
   alertAsNotification Boolean @default(true) @map("alert_as_notificaton")
   /// アラートを投稿する場合のノートの公開範囲
-  noteVisibility            String  @default("home") @map("note_visibility")
+  noteVisibility      String  @default("home") @map("note_visibility")
   /// アラートを投稿する場合にノートを連合なしとするかどうか
-  noteLocalOnly             Boolean @default(false) @map("note_local_only")
+  noteLocalOnly       Boolean @default(false) @map("note_local_only")
   /// アラートのテンプレート文字列
-  template              String? @db.VarChar(1024)
+  template            String? @db.VarChar(1024)
   /// ランキングからBANされているかどうか
-  bannedFromRanking     Boolean @default(false) @map("banned_from_ranking")
+  bannedFromRanking   Boolean @default(false) @map("banned_from_ranking")
   /// 自分の名前をランキングに表示するかどうか
-  rankingVisible        Boolean @default(false) @map("ranking_visible")
+  rankingVisible      Boolean @default(false) @map("ranking_visible")
 
   /// ミス廃ログ
   records MisshaiRecord[]
@@ -121,7 +124,7 @@ model MisshaiRecord {
   /// このログの所有者であるアカウントのID
   accountId String         @map("account_id")
   /// このログの所有者であるアカウント
-  account   MisshaiAccount @relation(fields: [accountId], references: [misskeySessionId])
+  account   MisshaiAccount @relation(fields: [accountId], references: [misskeySessionId], onDelete: Cascade)
 
   @@map("misshai_record")
 }

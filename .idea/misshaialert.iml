@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
     </content>
+    <content url="file://$MODULE_DIR$/node_modules/.pnpm/@prisma+client@4.12.0_prisma@4.12.0/node_modules/.prisma" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
