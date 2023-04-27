@@ -29,7 +29,7 @@ export const processLogin = async (misskeyUser: MkUser, host: string, misskeyTok
         },
       },
       // Note: 少しでもデータ転送量を抑える（Prismaはcreateの後に絶対selectを実行してしまう）
-      select: {},
+      select: { id: true },
     });
     return accessToken;
   }
