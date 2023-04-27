@@ -24,7 +24,7 @@ const Feature = styled('section', {
   },
 });
 
-export const WelcomePage: React.FC = () => {
+const WelcomePage: React.FC = () => {
   return (
     <div>
       <Hero	/>
@@ -59,3 +59,5 @@ export const WelcomePage: React.FC = () => {
     </div>
   );
 };
+
+export default WelcomePage;

@@ -11,7 +11,7 @@ export const migrateLegacyUser = async () => {
   for (const user of users) {
     const account = await prisma.account.create({
       data: {
-        name: `@${user.username}@${user.host}`,
+        name: user.username,
         accessToken: user.misshaiToken,
       },
     });

@@ -29,6 +29,7 @@ const AppMenuButton = styled(Button, {
 
 const AccountButton = styled(Button, {
   height: 32,
+  fontWeight: 'normal',
 });
 
 const Title = styled(Centered, {
@@ -53,8 +54,7 @@ export const HeaderBar: React.FC = () => {
       </AppMenuButton>
       <Spacer/>
       <AccountButton flat>
-				Lutica
-        <i className="ti ti-chevron-down"/>
+				Lutica&nbsp;<i className="ti ti-chevron-down"/>
       </AccountButton>
     </Container>
   );

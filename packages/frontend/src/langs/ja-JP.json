@@ -73,6 +73,21 @@
 		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！",
 		"myPageDescription": "お使いのMisskeyアカウントを含むリンク、自己紹介、開設した質問ボックスなどを設置し、自由にカスタマイズできるマイページを作ろう。作成したページはURL共有できます。"
 	},
+
+	"_dashboard": {
+		"morning": "おはようございます、{{name}}さん。",
+		"afternoon": "こんにちは、{{name}}さん。",
+		"evening": "こんばんは、{{name}}さん。"
+	},
+
+	"_widgets": {
+		"misshaiData": "今日のミス廃データ",
+		"announcements": "お知らせ",
+		"questionBox": "質問ボックス",
+		"apps": "アプリ",
+		"unreadHints": "未読のヒント"
+	},
+
 	"_missHai": {
 		"ranking": "ミス廃ランキング",
 		"rankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",

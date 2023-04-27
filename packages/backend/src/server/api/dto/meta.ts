@@ -1,4 +1,4 @@
-import { currentTokenVersion } from 'tools-shared/dist/const';
+import { currentTokenVersion } from 'tools-shared/dist/const.js';
 import { z } from 'zod';
 
 export const metaDtoSchema = z.object({

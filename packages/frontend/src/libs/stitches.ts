@@ -13,13 +13,13 @@ export const {
 } = createStitches({
   theme: {
     colors: {
-      bg: olive.olive4,
+      bg: olive.olive5,
       fg: olive.olive12,
       white: olive.olive1,
       black: olive.olive12,
       muted: olive.olive11,
       card: olive.olive1,
-      cardPale: olive.olive3,
+      cardPale: olive.olive4,
       divider: olive.olive8,
       primary: 'rgb(134,179,0)',
       primaryLighten: 'rgb(172,230,0)',
@@ -90,14 +90,14 @@ export const {
 
 export const darkTheme = createTheme('dark', {
   colors: {
-    bg: oliveDark.olive4,
+    bg: oliveDark.olive2,
     fg: oliveDark.olive12,
     white: oliveDark.olive1,
     black: oliveDark.olive12,
     muted: oliveDark.olive11,
     divider: oliveDark.olive8,
-    card: oliveDark.olive1,
-    cardPale: oliveDark.olive3,
+    card: oliveDark.olive5,
+    cardPale: oliveDark.olive1,
     danger: tomatoDark.tomato10,
     dangerLighten: tomatoDark.tomato8,
     buttonBg: oliveDark.olive1,

@@ -1,6 +1,5 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import pages from 'vite-plugin-pages';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
@@ -15,7 +14,6 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    pages(),
   ],
   server: {
     origin: 'http://localhost:4000/vite',

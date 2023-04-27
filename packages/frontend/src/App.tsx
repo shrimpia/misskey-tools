@@ -1,11 +1,13 @@
-import React, { Suspense } from 'react';
-import { useRoutes } from 'react-router-dom';
-
-import { useToolsGlobalEffects } from './global-effects';
-import { token } from './misc/token';
+import React, { Suspense, lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import { HeaderBar } from '@/components/HeaderBar.js';
-import routes from '~react-pages';
+import { Centered } from '@/components/layouts/Centered';
+import { useToolsGlobalEffects } from '@/global-effects';
+import { token } from '@/misc/token';
+
+const IndexDashboard = lazy(() => import('@/pages/index.dashboard'));
+const IndexWelcome = lazy(() => import('./pages/index.welcome'));
 
 export const App : React.FC = () => {
   useToolsGlobalEffects();
@@ -13,8 +15,10 @@ export const App : React.FC = () => {
   return (
     <>
       {token && <HeaderBar/>}
-      <Suspense fallback={<p>Loading</p>}>
-        {useRoutes(routes)}
+      <Suspense fallback={<Centered fullscreen>Loading</Centered>}>
+        <Routes>
+          <Route index element={token ? <IndexDashboard /> : <IndexWelcome />} />
+        </Routes>
       </Suspense>
     </>
   );
