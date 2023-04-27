@@ -22,6 +22,7 @@ export const {
       cardPale: olive.olive4,
       divider: olive.olive8,
       primary: 'rgb(134,179,0)',
+      primaryA: 'rgba(134,179,0,0.1)',
       primaryLighten: 'rgb(172,230,0)',
       primaryDarken: 'rgb(96,128,0)',
       primaryFg: '$white',
@@ -73,6 +74,11 @@ export const {
       3: '16px',
       4: '32px',
       5: '999px',
+    },
+    shadows: {
+      s: '0 0 2px #0002',
+      m: '0 0 12px #0002',
+      l: '0 0 24px #0002',
     },
     zIndices: {
       base: 0,

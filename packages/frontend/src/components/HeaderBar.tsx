@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { PopupMenu } from './primitives/PopupMenu';
 
 import { Centered } from '@/components/layouts/Centered.js';
 import { Button } from '@/components/primitives/Button.js';
 import { styled } from '@/libs/stitches.js';
+import { MenuItem } from '@/models/menu';
+
 
 const Container = styled('header', {
   display: 'flex',
@@ -46,6 +51,25 @@ const Spacer = styled('div', {
 });
 
 export const HeaderBar: React.FC = () => {
+  const { t } = useTranslation();
+
+  const menuItems = useMemo(() => [{
+    type: 'link',
+    label: t('misskeyAccounts'),
+    href: '/accounts',
+    iconClassName: 'ti ti-users',
+  },{
+    type: 'link',
+    label: t('settings'),
+    href: '/settings',
+    iconClassName: 'ti ti-settings',
+  },{
+    type: 'link',
+    label: t('helpAndSupport'),
+    href: '/help',
+    iconClassName: 'ti ti-help-circle',
+  }] as MenuItem[], []);
+
   return (
     <Container>
       <Title>Misskey Tools</Title>
@@ -53,9 +77,11 @@ export const HeaderBar: React.FC = () => {
         <i className="ti ti-grid-dots"/>
       </AppMenuButton>
       <Spacer/>
-      <AccountButton flat>
-				Lutica&nbsp;<i className="ti ti-chevron-down"/>
-      </AccountButton>
+      <PopupMenu items={menuItems}>
+        <AccountButton flat>
+					Lutica
+        </AccountButton>
+      </PopupMenu>
     </Container>
   );
 };
