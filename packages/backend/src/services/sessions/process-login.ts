@@ -3,7 +3,7 @@ import { currentTokenVersion } from 'tools-shared/dist/const.js';
 
 import { prisma } from '@/libs/prisma.js';
 import { generateAccessToken } from '@/services/accounts/generate-access-token.js';
-import { getSessionByMisskeyAcct } from '@/services/sessions/get-session-by-misskey-token.js';
+import { getSessionByMisskeyAcct } from '@/services/sessions/get-session-by-misskey-acct';
 
 /**
  * Misskey認証によるログイン処理
