@@ -24,8 +24,15 @@ const Greeting = styled(Text, {
 const WidgetContainer = styled('div', {
   display: 'flex',
   flexWrap: 'wrap',
-  padding: '$l',
   gap: '$l',
+
+  '@pad': {
+    gap: '$m',
+  },
+
+  '@phone': {
+    justifyContent: 'center',
+  },
 });
 
 const DashboardPage: React.FC = () => {

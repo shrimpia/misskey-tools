@@ -11,6 +11,10 @@ const Container = styled('main', {
   marginTop: '$2xl',
   maxWidth: 1400,
 
+  '@pad': {
+    padding: '$m',
+  },
+
   '@phone': {
     padding: '$s',
   },
