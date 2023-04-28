@@ -34,7 +34,7 @@ export const Hero: React.FC = () => {
 
   return (
     <Container direction="vertical" alignItems="center" justifyContent="center">
-      <Title>{t('title')}</Title>
+      <Title>Misskey Tools</Title>
       <VStack gap="xl" alignItems="center" css={{ marginTop: '$s' }}>
         <Text color="muted">
 					Made with <Twemoji tag="span">🍶</Twemoji> by Shrimpia Network
