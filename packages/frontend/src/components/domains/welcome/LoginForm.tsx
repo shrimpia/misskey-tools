@@ -32,7 +32,7 @@ export const LoginForm: React.FC<LoginFormProp> = (p) => {
     try {
       sanitizeHost(value);
     } catch (e) {
-      setError(t('instanceUrlValidationError') ?? '');
+      setError(t('serverUrlValidationError') ?? '');
     }
   };
 
@@ -50,9 +50,9 @@ export const LoginForm: React.FC<LoginFormProp> = (p) => {
       <VStack as="form" onSubmit={onClickLoginButton}>
         <HStack gap="s" alignItems="right">
           <InputLabel>
-            {t('instanceUrl')}
+            {t('serverUrl')}
             <Input
-              placeholder={t('instanceUrlPlaceholder') ?? ''}
+              placeholder={t('serverUrlPlaceholder') ?? ''}
               error={hasError}
               value={value}
               onBlur={validate}
