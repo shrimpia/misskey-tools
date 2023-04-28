@@ -12,7 +12,7 @@ import { resources } from '@/langs';
 import { themes } from '@/misc/theme';
 import { languageAtom, themeAtom } from '@/store/client-settings';
 
-const AppearanceSetting: React.FC = () => {
+const AppearanceSettings: React.FC = () => {
   const { t } = useTranslation();
   const [theme, setTheme] = useAtom(themeAtom);
   const [language, setLanguage] = useAtom(languageAtom);
@@ -45,4 +45,4 @@ const AppearanceSetting: React.FC = () => {
   );
 };
 
-export default AppearanceSetting;
+export default AppearanceSettings;

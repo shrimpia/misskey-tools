@@ -86,6 +86,9 @@ export const {
       modal: 10,
       popup: 15,
     },
+    timingFunction: {
+      default: 'cubic-bezier(0,.35,.4,1)',
+    },
   },
   media: {
     phone: '(max-width: 640px)',

@@ -2,32 +2,17 @@ import * as $ from '@radix-ui/react-dropdown-menu';
 import React, { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
-import { css, keyframes, styled } from '@/libs/stitches';
+import { slideDownAndFade } from '../keyframes/slide-down-and-fade';
+import { slideLeftAndFade } from '../keyframes/slide-left-and-fade';
+import { slideRightAndFade } from '../keyframes/slide-right-and-fade';
+import { slideUpAndFade } from '../keyframes/slide-up-and-fade';
+
+import { css, styled } from '@/libs/stitches';
 import { MenuItem } from '@/models/menu';
 
 export type PopupMenuProp = PropsWithChildren<{
 	items: MenuItem[];
 }>;
-
-const slideUpAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateY(4px)' },
-  '100%': { opacity: 1, transform: 'translateY(0)' },
-});
-
-const slideRightAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateX(-4px)' },
-  '100%': { opacity: 1, transform: 'translateX(0)' },
-});
-
-const slideDownAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateY(-4px)' },
-  '100%': { opacity: 1, transform: 'translateY(0)' },
-});
-
-const slideLeftAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateX(4px)' },
-  '100%': { opacity: 1, transform: 'translateX(0)' },
-});
 
 const containerStyle = css({
   background: '$card',
@@ -36,7 +21,7 @@ const containerStyle = css({
   padding: '$xs',
 
   animationDuration: '300ms',
-  animationTimingFunction: 'cubic-bezier(0,.68,.31,1)',
+  animationTimingFunction: '$timingFunction$default',
   willChange: 'transform, opacity',
   zIndex: '$popup',
   '&[data-state="open"]': {

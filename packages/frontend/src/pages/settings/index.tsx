@@ -1,13 +1,13 @@
-import React, { Suspense, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 
-import { Centered } from '@/components/layouts/Centered';
 import { HStack } from '@/components/layouts/HStack';
 import { PageRoot } from '@/components/PageRoot';
 import { Heading } from '@/components/primitives/Heading';
 import { Menu } from '@/components/primitives/Menu';
+import { SuspenseView } from '@/components/primitives/SuspenseView';
 import { config, styled } from '@/libs/stitches';
 import { MenuItemLink, MenuItemWithoutNesting } from '@/models/menu';
 
@@ -97,9 +97,9 @@ const SettingsPage: React.FC = () => {
           <Menu items={items} />
         </MenuWrapper>
         <PageWrapper hasPage={hasSubPage}>
-          <Suspense fallback={<Centered>Loading...</Centered>}>
+          <SuspenseView>
             <Outlet/>
-          </Suspense>
+          </SuspenseView>
         </PageWrapper>
       </HStack>
     </PageRoot>

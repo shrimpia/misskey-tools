@@ -42,12 +42,14 @@ const Label = styled('label', {
   cursor: 'pointer',
   border: '1px solid $divider',
   borderRadius: '$2',
+  transition: 'all 0.2s $timingFunction$default',
 
   '&:hover': {
     borderColor: '$primary',
   },
   '&:focus-within': {
     borderColor: '$primary',
+    boxShadow: '0 0 0 1px $colors$primary',
   },
 });
 

@@ -11,11 +11,15 @@ export const Select = styled('select', {
   fontSize: '$m',
   width: '100%',
   border: '1px solid $divider',
-  transition: 'all 0.2s ease',
+  transition: 'all 0.2s $timingFunction$default',
 
   '&:focus': {
     borderColor: '$primary',
     boxShadow: '0 0 0 1px $colors$primary',
+  },
+
+  '&:hover': {
+    borderColor: '$primary',
   },
 
   variants: {
@@ -24,7 +28,6 @@ export const Select = styled('select', {
         color: '$danger',
         borderColor: '$danger',
         '&:focus': {
-          borderColor: '$danger',
           boxShadow: '0 0 0 1px $colors$danger',
         },
       },
