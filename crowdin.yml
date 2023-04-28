@@ -1,4 +1,4 @@
 files:
-  - source: /apps/frontend/src/langs/ja-JP.json
-    translation: /src/frontend/src/langs/%locale%.json
+  - source: /packages/frontend/src/langs/ja-JP.json
+    translation: /packages/frontend/src/langs/%locale%.json
     update_option: update_as_unapproved
