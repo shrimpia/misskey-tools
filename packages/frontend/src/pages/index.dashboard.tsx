@@ -44,7 +44,7 @@ const DashboardPage: React.FC = () => {
       // あとは全部昼
       return t('_dashboard.afternoon', { name: account.name });
     }
-  }, []);
+  }, [account.name, t]);
 
   return (
     <PageRoot title={t('dashboard') ?? ''}>

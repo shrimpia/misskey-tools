@@ -2,6 +2,7 @@ module.exports = {
   extends: [
     'tools', 
     'plugin:react/recommended',
+    "plugin:react-hooks/recommended",
   ],
   settings: {
     react: {

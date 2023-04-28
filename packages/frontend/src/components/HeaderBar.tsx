@@ -75,7 +75,7 @@ export const HeaderBar: React.FC = () => {
     label: t('helpAndSupport'),
     href: '/help',
     iconClassName: 'ti ti-help-circle',
-  }] as MenuItem[], []);
+  }] as MenuItem[], [t]);
 
   return (
     <Container>

@@ -9,6 +9,7 @@ export const Select = styled('select', {
   background: '$card',
   color: '$fg',
   fontSize: '$m',
+  width: '100%',
   border: '1px solid $divider',
   transition: 'all 0.2s ease',
 

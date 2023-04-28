@@ -10,6 +10,7 @@
 	"sendAsNote": "ノート",
 	"visibility": "公開範囲",
 	"appearance": "表示設定",
+	"accountSettings": "アカウント設定",
 	"template": "テンプレート",
 	"sendAlert": "アラートをテスト送信する",
 	"sendAlertDescription": "現在の設定を用いて、アラート送信をテストします。",

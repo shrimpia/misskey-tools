@@ -12,6 +12,13 @@ export type MenuItem =
 	| MenuItemSub
 	;
 
+export type MenuItemWithoutNesting =
+		| MenuItemHeading
+		| MenuItemLink
+		| MenuItemButton
+		| MenuItemSeparator
+		;
+
 export type MenuItemLink = MenuItemCommon & {
 	type: 'link';
 	href: string;
@@ -30,7 +37,7 @@ export type MenuItemSub = MenuItemCommon & {
 };
 
 export type MenuItemSeparator = {
-	type: 'seprator';
+	type: 'separator';
 };
 
 export type MenuItemHeading = {

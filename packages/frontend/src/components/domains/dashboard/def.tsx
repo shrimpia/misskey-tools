@@ -12,7 +12,8 @@ export interface WidgetDef {
 export const widget = (name: string, iconClass: string, pale: boolean, render: React.FC): WidgetDef => {
   return {
     name, iconClass,
-    render() {
+    render: () => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const { t } = useTranslation();
       return (
         <WidgetBase title={pale ? undefined : (t('_widgets.' + name) ?? '')} iconClass={pale ? undefined : iconClass} pale={pale}>

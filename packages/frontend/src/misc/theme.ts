@@ -33,7 +33,7 @@ export const useTheme = () => {
   // テーマ変更に追従する
   useEffect(() => {
     applyTheme();
-  }, [theme, osTheme]);
+  }, [applyTheme]);
 
   // システムテーマ変更に追従する
   useEffect(() => {

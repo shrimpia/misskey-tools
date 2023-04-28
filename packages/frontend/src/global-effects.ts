@@ -19,5 +19,5 @@ export const useToolsGlobalEffects = () => {
 
   useEffect(() => {
     i18n.changeLanguage(language);
-  }, [language]);
+  }, [i18n, language]);
 };

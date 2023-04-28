@@ -29,7 +29,7 @@ const slideLeftAndFade = keyframes({
   '100%': { opacity: 1, transform: 'translateX(0)' },
 });
 
-const contentStyle = css({
+const containerStyle = css({
   background: '$card',
   borderRadius: '$2',
   boxShadow: '$m',
@@ -54,6 +54,7 @@ const itemStyle = css({
   display: 'flex',
   alignItems: 'center',
   lineHeight: 1,
+  textAlign: 'left',
 
   '> .icon': {
     marginRight: '$xs',
@@ -76,13 +77,9 @@ const itemStyle = css({
   },
 });
 
-const Portal = styled($.Portal, {
-  transformStyle: 'preserve-3d',
-});
-
-const Content = styled($.Content, contentStyle);
+const Content = styled($.Content, containerStyle);
 const Item = styled($.Item, itemStyle);
-const SubContent = styled($.SubContent, contentStyle);
+const SubContent = styled($.SubContent, containerStyle);
 
 const SubItem = styled($.SubTrigger, itemStyle, {
   '&[data-state="open"]': {
@@ -103,7 +100,6 @@ const Label = styled($.Label, {
 });
 
 const MenuItemComponent: React.FC<{item: MenuItem}> = ({ item }) => {
-  console.log(item);
   switch (item.type) {
     case 'link':
       return (
@@ -127,7 +123,7 @@ const MenuItemComponent: React.FC<{item: MenuItem}> = ({ item }) => {
           {item.label}
         </Label>
       );
-    case 'seprator':
+    case 'separator':
       return <Separator />;
     case 'sub':
       return (
@@ -158,11 +154,11 @@ export const PopupMenu: React.FC<PopupMenuProp> = (p) => {
         {p.children}
       </$.Trigger>
 
-      <Portal>
+      <$.Portal>
         <Content>
           {p.items.map((item, i) => <MenuItemComponent key={i} item={item} />)}
         </Content>
-      </Portal>
+      </$.Portal>
     </$.Root>
   );
 };
