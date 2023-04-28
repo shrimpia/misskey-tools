@@ -1,68 +1,89 @@
 {
-	"title": "Misskey Tools",
-	"description1": "Misskey هو شيء ممتع. عندما أدركت ذلك ، فقد استخدمت Misskey طوال اليوم.",
-	"description2": "دعنا نحصل على حساب Misskey Tools ونعرف نشاطك.",
+	"$languageName": "日本語",
+	"description": "Misskeyをもっと楽しく、もっと便利に。すべてのミスキストのためのオールインワンツール。",
+	"name": "اسم",
 	"notes": "ملاحظات",
 	"following": "متابعة",
 	"followers": "المتابعون",
-	"welcomeBack": "مرحبا بعودتك، {{acct}}.",
 	"alertMode": "كيفية إرسال التنبيهات",
 	"visibility": "الوضوح",
 	"appearance": "مظهر",
+	"accountSettings": "アカウント設定",
 	"template": "نموذج",
 	"sendAlert": "اختبر تنبيهك",
 	"sendAlertDescription": "أرسل تنبيهك بالإعدادات الحالية للاختبار.",
 	"sendAlertDisabled": "لا يمكنك اختبار إرسال التنبيه لأن إعداد \"كيفية إرسال التنبيهات\" هو \"لا تفعل شيئًا\".",
+	"login": "تسجيل الدخول",
+	"loginWithMisskey": "Misskey でログイン",
 	"logout": "تسجيل خروج",
 	"logoutDescription": "إذا قمت بتسجيل الخروج ، فسيتم إرسال تنبيهاتك تلقائيًا.",
 	"deleteAccount": "تعطيل تكامل الحساب",
 	"deleteAccountDescription": "حذف حساب Misskey Tools الخاص بك. سيؤدي هذا إلى تعطيل التكامل مع Misskey.",
-	"instanceUrl": "Url المثيل",
-	"login": "تسجيل الدخول",
-	"localOnly": "محلي فقط",
-	"remoteFollowersOnly": "المتابعون عن بعد والمحليون فقط",
+	"serverUrl": "サーバーURL",
+	"serverUrlPlaceholder": "例：misskey.io",
+	"serverUrlValidationError": "正しいURL文字列を入力してください。",
+	"noFederation": "連合なし",
 	"help": "مساعدة",
 	"save": "حفظ",
 	"theme": "مظهر",
 	"language": "لغة",
 	"fetching": "جار الجلب……",
 	"failedToFetch": "فشل الجلب",
-	"registeredUsersCount": "المستخدمون",
 	"isCalculating": "يتم حسابه الآن. يرجى إعادة التحقق لاحقًا!",
 	"ok": "موافق",
 	"yes": "موافق",
 	"no": "لا",
 	"termsOfService": "شروط الخدمة",
-	"name": "اسم",
 	"resetToDefault": "إعادة تعيين إلى الافتراضي",
 	"error": "خطأ",
 	"retry": "حاول مجددا",
 	"saved": "保存しました。",
-	"disclaimerForMisskeyHq": "Misskey Tools هي<b> ليست</b> أداة رسمية من Misskey HQ.",
+	"accounts": "アカウント",
 	"translatedByTheCommunity": "يقوم متطوعون بترجمة Misskey Tools.",
 	"helpTranslation": "إرسال الترجمات",
+	"developedAsOpenSourceSoftware": "Misskey Toolsはオープンソースソフトウェアであり、誰でも開発にご協力いただけます。あなたも貢献してみませんか？",
 	"announcements": "お知らせ",
-	"_welcomeMessage": {
-		"pattern1": "هل أنت متفرغ؟",
-		"pattern2": "هل تفرط في استخدام Misskey؟",
-		"pattern3": "كم عدد الملاحظات التي كتبتها اليوم؟",
-		"pattern4": "هل تعتقد حقًا أنك مخطئ؟",
-		"pattern5": "Misskey هو أنفاسي!",
-		"pattern6": "I'm Misskey freak!"
-	},
+	"upload": "アップロード",
+	"preview": "プレビュー",
+	"dashboard": "ダッシュボード",
+	"missHaiAlert": "ミス廃アラート",
+	"avatarCropper": "アバタークロッパー",
+	"questionBox": "質問ボックス",
+	"followingManager": "フォローマネージャー",
+	"myPage": "マイページ",
+	"shouldUpdateToken": "認証トークンの更新が必要です。更新しないと一部機能が正常に動作しません。",
+	"update": "更新する",
+	"shareMisskeyTools": "#MisskeyTools をシェアする",
+	"shareMisskeyToolsNote": "#MisskeyTools はいいぞ\n\nhttps://misskey.tools",
+	"settings": "設定",
+	"accentColor": "アクセントカラー",
+	"changelog": "更新履歴",
+	"otherSettings": "その他の設定",
+	"admin": "管理画面",
+	"misskeyAccounts": "Misskey アカウント…",
+	"helpAndSupport": "ヘルプとサポート",
 	"_welcome": {
-		"title": "Toolkit for Professional.",
-		"description": "All tools are designed for Misskey, in order to make Misskey more enjoyable.",
 		"misshaiAlertTitle": "Miss-hai Alert",
 		"misshaiAlertDescription": "هل أنت قلق من الإفراط في استخدام Misskey؟ باستخدام إنذار Misshai ، يمكنك نشر أنشطتك تلقائيًا على Misskey على النحو التالي.",
 		"misshaiRankingDescription": "يظهر ترتيب Misshai أنشطتك الكمية على Misskey.",
+		"avatarCropperDescription": "丸形、角丸形、そして猫耳のついた状態をプレビューしながら、アイコンを自在に切り抜けます。魅力的なアバターを、もっと魅力的に。",
+		"questionBoxDescription": "匿名で質問できるページを開設しよう。届いた質問には、お使いのMisskeyアカウントで回答できます。",
+		"followingManagerDescription": "増えすぎたフォロー・フォロワーを管理できる高機能なマネージャー。所属サーバーや、フォローバックされていないアカウントで絞り込むことができ、一括処理にも対応しています。",
 		"nextFeaturesTitle": "سيتم التحديث في المستقبل.",
-		"nextFeaturesDescription": "هذا ليس كل شيء. سنضيف المزيد من الأدوات عن طريق التحديثات في المستقبل."
+		"nextFeaturesDescription": "هذا ليس كل شيء. سنضيف المزيد من الأدوات عن طريق التحديثات في المستقبل.",
+		"myPageDescription": "お使いのMisskeyアカウントを含むリンク、自己紹介、開設した質問ボックスなどを設置し、自由にカスタマイズできるマイページを作ろう。作成したページはURL共有できます。"
 	},
-	"_nav": {
-		"misshai": "Misshai",
-		"accounts": "حسابات",
-		"settings": "إعدادات"
+	"_dashboard": {
+		"morning": "おはようございます、{{name}}さん。",
+		"afternoon": "こんにちは、{{name}}さん。",
+		"evening": "こんばんは、{{name}}さん。"
+	},
+	"_widgets": {
+		"misshaiData": "今日のミス廃データ",
+		"announcements": "お知らせ",
+		"questionBox": "質問ボックス",
+		"apps": "アプリ",
+		"unreadHints": "未読のヒント"
 	},
 	"_missHai": {
 		"ranking": "ترتيب Misshai",
@@ -74,32 +95,19 @@
 		"dataDelta": "الفرق",
 		"rating": "تقييم",
 		"order": "الطلب",
-		"showRanking": "عرض الترتيب"
+		"showRanking": "عرض الترتيب",
+		"useRanking": "ランキングに参加する",
+		"note": "自動的にノートとして投稿する",
+		"notification": "Misskeyに通知する",
+		"notificationWarning": "Misskeyのバージョンによっては動作しません。"
 	},
 	"_accounts": {
-		"currentAccount": "الحساب الحالي",
 		"switchAccount": "تبديل حسابك",
 		"useAnother": "سجل بحساب آخر"
 	},
-	"_developerInfo": {
-		"title": "المطور",
-		"description": "إذا كنت تريد دعمًا ، أرسل رسائل إلى الحسابات أدناه."
-	},
-	"_timeline": {
-		"title": "الخط الزمني",
-		"description": "يظهر أحدث الملاحظات بما في ذلك علامات {{hashtag}}."
-	},
-	"_alertMode": {
-		"note": "ملاحظة تلقائية",
-		"notification": "تنبيه حسابك (افتراضي)",
-		"nothing": "لا تفعل شيئا",
-		"notificationWarning": "لن يعمل خيار \"تنبيه حسابك\" على الإصدارات القديمة من Misskey."
-	},
 	"_visibility": {
-		"public": "عام",
 		"home": "الصفحة الرئيسية",
-		"followers": "المتابعون",
-		"users": "المستخدمون المسجلون"
+		"followers": "المتابعون"
 	},
 	"_themes": {
 		"light": "إضاءة",
@@ -122,18 +130,19 @@
 			"url": "عنوان Url لهذا الموقع",
 			"username": "اسم المستخدم الخاص بك",
 			"host": "مضيفك",
-			"rating": "تقييمك"
+			"rating": "تقييمك",
+			"gacha": "ガチャ"
 		}
 	},
 	"_error": {
 		"sorry": "هناك خطأ ما. يرجى المحاولة مجددا.",
 		"additionalInfo": "معلومات اضافية: ",
-		"hitorisskeyIsDenied": "لا يمكنك التكامل مع hitorisskey.",
 		"teapot": "أنا إبريق شاي.",
 		"sessionRequired": "الجلسة مطلوبة.",
 		"tokenRequired": "الرمز مطلوب.",
 		"invalidParameter": "معلمة غير صالحة.",
 		"notAuthorized": "غير مخول.",
+		"hostNotFound": "サーバーに接続できませんでした。ホスト名が正しく入力されているか、接続先のサーバーが正常に動作しているかご確認ください。",
 		"other": "لا شيء"
 	},
 	"_sendTest": {
