@@ -39,7 +39,7 @@
 	"retry": "やり直す",
 	"saved": "保存しました。",
 	"accounts": "アカウント",
-	"translatedByTheCommunity": "Misskey Toolsはボランティアによって翻訳されています。",
+	"translatedByTheCommunity": "Misskey Toolsはコミュニティによって翻訳されています。あなたも翻訳に協力してみませんか？",
 	"helpTranslation": "翻訳に協力する",
 	"developedAsOpenSourceSoftware": "Misskey Toolsはオープンソースソフトウェアであり、誰でも開発にご協力いただけます。あなたも貢献してみませんか？",
 	"announcements": "お知らせ",
@@ -64,7 +64,7 @@
 	"helpAndSupport": "ヘルプとサポート",
 	"_welcome": {
 		"misshaiAlertTitle": "ミス廃アラート",
-		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
+		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
 		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
 		"avatarCropperDescription": "丸形、角丸形、そして猫耳のついた状態をプレビューしながら、アイコンを自在に切り抜けます。魅力的なアバターを、もっと魅力的に。",
 		"questionBoxDescription": "匿名で質問できるページを開設しよう。届いた質問には、お使いのMisskeyアカウントで回答できます。",
@@ -87,9 +87,9 @@
 	},
 	"_missHai": {
 		"ranking": "ミス廃ランキング",
-		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
+		"rankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
 		"showAll": "全員分見る",
-		"data": "みす廃データ",
+		"data": "ミス廃データ",
 		"dataBody": "内容",
 		"dataScore": "スコア",
 		"dataDelta": "前日比",
@@ -135,7 +135,7 @@
 		}
 	},
 	"_error": {
-		"sorry": "問題が発生しました。お手数ですが、やり直してください。",
+		"sorry": "問題が発生しました。",
 		"additionalInfo": "追加情報: ",
 		"teapot": "I'm a teapot.",
 		"sessionRequired": "セッションがありません。",
@@ -143,7 +143,7 @@
 		"invalidParameter": "パラメータが不正です。",
 		"notAuthorized": "権限がありません。",
 		"hostNotFound": "サーバーに接続できませんでした。ホスト名が正しく入力されているか、接続先のサーバーが正常に動作しているかご確認ください。",
-		"other": "なし"
+		"other": "不明なエラーです。"
 	},
 	"_sendTest": {
 		"title": "アラートをテスト送信しますか？",
