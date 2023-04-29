@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { WidgetBase } from './WidgetBase';
 
+import { SuspenseView } from '@/components/primitives/SuspenseView';
+
 export interface WidgetDef {
 	name: string;
 	iconClass: string;
@@ -17,7 +19,9 @@ export const widget = (name: string, iconClass: string, pale: boolean, render: R
       const { t } = useTranslation();
       return (
         <WidgetBase title={pale ? undefined : (t('_widgets.' + name) ?? '')} iconClass={pale ? undefined : iconClass} pale={pale}>
-          {render({})}
+          <SuspenseView>
+            {render({})}
+          </SuspenseView>
         </WidgetBase>
       );
     },
