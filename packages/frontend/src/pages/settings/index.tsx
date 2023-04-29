@@ -59,21 +59,12 @@ const SettingsPage: React.FC = () => {
     iconClassName: 'ti ti-palette',
     label: t('appearance') ?? '',
   }, {
-    type: 'link',
-    href: '/settings/misshai',
-    iconClassName: 'ti ti-antenna',
-    label: t('missHaiAlert') ?? '',
-  }, {
     type: 'separator',
   }, {
     type: 'button',
     iconClassName: 'ti ti-logout',
     label: t('logout') ?? '',
-  } , {
-    type: 'button',
-    iconClassName: 'ti ti-trash',
-    label: t('deleteAccount') ?? '',
-  } ] as MenuItemWithoutNesting[], [t]);
+  }] as MenuItemWithoutNesting[], [t]);
 
   const location = useLocation();
   const navigate = useNavigate();

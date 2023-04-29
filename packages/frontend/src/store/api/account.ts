@@ -1,4 +1,4 @@
-import { trpcJotai } from '@/store/api';
+import { trpcJotai } from '@/libs/trpc';
 
 export const accountAtom = trpcJotai.account.getMyself.atomWithQuery();
 

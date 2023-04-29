@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { App } from '@/App';
 import { BackendError } from '@/components/domains/backend-error/BackendError.js';
+import { TRPCProvider } from '@/libs/trpc';
 
 import 'vite/modulepreload-polyfill';
 import 'ress';
@@ -20,8 +21,10 @@ const error = (window as any).__misshaialert?.error;
 
 if (el != null) {
   createRoot(el).render(error ? (<BackendError error={error} />) : (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <TRPCProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </TRPCProvider>
   ));
 }
