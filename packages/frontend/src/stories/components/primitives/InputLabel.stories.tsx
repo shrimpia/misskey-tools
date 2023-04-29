@@ -6,7 +6,9 @@ import { InputLabel } from '@/components/primitives/InputLabel.js';
 
 const meta = {
   component: InputLabel,
-  tags: ['autodocs'],
+  parameters: {
+    layouts: 'centered',
+  },
 } satisfies Meta<typeof InputLabel>;
 
 export default meta;

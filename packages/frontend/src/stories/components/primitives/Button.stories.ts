@@ -25,6 +25,9 @@ const meta = {
       control: { type: 'radio' },
     },
   },
+  parameters: {
+    layouts: 'centered',
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;

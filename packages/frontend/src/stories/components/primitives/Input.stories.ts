@@ -8,6 +8,9 @@ const meta = {
   args: {
     placeholder: '値を入力…',
   },
+  parameters: {
+    layouts: 'centered',
+  },
 } satisfies Meta<typeof Input>;
 
 export default meta;

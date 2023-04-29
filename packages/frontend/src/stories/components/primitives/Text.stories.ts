@@ -22,6 +22,9 @@ const meta = {
       control: { type: 'select' },
     },
   },
+  parameters: {
+    layouts: 'centered',
+  },
 } satisfies Meta<typeof Text>;
 
 export default meta;

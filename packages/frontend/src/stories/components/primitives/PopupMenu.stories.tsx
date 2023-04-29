@@ -6,7 +6,6 @@ import { PopupMenu } from '@/components/primitives/PopupMenu';
 
 const meta = {
   component: PopupMenu,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
@@ -42,7 +41,7 @@ export const Default: Story = {
         },
       }],
     }, {
-      type: 'seprator',
+      type: 'separator',
     }, {
       type: 'heading',
       label: '無効',
