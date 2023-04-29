@@ -72,7 +72,7 @@ export const {
       1: '3px',
       2: '8px',
       3: '16px',
-      4: '32px',
+      4: '24px',
       5: '999px',
     },
     shadows: {

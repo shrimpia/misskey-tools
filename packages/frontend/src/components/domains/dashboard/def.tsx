@@ -1,3 +1,4 @@
+import { css } from '@stitches/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +11,10 @@ export interface WidgetDef {
 	render: React.FC;
 }
 
+export const scrollableStyle = css({
+  overflow: 'auto',
+});
+
 export const widget = (name: string, iconClass: string, pale: boolean, render: React.FC): WidgetDef => {
   return {
     name, iconClass,
@@ -18,7 +23,7 @@ export const widget = (name: string, iconClass: string, pale: boolean, render: R
       const { t } = useTranslation();
       return (
         <WidgetBase title={pale ? undefined : (t('_widgets.' + name) ?? '')} iconClass={pale ? undefined : iconClass} pale={pale}>
-          <SuspenseView>
+          <SuspenseView className={scrollableStyle()}>
             {render({})}
           </SuspenseView>
         </WidgetBase>

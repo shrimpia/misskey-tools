@@ -20,6 +20,8 @@ export type WidgetBaseProp = PropsWithChildren<{
 }>;
 
 const Container = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
   padding: '$l',
   borderRadius: '$4',
   background: '$card',
