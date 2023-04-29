@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
-import {darkTheme, globalStyles, theme} from '../libs/stitches';
+import {darkTheme, globalStyles, theme} from '../src/libs/stitches';
 
 import 'ress';
 import '@tabler/icons-webfont/tabler-icons.min.css';
