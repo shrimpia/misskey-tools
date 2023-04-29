@@ -28,6 +28,7 @@ export const App : React.FC = () => {
             <Route path="account" element={<Account />}/>
             <Route path="*" element={<p>Not Found</p>}/>
           </Route>
+          <Route path="*" element={<NotFound />}/>
         </Routes>
       </SuspenseView>
     </>
