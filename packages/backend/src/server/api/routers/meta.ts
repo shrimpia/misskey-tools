@@ -1,8 +1,7 @@
 import { currentTokenVersion } from 'tools-shared/dist/const.js';
 
-import { metaDtoSchema } from '../dto/meta';
-
 import { meta } from '@/config';
+import { metaDtoSchema } from '@/server/api/dto/meta';
 import { procedure, router } from '@/server/api/trpc';
 
 export const metaRouter = router({

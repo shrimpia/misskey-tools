@@ -2,12 +2,11 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { PopupMenu } from './primitives/PopupMenu';
-
 import { Centered } from '@/components/layouts/Centered.js';
 import { Button } from '@/components/primitives/Button.js';
+import { PopupMenu } from '@/components/primitives/PopupMenu.js';
 import { styled } from '@/libs/stitches.js';
-import { MenuItem } from '@/models/menu';
+import { MenuItem } from '@/models/menu.js';
 
 
 const Container = styled('header', {

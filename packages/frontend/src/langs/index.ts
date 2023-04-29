@@ -1,13 +1,13 @@
 import deepmerge from 'deepmerge';
 
-import enUS from './en-US.json';
-import itIT from './it-IT.json';
-import jaCR from './ja-cr.json';
-import jaJP from './ja-JP.json';
-import jaKS from './ja-KS.json';
-import koKR from './ko-KR.json';
-import zhCN from './zh-CN.json';
-import zhTW from './zh-TW.json';
+import enUS from '@/langs/en-US.json';
+import itIT from '@/langs/it-IT.json';
+import jaCR from '@/langs/ja-cr.json';
+import jaJP from '@/langs/ja-JP.json';
+import jaKS from '@/langs/ja-KS.json';
+import koKR from '@/langs/ko-KR.json';
+import zhCN from '@/langs/zh-CN.json';
+import zhTW from '@/langs/zh-TW.json';
 
 
 const merge = (baseData: Record<string, unknown>, newData: Record<string, unknown>) => {

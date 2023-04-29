@@ -1,9 +1,8 @@
 import React, { Suspense } from 'react';
 
-import { Spinner } from './Spinner';
-
 import { slideUpAndFade } from '@/components/keyframes/slide-up-and-fade';
 import { Centered } from '@/components/layouts/Centered';
+import { Spinner } from '@/components/primitives/Spinner';
 import { styled } from '@/libs/stitches';
 
 const Content = styled('div', {

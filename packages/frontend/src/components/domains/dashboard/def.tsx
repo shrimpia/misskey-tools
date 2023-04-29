@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { WidgetBase } from './WidgetBase';
-
+import { WidgetBase } from '@/components/domains/dashboard/WidgetBase';
 import { SuspenseView } from '@/components/primitives/SuspenseView';
 
 export interface WidgetDef {

@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { useAtomValue } from 'jotai';
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +7,7 @@ import { VStack } from '@/components/layouts/VStack';
 import { Badge } from '@/components/primitives/Badge';
 import { Text } from '@/components/primitives/Text';
 import { styled } from '@/libs/stitches';
-import { announcementListAtom } from '@/store/api/announcements';
+import { trpc } from '@/libs/trpc';
 
 const Container = styled(Link, {
   display: 'block',
@@ -29,7 +28,7 @@ const Title = styled('div', {
 });
 
 export default widget('announcements', 'ti ti-speakerphone', false, () => {
-  const announcements = useAtomValue(announcementListAtom);
+  const [announcements] = trpc.announcements.getAll.useSuspenseQuery();
 
   const data = useMemo(() => announcements.map(d => ({
     id: d.id,

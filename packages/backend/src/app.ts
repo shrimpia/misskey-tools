@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 
-import { config } from './config.js';
+import { config } from '@/config.js';
 
 export type { AppRouter } from '@/server/api/index.js';
 
@@ -14,6 +14,6 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.validateStatus = (stat) => stat < 500;
 
 (async () => {
-  await (await import('./boot/server.js')).default();
-  (await import('./boot/worker.js')).default();
+  await (await import('@/boot/server.js')).default();
+  (await import('@/boot/worker.js')).default();
 })();

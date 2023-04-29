@@ -1,10 +1,9 @@
 
 import { z } from 'zod';
 
-import { accountDtoSchema, toAccountDto } from '../dto/account';
-import { misskeySessionDtoSchema } from '../dto/misskey-session';
-
 import { prisma } from '@/libs/prisma';
+import { accountDtoSchema, toAccountDto } from '@/server/api/dto/account';
+import { misskeySessionDtoSchema } from '@/server/api/dto/misskey-session';
 import { sessionProcedure } from '@/server/api/procedures/session.js';
 import { router } from '@/server/api/trpc.js';
 

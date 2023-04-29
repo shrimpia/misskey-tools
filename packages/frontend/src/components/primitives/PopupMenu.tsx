@@ -2,11 +2,10 @@ import * as $ from '@radix-ui/react-dropdown-menu';
 import React, { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
-import { slideDownAndFade } from '../keyframes/slide-down-and-fade';
-import { slideLeftAndFade } from '../keyframes/slide-left-and-fade';
-import { slideRightAndFade } from '../keyframes/slide-right-and-fade';
-import { slideUpAndFade } from '../keyframes/slide-up-and-fade';
-
+import { slideDownAndFade } from '@/components/keyframes/slide-down-and-fade';
+import { slideLeftAndFade } from '@/components/keyframes/slide-left-and-fade';
+import { slideRightAndFade } from '@/components/keyframes/slide-right-and-fade';
+import { slideUpAndFade } from '@/components/keyframes/slide-up-and-fade';
 import { css, styled } from '@/libs/stitches';
 import { MenuItem } from '@/models/menu';
 
