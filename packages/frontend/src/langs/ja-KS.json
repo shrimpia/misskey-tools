@@ -31,8 +31,8 @@
 	"failedToFetch": "取得できへんかったわ",
 	"isCalculating": "現在算出中やで。また後で見てや！",
 	"ok": "OK",
-	"yes": "はい",
-	"no": "いいえ",
+	"yes": "ええで",
+	"no": "あかんで",
 	"termsOfService": "利用規約",
 	"resetToDefault": "最初の設定に戻すで",
 	"error": "エラー",
@@ -52,26 +52,26 @@
 	"followingManager": "フォローマネージャー",
 	"myPage": "マイページ",
 	"shouldUpdateToken": "認証トークンの更新がいるで。更新せんと一部機能がちゃんと動かんで。",
-	"update": "更新する",
+	"update": "更新するで",
 	"shareMisskeyTools": "#うちのオカンが言うにはな。MisskeyToolsっていうらしいねん",
 	"shareMisskeyToolsNote": "#MisskeTools　めっちゃええやん！",
 	"settings": "設定",
 	"accentColor": "アクセントカラー",
 	"changelog": "更新履歴",
-	"otherSettings": "その他の設定",
+	"otherSettings": "ほかの設定",
 	"admin": "管理画面",
 	"misskeyAccounts": "Misskey アカウント…",
 	"helpAndSupport": "ヘルプとサポート",
 	"_welcome": {
 		"misshaiAlertTitle": "ミス廃アラート",
-		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
-		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
-		"avatarCropperDescription": "丸形、角丸形、そして猫耳のついた状態をプレビューしながら、アイコンを自在に切り抜けます。魅力的なアバターを、もっと魅力的に。",
-		"questionBoxDescription": "匿名で質問できるページを開設しよう。届いた質問には、お使いのMisskeyアカウントで回答できます。",
-		"followingManagerDescription": "増えすぎたフォロー・フォロワーを管理できる高機能なマネージャー。所属サーバーや、フォローバックされていないアカウントで絞り込むことができ、一括処理にも対応しています。",
-		"nextFeaturesTitle": "今後も追加予定。",
-		"nextFeaturesDescription": "これだけではありません。今後もアップデートで様々な機能を追加します！",
-		"myPageDescription": "お使いのMisskeyアカウントを含むリンク、自己紹介、開設した質問ボックスなどを設置し、自由にカスタマイズできるマイページを作ろう。作成したページはURL共有できます。"
+		"misshaiAlertDescription": "あんたMisskeyめっちゃ好きやん！ミス廃アラート使ったら、あんたがMisskeyで活動した統計を定期投稿してくれるで。",
+		"misshaiRankingDescription": "ミス廃ランキングは、あんたらのMisskeyで活動した量を数値化してランキング表示するもんやで。",
+		"avatarCropperDescription": "丸形、角丸形、そして猫耳のついた状態をプレビューしながら、アイコンを自在に切り抜けるで。まぁ化粧のようなもんやわ。",
+		"questionBoxDescription": "匿名で質問できるページ作ろうや。届いた質問はあんたのMisskeyアカウントで回答できるで。",
+		"followingManagerDescription": "増えすぎたフォロー・フォロワーを管理できる高機能なマネージャーやで。所属サーバーや、フォローバックされていないアカウントで絞り込むことができて、一括処理にも対応してるんやって。しらんけど",
+		"nextFeaturesTitle": "やれたらやるわ",
+		"nextFeaturesDescription": "これだけちゃうで。今後もアップデートで色々足していくからな！",
+		"myPageDescription": "今使ってるMisskeyアカウントを含むリンク、自己紹介、開設した質問ボックスなどを設置し、自由にカスタマイズできるマイページ作ろか。作成したページはURL共有できるんやって。"
 	},
 	"_dashboard": {
 		"morning": "おはようございます、{{name}}さん。",
@@ -95,15 +95,15 @@
 		"dataDelta": "前日比",
 		"rating": "レート",
 		"order": "順位",
-		"showRanking": "ランキングを見る",
-		"useRanking": "ランキングに参加する",
-		"note": "自動的にノートとして投稿する",
-		"notification": "Misskeyに通知する",
-		"notificationWarning": "Misskeyのバージョンによっては動作しません。"
+		"showRanking": "ランキング見るで",
+		"useRanking": "ランキング参加するで",
+		"note": "勝手にノートしといたるわ",
+		"notification": "Misskeyに通知しとくで",
+		"notificationWarning": "Misskeyのバージョンによったら動作せんのもあるんやって。"
 	},
 	"_accounts": {
-		"switchAccount": "アカウント切り替え",
-		"useAnother": "他のアカウントで登録する"
+		"switchAccount": "アカウント変えるで",
+		"useAnother": "他のアカウントで登録するで"
 	},
 	"_visibility": {
 		"home": "ホーム",
@@ -112,7 +112,7 @@
 	"_themes": {
 		"light": "ライトテーマ",
 		"dark": "ダークテーマ",
-		"system": "システム設定に準じる"
+		"system": "システム設定そのまま使うで"
 	},
 	"_template": {
 		"description": "アラートの自動投稿をカスタマイズできるで。",
@@ -157,14 +157,14 @@
 		"title": "ログアウトしてもええか？",
 		"message": "ログアウトしても、アラート送信や、お使いのMisskeyアカウントのデータ収集といった機能は動作し続けます。Misskey Toolsの利用を停止したい場合は、「アカウント連携を解除する」ボタンを押下して下さい。",
 		"yes": "ログアウトする",
-		"no": "キャンセル"
+		"no": "やめとくわ"
 	},
 	"_deactivate": {
-		"title": "アカウント連携を解除しますか？",
+		"title": "アカウント連携解除するんか？",
 		"message": "収集されたデータや個人設定など、全てのデータが削除されます。この操作は取り消すことができません。",
-		"yes": "解除する",
-		"no": "キャンセル",
-		"success": "アカウントを解除しました。トップ画面に戻ります。",
-		"failure": "アカウントを解除できませんでした。"
+		"yes": "解除するで",
+		"no": "やめとくわ",
+		"success": "アカウント消したで。トップ画面戻るわ。",
+		"failure": "アカウント消えんかったわ"
 	}
 }
