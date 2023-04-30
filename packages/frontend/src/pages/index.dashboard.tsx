@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { useAtomValue } from 'jotai';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,7 +6,7 @@ import { widgets } from '@/components/domains/dashboard/widgets';
 import { PageRoot } from '@/components/PageRoot';
 import { Text } from '@/components/primitives/Text';
 import { styled } from '@/libs/stitches';
-import { accountAtom } from '@/store/api/account';
+import { trpc } from '@/libs/trpc';
 
 const Greeting = styled(Text, {
   textOverflow: 'ellipsis',
@@ -36,7 +35,7 @@ const WidgetContainer = styled('div', {
 });
 
 const DashboardPage: React.FC = () => {
-  const account = useAtomValue(accountAtom);
+  const [account] = trpc.account.getMyself.useSuspenseQuery();
   const { t } = useTranslation();
 
   const greetingMessage = useMemo(() => {

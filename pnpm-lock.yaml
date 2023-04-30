@@ -206,9 +206,6 @@ importers:
       jotai:
         specifier: ^2.0.4
         version: 2.0.4(react@18.2.0)
-      jotai-trpc:
-        specifier: ^0.5.0
-        version: 0.5.0(@trpc/client@10.20.0)(@trpc/server@10.20.0)(jotai@2.0.4)
       json5-loader:
         specifier: ^4.0.1
         version: 4.0.1(webpack@5.80.0)
@@ -8563,18 +8560,6 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
-
-  /jotai-trpc@0.5.0(@trpc/client@10.20.0)(@trpc/server@10.20.0)(jotai@2.0.4):
-    resolution: {integrity: sha512-v+tb2zk33/pHmveZwH9wfnVw0IxrGdw/XfQr+0Van8h0P3o1hxU8FkLGyDr0UUtJIRCNMmJZH8hI/MivjbVh+A==}
-    peerDependencies:
-      '@trpc/client': '>=10.0.0'
-      '@trpc/server': '>=10.0.0'
-      jotai: '>=1.11.0'
-    dependencies:
-      '@trpc/client': 10.20.0(@trpc/server@10.20.0)
-      '@trpc/server': 10.20.0
-      jotai: 2.0.4(react@18.2.0)
-    dev: false
 
   /jotai@2.0.4(react@18.2.0):
     resolution: {integrity: sha512-XkR1Jtm4a2iKV/7fdB3rNHjJz8FkkDMVczqiAok7lt8W4F69l/ZQkPGWSEV+hJOJXRn27k6XYKOoKEQIwBuAMA==}

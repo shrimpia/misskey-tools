@@ -1,4 +1,3 @@
-import { useAtomValue } from 'jotai';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,11 +6,11 @@ import { VStack } from '@/components/layouts/VStack';
 import { Logo } from '@/components/Logo';
 import { PageRoot } from '@/components/PageRoot';
 import { Card } from '@/components/primitives/Card';
-import { metaAtom } from '@/store/api/meta';
+import { trpc } from '@/libs/trpc';
 
 const AboutPage: React.FC = () => {
   const { t } = useTranslation();
-  const meta = useAtomValue(metaAtom);
+  const [meta] = trpc.meta.get.useSuspenseQuery();
 
   const share = (host: string) => {
     window.open(`https://${host}/share?text=${encodeURIComponent(t('shareMisskeyToolsNote') ?? '')}`);

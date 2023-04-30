@@ -1,10 +1,9 @@
-import { useAtomValue } from 'jotai';
 import React from 'react';
 
-import { sessionsAtom } from '@/store/api/account';
+import { trpc } from '@/libs/trpc';
 
 export const MisskeyAccounts: React.FC = () => {
-  const sessions = useAtomValue(sessionsAtom);
+  const [sessions] = trpc.account.getMisskeySessions.useSuspenseQuery();
   return (
     <ul>
       {sessions.map(session => <li key={session.id}>{session.username}@{session.host}</li>)}

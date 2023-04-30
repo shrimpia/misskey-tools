@@ -6,6 +6,7 @@ import { Centered } from '@/components/layouts/Centered.js';
 import { Button } from '@/components/primitives/Button.js';
 import { PopupMenu } from '@/components/primitives/PopupMenu.js';
 import { styled } from '@/libs/stitches.js';
+import { trpc } from '@/libs/trpc';
 import { MenuItem } from '@/models/menu.js';
 
 
@@ -58,22 +59,25 @@ const Spacer = styled('div', {
 
 export const HeaderBar: React.FC = () => {
   const { t } = useTranslation();
+  const [account] = trpc.account.getMyself.useSuspenseQuery();
 
   const menuItems = useMemo(() => [{
     type: 'link',
     label: t('misskeyAccounts'),
     href: '/accounts',
     iconClassName: 'ti ti-users',
-  },{
+  }, {
     type: 'link',
     label: t('settings'),
     href: '/settings',
     iconClassName: 'ti ti-settings',
-  },{
+  }, {
+    type: 'separator',
+  }, {
     type: 'link',
-    label: t('helpAndSupport'),
-    href: '/help',
-    iconClassName: 'ti ti-help-circle',
+    label: t('aboutMisskeyTools'),
+    href: '/about',
+    iconClassName: '',
   }] as MenuItem[], [t]);
 
   return (
@@ -87,7 +91,7 @@ export const HeaderBar: React.FC = () => {
       <Spacer/>
       <PopupMenu items={menuItems}>
         <AccountButton flat>
-					Lutica
+          {account.name}
         </AccountButton>
       </PopupMenu>
     </Container>
