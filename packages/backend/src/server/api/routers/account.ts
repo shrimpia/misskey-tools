@@ -7,7 +7,6 @@ import { misskeySessionDtoSchema } from '@/server/api/dto/misskey-session';
 import { sessionProcedure } from '@/server/api/procedures/session.js';
 import { router } from '@/server/api/trpc.js';
 
-
 export const accountRouter = router({
   getMyself: sessionProcedure
     .output(accountDtoSchema)
@@ -26,5 +25,14 @@ export const accountRouter = router({
         },
       });
       return sessions;
+    }),
+  changeName: sessionProcedure
+    .input(z.string())
+    .mutation(async ({ ctx, input }) => {
+      await prisma.account.update({
+        where: { id: ctx.account.id },
+        data: { name: input },
+        select: { id: true },
+      });
     }),
 });
