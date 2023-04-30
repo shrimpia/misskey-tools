@@ -14,6 +14,7 @@ export const Button = styled('button', {
   justifyContent: 'center',
   appearance: 'none',
   cursor: 'pointer',
+  lineHeight: 1.5,
 
   '&:disabled': {
     cursor: 'not-allowed',
