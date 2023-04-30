@@ -22,7 +22,7 @@ export const widget = (name: string, iconClass: string, pale: boolean, render: R
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const { t } = useTranslation();
       return (
-        <WidgetBase title={pale ? undefined : (t('_widgets.' + name) ?? '')} iconClass={pale ? undefined : iconClass} pale={pale}>
+        <WidgetBase title={pale ? undefined : (t(('_widgets.' + name) as any) ?? '')} iconClass={pale ? undefined : iconClass} pale={pale}>
           <SuspenseView className={scrollableStyle()}>
             {render({})}
           </SuspenseView>
