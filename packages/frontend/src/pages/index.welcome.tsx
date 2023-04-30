@@ -1,11 +1,19 @@
-import { t } from 'i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Twemoji from 'react-twemoji';
 
-import { Hero } from '@/components/domains/welcome/Hero';
+import { LoginForm } from '@/components/domains/welcome/LoginForm';
 import { Article } from '@/components/layouts/Article';
+import { Flex } from '@/components/layouts/Flex';
+import { VStack } from '@/components/layouts/VStack';
+import { Logo } from '@/components/Logo';
 import { Text } from '@/components/primitives/Text';
 import { styled } from '@/libs/stitches';
+
+const Container = styled(Flex, {
+  marginTop: '30vh',
+  padding: '$m',
+});
 
 const Features = styled('article', {
   display: 'grid',
@@ -25,9 +33,25 @@ const Feature = styled('section', {
 });
 
 const WelcomePage: React.FC = () => {
+  const { t } = useTranslation();
+
+  const onLogin = (host: string) => {
+    location.href = `/login?host=${host}`;
+  };
   return (
     <div>
-      <Hero	/>
+      <Container direction="vertical" alignItems="center" justifyContent="center">
+        <Logo />
+        <VStack gap="xl" alignItems="center" css={{ marginTop: '$s' }}>
+          <Text color="muted">
+					Made with <Twemoji tag="span">🍶</Twemoji> by Shrimpia Network
+          </Text>
+          <Text fontSize={{ '@initial': 'xl', '@phone': 'm' }}>
+            {t('description')}
+          </Text>
+          <LoginForm onLogin={onLogin}/>
+        </VStack>
+      </Container>
       <Text fontSize="xl" align="center">
         <Twemoji>👍&emsp;❤&emsp;😆&emsp;🎉&emsp;🍮</Twemoji>
       </Text>

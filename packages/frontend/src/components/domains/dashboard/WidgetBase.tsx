@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
+import { Card } from '@/components/primitives/Card';
 import { styled } from '@/libs/stitches';
 
 export type WidgetBaseProp = PropsWithChildren<{
@@ -19,34 +20,12 @@ export type WidgetBaseProp = PropsWithChildren<{
 	pale?: boolean;
 }>;
 
-const Container = styled('div', {
+const Container = styled(Card, {
   display: 'flex',
   flexDirection: 'column',
-  padding: '$l',
-  borderRadius: '$4',
-  background: '$card',
   width: 320,
   height: 320,
   textDecoration: 'none',
-
-  '> h1': {
-    fontSize: '$m',
-    fontWeight: 'bold',
-    color: '$primary',
-    marginBottom: '$s',
-
-    '> i': {
-      marginRight: '$xs',
-    },
-  },
-
-  variants: {
-    pale: {
-      true: {
-        background: '$cardPale',
-      },
-    },
-  },
 });
 
 /**

@@ -26,5 +26,8 @@ export const Flex = styled('div', {
       right: { justifyContent: 'flex-end' },
       stretch: { justifyContent: 'stretch' },
     },
+    wrap: {
+      true: { flexWrap: 'wrap' },
+    },
   },
 });

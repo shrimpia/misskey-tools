@@ -7,14 +7,10 @@ import { Button } from '@/components/primitives/Button.js';
 import { Input } from '@/components/primitives/Input.js';
 import { InputLabel } from '@/components/primitives/InputLabel.js';
 import { Text } from '@/components/primitives/Text.js';
-import { styled } from '@/libs/stitches.js';
 import { sanitizeHost } from '@/misc/sanitize-host.js';
 
-const Container = styled('div', {
-  height: 100,
-});
-
 export type LoginFormProp = {
+	buttonText?: string;
 	onLogin?: (host: string) => void;
 };
 
@@ -46,25 +42,23 @@ export const LoginForm: React.FC<LoginFormProp> = (p) => {
   const hasError = error != null;
 
   return (
-    <Container>
-      <VStack as="form" onSubmit={onClickLoginButton}>
-        <HStack gap="s" alignItems="right">
-          <InputLabel>
-            {t('serverUrl')}
-            <Input
-              placeholder={t('serverUrlPlaceholder') ?? ''}
-              error={hasError}
-              value={value}
-              onBlur={validate}
-              onChange={e => setValue(e.target.value)}
-            />
-          </InputLabel>
-          <Button type="submit" primaryGradient disabled={hasError || !value}>
-            {t('login')}
-          </Button>
-        </HStack>
-        {hasError && <Text color="danger" fontSize="xs"><i className="ti ti-alert-circle-filled"/> {error}</Text>}
-      </VStack>
-    </Container>
+    <VStack as="form" gap="none" onSubmit={onClickLoginButton}>
+      <HStack gap="s" alignItems="right" wrap>
+        <InputLabel>
+          {t('serverUrl')}
+          <Input
+            placeholder={t('serverUrlPlaceholder') ?? ''}
+            error={hasError}
+            value={value}
+            onBlur={validate}
+            onChange={e => setValue(e.target.value)}
+          />
+        </InputLabel>
+        <Button type="submit" primaryGradient disabled={hasError || !value}>
+          {p.buttonText ?? t('login')}
+        </Button>
+      </HStack>
+      {hasError && <Text color="danger" fontSize="xs"><i className="ti ti-alert-circle-filled"/> {error}</Text>}
+    </VStack>
   );
 };

@@ -45,6 +45,7 @@ export const {
       flatActive: blackA.blackA4,
     },
     space: {
+      none: '0',
       '2xs': '4px',
       xs: '8px',
       s: '12px',
@@ -69,6 +70,7 @@ export const {
       '7xl': '96px',
     },
     radii: {
+      0: '0px',
       1: '3px',
       2: '8px',
       3: '16px',
@@ -76,6 +78,7 @@ export const {
       5: '999px',
     },
     shadows: {
+      none: '0',
       s: '0 0 2px #0002',
       m: '0 0 12px #0002',
       l: '0 0 24px #0002',
@@ -127,5 +130,17 @@ export const globalStyles = globalCss({
   },
   a: {
     color: '$primary',
+  },
+  h1: { fontSize: '$3xl' },
+  h2: { fontSize: '$2xl' },
+  h3: { fontSize: '$xl' },
+  h4: { fontSize: '$l' },
+  h5: { fontSize: '$m' },
+  h6: { fontSize: '$s' },
+  'p, ul': {
+    marginBottom: '$m',
+  },
+  li: {
+    marginLeft: '$l',
   },
 });
