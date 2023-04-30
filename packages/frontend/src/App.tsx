@@ -1,6 +1,5 @@
 import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import { VStack } from './components/layouts/VStack';
 
@@ -38,7 +37,6 @@ export const App : React.FC = () => {
         </Routes>
         <VStack as="footer" alignItems="center" css={{ padding: '$2xl $m' }}>
           <p>(C)2020-2023 Shrimpia Network</p>
-          <p><Link to="/about">About Misskey Tools</Link></p>
         </VStack>
       </SuspenseView>
     </>

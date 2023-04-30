@@ -40,6 +40,7 @@ export const announcementsRouter = router({
     }),
   like: sessionProcedure
     .input(z.number())
+    .output(z.number())
     .mutation(async ({ input }) => {
       const announcement = await prisma.announcement.findUnique({
         where: { id: input },
@@ -50,9 +51,12 @@ export const announcementsRouter = router({
           code: 'NOT_FOUND',
         });
       }
-      await prisma.announcement.update({
+      const { like } = await prisma.announcement.update({
         where: { id: input },
         data: { like: announcement.like + 1 },
+        select: { like: true },
       });
+
+      return like;
     }),
 });
