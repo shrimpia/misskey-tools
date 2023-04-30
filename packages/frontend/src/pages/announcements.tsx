@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useAtomValue } from 'jotai';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
@@ -20,32 +20,46 @@ const AnnouncementsPage: React.FC = () => {
 
   const { t } = useTranslation();
 
+  const Title = styled('h1', {
+    fontSize: '$3xl',
+    marginBottom: '$2xl',
+  });
+
   const Section = styled('section', {
-    padding: '$m',
+    background: '$card',
+    borderRadius: '$4',
+    padding: '$xl $l',
+    lineHeight: 2,
+
     'h1, h2, h3': {
       marginTop: '$l',
       marginBottom: '$xs',
     },
-    'p, ul': {
+    'p': {
       marginBottom: '$m',
     },
     li: {
       marginLeft: '$l',
     },
+
+    '@phone': {
+      padding: '$m',
+    },
   });
+
+  const absoluteTime = useMemo(() => dayjs(announcement.createdAt).format('YYYY/MM/DD hh:mm:ss'), [announcement.createdAt]);
+  const relativeTime = useMemo(() => dayjs(announcement.createdAt).locale(language.split('_')[0]).fromNow(), [announcement.createdAt, language]);
 
   return (
     <PageRoot title={t('announcements') ?? ''}>
+      <Title>{announcement.title}{' '}</Title>
       <article>
-        <h2>
-          {announcement.title}{' '}
-        </h2>
-        <Text as="aside" color="muted" fontSize="m" css={{ marginLeft: '$l' }}>
-          <i className="ti ti-clock" />&nbsp;
-          {dayjs(announcement.createdAt).locale(language.split('_')[0]).fromNow()}
-        </Text>
         <Section>
           <ReactMarkdown>{announcement.body}</ReactMarkdown>
+
+          <Text as="aside" color="muted" fontSize="m" css={{ marginTop: '$l' }}>
+            <i className="ti ti-clock" /> {absoluteTime} ({relativeTime})
+          </Text>
         </Section>
       </article>
     </PageRoot>
