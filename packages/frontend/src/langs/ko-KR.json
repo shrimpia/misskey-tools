@@ -1,6 +1,6 @@
 {
 	"$languageName": "한국어",
-	"description": "Misskeyをもっと楽しく、もっと便利に。すべてのミスキストのためのオールインワンツール。",
+	"description": "Misskey를 더욱 즐겁고 편리하게. 이 세상의 모든 미스키스트를 위한 만능 도구.",
 	"name": "이름",
 	"notes": "노트",
 	"following": "팔로우",
@@ -42,7 +42,7 @@
 	"translatedByTheCommunity": "Misskey Tools는 자원봉사자들에 의해 번역되었습니다.",
 	"helpTranslation": "번역을 도와주세요",
 	"developer": "개발자",
-	"developedAsOpenSourceSoftware": "Misskey Toolsはオープンソースソフトウェアであり、誰でも開発にご協力いただけます。あなたも貢献してみませんか？",
+	"developedAsOpenSourceSoftware": "Misskey Tools는 오픈 소스 소프트웨어로, 누구나 개발 과정에 기여할 수 있습니다. 여러분도 참가해 보시지 않으시겠어요?",
 	"statistics": "통계",
 	"sponsors": "후원자",
 	"announcements": "공지사항",
@@ -73,22 +73,22 @@
 		"misshaiRankingDescription": "노트왕 랭킹에서는, Misskey에서의 활동을 수치화하여 랭킹의 형태로 보여 드립니다.",
 		"avatarCropperDescription": "프로필 사진이 원형 또는 사각형으로 표시될 때와, 고양이귀가 붙었을 때의 모습을 실시간으로 확인하면서 자를 수 있습니다. 매력있는 아바타를 더욱 매력적으로.",
 		"questionBoxDescription": "익명으로 질문할 수 있는 페이지를 열어 보아요. 질문에 대한 답변은 Misskey를 통해 작성할 수 있습니다.",
-		"followingManagerDescription": "増えすぎたフォロー・フォロワーを管理できる高機能なマネージャー。所属サーバーや、フォローバックされていないアカウントで絞り込むことができ、一括処理にも対応しています。",
+		"followingManagerDescription": "너무 많아진 팔로우 및 팔로워를 정리하고 싶을 때. 서버 및 상호 팔로우 여부로 분류하여 일괄적으로 정리할 수 있습니다.",
 		"nextFeaturesTitle": "앞으로도 추가될 예정",
 		"nextFeaturesDescription": "이것 뿐만이 아닙니다. 앞으로도 업데이트를 통해 다양한 기능을 추가할 예정입니다!",
-		"myPageDescription": "お使いのMisskeyアカウントを含むリンク、自己紹介、開設した質問ボックスなどを設置し、自由にカスタマイズできるマイページを作ろう。作成したページはURL共有できます。"
+		"myPageDescription": "Misskey 계정을 비롯한 링크, 자기소개, 질문 상자를 배치하여 나만의 페이지를 만들어 보아요! 완성된 페이지는 URL를 통해 공유할 수 있습니다."
 	},
 	"_dashboard": {
-		"morning": "おはようございます、{{name}}さん。",
-		"afternoon": "こんにちは、{{name}}さん。",
-		"evening": "こんばんは、{{name}}さん。"
+		"morning": "좋은 아침입니다, {{name}} 님.",
+		"afternoon": "안녕하세요, {{name}} 님.",
+		"evening": "안녕하세요, {{name}} 님."
 	},
 	"_widgets": {
-		"misshaiData": "今日のミス廃データ",
-		"announcements": "お知らせ",
-		"questionBox": "質問ボックス",
-		"apps": "アプリ",
-		"unreadHints": "未読のヒント"
+		"misshaiData": "오늘의 노트왕 데이터",
+		"announcements": "공지사항",
+		"questionBox": "질문 상자",
+		"apps": "앱",
+		"unreadHints": "읽지 않은 팁"
 	},
 	"_missHai": {
 		"ranking": "노트왕 랭킹",
@@ -102,9 +102,9 @@
 		"order": "순위",
 		"showRanking": "순위를 보기",
 		"useRanking": "랭킹에 참가하기",
-		"note": "自動的にノートとして投稿する",
-		"notification": "Misskeyに通知する",
-		"notificationWarning": "Misskeyのバージョンによっては動作しません。"
+		"note": "자동으로 노트로 보내기",
+		"notification": "Misskey 알림으로 보내기",
+		"notificationWarning": "Misskey 버전에 따라 동작하지 않을 수 있습니다."
 	},
 	"_accounts": {
 		"switchAccount": "계정 전환",
