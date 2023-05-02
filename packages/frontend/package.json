@@ -20,9 +20,9 @@
     "@stitches/react": "^1.2.8",
     "@tabler/icons-webfont": "^2.17.0",
     "@tanstack/react-query": "^4.29.5",
-    "@trpc/client": "10.20.0",
-    "@trpc/react-query": "^10.23.0",
-    "@trpc/server": "10.20.0",
+    "@trpc/client": "10.23.0",
+    "@trpc/react-query": "10.23.0",
+    "@trpc/server": "10.23.0",
     "dayjs": "^1.11.7",
     "deepmerge": "^4.3.1",
     "i18next": "^22.4.15",
@@ -72,7 +72,6 @@
     "tools-tsconfig": "workspace:*",
     "typescript": "5.0.4",
     "vite": "^4.2.2",
-    "vite-plugin-pages": "^0.29.0",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.30.1"
   }
