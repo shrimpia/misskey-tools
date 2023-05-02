@@ -17,11 +17,11 @@
     "preset": "tools-jest-presets/jest/node"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.22",
-    "@types/node": "^18.11.9",
-    "eslint": "^7.32.0",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.16.3",
+    "eslint": "^8.39.0",
     "eslint-config-tools": "workspace:*",
-    "jest": "^26.6.3",
+    "jest": "^29.5.0",
     "tools-jest-presets": "workspace:*",
     "tools-tsconfig": "workspace:*",
     "typescript": "^5.0.4"
