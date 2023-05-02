@@ -43,6 +43,8 @@ export const startServer = async () => {
   app.get('/vite/*', viteController);
   app.get('/*', frontendController);
 
-  await app.listen(config.port || 3000);
+  await app.listen({
+    port: config.port || 3000,
+  });
 };
 
