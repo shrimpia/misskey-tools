@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ErrorCode } from 'tools-shared/dist/types/error-code.js';
+
+import type { ErrorCode } from 'tools-shared/dist/types/error-code.js';
 
 import { Centered } from '@/components/layouts/Centered.js';
 import { VStack } from '@/components/layouts/VStack.js';

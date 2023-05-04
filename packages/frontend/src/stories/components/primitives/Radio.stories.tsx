@@ -1,5 +1,6 @@
-import { Meta } from '@storybook/react';
 import React from 'react';
+
+import type { Meta } from '@storybook/react';
 
 import { Radio } from '@/components/primitives/Radio';
 import { RadioGroup } from '@/components/primitives/RadioGroup';

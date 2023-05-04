@@ -1,5 +1,6 @@
-import { Meta } from '@storybook/react';
 import React from 'react';
+
+import type { Meta } from '@storybook/react';
 
 import { Input } from '@/components/primitives/Input.js';
 import { InputLabel } from '@/components/primitives/InputLabel.js';

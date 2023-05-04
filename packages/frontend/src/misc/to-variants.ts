@@ -1,4 +1,4 @@
-import { CSS } from '@stitches/react';
+import type { CSS } from '@stitches/react';
 
 /**
  * デザイントークンから Variant を生成します。

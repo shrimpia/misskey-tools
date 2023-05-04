@@ -1,5 +1,7 @@
-import { inferAsyncReturnType, initTRPC } from '@trpc/server';
-import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify';
+import { initTRPC } from '@trpc/server';
+
+import type { inferAsyncReturnType } from '@trpc/server';
+import type { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify';
 
 import { getAccountByAccessToken } from '@/services/accounts/get-account-by-access-token.js';
 

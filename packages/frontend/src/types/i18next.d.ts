@@ -1,5 +1,5 @@
 import 'i18next';
-import jaJP from '@/langs/ja-JP.json';
+import type jaJP from '@/langs/ja-JP.json';
 
 declare module 'i18next' {
   // and extend them!

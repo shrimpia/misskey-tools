@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { RouteHandler } from 'fastify';
+
+import type { RouteHandler } from 'fastify';
 
 import { sessionHostCache } from '@/server/cache.js';
 import { die } from '@/server/utils/die.js';

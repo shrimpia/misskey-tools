@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import { errorCodes } from 'tools-shared/dist/types/error-code.js';
+
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { BackendError } from '@/components/domains/backend-error/BackendError.js';
 

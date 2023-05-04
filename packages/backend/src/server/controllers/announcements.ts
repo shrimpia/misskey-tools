@@ -1,5 +1,6 @@
-import { RouteHandler } from 'fastify';
 import striptags from 'striptags';
+
+import type { RouteHandler } from 'fastify';
 
 import { markdown } from '@/libs/markdown.js';
 import { prisma } from '@/libs/prisma.js';

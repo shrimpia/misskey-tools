@@ -1,5 +1,7 @@
-import React, { FormEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import type { FormEventHandler } from 'react';
 
 import { HStack } from '@/components/layouts/HStack.js';
 import { VStack } from '@/components/layouts/VStack.js';

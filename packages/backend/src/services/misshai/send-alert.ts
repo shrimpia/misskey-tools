@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import type { User } from '@prisma/client';
 
 import { api } from '@/libs/misskey.js';
 import { format } from '@/services/misshai/format.js';

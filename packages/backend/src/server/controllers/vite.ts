@@ -1,4 +1,4 @@
-import { RouteHandler } from 'fastify';
+import type { RouteHandler } from 'fastify';
 
 /**
  * Vite アセットを返します。

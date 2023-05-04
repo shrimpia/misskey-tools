@@ -44,5 +44,6 @@ module.exports = {
 			}
 		],
 		'object-curly-spacing': ['error', 'always'],
+    '@typescript-eslint/consistent-type-imports': 'error',
 	}
 };

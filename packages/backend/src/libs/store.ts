@@ -2,7 +2,7 @@
 // getStateを介してステートを取得し、dispatchによって更新する
 // stateを直接編集できないようになっている
 
-import { Log } from 'tools-shared/dist/types/log.js';
+import type { Log } from 'tools-shared/dist/types/log.js';
 
 /**
  * 初期値

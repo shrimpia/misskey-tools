@@ -3,13 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 
+import type { MenuItemLink, MenuItemWithoutNesting } from '@/models/menu';
+
 import { HStack } from '@/components/layouts/HStack';
 import { PageRoot } from '@/components/PageRoot';
 import { Heading } from '@/components/primitives/Heading';
 import { Menu } from '@/components/primitives/Menu';
 import { SuspenseView } from '@/components/primitives/SuspenseView';
 import { config, styled } from '@/libs/stitches';
-import { MenuItemLink, MenuItemWithoutNesting } from '@/models/menu';
 
 const MenuWrapper = styled('div', {
   flexBasis: 240,

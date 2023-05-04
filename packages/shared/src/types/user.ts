@@ -1,5 +1,5 @@
-import { AlertMode } from '@/types/alert-mode.js';
-import { Visibility } from '@/types/visibility.js';
+import type { AlertMode } from '@/types/alert-mode.js';
+import type { Visibility } from '@/types/visibility.js';
 
 export interface IUser {
   id: number;

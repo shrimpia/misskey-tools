@@ -1,7 +1,9 @@
 
+import type { PromisedReturnType } from '@/types/promised-return-type';
+
 import { prisma } from '@/libs/prisma.js';
 
-const ERROR_CODES_USER_REMOVED = ['NO_SUCH_USER', 'AUTHENTICATION_FAILED', 'YOUR_ACCOUNT_SUSPENDED'];
+// const ERROR_CODES_USER_REMOVED = ['NO_SUCH_USER', 'AUTHENTICATION_FAILED', 'YOUR_ACCOUNT_SUSPENDED'];
 
 export const work = async () => {
   // TODO 作り直し
@@ -27,4 +29,4 @@ const getAllAccounts = async () => {
   });
 };
 
-export type Account = (ReturnType<typeof getAllAccounts> extends Promise<infer T> ? T : never)[0];
+export type Account = (PromisedReturnType<typeof getAllAccounts>)[0];

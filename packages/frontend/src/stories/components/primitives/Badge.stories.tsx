@@ -1,5 +1,6 @@
-import { StoryObj, Meta } from '@storybook/react';
 import React from 'react';
+
+import type { StoryObj, Meta } from '@storybook/react';
 
 import { Badge } from '@/components/primitives/Badge';
 

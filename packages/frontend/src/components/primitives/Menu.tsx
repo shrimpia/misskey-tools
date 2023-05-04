@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import type { MenuItemWithoutNesting } from '@/models/menu';
+
 import { styled } from '@/libs/stitches';
-import { MenuItemWithoutNesting } from '@/models/menu';
 
 const Item = styled('div', {
   padding: '$xs $s',

@@ -1,13 +1,16 @@
 import * as $ from '@radix-ui/react-dropdown-menu';
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+import type { MenuItem } from '@/models/menu';
+import type { PropsWithChildren } from 'react';
 
 import { slideDownAndFade } from '@/components/keyframes/slide-down-and-fade';
 import { slideLeftAndFade } from '@/components/keyframes/slide-left-and-fade';
 import { slideRightAndFade } from '@/components/keyframes/slide-right-and-fade';
 import { slideUpAndFade } from '@/components/keyframes/slide-up-and-fade';
 import { css, styled } from '@/libs/stitches';
-import { MenuItem } from '@/models/menu';
+
 
 export type PopupMenuProp = PropsWithChildren<{
 	items: MenuItem[];

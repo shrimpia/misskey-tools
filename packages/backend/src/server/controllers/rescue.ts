@@ -1,4 +1,4 @@
-import { RouteHandler } from 'fastify';
+import type { RouteHandler } from 'fastify';
 
 /**
  * フロントエンドのlocalStorageを初期化するレスキューページを配信します。

@@ -1,7 +1,9 @@
 import * as $ from '@radix-ui/react-radio-group';
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 
 import { VStack } from '../layouts/VStack';
+
+import type { PropsWithChildren } from 'react';
 
 export type RadioGroupProp = PropsWithChildren<{
 	value?: string;

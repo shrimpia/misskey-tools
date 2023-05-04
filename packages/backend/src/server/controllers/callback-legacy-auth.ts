@@ -1,7 +1,6 @@
 import crypto from 'crypto';
 
-import { RouteHandler } from 'fastify';
-
+import type { RouteHandler } from 'fastify';
 import type { UserDetailed } from 'misskey-js/built/entities.js';
 
 import { api } from '@/libs/misskey';

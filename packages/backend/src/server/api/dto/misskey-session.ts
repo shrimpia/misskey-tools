@@ -1,5 +1,6 @@
-import { MisskeySession } from '@prisma/client';
 import { z } from 'zod';
+
+import type { MisskeySession } from '@prisma/client';
 
 export const misskeySessionDtoSchema = z.object({
   id: z.string(),

@@ -1,6 +1,8 @@
 
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
+
+import type { PropsWithChildren } from 'react';
 
 import { styled } from '@/libs/stitches';
 

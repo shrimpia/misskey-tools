@@ -1,9 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpLink } from '@trpc/client';
 import { createTRPCReact } from '@trpc/react-query';
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
+import type { PropsWithChildren } from 'react';
 import type { AppRouter } from 'tools-backend';
 
 import { LOCALSTORAGE_KEY_TOKEN } from '@/const';

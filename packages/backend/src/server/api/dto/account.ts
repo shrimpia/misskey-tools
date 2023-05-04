@@ -1,6 +1,6 @@
-import { Account } from '@prisma/client';
 import { z } from 'zod';
 
+import type { Account } from '@prisma/client';
 
 export const accountDtoSchema = z.object({
   id: z.string(),

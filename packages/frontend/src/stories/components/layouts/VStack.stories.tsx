@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
+
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { VStack } from '@/components/layouts/VStack.js';
 import { styled } from '@/libs/stitches.js';

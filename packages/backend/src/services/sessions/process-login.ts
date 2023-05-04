@@ -1,5 +1,6 @@
-import { UserDetailed as MkUser } from 'misskey-js/built/entities.js';
 import { currentTokenVersion } from 'tools-shared/dist/const.js';
+
+import type { UserDetailed as MkUser } from 'misskey-js/built/entities.js';
 
 import { prisma } from '@/libs/prisma.js';
 import { generateAccessToken } from '@/services/accounts/generate-access-token.js';

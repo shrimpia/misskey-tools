@@ -1,6 +1,7 @@
-import { RouteHandler } from 'fastify';
 import { misskeyAppInfo } from 'tools-shared/dist/const.js';
 import { v4 as uuid } from 'uuid';
+
+import type { RouteHandler } from 'fastify';
 
 import { config } from '@/config.js';
 import { api } from '@/libs/misskey.js';
