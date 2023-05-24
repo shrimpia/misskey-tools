@@ -67,6 +67,13 @@
 	"misskeyAccounts": "Misskey 계정…",
 	"helpAndSupport": "도움 및 지원",
 	"aboutMisskeyTools": "Misskey Tools에 대해",
+	"noteScheduler": "予約投稿",
+	"cw": "内容を隠す",
+	"cwOption": "内容に対する注釈（オプション）",
+	"noteBody": "ノートの本文",
+	"remainedLength": "残り{{len}}文字",
+	"noMoreInput": "これ以上入力できません",
+	"datetime": "日時",
 	"_welcome": {
 		"misshaiAlertTitle": "노트왕 알림",
 		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
@@ -111,8 +118,10 @@
 		"useAnother": "다른 계정 등록하기"
 	},
 	"_visibility": {
+		"public": "パブリック",
 		"home": "홈",
-		"followers": "팔로워"
+		"followers": "팔로워",
+		"specified": "ダイレクト"
 	},
 	"_themes": {
 		"light": "밝은 테마",
@@ -171,5 +180,12 @@
 		"no": "취소",
 		"success": "계정 연동을 해제했습니다. 메인 화면으로 돌아갑니다.",
 		"failure": "계정 연동을 해제할 수 없습니다."
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	}
 }
