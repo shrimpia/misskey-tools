@@ -15,7 +15,7 @@ Misskey Tools へのコントリビューションにご関心いただき、誠
 * `///` （/3つ）で各要素ごとにコメントをつけること
   * `//` （/2つ）だと整形時に削除されてしまうため注意
 * schema.prisma を編集したら、次のコマンドを実行してSQLファイルを生成する
-  * `prisma migrate dev --name 変更名`
+  * `pnpm dlx prisma migrate dev --name 変更名`
   * 変更名は snake_case
 
 ## tRPCでのデータ返却時はDTOを渡すこと

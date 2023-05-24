@@ -20,15 +20,24 @@ const Container = styled('main', {
   '@phone': {
     padding: '$s',
   },
+
+  variants: {
+    slim: {
+      true: {
+        maxWidth: 800,
+      },
+    },
+  },
 });
 
 export type PageRootProp = PropsWithChildren<{
 	title?: string;
+	slim?: boolean;
 }>;
 
 export const PageRoot: React.FC<PageRootProp> = (p) => {
   return (
-    <Container>
+    <Container slim={p.slim ?? false}>
       <Helmet>
         {p.title && <title>{p.title} | Misskey Tools</title>}
       </Helmet>

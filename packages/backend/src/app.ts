@@ -15,5 +15,4 @@ axios.defaults.validateStatus = (stat) => stat < 500;
 
 (async () => {
   await (await import('@/boot/server.js')).default();
-  (await import('@/boot/worker.js')).default();
 })();

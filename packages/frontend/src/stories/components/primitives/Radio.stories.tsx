@@ -21,3 +21,11 @@ export const Default = () => (
     <Radio value="C">ジェンツーペンギン</Radio>
   </RadioGroup>
 );
+
+export const Disabled = () => (
+  <RadioGroup disabled>
+    <Radio value="A">コウテイペンギン</Radio>
+    <Radio value="B">アデリーペンギン</Radio>
+    <Radio value="C">ジェンツーペンギン</Radio>
+  </RadioGroup>
+);

@@ -7,30 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// お知らせ
-model Announcement {
-  /// ID
-  id        Int      @id(map: "PK_e0ef0550174fd1099a308fd18a0") @default(autoincrement())
-  /// 作成日時
-  createdAt DateTime @db.Timestamp(6)
-  /// タイトル
-  title     String   @db.VarChar(128)
-  /// 本文
-  body      String   @db.VarChar(8192)
-  /// いいね数
-  like      Int      @default(0)
-
-  @@map("announcement")
-}
-
-/// 使用済みトークンを管理するテーブル。
-/// 廃止予定
-model UsedToken {
-  token String @id(map: "PK_7f2db4c33c33cd6b38e63393fe5") @unique(map: "IDX_7f2db4c33c33cd6b38e63393fe") @db.VarChar
-
-  @@map("used_token")
-}
-
 /// Misskey Tools アカウント
 model Account {
   /// ID
@@ -73,6 +49,7 @@ model MisskeySession {
 
   /// ミス廃アラート機能のアカウント
   misshaiAccount MisshaiAccount?
+  scheduledNote  ScheduledNote[]
 
   @@unique([username, host])
   @@map("misskey_session")
@@ -127,6 +104,55 @@ model MisshaiRecord {
   account   MisshaiAccount @relation(fields: [accountId], references: [misskeySessionId], onDelete: Cascade)
 
   @@map("misshai_record")
+}
+
+/// 予約されたノート
+model ScheduledNote {
+  /// ID
+  id             String   @id @default(uuid())
+  /// このログの日付
+  date           DateTime @db.Timestamp()
+  /// 予約したノートの本文
+  text           String
+  /// 予約したノートのCW
+  cw             String?
+  /// 予約したノートを「連合なし」とするかどうか
+  localOnly      Boolean  @map("local_only")
+  /// 予約したノートの公開範囲
+  visibility     String
+  /// 予約したノートが公開範囲「ダイレクト」のときに送信する相手のリスト
+  visibleUserIds String[] @map("visible_user_ids")
+
+  /// このノートを送信するMisskeyセッションのID
+  misskeySessionId String         @map("misskey_session_id")
+  /// このノートを送信するMisskeyセッション
+  misskeySession   MisskeySession @relation(fields: [misskeySessionId], references: [id], onDelete: Cascade)
+
+  @@map("scheduled_note")
+}
+
+/// お知らせ
+model Announcement {
+  /// ID
+  id        Int      @id(map: "PK_e0ef0550174fd1099a308fd18a0") @default(autoincrement())
+  /// 作成日時
+  createdAt DateTime @db.Timestamp(6)
+  /// タイトル
+  title     String   @db.VarChar(128)
+  /// 本文
+  body      String   @db.VarChar(8192)
+  /// いいね数
+  like      Int      @default(0)
+
+  @@map("announcement")
+}
+
+/// 使用済みトークンを管理するテーブル。
+/// 廃止予定
+model UsedToken {
+  token String @id(map: "PK_7f2db4c33c33cd6b38e63393fe5") @unique(map: "IDX_7f2db4c33c33cd6b38e63393fe") @db.VarChar
+
+  @@map("used_token")
 }
 
 /// Misskey Tools v3以前で使用されていたユーザーモデル。

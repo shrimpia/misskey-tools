@@ -7,6 +7,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     placeholder: '値を入力…',
+    disabled: false,
   },
   parameters: {
     layouts: 'centered',

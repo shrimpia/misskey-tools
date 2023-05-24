@@ -1,9 +1,9 @@
 import { misskeyAppInfo } from 'tools-shared/dist/const.js';
-import { v4 as uuid } from 'uuid';
 
 import type { RouteHandler } from 'fastify';
 
 import { config } from '@/config.js';
+import { uuid } from '@/libs/id.js';
 import { api } from '@/libs/misskey.js';
 import { sessionHostCache, tokenSecretCache } from '@/server/cache.js';
 import { die } from '@/server/utils/die.js';

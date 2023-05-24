@@ -2,8 +2,8 @@
 	"port": 4000,
 	"url": "https://misskey.tools",
 	"uaExtra": "",
-	"admin": {
-		"username": "your_user_name",
-		"host": "your-instance-host"
+	"redis": {
+		"host": "localhost",
+		"port": 6379
 	}
 }

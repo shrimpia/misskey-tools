@@ -43,6 +43,9 @@ export const {
       headerBarFg: olive.olive1,
       flatHover: blackA.blackA3,
       flatActive: blackA.blackA4,
+      switchBg: olive.olive7,
+      switchBgOn: '$primary',
+      switchThumb: olive.olive1,
     },
     space: {
       none: '0',
@@ -119,6 +122,7 @@ export const darkTheme = createTheme('dark', {
     buttonBgActive: oliveDark.olive2,
     flatHover: whiteA.whiteA6,
     flatActive: whiteA.whiteA5,
+    switchBg: oliveDark.olive8,
   },
 });
 

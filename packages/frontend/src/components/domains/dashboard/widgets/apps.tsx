@@ -78,7 +78,7 @@ export default widget('apps', 'ti ti-grid-dots', true, () => {
         <i className="ti ti-eraser"/>
         <span>ノート削除</span>
       </AppIcon>
-      <AppIcon to="/apps/scheduled-note">
+      <AppIcon to="/apps/note-scheduler">
         <i className="ti ti-alarm"/>
         <span>予約投稿</span>
       </AppIcon>

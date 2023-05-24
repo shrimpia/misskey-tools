@@ -7,11 +7,12 @@ import type { PropsWithChildren } from 'react';
 
 export type RadioGroupProp = PropsWithChildren<{
 	value?: string;
+	disabled?: boolean;
 	onValueChange?: (value: string) => void;
 }>;
 
 export const RadioGroup: React.FC<RadioGroupProp> = (p) => (
-  <$.Root value={p.value} onValueChange={p.onValueChange}>
+  <$.Root value={p.value} disabled={p.disabled} onValueChange={p.onValueChange}>
     <VStack gap="xs">
       {p.children}
     </VStack>

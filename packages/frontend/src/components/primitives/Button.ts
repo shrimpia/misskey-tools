@@ -15,6 +15,7 @@ export const Button = styled('button', {
   appearance: 'none',
   cursor: 'pointer',
   lineHeight: 1.5,
+  textDecoration: 'none',
 
   '&:disabled': {
     cursor: 'not-allowed',
@@ -33,6 +34,23 @@ export const Button = styled('button', {
   },
 
   variants: {
+    flat: {
+      true: {
+        background: 'transparent',
+        borderColor: 'transparent',
+        '&:disabled': {
+          background: 'transparent',
+          color: '$buttonFgDisabled',
+          borderColor: 'transparent',
+        },
+        '&:not(:disabled):hover': {
+          background: '$flatHover',
+        },
+        '&:not(:disabled):active': {
+          background: '$flatActive',
+        },
+      },
+    },
     primary: {
       true: {
         background: '$buttonBgPrimary',
@@ -69,21 +87,9 @@ export const Button = styled('button', {
         },
       },
     },
-    flat: {
+    inline: {
       true: {
-        background: 'transparent',
-        borderColor: 'transparent',
-        '&:disabled': {
-          background: 'transparent',
-          color: '$buttonFgDisabled',
-          borderColor: 'transparent',
-        },
-        '&:not(:disabled):hover': {
-          background: '$flatHover',
-        },
-        '&:not(:disabled):active': {
-          background: '$flatActive',
-        },
+        display: 'inline',
       },
     },
     size: {
@@ -106,4 +112,24 @@ export const Button = styled('button', {
       pill: { borderRadius: '$5' },
     },
   },
+
+  compoundVariants: [
+    {
+      primary: true,
+      flat: true,
+      css: {
+        color: '$primary',
+        borderColor: 'transparent',
+        background: 'transparent',
+        '&:not(:disabled):hover': {
+          background: '$flatHover',
+          borderColor: 'transparent',
+        },
+        '&:not(:disabled):active': {
+          background: '$flatActive',
+          borderColor: 'transparent',
+        },
+      },
+    },
+  ],
 });
