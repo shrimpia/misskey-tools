@@ -41,7 +41,10 @@
 	"accounts": "アカウント",
 	"translatedByTheCommunity": "Misskey Tools由志愿者进行翻译。",
 	"helpTranslation": "帮助我们翻译",
+	"developer": "開発者",
 	"developedAsOpenSourceSoftware": "Misskey Toolsはオープンソースソフトウェアであり、誰でも開発にご協力いただけます。あなたも貢献してみませんか？",
+	"statistics": "統計",
+	"sponsors": "スポンサー",
 	"announcements": "通知",
 	"upload": "上传",
 	"preview": "预览",
@@ -53,6 +56,7 @@
 	"myPage": "マイページ",
 	"shouldUpdateToken": "认证令牌需要更新。 如果不更新，一些功能将无法正常工作。",
 	"update": "更新",
+	"share": "シェア",
 	"shareMisskeyTools": "#MisskeyTools 分享",
 	"shareMisskeyToolsNote": "#厉害的MisskeyTools\n\nhttps://misskey.tools",
 	"settings": "设置",
@@ -62,6 +66,14 @@
 	"admin": "管理画面",
 	"misskeyAccounts": "Misskey アカウント…",
 	"helpAndSupport": "ヘルプとサポート",
+	"aboutMisskeyTools": "Misskey Tools について",
+	"noteScheduler": "予約投稿",
+	"cw": "内容を隠す",
+	"cwOption": "内容に対する注釈（オプション）",
+	"noteBody": "ノートの本文",
+	"remainedLength": "残り{{len}}文字",
+	"noMoreInput": "これ以上入力できません",
+	"datetime": "日時",
 	"_welcome": {
 		"misshaiAlertTitle": "错过警报",
 		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
@@ -106,8 +118,10 @@
 		"useAnother": "他のアカウントで登録する"
 	},
 	"_visibility": {
+		"public": "パブリック",
 		"home": "首页",
-		"followers": "关注者"
+		"followers": "关注者",
+		"specified": "ダイレクト"
 	},
 	"_themes": {
 		"light": "浅色主题",
@@ -166,5 +180,12 @@
 		"no": "取消",
 		"success": "アカウントを解除しました。トップ画面に戻ります。",
 		"failure": "アカウントを解除できませんでした。"
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	}
 }

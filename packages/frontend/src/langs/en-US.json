@@ -41,7 +41,10 @@
 	"accounts": "Accounts",
 	"translatedByTheCommunity": "Misskey Tools is translated by volunteers.",
 	"helpTranslation": "Submit translations",
+	"developer": "開発者",
 	"developedAsOpenSourceSoftware": "Misskey Tools is open source software, so everyone can contribute to the development. Would you like to do so?",
+	"statistics": "統計",
+	"sponsors": "スポンサー",
 	"announcements": "Announcements",
 	"upload": "Upload",
 	"preview": "Preview",
@@ -53,6 +56,7 @@
 	"myPage": "My Page",
 	"shouldUpdateToken": "Please update your authentication token, or some functions will not work properly.",
 	"update": "Update",
+	"share": "シェア",
 	"shareMisskeyTools": "Share #MisskeyTools",
 	"shareMisskeyToolsNote": "Try #MisskeyTools !\n\nhttps://misskey.tools",
 	"settings": "Settings",
@@ -62,6 +66,14 @@
 	"admin": "Control Panel",
 	"misskeyAccounts": "Misskey Accounts...",
 	"helpAndSupport": "Help and Supports",
+	"aboutMisskeyTools": "Misskey Tools について",
+	"noteScheduler": "予約投稿",
+	"cw": "内容を隠す",
+	"cwOption": "内容に対する注釈（オプション）",
+	"noteBody": "ノートの本文",
+	"remainedLength": "残り{{len}}文字",
+	"noMoreInput": "これ以上入力できません",
+	"datetime": "日時",
 	"_welcome": {
 		"misshaiAlertTitle": "Miss-hai Alert",
 		"misshaiAlertDescription": "Are you worried about overusing Misskey? With Miss-hai Alert, you can automatically post your activities on Misskey as below.",
@@ -106,8 +118,10 @@
 		"useAnother": "Register with another account"
 	},
 	"_visibility": {
+		"public": "パブリック",
 		"home": "Home",
-		"followers": "Followers"
+		"followers": "Followers",
+		"specified": "ダイレクト"
 	},
 	"_themes": {
 		"light": "Light",
@@ -166,5 +180,12 @@
 		"no": "Cancel",
 		"success": "Your account has been deactivated. Return to the top screen.",
 		"failure": "Failed to delete account."
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	}
 }
