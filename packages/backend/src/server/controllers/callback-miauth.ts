@@ -23,6 +23,7 @@ export const callbackMiauthController: RouteHandler<{Querystring: {session: stri
     return;
   }
 
+
   const url = `https://${host}/api/miauth/${session}/check`;
   const res = await axios.post(url, {});
   const { token, user } = res.data;
@@ -34,6 +35,7 @@ export const callbackMiauthController: RouteHandler<{Querystring: {session: stri
     return;
   }
 
+  console.log(`Try to get a Misskey access token from ${host} with session ${session}...`);
   const accessToken = await processLogin(user, host, token);
   await reply.view('frontend', { token: accessToken });
 };

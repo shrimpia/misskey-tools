@@ -10,7 +10,7 @@ export const Input = styled('input', {
   color: '$fg',
   fontSize: '$m',
   border: '1px solid $divider',
-  transition: 'all 0.2s $timingFunction$default',
+  transition: 'all 0.2s ',
 
   '&:focus': {
     borderColor: '$primary',

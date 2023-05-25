@@ -13,6 +13,6 @@ export const generateAccessToken = async (): Promise<string> => {
   do {
     token = rndstr(32);
     used = await prisma.usedToken.findUnique({ where: { token } });
-  } while (used !== undefined);
+  } while (used != null);
   return token;
 };

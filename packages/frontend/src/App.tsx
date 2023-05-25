@@ -17,6 +17,7 @@ const AnnouncementsPage = lazy(() => import('@/pages/announcements'));
 const AboutPage = lazy(() => import('@/pages/about'));
 const AppsNoteScheduler = lazy(() => import('@/pages/apps/note-scheduler'));
 const AppsNoteSchedulerNew = lazy(() => import('@/pages/apps/note-scheduler.new'));
+const AppsNoteSchedulerEdit = lazy(() => import('@/pages/apps/note-scheduler.edit'));
 const NotFound = lazy(() => import('@/pages/not-found'));
 
 export const App : React.FC = () => {
@@ -37,6 +38,7 @@ export const App : React.FC = () => {
           <Route path="/about" element={<AboutPage />}/>
           <Route path="/apps/note-scheduler" element={<AppsNoteScheduler />}/>
           <Route path="/apps/note-scheduler/new" element={<AppsNoteSchedulerNew />}/>
+          <Route path="/apps/note-scheduler/edit/:id" element={<AppsNoteSchedulerEdit />}/>
           <Route path="*" element={<NotFound />}/>
         </Routes>
         <VStack as="footer" alignItems="center" css={{ padding: '$2xl $m' }}>

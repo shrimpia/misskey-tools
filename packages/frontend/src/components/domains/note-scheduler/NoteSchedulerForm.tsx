@@ -21,6 +21,7 @@ import { trpc } from '@/libs/trpc';
 export type NoteSchedulerFormProp = {
 	id?: string;
 	disabled?: boolean;
+	initialNote?: Draft;
 	onSubmit?: (draft: Draft) => void;
 };
 
@@ -50,6 +51,7 @@ export const NoteSchedulerForm: React.FC<NoteSchedulerFormProp> = (p) => {
   }), [sessions]);
 
   const [draft, setDraft] = useState<Draft>(draftDefault);
+  const [dateError, setDateError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!p.id) {
@@ -69,12 +71,28 @@ export const NoteSchedulerForm: React.FC<NoteSchedulerFormProp> = (p) => {
     });
   }, [draftDefault, notes, p.id]);
 
+  useEffect(() => {
+    if (!p.initialNote) return;
+    setDraft(p.initialNote);
+  }, [p.initialNote]);
+
   const updateDraft = useCallback(<T extends keyof Draft>(key: T, value: Draft[T]) => {
     setDraft({
       ...draft,
       [key]: value,
     });
   }, [draft]);
+
+  const onChangeDate = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    updateDraft('dateString', e.target.value);
+    if (Date.now() >= Date.parse(e.target.value)) {
+      setDateError('過去の時間を指定することはできません。');
+      return;
+    }
+    setDateError(null);
+  }, [updateDraft]);
+
+  const canPost = draft.text.length > 0 && draft.text.length <= 3000 && !dateError;
 
   return (
 
@@ -138,11 +156,12 @@ export const NoteSchedulerForm: React.FC<NoteSchedulerFormProp> = (p) => {
 
       <InputLabel>
         {t('datetime')}
-        <Input type="datetime-local" value={draft.dateString} disabled={p.disabled} onChange={e => updateDraft('dateString', e.target.value)}></Input>
+        <Input type="datetime-local" value={draft.dateString} disabled={p.disabled} error={dateError != null} onChange={onChangeDate}></Input>
+        {dateError && <Text color="danger" fontSize="xs"><i className="ti ti-alert-circle-filled"/> {dateError}</Text>}
       </InputLabel>
 
       <HStack gap="s" justifyContent="right" alignItems="center">
-        <Button primaryGradient disabled={p.disabled} onClick={() => p.onSubmit?.(draft)}>
+        <Button primaryGradient disabled={p.disabled || !canPost} onClick={() => p.onSubmit?.(draft)}>
           {t('_noteScheduler.schedule')}
         </Button>
       </HStack>

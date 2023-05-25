@@ -94,7 +94,7 @@ export const Button = styled('button', {
     },
     size: {
       small: {
-        padding: '$xxs $s',
+        padding: '$2xs $s',
         fontSize: '$xs',
       },
       medium: {
@@ -119,6 +119,23 @@ export const Button = styled('button', {
       flat: true,
       css: {
         color: '$primary',
+        borderColor: 'transparent',
+        background: 'transparent',
+        '&:not(:disabled):hover': {
+          background: '$flatHover',
+          borderColor: 'transparent',
+        },
+        '&:not(:disabled):active': {
+          background: '$flatActive',
+          borderColor: 'transparent',
+        },
+      },
+    },
+    {
+      danger: true,
+      flat: true,
+      css: {
+        color: '$danger',
         borderColor: 'transparent',
         background: 'transparent',
         '&:not(:disabled):hover': {

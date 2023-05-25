@@ -46,6 +46,7 @@ export const {
       switchBg: olive.olive7,
       switchBgOn: '$primary',
       switchThumb: olive.olive1,
+      overlayBg: blackA.blackA9,
     },
     space: {
       none: '0',
@@ -123,6 +124,7 @@ export const darkTheme = createTheme('dark', {
     flatHover: whiteA.whiteA6,
     flatActive: whiteA.whiteA5,
     switchBg: oliveDark.olive8,
+    overlayBg: whiteA.whiteA9,
   },
 });
 
