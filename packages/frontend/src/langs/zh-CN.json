@@ -33,6 +33,7 @@
 	"ok": "OK",
 	"yes": "是",
 	"no": "否",
+	"cancel": "キャンセル",
 	"termsOfService": "服务条款",
 	"resetToDefault": "重置为默认值",
 	"error": "错误",
@@ -184,7 +185,9 @@
 	"_noteScheduler": {
 		"createNew": "新規作成",
 		"edit": "編集",
+		"delete": "削除",
 		"noNotes": "予約投稿はまだ作成されていません。",
+		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
 		"accountToNote": "投稿するアカウント",
 		"schedule": "投稿を予約"
 	}
