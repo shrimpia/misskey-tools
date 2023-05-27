@@ -41,7 +41,10 @@
 	"accounts": "アカウント",
 	"translatedByTheCommunity": "Misskey Toolsはコミュニティによって翻訳されています。あなたも翻訳に協力してみませんか？",
 	"helpTranslation": "翻訳に協力する",
+	"developer": "開発者",
 	"developedAsOpenSourceSoftware": "Misskey Toolsはオープンソースソフトウェアであり、誰でも開発にご協力いただけます。あなたも貢献してみませんか？",
+	"statistics": "統計",
+	"sponsors": "スポンサー",
 	"announcements": "お知らせ",
 	"upload": "アップロード",
 	"preview": "プレビュー",
@@ -53,6 +56,7 @@
 	"myPage": "マイページ",
 	"shouldUpdateToken": "認証トークンの更新が必要です。更新しないと一部機能が正常に動作しません。",
 	"update": "更新する",
+	"share": "シェア",
 	"shareMisskeyTools": "#MisskeyTools をシェアする",
 	"shareMisskeyToolsNote": "#MisskeyTools はいいぞ\n\nhttps://misskey.tools",
 	"settings": "設定",
@@ -62,6 +66,14 @@
 	"admin": "管理画面",
 	"misskeyAccounts": "Misskey アカウント…",
 	"helpAndSupport": "ヘルプとサポート",
+	"aboutMisskeyTools": "Misskey Tools について",
+	"noteScheduler": "予約投稿",
+	"cw": "内容を隠す",
+	"cwOption": "内容に対する注釈（オプション）",
+	"noteBody": "ノートの本文",
+	"remainedLength": "残り{{len}}文字",
+	"noMoreInput": "これ以上入力できません",
+	"datetime": "日時",
 	"_welcome": {
 		"misshaiAlertTitle": "ミス廃アラート",
 		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
@@ -106,8 +118,10 @@
 		"useAnother": "他のアカウントで登録する"
 	},
 	"_visibility": {
+		"public": "パブリック",
 		"home": "ホーム",
-		"followers": "フォロワー"
+		"followers": "フォロワー",
+		"specified": "ダイレクト"
 	},
 	"_themes": {
 		"light": "ライトテーマ",
@@ -166,5 +180,12 @@
 		"no": "キャンセル",
 		"success": "アカウントを解除しました。トップ画面に戻ります。",
 		"failure": "アカウントを解除できませんでした。"
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	}
 }

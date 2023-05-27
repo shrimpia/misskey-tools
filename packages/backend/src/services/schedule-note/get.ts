@@ -8,7 +8,7 @@ export const getScheduledNotes = async (account: Account) => {
 
   const notes = await prisma.scheduledNote.findMany({
     where: { misskeySessionId: { in: sessionIds } },
-    orderBy: { date: 'asc' },
+    orderBy: { date: 'desc' },
     select: {
       id: true,
       misskeySessionId: true,
