@@ -2,16 +2,15 @@ import { TRPCError } from '@trpc/server';
 import { noteVisibilities } from 'misskey-js';
 import { z } from 'zod';
 
-import { scheduledNoteDtoSchema, toScheduledNoteDto } from '../dto/scheduled-note';
-
+import { scheduledNoteDtoSchema, toScheduledNoteDto } from '@/server/api/dto/scheduled-note';
 import { sessionProcedure } from '@/server/api/procedures/session.js';
 import { router } from '@/server/api/trpc.js';
-import { createScheduledNote } from '@/services/schedule-note/create';
-import { deleteScheduledNote } from '@/services/schedule-note/delete';
-import { getScheduledNotes } from '@/services/schedule-note/get';
+import { createScheduledNote } from '@/services/note-scheduler/create';
+import { deleteScheduledNote } from '@/services/note-scheduler/delete';
+import { getScheduledNotes } from '@/services/note-scheduler/get';
 import { getSession } from '@/services/sessions/get-session.js';
 
-export const scheduleNoteRouter = router({
+export const noteSchedulerRouter = router({
   create: sessionProcedure
     .input(z.object({
       sessionId: z.string(),

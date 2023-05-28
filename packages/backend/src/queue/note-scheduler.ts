@@ -1,14 +1,17 @@
-
-import type { ProcessPromiseFunction } from 'bull';
+import { Queue, Worker } from 'bullmq';
 
 import { getMisskey } from '@/libs/misskey.js';
 import { prisma } from '@/libs/prisma.js';
+import { connection } from '@/libs/redis.js';
 import { isVisibility } from '@/utils/is-visibility.js';
 
-/**
- * 予約投稿ジョブを処理します
- */
-export const processScheduleNote: ProcessPromiseFunction<{id: string}> = async (job) => {
+export type NoteSchedulerQueueType = {
+	id: string;
+};
+
+export const noteSchedulerQueue = new Queue<NoteSchedulerQueueType>('noteScheduler', { connection });
+
+export const noteSchedulerWorker = new Worker<NoteSchedulerQueueType>('noteScheduler', async (job) => {
   const scheduledNote = await prisma.scheduledNote.findUnique({
     where: { id: job.data.id },
     include: {
@@ -39,4 +42,4 @@ export const processScheduleNote: ProcessPromiseFunction<{id: string}> = async (
     localOnly: scheduledNote.localOnly,
     visibleUserIds: scheduledNote.visibleUserIds,
   }, scheduledNote.misskeySession.token);
-};
+}, { connection });

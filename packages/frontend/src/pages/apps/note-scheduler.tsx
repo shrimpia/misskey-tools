@@ -49,13 +49,13 @@ const MarginRight = styled('div', {
   marginRight: '$2xs',
 });
 
-const NoteCard: React.FC<{ note: RouterOutput['scheduleNote']['list'][number] }> = ({ note }) => {
+const NoteCard: React.FC<{ note: RouterOutput['noteScheduler']['list'][number] }> = ({ note }) => {
   const [deleteConfirmDialogOpened, setDeleteConfirmDialogOpened] = useState(false);
 
   const { t } = useTranslation();
   const [sessions] = trpc.account.getMisskeySessions.useSuspenseQuery();
-  const { mutateAsync: deleteAsync } = trpc.scheduleNote.delete.useMutation();
-  const [_, { refetch }] = trpc.scheduleNote.list.useSuspenseQuery();
+  const { mutateAsync: deleteAsync } = trpc.noteScheduler.delete.useMutation();
+  const [_, { refetch }] = trpc.noteScheduler.list.useSuspenseQuery();
 
   const date = dayjs(note.date);
   const session = sessions.find(s => s.id === note.misskeySessionId);
@@ -128,7 +128,7 @@ const visibilityIcon: Record<string, string> = {
 };
 
 const NoteSchedulerPage: React.FC = () => {
-  const [notes] = trpc.scheduleNote.list.useSuspenseQuery();
+  const [notes] = trpc.noteScheduler.list.useSuspenseQuery();
   const { t } = useTranslation();
 
   return (

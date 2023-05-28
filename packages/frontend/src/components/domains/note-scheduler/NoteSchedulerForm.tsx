@@ -37,7 +37,7 @@ export type Draft = {
 
 export const NoteSchedulerForm: React.FC<NoteSchedulerFormProp> = (p) => {
   const [sessions] = trpc.account.getMisskeySessions.useSuspenseQuery();
-  const [notes] = trpc.scheduleNote.list.useSuspenseQuery();
+  const [notes] = trpc.noteScheduler.list.useSuspenseQuery();
   const { t } = useTranslation();
 
   const draftDefault = useMemo<Draft>(() => ({

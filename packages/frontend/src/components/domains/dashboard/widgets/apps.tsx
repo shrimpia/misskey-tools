@@ -70,14 +70,14 @@ export default widget('apps', 'ti ti-grid-dots', true, () => {
         <i className="ti ti-article"/>
         <span>マイページ</span>
       </AppIcon>
-      <AppIcon to="/apps/server-search">
+      {/* <AppIcon to="/apps/server-search">
         <i className="ti ti-search"/>
         <span>サーバー検索</span>
       </AppIcon>
       <AppIcon to="/apps/note-cleaner">
         <i className="ti ti-eraser"/>
         <span>ノート削除</span>
-      </AppIcon>
+      </AppIcon> */}
       <AppIcon to="/apps/note-scheduler">
         <i className="ti ti-alarm"/>
         <span>予約投稿</span>

@@ -14,9 +14,9 @@ import { trpc } from '@/libs/trpc';
 const NoteSchedulerEditPage: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { mutateAsync: createAsync, isLoading: isCreating } = trpc.scheduleNote.create.useMutation();
-  const { mutateAsync: deleteAsync, isLoading: isDeleting } = trpc.scheduleNote.delete.useMutation();
-  const [list] = trpc.scheduleNote.list.useSuspenseQuery();
+  const { mutateAsync: createAsync, isLoading: isCreating } = trpc.noteScheduler.create.useMutation();
+  const { mutateAsync: deleteAsync, isLoading: isDeleting } = trpc.noteScheduler.delete.useMutation();
+  const [list] = trpc.noteScheduler.list.useSuspenseQuery();
   const { id } = useParams();
 
   const note = list.find(n => n.id === id);

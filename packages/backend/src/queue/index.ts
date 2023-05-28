@@ -1,9 +1,9 @@
-import { createQueue } from '@/libs/queue.js';
-import { processScheduleNote } from '@/queue/processors/schedule-note.js';
+import { noteSchedulerQueue, noteSchedulerWorker } from '@/queue/note-scheduler.js';
 
-const scheduleNote = createQueue<{id: string}>('scheduleNote');
-scheduleNote.process(processScheduleNote);
+export const queues = {
+  noteSchedulerQueue,
+};
 
-export const queue = {
-  scheduleNote,
+export const workers = {
+  noteSchedulerWorker,
 };

@@ -13,7 +13,7 @@ import { trpc } from '@/libs/trpc';
 const NoteSchedulerNewPage: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { mutateAsync: createAsync, isLoading } = trpc.scheduleNote.create.useMutation();
+  const { mutateAsync: createAsync, isLoading } = trpc.noteScheduler.create.useMutation();
 
   const onSubmit = async (draft: Draft) => {
     await createAsync({
