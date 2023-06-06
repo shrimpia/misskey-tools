@@ -5,13 +5,15 @@ import { prisma } from '@/libs/prisma.js';
 import { connection } from '@/libs/redis.js';
 import { isVisibility } from '@/utils/is-visibility.js';
 
+const NAME = 'noteScheduler';
+
 export type NoteSchedulerQueueType = {
 	id: string;
 };
 
-export const noteSchedulerQueue = new Queue<NoteSchedulerQueueType>('noteScheduler', { connection });
+export const noteSchedulerQueue = new Queue<NoteSchedulerQueueType>(NAME, { connection });
 
-export const noteSchedulerWorker = new Worker<NoteSchedulerQueueType>('noteScheduler', async (job) => {
+export const noteSchedulerWorker = new Worker<NoteSchedulerQueueType>(NAME, async (job) => {
   const scheduledNote = await prisma.scheduledNote.findUnique({
     where: { id: job.data.id },
     include: {
