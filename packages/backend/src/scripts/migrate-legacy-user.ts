@@ -2,7 +2,7 @@ import { prisma } from '@/libs/prisma.js';
 import { normalize } from '@/utils/visibility.js';
 
 /**
- * user テーブルを account, misskey_session, misshai_account テーブルに移行します。
+ * user テーブルを Account, MisskeySession, HolicAccount テーブルに移行します。
  */
 export const migrateLegacyUser = async () => {
   if ((await prisma.user.count()) === 0) return;
@@ -24,7 +24,7 @@ export const migrateLegacyUser = async () => {
         accountId: account.id,
       },
     });
-    await prisma.misshaiAccount.create({
+    await prisma.holicAccount.create({
       data: {
         misskeySessionId: session.id,
         alertAsNote: user.alertMode === 'note' || user.alertMode === 'both',

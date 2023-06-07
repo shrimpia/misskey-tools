@@ -58,7 +58,8 @@
 	},
 	"tsup": {
 		"entry": [
-			"src/app.ts"
+			"src/app.ts",
+			"src/scripts/*"
 		],
 		"format": [
 			"esm"

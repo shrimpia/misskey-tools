@@ -5,6 +5,7 @@ import type { MisskeySession, HolicAccount } from '@prisma/client';
 
 import { getMisskey } from '@/libs/misskey.js';
 import { connection } from '@/libs/redis.js';
+import { isVisibility } from '@/utils/is-visibility';
 
 const NAME = 'holicNote';
 
@@ -20,10 +21,18 @@ export const holicNoteWorker = new Worker<HolicNoteQueueType>(NAME, async (job) 
   const { session, account, text } = job.data;
 
   const api = getMisskey(session.host);
+
+  if (!isVisibility(account.noteVisibility)) {
+    // 公開範囲の値がおかしい場合は処理しない
+    // TODO 警告をログに流す
+    console.warn(`The scheduled note id:${job.data} has wrong visibility ${account.noteVisibility}. Ignored.`);
+    return;
+  }
+
   try {
     await api.request('notes/create', {
       text,
-      visibility: account.noteVisibility as any,
+      visibility: account.noteVisibility,
       localOnly: account.noteLocalOnly,
     }, session.token);
   } catch (e) {
