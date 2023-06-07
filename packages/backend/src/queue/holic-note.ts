@@ -1,5 +1,5 @@
 import { Queue, Worker } from 'bullmq';
-import { isAPIError } from 'misskey-js/built/api';
+import * as misskey from 'misskey-js';
 
 import type { MisskeySession, HolicAccount } from '@prisma/client';
 
@@ -36,7 +36,7 @@ export const holicNoteWorker = new Worker<HolicNoteQueueType>(NAME, async (job) 
       localOnly: account.noteLocalOnly,
     }, session.token);
   } catch (e) {
-    if (!isAPIError(e)) throw e;
+    if (!misskey.api.isAPIError(e)) throw e;
     if (e.code === 'RATE_LIMIT_EXCEEDED') {
       // delay 1h
       holicNoteWorker.rateLimit(1000 * 60 * 60);
