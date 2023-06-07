@@ -48,7 +48,7 @@ model MisskeySession {
   account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
 
   /// ミス廃アラート機能のアカウント
-  misshaiAccount MisshaiAccount?
+  holicAccount HolicAccount?
   scheduledNote  ScheduledNote[]
 
   @@unique([username, host])
@@ -56,7 +56,7 @@ model MisskeySession {
 }
 
 /// ミス廃アラート アカウント
-model MisshaiAccount {
+model HolicAccount {
   /// このアカウントに紐づくMisskeyセッションのID
   misskeySessionId String         @id @map("misskey_session_id")
   /// このアカウントに紐づくMisskeyセッション
@@ -78,13 +78,13 @@ model MisshaiAccount {
   rankingVisible      Boolean @default(false) @map("ranking_visible")
 
   /// ミス廃ログ
-  records MisshaiRecord[]
+  records HolicRecord[]
 
   @@map("misshai_account")
 }
 
 /// ミス廃アラートのログ
-model MisshaiRecord {
+model HolicRecord {
   /// ID
   id             String   @id @default(uuid())
   /// このログの日付
@@ -101,7 +101,7 @@ model MisshaiRecord {
   /// このログの所有者であるアカウントのID
   accountId String         @map("account_id")
   /// このログの所有者であるアカウント
-  account   MisshaiAccount @relation(fields: [accountId], references: [misskeySessionId], onDelete: Cascade)
+  account   HolicAccount @relation(fields: [accountId], references: [misskeySessionId], onDelete: Cascade)
 
   @@map("misshai_record")
 }
