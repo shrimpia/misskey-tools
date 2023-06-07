@@ -2,17 +2,16 @@
 
 import announcements from './announcements';
 import apps from './apps';
-import misshaiData from './misshaiData';
+import holicData from './holicData';
 import questionBox from './questionBox';
 import unreadHints from './unreadHints';
 
 import type { WidgetDef } from '../def';
 
 export const widgets: WidgetDef[] = [
-  misshaiData,
+  holicData,
   announcements,
   questionBox,
   apps,
   unreadHints,
 ];
-

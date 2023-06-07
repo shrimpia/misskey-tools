@@ -28,13 +28,13 @@ export const noteSchedulerWorker = new Worker<NoteSchedulerQueueType>(NAME, asyn
   if (scheduledNote == null) {
     // データベース上に存在しない場合は処理しない
     // TODO 警告をログに流す
-    console.warn(`the scheduled note id:${job.data} is not found. Ignored.`);
+    console.warn(`The scheduled note id:${job.data} is not found. Ignored.`);
     return;
   }
   if (!isVisibility(scheduledNote.visibility)) {
     // 公開範囲の値がおかしい場合は処理しない
     // TODO 警告をログに流す
-    console.warn(`the scheduled note id:${job.data} has wrong visibility ${scheduledNote.visibility}. Ignored.`);
+    console.warn(`The scheduled note id:${job.data} has wrong visibility ${scheduledNote.visibility}. Ignored.`);
     return;
   }
   await getMisskey(scheduledNote.misskeySession.host).request('notes/create', {

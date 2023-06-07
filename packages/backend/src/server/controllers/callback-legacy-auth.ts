@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import type { RouteHandler } from 'fastify';
 import type { UserDetailed } from 'misskey-js/built/entities.js';
 
-import { api } from '@/libs/misskey';
+import { getMisskey } from '@/libs/misskey.js';
 import { tokenSecretCache, sessionHostCache } from '@/server/cache.js';
 import { die } from '@/server/utils/die.js';
 import { processLogin } from '@/services/sessions/process-login.js';
@@ -30,11 +30,12 @@ export const callbackLegacyAuthController: RouteHandler<{Querystring: {token: st
     return;
   }
 
-  const { accessToken: misskeyToken, user } = await api<{ accessToken: string, user: UserDetailed }>(host, 'auth/session/userkey', {
+  const { accessToken: misskeyToken, user } = await getMisskey(host).request('auth/session/userkey', {
     appSecret, token,
   });
-  const i = crypto.createHash('sha256').update(misskeyToken + appSecret, 'utf8').digest('hex');
 
-  const accessToken = await processLogin(user, host, i);
+  const i = crypto.createHash('sha256').update(misskeyToken + appSecret, 'utf8').digest('hex');
+  const accessToken = await processLogin(user as UserDetailed, host, i);
+
   await reply.view('frontend', { token: accessToken });
 };

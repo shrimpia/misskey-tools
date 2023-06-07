@@ -7,6 +7,7 @@ import { fastify } from 'fastify';
 import pug from 'pug';
 
 import { config, meta } from '@/config.js';
+import { queues } from '@/queue/index.js';
 import { appRouter } from '@/server/api/index.js';
 import { createContext } from '@/server/api/trpc.js';
 import { announcementsController } from '@/server/controllers/announcements.js';
@@ -42,6 +43,14 @@ export const startServer = async () => {
   app.get('/__rescue__', rescueController);
   app.get('/vite/*', viteController);
   app.get('/*', frontendController);
+
+  // アラートを発火させるキュー
+  queues.holicCronQueue.add('cron', null, {
+    jobId: 'cron',
+    repeat: {
+      pattern: '0 0 0 * * *',
+    },
+  });
 
   await app.listen({
     port: config.port || 3000,
