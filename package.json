@@ -13,7 +13,7 @@
     "storybook": "pnpm recursive --filter tools-frontend run storybook"
   },
   "devDependencies": {
-    "turbo": "^1.9.9"
+    "turbo": "^1.10.2"
   },
-  "packageManager": "pnpm@8.5.1"
+  "packageManager": "pnpm@8.6.1"
 }
