@@ -1,4 +1,5 @@
 import React from 'react';
+import GithubCorner from 'react-github-corner';
 import { useTranslation } from 'react-i18next';
 import Twemoji from 'react-twemoji';
 
@@ -40,11 +41,12 @@ const WelcomePage: React.FC = () => {
   };
   return (
     <div>
+      <GithubCorner href="https://github.com/shrimpia/misskey-tools" />
       <Container direction="vertical" alignItems="center" justifyContent="center">
         <Logo />
         <VStack gap="xl" alignItems="center" css={{ marginTop: '$s' }}>
           <Text color="muted">
-					Made with <Twemoji tag="span">🍶</Twemoji> by Shrimpia Network
+					Made with <Twemoji tag="span">🦐</Twemoji> by Shrimpia Network
           </Text>
           <Text fontSize={{ '@initial': 'xl', '@phone': 'm' }}>
             {t('description')}
@@ -58,9 +60,9 @@ const WelcomePage: React.FC = () => {
       <Article>
         <Features>
           <Feature>
-            <h2>{t('missHaiAlert')}</h2>
-            <p>{t('_welcome.misshaiAlertDescription')}</p>
-            <p>{t('_welcome.misshaiRankingDescription')}</p>
+            <h2>{t('misskeholicAlert')}</h2>
+            <p>{t('_welcome.misskeholicAlertDescription')}</p>
+            <p>{t('_welcome.misskeholicRankingDescription')}</p>
           </Feature>
           <Feature>
             <h2>{t('avatarCropper')}</h2>
