@@ -17,7 +17,7 @@ import '@/style.scss';
 const el = document.getElementById('app');
 
 // TODO: エラーオブジェクトが存在する場合はレンダリングを分ける
-const error = (window as any).__misshaialert?.error;
+const error = (window as any).__tools?.error;
 
 if (el != null) {
   createRoot(el).render(error ? (<BackendError error={error} />) : (
