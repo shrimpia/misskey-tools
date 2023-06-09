@@ -50,7 +50,7 @@
 	"upload": "업로드",
 	"preview": "미리보기",
 	"dashboard": "대시보드",
-	"missHaiAlert": "노트왕 알림",
+	"misskeholicAlert": "ミス廃アラート",
 	"avatarCropper": "아바타 자르기",
 	"questionBox": "질문 상자",
 	"followingManager": "팔로우 관리자",
@@ -76,9 +76,9 @@
 	"noMoreInput": "これ以上入力できません",
 	"datetime": "日時",
 	"_welcome": {
-		"misshaiAlertTitle": "노트왕 알림",
-		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
-		"misshaiRankingDescription": "노트왕 랭킹에서는, Misskey에서의 활동을 수치화하여 랭킹의 형태로 보여 드립니다.",
+		"misskeholicAlertTitle": "ミス廃アラート",
+		"misskeholicAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
+		"misskeholicRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
 		"avatarCropperDescription": "프로필 사진이 원형 또는 사각형으로 표시될 때와, 고양이귀가 붙었을 때의 모습을 실시간으로 확인하면서 자를 수 있습니다. 매력있는 아바타를 더욱 매력적으로.",
 		"questionBoxDescription": "익명으로 질문할 수 있는 페이지를 열어 보아요. 질문에 대한 답변은 Misskey를 통해 작성할 수 있습니다.",
 		"followingManagerDescription": "너무 많아진 팔로우 및 팔로워를 정리하고 싶을 때. 서버 및 상호 팔로우 여부로 분류하여 일괄적으로 정리할 수 있습니다.",
@@ -92,27 +92,37 @@
 		"evening": "안녕하세요, {{name}} 님."
 	},
 	"_widgets": {
-		"misshaiData": "오늘의 노트왕 데이터",
+		"holicData": "今日のミス廃データ",
 		"announcements": "공지사항",
 		"questionBox": "질문 상자",
 		"apps": "앱",
 		"unreadHints": "읽지 않은 팁"
 	},
-	"_missHai": {
-		"ranking": "노트왕 랭킹",
-		"rankingDescription": "유저의 활동량에 따라 레이팅을 산출하여 높은 순으로 랭킹을 표시합니다.",
-		"showAll": "모두 보이기",
-		"data": "みす廃データ",
-		"dataBody": "내용",
-		"dataScore": "점수",
-		"dataDelta": "어제보다",
-		"rating": "레이팅",
-		"order": "순위",
-		"showRanking": "순위를 보기",
-		"useRanking": "랭킹에 참가하기",
-		"note": "자동으로 노트로 보내기",
-		"notification": "Misskey 알림으로 보내기",
-		"notificationWarning": "Misskey 버전에 따라 동작하지 않을 수 있습니다."
+	"_misshaiAlert": {
+		"gettingStarted": "利用を開始する",
+		"holicRanking": "ミス廃ランキング",
+		"holicRankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
+		"showAll": "全員分見る",
+		"data": "ミス廃データ",
+		"dataBody": "内容",
+		"dataScore": "スコア",
+		"dataDelta": "前日比",
+		"rating": "レート",
+		"order": "順位",
+		"showRanking": "ランキングを見る",
+		"useRanking": "ランキングに参加する",
+		"note": "自動的にノートとして投稿する",
+		"notification": "Misskeyに通知する",
+		"notificationWarning": "Misskeyのバージョンによっては動作しません。"
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"delete": "削除",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	},
 	"_accounts": {
 		"switchAccount": "계정 전환",
@@ -131,7 +141,7 @@
 	},
 	"_template": {
 		"description": "알림 템플릿을 수정할 수 있습니다.",
-		"description2": "'#misshaialert' 해시태그가 자동으로 맨 아래에 추가됩니다.",
+		"hashtagAutomaticInsertion": "ハッシュタグ #missholicalert は、テンプレートに関わらず自動付与されます。",
 		"default": "어제 하루동안의 Misskey 사용량이에요!\n\n노트: {notesCount}({notesDelta})\n팔로우 : {followingCount}({followingDelta})\n팔로워 :{followersCount}({followersDelta})\n\n입니다.\n{url}",
 		"insertVariables": "변수 입력",
 		"insertVariablesHelp": "{ } 으로 감싼 문자열은 변수라고 하며 특별한 기능을 가집니다. 변수는 알림을 전송할 때 자동으로 변환됩니다.",
@@ -181,14 +191,5 @@
 		"no": "취소",
 		"success": "계정 연동을 해제했습니다. 메인 화면으로 돌아갑니다.",
 		"failure": "계정 연동을 해제할 수 없습니다."
-	},
-	"_noteScheduler": {
-		"createNew": "新規作成",
-		"edit": "編集",
-		"delete": "削除",
-		"noNotes": "予約投稿はまだ作成されていません。",
-		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
-		"accountToNote": "投稿するアカウント",
-		"schedule": "投稿を予約"
 	}
 }
