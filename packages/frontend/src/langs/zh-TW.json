@@ -50,7 +50,7 @@
 	"upload": "アップロード",
 	"preview": "プレビュー",
 	"dashboard": "ダッシュボード",
-	"missHaiAlert": "ミス廃アラート",
+	"misskeholicAlert": "ミス廃アラート",
 	"avatarCropper": "アバタークロッパー",
 	"questionBox": "質問ボックス",
 	"followingManager": "フォローマネージャー",
@@ -76,9 +76,9 @@
 	"noMoreInput": "これ以上入力できません",
 	"datetime": "日時",
 	"_welcome": {
-		"misshaiAlertTitle": "ミス廃アラート",
-		"misshaiAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を以下のように定期投稿できます。",
-		"misshaiRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
+		"misskeholicAlertTitle": "ミス廃アラート",
+		"misskeholicAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
+		"misskeholicRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
 		"avatarCropperDescription": "丸形、角丸形、そして猫耳のついた状態をプレビューしながら、アイコンを自在に切り抜けます。魅力的なアバターを、もっと魅力的に。",
 		"questionBoxDescription": "匿名で質問できるページを開設しよう。届いた質問には、お使いのMisskeyアカウントで回答できます。",
 		"followingManagerDescription": "増えすぎたフォロー・フォロワーを管理できる高機能なマネージャー。所属サーバーや、フォローバックされていないアカウントで絞り込むことができ、一括処理にも対応しています。",
@@ -92,17 +92,18 @@
 		"evening": "こんばんは、{{name}}さん。"
 	},
 	"_widgets": {
-		"misshaiData": "今日のミス廃データ",
+		"holicData": "今日のミス廃データ",
 		"announcements": "お知らせ",
 		"questionBox": "質問ボックス",
 		"apps": "アプリ",
 		"unreadHints": "未読のヒント"
 	},
-	"_missHai": {
-		"ranking": "ミス廃ランキング",
-		"rankingDescription": "ユーザーの「みす廃レート」を算出し、高い順にランキング表示しています。",
+	"_misshaiAlert": {
+		"gettingStarted": "利用を開始する",
+		"holicRanking": "ミス廃ランキング",
+		"holicRankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
 		"showAll": "全員分見る",
-		"data": "みす廃データ",
+		"data": "ミス廃データ",
 		"dataBody": "内容",
 		"dataScore": "スコア",
 		"dataDelta": "前日比",
@@ -113,6 +114,15 @@
 		"note": "自動的にノートとして投稿する",
 		"notification": "Misskeyに通知する",
 		"notificationWarning": "Misskeyのバージョンによっては動作しません。"
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"delete": "削除",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	},
 	"_accounts": {
 		"switchAccount": "アカウント切り替え",
@@ -131,7 +141,7 @@
 	},
 	"_template": {
 		"description": "アラートの自動投稿をカスタマイズできます。",
-		"description2": "ハッシュタグ #misshaialert は、テンプレートに関わらず自動付与されます。",
+		"hashtagAutomaticInsertion": "ハッシュタグ #missholicalert は、テンプレートに関わらず自動付与されます。",
 		"default": "昨日のMisskeyの活動は\n\nノート: {notesCount}({notesDelta})\nフォロー : {followingCount}({followingDelta})\nフォロワー :{followersCount}({followersDelta})\n\nでした。\n{url}",
 		"insertVariables": "変数を挿入する",
 		"insertVariablesHelp": "{ } で囲われた文字列は変数と呼ばれ、特別な意味を持ちます。これを含めると、投稿時に自動的に値が埋め込まれます。",
@@ -181,14 +191,5 @@
 		"no": "キャンセル",
 		"success": "アカウントを解除しました。トップ画面に戻ります。",
 		"failure": "アカウントを解除できませんでした。"
-	},
-	"_noteScheduler": {
-		"createNew": "新規作成",
-		"edit": "編集",
-		"delete": "削除",
-		"noNotes": "予約投稿はまだ作成されていません。",
-		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
-		"accountToNote": "投稿するアカウント",
-		"schedule": "投稿を予約"
 	}
 }
