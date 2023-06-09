@@ -1,15 +1,15 @@
 @font-face {
   font-family: "OTADESIGN Rounded";
-  src: url("/fonts/otadesign_rounded.woff2") format('woff2'),
-       url("/fonts/otadesign_rounded.woff") format('woff');
+  src: url("./assets/fonts/otadesign_rounded.woff2") format('woff2'),
+       url("./assets/fonts/otadesign_rounded.woff") format('woff');
 }
 
 @font-face {
   font-family: "Koruri";
-  src: url("/fonts/koruri-regular.eot");
-  src: url("/fonts/koruri-regular.eot?#iefix") format("embedded-opentype"),
-  url("/fonts/koruri-regular.woff") format("woff"),
-  url("/fonts/koruri-regular.ttf") format("truetype");
+  src: url("./assets/fonts/koruri-regular.eot");
+  src: url("./assets/fonts/koruri-regular.eot?#iefix") format("embedded-opentype"),
+  url("./assets/fonts/koruri-regular.woff") format("woff"),
+  url("./assets/fonts/koruri-regular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -17,10 +17,10 @@
 
 @font-face {
   font-family: "Koruri";
-  src: url("/fonts/koruri-semibold.eot");
-  src: url("/fonts/koruri-semibold.eot?#iefix") format("embedded-opentype"),
-  url("/fonts/koruri-semibold.woff") format("woff"),
-  url("/fonts/koruri-semibold.ttf") format("truetype");
+  src: url("./assets/fonts/koruri-semibold.eot");
+  src: url("./assets/fonts/koruri-semibold.eot?#iefix") format("embedded-opentype"),
+  url("./assets/fonts/koruri-semibold.woff") format("woff"),
+  url("./assets/fonts/koruri-semibold.ttf") format("truetype");
   font-style: normal;
   font-weight: 500;
   font-display: swap;
@@ -28,10 +28,10 @@
 
 @font-face {
   font-family: "Koruri";
-  src: url("/fonts/koruri-bold.eot");
-  src: url("/fonts/koruri-bold.eot?#iefix") format("embedded-opentype"),
-  url("/fonts/koruri-bold.woff") format("woff"),
-  url("/fonts/koruri-bold.ttf") format("truetype");
+  src: url("./assets/fonts/koruri-bold.eot");
+  src: url("./assets/fonts/koruri-bold.eot?#iefix") format("embedded-opentype"),
+  url("./assets/fonts/koruri-bold.woff") format("woff"),
+  url("./assets/fonts/koruri-bold.ttf") format("truetype");
   font-style: normal;
   font-weight: 700;
   font-display: swap;
