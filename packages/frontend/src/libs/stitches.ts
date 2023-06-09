@@ -1,4 +1,11 @@
-import { blackA, olive, oliveDark, tomato, tomatoDark, whiteA } from '@radix-ui/colors';
+import {
+  blackA,
+  olive,
+  oliveDark,
+  tomato,
+  tomatoDark,
+  whiteA,
+} from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 
 export const {

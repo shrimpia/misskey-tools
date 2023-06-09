@@ -48,5 +48,5 @@ export const format = (p: VariableParameter): string => {
   return template.replace(variableRegex, (m, name) => {
     const v = variables[name];
     return !v ? m : typeof v === 'function' ? v(p) : v;
-  }) + '\n\n#missholic';
+  }) + '\n\n#misskeholic';
 };

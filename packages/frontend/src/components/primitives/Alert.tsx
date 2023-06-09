@@ -14,6 +14,7 @@ export type AlertProp = {
 	title?: string;
 	description: string;
 	cancelText?: string;
+	hasCancel?: boolean;
 	okText?: string;
 	danger?: boolean;
 	onOkClick?: () => void;
@@ -32,11 +33,13 @@ export const Alert: React.FC<AlertProp> = (p) => {
             {p.description}
           </AlertDialogDescription>
           <HStack justifyContent="right">
-            <$.Cancel asChild>
-              <Button flat>
-                {p.cancelText ?? t('cancel')}
-              </Button>
-            </$.Cancel>
+            {p.hasCancel && (
+              <$.Cancel asChild>
+                <Button flat>
+                  {p.cancelText ?? t('cancel')}
+                </Button>
+              </$.Cancel>
+            )}
             <$.Action asChild>
               <Button danger={p.danger} primaryGradient={!p.danger} onClick={p.onOkClick}>
                 {p.okText ?? t('ok')}

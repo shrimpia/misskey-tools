@@ -111,6 +111,7 @@ const NoteCard: React.FC<{ note: RouterOutput['noteScheduler']['list'][number] }
       </VStack>
       <Alert
         danger
+        hasCancel
         description={t('_noteScheduler.deleteConfirm', { note: note.text })}
         open={deleteConfirmDialogOpened}
         onOpenChange={setDeleteConfirmDialogOpened}
