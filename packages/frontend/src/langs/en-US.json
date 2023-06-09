@@ -50,7 +50,7 @@
 	"upload": "Upload",
 	"preview": "Preview",
 	"dashboard": "Dashboard",
-	"missHaiAlert": "Misskeholic Alert",
+	"misskeholicAlert": "ミス廃アラート",
 	"avatarCropper": "Avatar Cropper",
 	"questionBox": "Question Box",
 	"followingManager": "Following Manager",
@@ -76,9 +76,9 @@
 	"noMoreInput": "これ以上入力できません",
 	"datetime": "日時",
 	"_welcome": {
-		"misshaiAlertTitle": "Miss-hai Alert",
-		"misshaiAlertDescription": "Are you worried about overusing Misskey? With Miss-hai Alert, you can automatically post your activities on Misskey as below.",
-		"misshaiRankingDescription": "Miss-hai Ranking shows your quantified activities on Misskey.",
+		"misskeholicAlertTitle": "ミス廃アラート",
+		"misskeholicAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
+		"misskeholicRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
 		"avatarCropperDescription": "Cut through icons at will with previewing round, square, and cat-eared states. Make your avatar more attractive.",
 		"questionBoxDescription": "Let's create a page to accept questions anonymously. You can answer the questions you receive with your Misskey account.",
 		"followingManagerDescription": "Manage an overgrowing number of following and followers. You can filter accounts by your conditions such as the host name, or whether not be followed back. It also supports batch processing.",
@@ -92,27 +92,37 @@
 		"evening": "Good evening, {{name}}."
 	},
 	"_widgets": {
-		"misshaiData": "Today's Misskeholic Data",
+		"holicData": "今日のミス廃データ",
 		"announcements": "Announcements",
 		"questionBox": "Question Box",
 		"apps": "Apps",
 		"unreadHints": "Unread Hints"
 	},
-	"_missHai": {
-		"ranking": "Miss-hai Ranking",
-		"rankingDescription": "This ranking shows users \"Misshai Rating\" in order of the highest to lowest.",
-		"showAll": "Show All",
-		"data": "Miss-hai Data",
-		"dataBody": "Body",
-		"dataScore": "Score",
-		"dataDelta": "Difference",
-		"rating": "Rating",
-		"order": "Order",
-		"showRanking": "Show Ranking",
-		"useRanking": "Join the Ranking",
-		"note": "Send as note automatically",
-		"notification": "Notify to your Misskey Account",
-		"notificationWarning": "It may not work on some versions of Misskey."
+	"_misshaiAlert": {
+		"gettingStarted": "利用を開始する",
+		"holicRanking": "ミス廃ランキング",
+		"holicRankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
+		"showAll": "全員分見る",
+		"data": "ミス廃データ",
+		"dataBody": "内容",
+		"dataScore": "スコア",
+		"dataDelta": "前日比",
+		"rating": "レート",
+		"order": "順位",
+		"showRanking": "ランキングを見る",
+		"useRanking": "ランキングに参加する",
+		"note": "自動的にノートとして投稿する",
+		"notification": "Misskeyに通知する",
+		"notificationWarning": "Misskeyのバージョンによっては動作しません。"
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"delete": "削除",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	},
 	"_accounts": {
 		"switchAccount": "Switch your account",
@@ -131,7 +141,7 @@
 	},
 	"_template": {
 		"description": "Customize template of your alert.",
-		"description2": "Hashtag '#misshaialert' will be appended regardless of the template.",
+		"hashtagAutomaticInsertion": "ハッシュタグ #missholicalert は、テンプレートに関わらず自動付与されます。",
 		"default": "My Misskey activity yesterday was:\n\nNotes: {notesCount}({notesDelta})\nFollowing: {followingCount}({followingDelta})\nFollowers: {followersCount}({followersDelta})\n\n{url}",
 		"insertVariables": "Insert variables",
 		"insertVariablesHelp": "The string enclosed in { } is called \"variables\" and has a special meaning. If you include this, it will be automatically replaced to the actual value when alerts created.",
@@ -181,14 +191,5 @@
 		"no": "Cancel",
 		"success": "Your account has been deactivated. Return to the top screen.",
 		"failure": "Failed to delete account."
-	},
-	"_noteScheduler": {
-		"createNew": "新規作成",
-		"edit": "編集",
-		"delete": "削除",
-		"noNotes": "予約投稿はまだ作成されていません。",
-		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
-		"accountToNote": "投稿するアカウント",
-		"schedule": "投稿を予約"
 	}
 }
