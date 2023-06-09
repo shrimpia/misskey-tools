@@ -50,7 +50,7 @@
 	"upload": "アップロード",
 	"preview": "プレビュー",
 	"dashboard": "ダッシュボード",
-	"missHaiAlert": "ミス廃アラート",
+	"misskeholicAlert": "ミス廃アラート",
 	"avatarCropper": "アバタークロッパー",
 	"questionBox": "質問ボックス",
 	"followingManager": "フォローマネージャー",
@@ -76,9 +76,9 @@
 	"noMoreInput": "これ以上入力できません",
 	"datetime": "日時",
 	"_welcome": {
-		"misshaiAlertTitle": "ミス廃アラート",
-		"misshaiAlertDescription": "あんたMisskeyめっちゃ好きやん！ミス廃アラート使ったら、あんたがMisskeyで活動した統計を定期投稿してくれるで。",
-		"misshaiRankingDescription": "ミス廃ランキングは、あんたらのMisskeyで活動した量を数値化してランキング表示するもんやで。",
+		"misskeholicAlertTitle": "ミス廃アラート",
+		"misskeholicAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
+		"misskeholicRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
 		"avatarCropperDescription": "丸形、角丸形、そして猫耳のついた状態をプレビューしながら、アイコンを自在に切り抜けるで。まぁ化粧のようなもんやわ。",
 		"questionBoxDescription": "匿名で質問できるページ作ろうや。届いた質問はあんたのMisskeyアカウントで回答できるで。",
 		"followingManagerDescription": "増えすぎたフォロー・フォロワーを管理できる高機能なマネージャーやで。所属サーバーや、フォローバックされていないアカウントで絞り込むことができて、一括処理にも対応してるんやって。しらんけど",
@@ -92,15 +92,16 @@
 		"evening": "こんばんは、{{name}}さん。"
 	},
 	"_widgets": {
-		"misshaiData": "今日のミス廃データ",
+		"holicData": "今日のミス廃データ",
 		"announcements": "お知らせ",
 		"questionBox": "質問ボックス",
 		"apps": "アプリ",
 		"unreadHints": "未読のヒント"
 	},
-	"_missHai": {
-		"ranking": "ミス廃ランキング",
-		"rankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
+	"_misshaiAlert": {
+		"gettingStarted": "利用を開始する",
+		"holicRanking": "ミス廃ランキング",
+		"holicRankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
 		"showAll": "全員分見る",
 		"data": "ミス廃データ",
 		"dataBody": "内容",
@@ -108,11 +109,20 @@
 		"dataDelta": "前日比",
 		"rating": "レート",
 		"order": "順位",
-		"showRanking": "ランキング見るで",
-		"useRanking": "ランキング参加するで",
-		"note": "勝手にノートしといたるわ",
-		"notification": "Misskeyに通知しとくで",
-		"notificationWarning": "Misskeyのバージョンによったら動作せんのもあるんやって。"
+		"showRanking": "ランキングを見る",
+		"useRanking": "ランキングに参加する",
+		"note": "自動的にノートとして投稿する",
+		"notification": "Misskeyに通知する",
+		"notificationWarning": "Misskeyのバージョンによっては動作しません。"
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"delete": "削除",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	},
 	"_accounts": {
 		"switchAccount": "アカウント変えるで",
@@ -131,7 +141,7 @@
 	},
 	"_template": {
 		"description": "アラートの自動投稿をカスタマイズできるで。",
-		"description2": "ハッシュタグ #misshaialert は、テンプレートとか関係なく勝手に付いてくるで。",
+		"hashtagAutomaticInsertion": "ハッシュタグ #missholicalert は、テンプレートに関わらず自動付与されます。",
 		"default": "昨日のMisskeyの活動は\n\nノート: {notesCount}({notesDelta})\nフォロー : {followingCount}({followingDelta})\nフォロワー :{followersCount}({followersDelta})\n\nやったで。\n{url}",
 		"insertVariables": "変数を挿入する",
 		"insertVariablesHelp": "{ } で囲われた文字列は変数って言うねん。特別な意味を持ってるからこれを入れたら、投稿時に自動的に値が埋め込まれるんやって。知らんけど",
@@ -181,14 +191,5 @@
 		"no": "やめとくわ",
 		"success": "アカウント消したで。トップ画面戻るわ。",
 		"failure": "アカウント消えんかったわ"
-	},
-	"_noteScheduler": {
-		"createNew": "新規作成",
-		"edit": "編集",
-		"delete": "削除",
-		"noNotes": "予約投稿はまだ作成されていません。",
-		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
-		"accountToNote": "投稿するアカウント",
-		"schedule": "投稿を予約"
 	}
 }
