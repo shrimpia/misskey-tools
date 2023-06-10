@@ -5,7 +5,8 @@ import type { MisskeySession, HolicAccount } from '@prisma/client';
 
 import { getMisskey } from '@/libs/misskey.js';
 import { connection } from '@/libs/redis.js';
-import { isVisibility } from '@/utils/is-visibility';
+import { isVisibility } from '@/utils/is-visibility.js';
+import { toAcct } from '@/utils/to-acct.js';
 
 const NAME = 'holicNote';
 
@@ -19,6 +20,8 @@ export const holicNoteQueue = new Queue<HolicNoteQueueType>(NAME, { connection }
 
 export const holicNoteWorker = new Worker<HolicNoteQueueType>(NAME, async (job) => {
   const { session, account, text } = job.data;
+
+  console.log(`[holic] Processing note job for ${toAcct(session)}`);
 
   const api = getMisskey(session.host);
 
@@ -36,6 +39,7 @@ export const holicNoteWorker = new Worker<HolicNoteQueueType>(NAME, async (job) 
       localOnly: account.noteLocalOnly,
     }, session.token);
   } catch (e) {
+    console.log(`[holic] Failed to create a note: ${e}`);
     if (!misskey.api.isAPIError(e)) throw e;
     if (e.code === 'RATE_LIMIT_EXCEEDED') {
       // delay 1h

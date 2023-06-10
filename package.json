@@ -7,13 +7,13 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev": "turbo run dev --no-cache  --continue",
+    "dev": "turbo run dev --no-cache --continue --force",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "storybook": "pnpm recursive --filter tools-frontend run storybook"
   },
   "devDependencies": {
-    "turbo": "^1.9.9"
+    "turbo": "^1.10.2"
   },
-  "packageManager": "pnpm@8.5.1"
+  "packageManager": "pnpm@8.6.1"
 }

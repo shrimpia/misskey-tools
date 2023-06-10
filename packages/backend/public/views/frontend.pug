@@ -30,7 +30,7 @@ html
 
 		if error
 			script.
-				window.__misshaialert = { error: '#{error}' };
+				window.__tools = { error: '#{error}' };
 
 		script(type='module').
 			import RefreshRuntime from 'http://localhost:5173/@react-refresh'
@@ -40,5 +40,5 @@ html
 			window.__vite_plugin_react_preamble_installed__ = true
 
 
-		script(type='module' src='http://localhost:5173/@vite/client')
-		script(type='module' src='http://localhost:5173/src/init.tsx')
+		script(type='module' src='/vite/@vite/client')
+		script(type='module' src='/vite/src/init.tsx')
