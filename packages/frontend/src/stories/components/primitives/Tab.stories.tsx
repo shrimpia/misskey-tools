@@ -6,6 +6,7 @@ import { Tab, TabItem } from '@/components/primitives/Tab';
 
 const meta = {
   component: Tab,
+  tags: ['autodocs'],
   parameters: {
     layouts: 'centered',
   },
