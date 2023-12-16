@@ -33,6 +33,7 @@
 	"ok": "موافق",
 	"yes": "موافق",
 	"no": "لا",
+	"cancel": "キャンセル",
 	"termsOfService": "شروط الخدمة",
 	"resetToDefault": "إعادة تعيين إلى الافتراضي",
 	"error": "خطأ",
@@ -49,7 +50,7 @@
 	"upload": "アップロード",
 	"preview": "プレビュー",
 	"dashboard": "ダッシュボード",
-	"missHaiAlert": "ミス廃アラート",
+	"misskeholicAlert": "ミス廃アラート",
 	"avatarCropper": "アバタークロッパー",
 	"questionBox": "質問ボックス",
 	"followingManager": "フォローマネージャー",
@@ -75,9 +76,9 @@
 	"noMoreInput": "これ以上入力できません",
 	"datetime": "日時",
 	"_welcome": {
-		"misshaiAlertTitle": "Miss-hai Alert",
-		"misshaiAlertDescription": "هل أنت قلق من الإفراط في استخدام Misskey؟ باستخدام إنذار Misshai ، يمكنك نشر أنشطتك تلقائيًا على Misskey على النحو التالي.",
-		"misshaiRankingDescription": "يظهر ترتيب Misshai أنشطتك الكمية على Misskey.",
+		"misskeholicAlertTitle": "ミス廃アラート",
+		"misskeholicAlertDescription": "Misskeyにのめり込んでいませんか？ミス廃アラートを使えば、毎日のMisskeyでの活動量を定期投稿できます。",
+		"misskeholicRankingDescription": "ミス廃ランキングでは、Misskeyでの活動を数値化し、ランキング表示します。",
 		"avatarCropperDescription": "丸形、角丸形、そして猫耳のついた状態をプレビューしながら、アイコンを自在に切り抜けます。魅力的なアバターを、もっと魅力的に。",
 		"questionBoxDescription": "匿名で質問できるページを開設しよう。届いた質問には、お使いのMisskeyアカウントで回答できます。",
 		"followingManagerDescription": "増えすぎたフォロー・フォロワーを管理できる高機能なマネージャー。所属サーバーや、フォローバックされていないアカウントで絞り込むことができ、一括処理にも対応しています。",
@@ -91,27 +92,37 @@
 		"evening": "こんばんは、{{name}}さん。"
 	},
 	"_widgets": {
-		"misshaiData": "今日のミス廃データ",
+		"holicData": "今日のミス廃データ",
 		"announcements": "お知らせ",
 		"questionBox": "質問ボックス",
 		"apps": "アプリ",
 		"unreadHints": "未読のヒント"
 	},
-	"_missHai": {
-		"ranking": "ترتيب Misshai",
-		"rankingDescription": "يعرض هذا الترتيب للمستخدمين \"تقييم Misshai\" بالترتيب من الأعلى إلى الأدنى.",
-		"showAll": "عرض الكل",
-		"data": "بيانات Misshai",
-		"dataBody": "المحتوى",
-		"dataScore": "نتيجة",
-		"dataDelta": "الفرق",
-		"rating": "تقييم",
-		"order": "الطلب",
-		"showRanking": "عرض الترتيب",
+	"_misshaiAlert": {
+		"gettingStarted": "利用を開始する",
+		"holicRanking": "ミス廃ランキング",
+		"holicRankingDescription": "ユーザーの「ミス廃レート」を算出し、高い順にランキング表示しています。",
+		"showAll": "全員分見る",
+		"data": "ミス廃データ",
+		"dataBody": "内容",
+		"dataScore": "スコア",
+		"dataDelta": "前日比",
+		"rating": "レート",
+		"order": "順位",
+		"showRanking": "ランキングを見る",
 		"useRanking": "ランキングに参加する",
 		"note": "自動的にノートとして投稿する",
 		"notification": "Misskeyに通知する",
 		"notificationWarning": "Misskeyのバージョンによっては動作しません。"
+	},
+	"_noteScheduler": {
+		"createNew": "新規作成",
+		"edit": "編集",
+		"delete": "削除",
+		"noNotes": "予約投稿はまだ作成されていません。",
+		"deleteConfirm": "本当に予約投稿「{{note}}」を削除しますか？",
+		"accountToNote": "投稿するアカウント",
+		"schedule": "投稿を予約"
 	},
 	"_accounts": {
 		"switchAccount": "تبديل حسابك",
@@ -130,7 +141,7 @@
 	},
 	"_template": {
 		"description": "تخصيص نموذج التنبيه الخاص بك.",
-		"description2": "سيتم إلحاق هاشتاج '#misshaialert' بغض النظر عن نموذج.",
+		"hashtagAutomaticInsertion": "ハッシュタグ #missholicalert は、テンプレートに関わらず自動付与されます。",
 		"default": "كان نشاطي على Misskey بالأمس:\n\nملاحظات: {notesCount}({notesDelta})\nمتابعة {followingCount}({followingDelta})\nالمتابعون: {followersCount}({followersDelta})\n\n{url}",
 		"insertVariables": "أدخل متغيرات",
 		"insertVariablesHelp": "السلسلة المضمنة في{ } تسمى \"المتغيرات\" ولها معنى خاص. إذا قمت بتضمين هذا ، فسيتم استبداله تلقائيًا بالقيمة الفعلية عند إنشاء التنبيهات.",
@@ -180,12 +191,5 @@
 		"no": "إلغاء",
 		"success": "حسابك تم تعطيله. العودة إلى أعلى الشاشة.",
 		"failure": "فشل حذف الحساب."
-	},
-	"_noteScheduler": {
-		"createNew": "新規作成",
-		"edit": "編集",
-		"noNotes": "予約投稿はまだ作成されていません。",
-		"accountToNote": "投稿するアカウント",
-		"schedule": "投稿を予約"
 	}
 }
